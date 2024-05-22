@@ -267,6 +267,6 @@ class __TwigTemplate_7702abc247c379338929000a2c669956 extends Template
     <a href=\"{{ path('app_promo_admin_new') }}\" class=\"btn btn-details\">Ajouter un produit en réduction</a>
 </div>
 {% endblock %}
-", "admin/promo_admin/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\promo_admin\\index.html.twig");
+", "admin/promo_admin/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\promo_admin\\index.html.twig");
     }
 }

@@ -145,6 +145,6 @@ class __TwigTemplate_30ba53df9f2db8875a569927ccf2221e extends Template
 
     <a href=\"{{ path('app_loyalty_card_index') }}\">back to list</a>
 {% endblock %}
-", "admin/loyalty_card/new.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\loyalty_card\\new.html.twig");
+", "admin/loyalty_card/new.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\loyalty_card\\new.html.twig");
     }
 }

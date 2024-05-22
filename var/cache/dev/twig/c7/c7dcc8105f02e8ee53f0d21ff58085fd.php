@@ -268,6 +268,6 @@ class __TwigTemplate_8eeb52f5f7580950754759159603e81b extends Template
     </div>
 </div>
 {% endblock %}
-", "admin/adminproducts/edit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\adminproducts\\edit.html.twig");
+", "admin/adminproducts/edit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\adminproducts\\edit.html.twig");
     }
 }

@@ -146,6 +146,6 @@ class __TwigTemplate_c91124d4e02bd970bdd872da9ba4ab64 extends Template
         {% endfor %}
     </tbody>
 </table>
-", "@WebProfiler/Profiler/bag.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\bag.html.twig");
+", "@WebProfiler/Profiler/bag.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\bag.html.twig");
     }
 }

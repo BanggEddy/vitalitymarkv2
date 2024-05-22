@@ -382,6 +382,6 @@ class __TwigTemplate_720443800571800d2737fa3b009c069f extends Template
         </div>
     </body>
 {% endblock %}
-", "Auth/registration/register.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\Auth\\registration\\register.html.twig");
+", "Auth/registration/register.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\Auth\\registration\\register.html.twig");
     }
 }

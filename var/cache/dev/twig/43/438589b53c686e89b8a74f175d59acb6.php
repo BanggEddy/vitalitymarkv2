@@ -281,6 +281,6 @@ class __TwigTemplate_f971b504ed5ea5dbd4eea315c2ff90b7 extends Template
 
 </body>
 </html>
-", "@ApiPlatform/Graphiql/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\vendor\\api-platform\\core\\src\\Symfony\\Bundle\\Resources\\views\\Graphiql\\index.html.twig");
+", "@ApiPlatform/Graphiql/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\vendor\\api-platform\\core\\src\\Symfony\\Bundle\\Resources\\views\\Graphiql\\index.html.twig");
     }
 }

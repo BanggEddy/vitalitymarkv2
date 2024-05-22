@@ -4,7 +4,8 @@ namespace App\Service;
 
 use App\Repository\ProductsRepository;
 use App\Repository\PromoRepository;
-class ArticleFitler
+
+class ArticleFilter
 {
 
     private $productsRepository;
@@ -30,5 +31,4 @@ class ArticleFitler
 
         return ['products' => $products, 'promotions' => $promotions];
     }
-
 }

@@ -12,7 +12,25 @@ class UserTest extends KernelTestCase
         return (new User())->setAdresse('adresse')
             ->setName('davidphpunit')
             ->setCivilite('homme')
-            ->setDateCreate(new \DateTimeImmutable());
+            ->setDateCreate(new \DateTimeImmutable())
+            ->setExpiredAt(new \DateTimeImmutable())
+            ->setDeletedAt(null);
+    }
+
+    public function testUserIsMDPPasValide(): void
+    {
+        self::bootKernel();
+        $container = static::getContainer();
+        $user = $this->getEntity();
+        $user->setEmail('usertest@gmail.com')
+            ->setPassword('rooooooooooooooooot');
+
+        try {
+            $errors = $container->get('validator')->validate($user);
+            $this->assertCount(1, $errors);
+        } finally {
+            restore_exception_handler();
+        }
     }
 
     public function testUserIsValide(): void
@@ -21,7 +39,7 @@ class UserTest extends KernelTestCase
         $container = static::getContainer();
         $user = $this->getEntity();
         $user->setEmail('usertest@gmail.com')
-            ->setPassword('rooooooooooooooooot');
+            ->setPassword('Roooooooot123@');
 
         try {
             $errors = $container->get('validator')->validate($user);

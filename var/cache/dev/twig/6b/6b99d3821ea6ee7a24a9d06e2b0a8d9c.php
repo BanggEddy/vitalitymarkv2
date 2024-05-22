@@ -519,6 +519,6 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
     </div>
   </div>
 </div>
-", "user/uservue/panieroffcanvas.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\user\\uservue\\panieroffcanvas.html.twig");
+", "user/uservue/panieroffcanvas.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\user\\uservue\\panieroffcanvas.html.twig");
     }
 }

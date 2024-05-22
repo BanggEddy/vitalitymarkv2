@@ -1,6 +1,8 @@
 <?php
 
-// Dans UserFixtures.php
+// retenir la commande: 
+// php bin/console doctrine:fixtures:load --append --env=test
+// pour faire le test dans le .env
 
 namespace App\DataFixtures;
 
@@ -20,12 +22,16 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // Création des utilisateurs de test
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $user->setEmail("user$i@example.com");
+            $user->setAdresse('adresse');
+            $user->setName('davidphpunit');
+            $user->setCivilite('homme');
+            $user->setDateCreate(new \DateTimeImmutable());
+            $user->setExpiredAt(new \DateTimeImmutable());
+            $user->setDeletedAt(null);
 
-            // Hachage du mot de passe
             $hashedPassword = $this->passwordHasher->hashPassword($user, 'password');
             $user->setPassword($hashedPassword);
 

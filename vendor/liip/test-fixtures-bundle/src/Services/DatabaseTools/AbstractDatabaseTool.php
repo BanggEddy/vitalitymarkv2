@@ -18,7 +18,6 @@ use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Liip\TestFixturesBundle\FixturesLoaderFactoryInterface;
-use Liip\TestFixturesBundle\Services\DatabaseBackup\DatabaseBackupInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -62,11 +61,6 @@ abstract class AbstractDatabaseTool
      */
     protected $purgeMode;
 
-    /**
-     * @var bool
-     */
-    protected $databaseCacheEnabled = true;
-
     protected $excludedDoctrineTables = [];
 
     /**
@@ -86,17 +80,7 @@ abstract class AbstractDatabaseTool
         $this->registry = $registry;
     }
 
-    public function setDatabaseCacheEnabled(bool $databaseCacheEnabled): void
-    {
-        $this->databaseCacheEnabled = $databaseCacheEnabled;
-    }
-
-    public function isDatabaseCacheEnabled(): bool
-    {
-        return $this->databaseCacheEnabled;
-    }
-
-    public function setObjectManagerName(string $omName = null): void
+    public function setObjectManagerName(?string $omName = null): void
     {
         $this->omName = $omName;
         $this->om = $this->registry->getManager($omName);
@@ -107,7 +91,7 @@ abstract class AbstractDatabaseTool
         $this->registryName = $registryName;
     }
 
-    public function setPurgeMode(int $purgeMode = null): void
+    public function setPurgeMode(?int $purgeMode = null): void
     {
         $this->purgeMode = $purgeMode;
     }
@@ -123,14 +107,6 @@ abstract class AbstractDatabaseTool
     {
         $newTool = clone $this;
         $newTool->setPurgeMode($purgeMode);
-
-        return $newTool;
-    }
-
-    public function withDatabaseCacheEnabled(bool $databaseCacheEnabled): self
-    {
-        $newTool = clone $this;
-        $newTool->setDatabaseCacheEnabled($databaseCacheEnabled);
 
         return $newTool;
     }
@@ -151,7 +127,7 @@ abstract class AbstractDatabaseTool
             $loader = $this->container->get('test.service_container')->get('doctrine.fixtures.loader');
             $fixtures = $loader->getFixtures($groups);
             foreach ($fixtures as $fixture) {
-                $fixtureClasses[] = \get_class($fixture);
+                $fixtureClasses[] = $fixture::class;
             }
         }
 
@@ -180,26 +156,6 @@ abstract class AbstractDatabaseTool
     public function setExcludedDoctrineTables(array $excludedDoctrineTables): void
     {
         $this->excludedDoctrineTables = $excludedDoctrineTables;
-    }
-
-    protected function getBackupService(): ?DatabaseBackupInterface
-    {
-        $backupServiceParamName = strtolower('liip_test_fixtures.cache_db.'.(
-            ('ORM' === $this->getType())
-                ? $this->getPlatformName()
-                : $this->getType()
-        ));
-
-        if ($this->container->hasParameter($backupServiceParamName)) {
-            $backupServiceName = $this->container->getParameter($backupServiceParamName);
-            if (\is_string($backupServiceName) && $this->container->has($backupServiceName)) {
-                $backupService = $this->container->get($backupServiceName);
-            } else {
-                @trigger_error("Could not find {$backupServiceName} in container. Possible misconfiguration.");
-            }
-        }
-
-        return (isset($backupService) && $backupService instanceof DatabaseBackupInterface) ? $backupService : null;
     }
 
     protected function cleanDatabase(): void
@@ -263,6 +219,4 @@ abstract class AbstractDatabaseTool
         return $this->container->hasParameter(self::CACHE_METADATA_PARAMETER_NAME)
             && false !== $this->container->getParameter(self::CACHE_METADATA_PARAMETER_NAME);
     }
-
-    abstract protected function getPlatformName(): string;
 }

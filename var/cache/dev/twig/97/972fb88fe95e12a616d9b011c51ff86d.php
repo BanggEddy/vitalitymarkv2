@@ -240,6 +240,6 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
     <a href=\"{{ path('app_loyalty_card_new') }}\">Create new</a>
 
 {% endblock %}
-", "admin/loyalty_card/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\loyalty_card\\index.html.twig");
+", "admin/loyalty_card/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\loyalty_card\\index.html.twig");
     }
 }

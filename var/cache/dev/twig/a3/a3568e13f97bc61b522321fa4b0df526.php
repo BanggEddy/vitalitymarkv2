@@ -106,6 +106,6 @@ class __TwigTemplate_df737dc54c93685b42d08593888f83f2 extends Template
        </form>
     </div>
 </div>
-", "@WebProfiler/Profiler/header.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\header.html.twig");
+", "@WebProfiler/Profiler/header.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\header.html.twig");
     }
 }

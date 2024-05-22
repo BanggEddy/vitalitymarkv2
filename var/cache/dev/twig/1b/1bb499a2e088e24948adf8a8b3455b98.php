@@ -95,6 +95,6 @@ class __TwigTemplate_b4357854595bdacd77ffdd1282b328a8 extends Template
     {{ form_widget(form) }}
     <button class=\"btn\">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
-", "admin/loyalty_card/_form.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\loyalty_card\\_form.html.twig");
+", "admin/loyalty_card/_form.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\loyalty_card\\_form.html.twig");
     }
 }

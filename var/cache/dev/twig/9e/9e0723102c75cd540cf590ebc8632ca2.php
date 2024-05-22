@@ -228,6 +228,6 @@ class __TwigTemplate_ea869a9f9e45f340ffd068de57519724 extends Template
 
     {{ include('admin/coupon/_delete_form.html.twig') }}
 {% endblock %}
-", "admin/coupon/show.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\coupon\\show.html.twig");
+", "admin/coupon/show.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\coupon\\show.html.twig");
     }
 }

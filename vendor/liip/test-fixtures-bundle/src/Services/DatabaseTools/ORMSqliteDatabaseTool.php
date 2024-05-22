@@ -19,9 +19,6 @@ use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Tools\SchemaTool;
 use Liip\TestFixturesBundle\Event\FixtureEvent;
-use Liip\TestFixturesBundle\Event\PostFixtureBackupRestoreEvent;
-use Liip\TestFixturesBundle\Event\PreFixtureBackupRestoreEvent;
-use Liip\TestFixturesBundle\Event\ReferenceSaveEvent;
 use Liip\TestFixturesBundle\LiipTestFixturesEvents;
 
 /**
@@ -29,10 +26,7 @@ use Liip\TestFixturesBundle\LiipTestFixturesEvents;
  */
 class ORMSqliteDatabaseTool extends ORMDatabaseTool
 {
-    /**
-     * @var bool
-     */
-    private $shouldEnableForeignKeyChecks = false;
+    private bool $shouldEnableForeignKeyChecks = false;
 
     public function getDriverName(): string
     {
@@ -46,44 +40,10 @@ class ORMSqliteDatabaseTool extends ORMDatabaseTool
         /** @var Configuration $config */
         $config = $this->om->getConfiguration();
 
-        if (method_exists($config, 'getMetadataCache')) {
-            $cacheDriver = $config->getMetadataCache();
+        $cacheDriver = $config->getMetadataCache();
 
-            if ($cacheDriver) {
-                $cacheDriver->clear();
-            }
-        } else {
-            $cacheDriver = $config->getMetadataCacheImpl();
-
-            if ($cacheDriver) {
-                $cacheDriver->deleteAll();
-            }
-        }
-
-        $backupService = $this->getBackupService();
-        if ($backupService && $this->databaseCacheEnabled) {
-            $backupService->init($this->getMetadatas(), $classNames);
-
-            if ($backupService->isBackupActual()) {
-                if (null !== $this->connection) {
-                    $this->connection->close();
-                }
-
-                $this->om->flush();
-                $this->om->clear();
-
-                $event = new PreFixtureBackupRestoreEvent($this->om, $referenceRepository, $backupService->getBackupFilePath());
-                $this->eventDispatcher->dispatch($event, LiipTestFixturesEvents::PRE_FIXTURE_BACKUP_RESTORE);
-
-                $executor = $this->getExecutor($this->getPurger());
-                $executor->setReferenceRepository($referenceRepository);
-                $backupService->restore($executor);
-
-                $event = new PostFixtureBackupRestoreEvent($backupService->getBackupFilePath());
-                $this->eventDispatcher->dispatch($event, LiipTestFixturesEvents::POST_FIXTURE_BACKUP_RESTORE);
-
-                return $executor;
-            }
+        if ($cacheDriver) {
+            $cacheDriver->clear();
         }
 
         if (false === $append && false === $this->getKeepDatabaseAndSchemaParameter()) {
@@ -107,15 +67,6 @@ class ORMSqliteDatabaseTool extends ORMDatabaseTool
         $loader = $this->fixturesLoaderFactory->getFixtureLoader($classNames);
         $executor->execute($loader->getFixtures(), true);
 
-        if ($backupService) {
-            $event = new ReferenceSaveEvent($this->om, $executor, $backupService->getBackupFilePath());
-            $this->eventDispatcher->dispatch($event, LiipTestFixturesEvents::PRE_REFERENCE_SAVE);
-
-            $backupService->backup($executor);
-
-            $this->eventDispatcher->dispatch($event, LiipTestFixturesEvents::POST_REFERENCE_SAVE);
-        }
-
         return $executor;
     }
 
@@ -136,11 +87,7 @@ class ORMSqliteDatabaseTool extends ORMDatabaseTool
             return;
         }
 
-        if (method_exists($this->connection, 'executeQuery')) {
-            $this->connection->executeQuery('PRAGMA foreign_keys = 0');
-        } else {
-            $this->connection->query('PRAGMA foreign_keys = 0');
-        }
+        $this->connection->executeQuery('PRAGMA foreign_keys = 0');
 
         $this->shouldEnableForeignKeyChecks = true;
     }
@@ -155,11 +102,7 @@ class ORMSqliteDatabaseTool extends ORMDatabaseTool
             return;
         }
 
-        if (method_exists($this->connection, 'executeQuery')) {
-            $this->connection->executeQuery('PRAGMA foreign_keys = 1');
-        } else {
-            $this->connection->query('PRAGMA foreign_keys = 1');
-        }
+        $this->connection->executeQuery('PRAGMA foreign_keys = 1');
 
         $this->shouldEnableForeignKeyChecks = false;
     }

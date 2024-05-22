@@ -2,11 +2,7 @@
 
 Available events:
 
-- `LiipTestFixturesEvents::PRE_FIXTURE_BACKUP_RESTORE`: triggered before restoring the backup
-- `LiipTestFixturesEvents::POST_FIXTURE_BACKUP_RESTORE`: triggered after the backup has been restored
 - `LiipTestFixturesEvents::POST_FIXTURE_SETUP`: triggered before purging the database
-- `LiipTestFixturesEvents::PRE_REFERENCE_SAVE`: triggered before saving the backup of fixtures
-- `LiipTestFixturesEvents::POST_REFERENCE_SAVE`: triggered before the backup of fixtures has been saved
 
 ## Registering events
 
@@ -19,7 +15,6 @@ declare(strict_types=1);
 
 namespace Liip\Acme\Tests\AppConfigEvents\EventListener;
 
-use Liip\TestFixturesBundle\Event\PreFixtureBackupRestoreEvent;
 use Liip\TestFixturesBundle\LiipTestFixturesEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -28,16 +23,12 @@ class FixturesSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            LiipTestFixturesEvents::PRE_FIXTURE_BACKUP_RESTORE => 'preFixtureBackupRestore',
+            LiipTestFixturesEvents::POST_FIXTURE_SETUP => 'postFixtureSetup',
         ];
     }
 
-    public function preFixtureBackupRestore(PreFixtureBackupRestoreEvent $preFixtureBackupRestoreEvent): void
+    public function postFixtureSetup(FixtureEvent $fixtureEvent): void
     {
-        $manager = $preFixtureBackupRestoreEvent->getManager();
-        $repository = $preFixtureBackupRestoreEvent->getRepository();
-        $backupFilePath = $preFixtureBackupRestoreEvent->getBackupFilePath();
-
         // your code
     }
 }

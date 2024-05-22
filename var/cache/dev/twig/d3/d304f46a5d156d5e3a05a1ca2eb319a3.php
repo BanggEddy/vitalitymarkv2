@@ -340,6 +340,6 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
 </div>
 <br><br>
 {% endblock %}
-", "user/uservue/indexpanier.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\user\\uservue\\indexpanier.html.twig");
+", "user/uservue/indexpanier.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\user\\uservue\\indexpanier.html.twig");
     }
 }

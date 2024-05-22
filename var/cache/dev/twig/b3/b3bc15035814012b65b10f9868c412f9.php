@@ -127,6 +127,6 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
     <button type=\"submit\" class=\"btn btn-primary\">Create</button>
     {{ form_end(form) }}
 {% endblock %}
-", "admin/coupon/newtype.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\coupon\\newtype.html.twig");
+", "admin/coupon/newtype.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\coupon\\newtype.html.twig");
     }
 }

@@ -90,6 +90,6 @@ class __TwigTemplate_c94c430fcb56d3d5c38e66964076d890 extends Template
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ loyalty_card.id) }}\">
     <button class=\"btn\">Delete</button>
 </form>
-", "admin/loyalty_card/_delete_form.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\loyalty_card\\_delete_form.html.twig");
+", "admin/loyalty_card/_delete_form.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\loyalty_card\\_delete_form.html.twig");
     }
 }

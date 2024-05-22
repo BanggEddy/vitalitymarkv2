@@ -534,6 +534,6 @@ class __TwigTemplate_9ea2d2e571a385486619ec1c84fdb485 extends Template
 
 </body>
 </html>
-", "@ApiPlatform/SwaggerUi/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\vendor\\api-platform\\core\\src\\Symfony\\Bundle\\Resources\\views\\SwaggerUi\\index.html.twig");
+", "@ApiPlatform/SwaggerUi/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\vendor\\api-platform\\core\\src\\Symfony\\Bundle\\Resources\\views\\SwaggerUi\\index.html.twig");
     }
 }

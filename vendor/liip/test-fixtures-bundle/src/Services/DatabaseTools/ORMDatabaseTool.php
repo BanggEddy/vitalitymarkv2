@@ -17,31 +17,34 @@ use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\ProxyReferenceRepository;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Liip\TestFixturesBundle\Event\FixtureEvent;
-use Liip\TestFixturesBundle\Event\PostFixtureBackupRestoreEvent;
-use Liip\TestFixturesBundle\Event\PreFixtureBackupRestoreEvent;
-use Liip\TestFixturesBundle\Event\ReferenceSaveEvent;
 use Liip\TestFixturesBundle\LiipTestFixturesEvents;
 
 /**
  * @author Aleksey Tupichenkov <alekseytupichenkov@gmail.com>
  */
-class ORMDatabaseTool extends AbstractDbalDatabaseTool
+class ORMDatabaseTool extends AbstractDatabaseTool
 {
     /**
      * @var EntityManager
      */
     protected $om;
 
-    /**
-     * @var bool
-     */
-    private $shouldEnableForeignKeyChecks = false;
+    private bool $shouldEnableForeignKeyChecks = false;
+
+    protected Connection $connection;
+
+    public function setObjectManagerName(?string $omName = null): void
+    {
+        parent::setObjectManagerName($omName);
+        $this->connection = $this->registry->getConnection($omName);
+    }
 
     public function getType(): string
     {
@@ -55,53 +58,16 @@ class ORMDatabaseTool extends AbstractDbalDatabaseTool
         /** @var Configuration $config */
         $config = $this->om->getConfiguration();
 
-        if (method_exists($config, 'getMetadataCache')) {
-            $cacheDriver = $config->getMetadataCache();
+        $cacheDriver = $config->getMetadataCache();
 
-            if ($cacheDriver) {
-                $cacheDriver->clear();
-            }
-        } else {
-            $cacheDriver = $config->getMetadataCacheImpl();
-
-            if ($cacheDriver) {
-                $cacheDriver->deleteAll();
-            }
+        if ($cacheDriver) {
+            $cacheDriver->clear();
         }
 
         if (false === $this->getKeepDatabaseAndSchemaParameter()) {
             $this->createDatabaseIfNotExists();
-        }
 
-        $backupService = $this->getBackupService();
-
-        if ($backupService && $this->databaseCacheEnabled) {
-            $backupService->init($this->getMetadatas(), $classNames, $append);
-
-            if ($backupService->isBackupActual()) {
-                if (null !== $this->connection) {
-                    $this->connection->close();
-                }
-
-                $this->om->flush();
-                $this->om->clear();
-
-                $event = new PreFixtureBackupRestoreEvent($this->om, $referenceRepository, $backupService->getBackupFilePath());
-                $this->eventDispatcher->dispatch($event, LiipTestFixturesEvents::PRE_FIXTURE_BACKUP_RESTORE);
-
-                $executor = $this->getExecutor($this->getPurger());
-                $executor->setReferenceRepository($referenceRepository);
-                $backupService->restore($executor, $this->excludedDoctrineTables);
-
-                $event = new PostFixtureBackupRestoreEvent($backupService->getBackupFilePath());
-                $this->eventDispatcher->dispatch($event, LiipTestFixturesEvents::POST_FIXTURE_BACKUP_RESTORE);
-
-                return $executor;
-            }
-        }
-
-        // TODO: handle case when using persistent connections. Fail loudly?
-        if (false === $this->getKeepDatabaseAndSchemaParameter()) {
+            // TODO: handle case when using persistent connections. Fail loudly?
             $schemaTool = new SchemaTool($this->om);
             if (\count($this->excludedDoctrineTables) > 0 || true === $append) {
                 if (!empty($this->getMetadatas())) {
@@ -129,19 +95,10 @@ class ORMDatabaseTool extends AbstractDbalDatabaseTool
         $loader = $this->fixturesLoaderFactory->getFixtureLoader($classNames);
         $executor->execute($loader->getFixtures(), true);
 
-        if ($backupService) {
-            $event = new ReferenceSaveEvent($this->om, $executor, $backupService->getBackupFilePath());
-            $this->eventDispatcher->dispatch($event, LiipTestFixturesEvents::PRE_REFERENCE_SAVE);
-
-            $backupService->backup($executor);
-
-            $this->eventDispatcher->dispatch($event, LiipTestFixturesEvents::POST_REFERENCE_SAVE);
-        }
-
         return $executor;
     }
 
-    protected function getExecutor(ORMPurger $purger = null): ORMExecutor
+    protected function getExecutor(?ORMPurger $purger = null): ORMExecutor
     {
         return new ORMExecutor($this->om, $purger);
     }
@@ -178,11 +135,7 @@ class ORMDatabaseTool extends AbstractDbalDatabaseTool
 
         $tmpConnection = DriverManager::getConnection($params);
 
-        if (method_exists($tmpConnection, 'createSchemaManager')) {
-            $schemaManager = $tmpConnection->createSchemaManager();
-        } else {
-            $schemaManager = $tmpConnection->getSchemaManager();
-        }
+        $schemaManager = $tmpConnection->createSchemaManager();
 
         // DBAL 4.x does not support creating databases for SQLite anymore; for now we silently ignore this error
         try {
@@ -221,11 +174,7 @@ class ORMDatabaseTool extends AbstractDbalDatabaseTool
             return;
         }
 
-        if (method_exists($this->connection, 'executeQuery')) {
-            $this->connection->executeQuery('SET FOREIGN_KEY_CHECKS=0');
-        } else {
-            $this->connection->query('SET FOREIGN_KEY_CHECKS=0');
-        }
+        $this->connection->executeQuery('SET FOREIGN_KEY_CHECKS=0');
 
         $this->shouldEnableForeignKeyChecks = true;
     }
@@ -240,11 +189,7 @@ class ORMDatabaseTool extends AbstractDbalDatabaseTool
             return;
         }
 
-        if (method_exists($this->connection, 'executeQuery')) {
-            $this->connection->executeQuery('SET FOREIGN_KEY_CHECKS=1');
-        } else {
-            $this->connection->query('SET FOREIGN_KEY_CHECKS=1');
-        }
+        $this->connection->executeQuery('SET FOREIGN_KEY_CHECKS=1');
 
         $this->shouldEnableForeignKeyChecks = false;
     }

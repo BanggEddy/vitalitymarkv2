@@ -21,9 +21,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('liip_test_fixtures');
@@ -31,15 +28,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->arrayNode('cache_db')
-            ->addDefaultsIfNotSet()
-            ->ignoreExtraKeys(false)
-            ->children()
-            ->scalarNode('sqlite')
-            ->defaultNull()
-            ->end()
-            ->end()
-            ->end()
             ->booleanNode('keep_database_and_schema')->defaultFalse()->end()
             ->booleanNode('cache_metadata')->defaultTrue()->end()
         ;

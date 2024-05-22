@@ -90,6 +90,6 @@ class __TwigTemplate_73098d3428a17fa7308d60567ccc4596 extends Template
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ user.id) }}\">
     <button class=\"btn\">Delete</button>
 </form>
-", "admin/gestion_user/_delete_form.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\gestion_user\\_delete_form.html.twig");
+", "admin/gestion_user/_delete_form.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\gestion_user\\_delete_form.html.twig");
     }
 }

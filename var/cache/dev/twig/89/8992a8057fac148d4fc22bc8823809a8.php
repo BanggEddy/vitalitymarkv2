@@ -230,6 +230,6 @@ class __TwigTemplate_88a81360af4f4f7dda81a9ebafe13cc9 extends Template
         reader.readAsDataURL(input.files[0]);
     }
 </script>
-{% endblock %}", "admin/adminproducts/formedit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\admin\\adminproducts\\formedit.html.twig");
+{% endblock %}", "admin/adminproducts/formedit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\adminproducts\\formedit.html.twig");
     }
 }

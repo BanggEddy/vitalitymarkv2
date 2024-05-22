@@ -264,6 +264,6 @@ array_key_exists("promo", $context)) {
         });
     </script>
 {% endblock %}
-", "user/uservue/indexproduit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\user\\uservue\\indexproduit.html.twig");
+", "user/uservue/indexproduit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\user\\uservue\\indexproduit.html.twig");
     }
 }

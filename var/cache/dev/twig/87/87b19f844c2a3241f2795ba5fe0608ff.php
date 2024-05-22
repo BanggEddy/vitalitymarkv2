@@ -499,6 +499,6 @@ class __TwigTemplate_2c0ef1685a0f8d344454d4a4de194db0 extends Template
         });
     </script>
 {% endblock %}
-", "accueil/indexproduit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymark\\templates\\accueil\\indexproduit.html.twig");
+", "accueil/indexproduit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\accueil\\indexproduit.html.twig");
     }
 }
