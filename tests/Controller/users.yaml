@@ -1,0 +1,4 @@
+App\Entity\User:
+  user_user: email:"david2gmail.com"
+    roles:"[]"
+    password:"\\$2y\\$10\\$i6ylBGq2vwJpsdzq0ILW0Og46oMKA5/fdInwDeGqmCqJNttZenhqm"

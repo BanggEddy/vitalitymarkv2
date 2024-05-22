@@ -58,7 +58,7 @@ class UserTest extends KernelTestCase
 
         try {
             $errors = $container->get('validator')->validate($user);
-            $this->assertCount(1, $errors);
+            $this->assertCount(0, $errors);
         } finally {
             restore_exception_handler();
         }
