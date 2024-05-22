@@ -1,0 +1,53 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="promo-admin-container">
+        <h1 class="promo-admin-title">Liste des utilisateurs</h1>
+
+        <table class="table promo-admin-table">
+            <thead>
+                <tr class="promo-admin-table-header">
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Nom</th>
+                    <th style="font-size: 100%">Date de creation</th>
+                    <th>Date de suppression</th>
+                    <th>Date d'expiration</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr class="promo-admin-table-row">
+                    <td data-label="Id">{{ user.id }}</td>
+                    <td data-label="Email">{{ user.email }}</td>
+                    <td data-label="Roles">{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td data-label="Name">{{ user.name }}</td>
+                    <td data-label="Date_create">{{ user.dateCreate ? user.dateCreate|date('Y-m-d') : '' }}</td>
+                    <td data-label="DeletedAt">{{ user.deletedAt ? user.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td data-label="ExpiredAt">{{ user.expiredAt ? user.expiredAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td data-label="Actions">
+                        <a href="{{ path('app_gestion_user_show', {'id': user.id}) }}" class="promo-admin-btn promo-admin-btn-show"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"/>
+</svg></a>
+                        <a href="{{ path('app_gestion_user_edit', {'id': user.id}) }}" class="promo-admin-btn promo-admin-btn-edit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                        </svg>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="11" class="promo-admin-no-records">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

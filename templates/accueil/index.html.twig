@@ -1,0 +1,128 @@
+{% extends 'header.html.twig' %}
+
+{% block body %}
+<div class="container" style="margin-bottom: 40px; margin-top: 40px">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6" style="text-align: right; margin-bottom: 20px;">
+            <div>
+                <h2 style="font-weight: bold;"> Soutenir Action contre la Faim </h2>
+                <br>
+                <p>
+                    Explorez un shopping unique, où chaque achat aide à combattre la faim mondiale grâce à Action contre la Faim. Rejoignez-nous pour faire une différence repas après repas.
+                </p>
+                <br>
+                <a class="btn btn-details" href="https://www.actioncontrelafaim.org/" style="width: 30%">Soutenir</a>
+            </div>
+        </div>
+        <div class="col-md-6" style="text-align: center;">
+            <div>
+                <img src="{{ asset('images/asso.png') }}" alt="{{ 'photo' }}" class="asso-front img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<section style="background-color:#DBFFCA; margin-bottom:40px;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="{{ asset('images/carte.png') }}" alt="{{ 'photo' }}" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <div style="padding:10%">
+                    <h2 style="font-weight: bold;"> La carte de fidélité qui vous rapporte </h2>
+                    <br>
+                    <p> Jusqu'à 10 % en avantage carte sur plus de 1800 produits du quotidien, jusqu’à 50 % sur de nombreux produits des prospectus, vos tickets de caisse et bien d’autres avantages... Quand on vous dit qu’on est contre la vie chère.</p>
+                    <br>
+                    <a class="nav-link btn btn-details" style="width:100%;" href="/login">Ma carte de fidélité</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <div class="container">
+        <h2>En ce moment</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="http://localhost:8000/accueil/categorie/Boulangerie" style="text-decoration: none;">
+                    <img src="{{ asset('images/boulangerie.png') }}" alt="{{ 'photo' }}" class="product-imagee">
+                    <div class="product-details">
+                        <p style="font-weight: bold; text-align:center; color: #000;">Boulangerie</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="http://localhost:8000/accueil/categorie/Boucherie" style="text-decoration: none;">
+                    <img src="{{ asset('images/boucherie.png') }}" alt="{{ 'photo' }}" class="product-imagee">
+                    <div class="product-details">
+                        <p style="font-weight: bold; text-align:center; color: #000;">Boucherie</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="http://localhost:8000/accueil/categorie/Poisson" style="text-decoration: none;">
+                    <img src="{{ asset('images/poisson.png') }}" alt="{{ 'photo' }}" class="product-imagee">
+                    <div class="product-details">
+                        <p style="font-weight: bold; text-align:center; color: #000;">Poisson</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="http://localhost:8000/accueil/categorie/Produits frais" style="text-decoration: none;">
+                    <img src="{{ asset('images/produit.png') }}" alt="{{ 'photo' }}" class="product-imagee">
+                    <div class="product-details">
+                        <p style="font-weight: bold; text-align:center; color: #000;">Produits frais</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+<div class="container">
+<h2>Nos articles</h2>
+    <br>
+
+    <div class="row justify-content-center">
+    
+        {% for product in products %}
+        <div class="col-md-3 col-lg-3">
+            <div class="product-card">
+                <img src="{{ asset('images/' ~ product.images) }}" alt="{{ product.name }}" class="product-image">
+                <div class="product-details">
+                    <h3>{{ product.name }}</h3>
+                    {% set aUnePromotion = false %}
+                    {% for promo in promotions %}
+                        {% if promo.idproduct.id == product.id %}
+                            {% set aUnePromotion = true %}
+                            {% set aujourdhui = 'now'|date('Y-m-d') %}
+                            {% set joursRest = (promo.dateFin|date('U') - aujourdhui|date('U')) / (24 * 3600) %}
+                            {% if joursRest > 0 %}
+                                <p class="promo-description" style="font-weight: bold;">Jour(s) restant(s): {{ joursRest|round(0, 'floor') }}</p>
+                            {% else %}
+                                <p class="promo-description" style="font-weight: bold;">Offre expirée</p>
+                            {% endif %}
+                            <p class="btn-reduction"> - {{ promo.reduction }} %</p>
+                            <p style="font-size:80%">A partir de :</p>
+                            <p class="product-price original-price">{{ product.price }} €</p>
+                            <p class="product-price discounted-price" style="color: red;">{{ product.price * (1 - (promo.reduction / 100)) }} €</p>
+                        {% endif %}
+                    {% endfor %}
+                    {% if not aUnePromotion %}
+                        <p class="product-price">{{ product.price }} €</p>
+                    {% endif %}
+                    <p>{{ product.description }}</p>
+                    <p class="product-quantity">Quantité disponible: {{ product.quantity }}</p>
+                        <a href="{{ path('details_produit', {'id': product.id}) }}" class="btn btn-details"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"/>
+</svg></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

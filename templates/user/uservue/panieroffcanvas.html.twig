@@ -1,0 +1,188 @@
+<style>
+  .offcanvas-header {
+    background-color: #fff;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .offcanvas-title {
+    color: #000 !important;
+    margin-bottom: 0;
+  }
+
+  .offcanvas-body {
+    padding: 20px;
+    background-color: rgb(235, 235, 235);
+  }
+
+  .accordion-item {
+    background-color: #dee2e6;
+    border: none;
+    margin-bottom: 10px;
+  }
+
+  .accordion-button {
+    background-color: #0000;
+    color: #212529;
+    border: none;
+    border-radius: 0;
+    padding: 10px 20px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .accordion-button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .accordion-button.collapsed {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .accordion-body {
+    background-color: #fff;
+    border-top: 1px solid #7cdf7c;
+    padding: 20px;
+  }
+
+  .accordion-body .img-container {
+    margin-bottom: 10px;
+  }
+
+  .accordion-body .img-container img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .accordion-body .text-container {
+    margin-bottom: 10px;
+  }
+
+  .accordion-body h5 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .accordion-body p {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .accordion-body .text-right {
+    text-align: right;
+  }
+
+  .btn-details {
+    margin-top: 10px;
+  }
+
+  .total-info {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .total-price {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  .img-small {
+    width: 50px; 
+    height: auto;
+  }
+
+</style>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Votre panier:</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="container">
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePanier" aria-expanded="true" aria-controls="collapsePanier">
+              Votre panier
+            </button>
+          </h2>
+          <div id="collapsePanier" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              {% for panierDetail in panierDetails %}
+              <div class="row mb-4 border-bottom">
+                <div class="col-md-3">
+                  <div class="img-container">
+                    {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
+                    <img src="{{ asset('images/' ~ panierDetail['images']) }}" alt="image" class="img-fluid img-small">
+                    {% else %}
+                    <p>No image available</p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div class="text-container">
+                    <div class="row">
+                      <div class="col-md-8">
+                        {% if panierDetail['name'] is defined and panierDetail['name'] is not null %}
+                        <h5>{{ panierDetail['name'] }}</h5>
+                        {% else %}
+                        <p>No name available</p>
+                        {% endif %}
+                        {% if panierDetail['quantity'] is defined and panierDetail['quantity'] is not null %}
+                        <p class="btn-quantity">Quantité: {{ panierDetail['quantity'] }}</p>
+                        {% else %}
+                        <p>No quantity available</p>
+                        {% endif %}
+                      </div>
+                      <div class="col-md-4 text-right">
+                        {% if panierDetail['price'] is defined and panierDetail['price'] is not null %}
+                        <p>Prix: {{ panierDetail['price'] }}/unité </p>
+                        {% else %}
+                        <p>No price available</p>
+                        {% endif %}
+                        {% if panierDetail['reduction'] is not null and panierDetail['reduction'] is not empty and panierDetail['reduction'] != 'N/A' %}
+                            <p><span style="color: red;">{{ panierDetail['reduction'] }} % de réduction</span></p>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        {% if panierDetail['subtotal'] is defined and panierDetail['subtotal'] is not null %}
+                        <p>sous-total: {{ panierDetail['subtotal'] }}</p>
+                        {% else %}
+                        <p>No subtotal available</p>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <div class="row justify-content-end mb-4">
+                <div class="col-md-6">
+                  <p class="total-info">Nombre d'articles: {{ panierDetails|length }}</p>
+                </div>
+                <div class="col-md-6 text-right">
+                  <h3 class="total-price">Prix total: {{ totalPrice }} €</h3>
+                  <a class="btn btn-details" href="/user/panier">Mon Panier</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

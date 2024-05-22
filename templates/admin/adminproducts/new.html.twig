@@ -1,0 +1,37 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Ajouter un nouveau produit{% endblock %}
+
+{% block body %}
+<style>
+</style>
+<br>
+<div class="container nature-card">
+    <br>
+    <h3>Ajouter un nouveau produit</h3>
+    <br>
+    <form action="{{ path('app_create_product') }}" method="post" enctype="multipart/form-data">
+        {{ form_widget(productForm._token) }}
+        {% if productForm.images is defined %}
+            {% if productForm.images.vars.errors|length > 0 %}
+                <div class="alert alert-danger">
+                    {{ form_errors(productForm.images) }}
+                </div>
+            {% endif %}
+        {% endif %}
+        <p> Name : </p>
+        {{ form_widget(productForm.name, {'attr': {'class': 'spaced-input'}}) }}
+        <p> category : </p>
+        {{ form_widget(productForm.category, {'attr': {'class': 'spaced-input'}}) }}
+        <p> Quantité : </p>
+        {{ form_widget(productForm.quantity, {'attr': {'class': 'spaced-input'}}) }}
+        <p> Description : </p>
+        {{ form_widget(productForm.description, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_widget(productForm.images, {'attr': {'class': 'spaced-input'}}) }}
+        <p> Prix : </p>
+        {{ form_widget(productForm.price, {'attr': {'class': 'spaced-input'}}) }}
+        <button type="submit" class="btn btn-details" style="margin-bottom: 3% !important;">Ajouter</button>
+    </form>
+</div>
+<br>
+{% endblock %}

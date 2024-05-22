@@ -1,0 +1,507 @@
+.asso-front{
+    width:40%;
+    border-radius: 10% !important;
+}
+
+.section {
+    position: relative;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; 
+}
+
+.section::before {
+    content: "";
+    background-image: url('../images/topacc.png') !important;
+    background-color: rgba(0, 0, 0, 0.5); 
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(3px); 
+}
+
+.section h1 {
+    font-size: 36px;
+}
+.section p {
+    font-size: 20px;
+}
+.navbar-custom {
+    background-color: #fff;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(235, 235, 235);
+}
+.product-imagee {
+    border-radius: 80%; 
+    width: 100% !important; 
+    height: auto; 
+    overflow: hidden; 
+}
+
+
+.product-image {
+    position: relative; 
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 128, 0, 0.5);
+    border-radius: 10px; 
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out; 
+}
+
+.product-image:hover::after {
+    opacity: 1; 
+}
+
+.product-details {
+    margin-top: 10px;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-quantity {
+    color: #000000;
+}
+
+.product-category {
+    color: #6c757d;
+}
+
+.promo-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover; 
+    border-radius: 10px;
+}
+
+.promo-details {
+    margin-top: 10px; 
+}
+
+.promo-title {
+    font-size: 18px;
+    font-weight: bold; 
+}
+
+.promo-description {
+    color: #555; 
+}
+
+.promo-date {
+    color: #777; 
+}
+
+.promo-price {
+    color: #333;
+    font-weight: bold; 
+}
+
+.image-transition {
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-transition:hover {   
+    transform: scale(1.1); 
+}
+
+.nature-card {
+    background-color: #ffffff; 
+    border: 2px solid #000000; 
+    border-radius: 10px; 
+    margin-bottom: 20px;
+  }
+  
+  .nature-card .card-body {
+    padding: 2rem; 
+  }
+  
+  .nature-card .card-title {
+    color: #000000; 
+  }
+  
+.btn-details {
+    padding: 0.5rem 1rem;
+    background-color: #000000; 
+    color: white; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem; 
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; 
+}
+
+.btn-details:hover {
+    color: #000000; 
+    background-color: #ffffff; 
+    transform: scale(1.1); 
+}
+  
+    section2 {
+        background-color: #000;
+        padding: 20px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        transition: all 0.5s ease;
+    }
+    section2 .card {
+        transition: transform 0.3s ease;
+    }
+    section2 .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .full-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; 
+    }
+
+    .product-card,
+    .promo-card {
+        border: 1px solid #504e4e;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #ffffff;
+        transition: transform 0.5s ease;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-10px); 
+        transition: 0.5s;
+    }
+    .promo-card {
+        background-color: #ffff; 
+        border: 2px solid #c0c0c0; 
+        transition: transform 0.3s ease-in-out; 
+    }
+
+    .promo-card:hover {
+        transform: translateY(-5px); 
+    }
+
+    .product-image, .promo-image {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .product-details, .promo-details {
+        margin-top: 10px;
+    }
+
+    .product-price, .promo-price {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+
+    .product-category {
+        color: #6c757d;
+    }
+
+    .custom-select {
+        font-size: 14px;
+    }
+
+    .nature-theme {
+        border-radius: 30px;
+        border-style: solid;
+        border-color: #000000;
+        background-color: #ffffff;
+        padding: 40px;
+        margin-top: 50px;
+    }
+
+    .card-img {
+        width: 50%
+    }
+
+    .quantity-form, .delete-form {
+        margin-top: 10px;
+    }
+
+    .card-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .card-actions {
+        display: flex;
+        align-items: center;
+    }
+    .quantity-btn {
+        margin: 0 5px;
+        border-radius: 50px;
+    }
+
+    .quantity-btn.add {
+        background-color: red;
+        border-color:red;
+        border-radius: 50px;
+    }
+
+    .quantity-btn.subtract {
+        background-color: black;
+        border-color:black;
+        border-radius: 50px;
+    }
+
+    .quantity-text {
+        margin: 0 5px;
+    }
+
+    .quantity-text {
+        padding: 2px;
+        display: inline-block; 
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 2px;
+        border-radius:5px;
+    }
+        
+    .quantity-btn.add:hover {
+        background-color: #ff6666;
+    }
+
+    .quantity-btn.subtract:hover {
+        background-color: #666666; 
+    }
+    @media (max-width: 768px) {
+        .card-details {
+            flex-direction: column;
+        }
+    }
+    .right-align {
+        text-align: right;
+    }
+
+    .row-with-margin-bottom {
+        margin-bottom: 2% !important; 
+        background-color: #f3f5f6;
+        border-style: solid;
+        border-color: #d3d3d3;
+        border-radius: 20px;
+        padding:10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+
+    }
+    .delete-link {
+        color: gray;
+    }
+    
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    .nav-item .btn-outline-danger {
+        transition: all 0.3s ease;
+    }
+    .bg-custom {
+        background-color: #fff; 
+    }
+    .section {
+        text-align: center;
+    }
+    .form-container {
+        display: inline-block;
+        text-align: left;
+    }
+    .btn-quantity{
+        padding: 4px;
+        display: inline-block;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 2px;
+        border-radius: 5px;
+    }
+    .original-price {
+        text-decoration-line: line-through !important;
+        font-size:small;
+    }
+    
+    .discounted-price {
+        color: red;
+    }
+    .btn-reduction{
+        padding: 4px;
+        display: inline-block;
+        box-shadow: rgba(240, 155, 155, 0.937) 0px 1px 4px, rgb(164, 25, 25) 0px 0px 0px 2px;
+        border-radius: 5px;
+        color:red;
+        font-weight: bold;
+        background-color: rgba(233, 134, 134, 0.61);
+    }
+
+    .spaced-input {
+        display: block; 
+        width: 100%;
+        margin-bottom: 1.5rem; 
+        padding: 0.5rem;
+        border: 1px solid #ccc; 
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+
+
+    .promo-admin-container {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+    
+    .promo-admin-title {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    .promo-admin-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .promo-admin-table-header {
+        background-color: #000000;
+        color: white;
+    }
+    
+    .promo-admin-table-header th {
+        padding: 15px;
+        text-align: left;
+        font-size: 1.1rem;
+    }
+    
+    .promo-admin-table-row {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .promo-admin-table-row:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    
+    .promo-admin-table-row td {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    
+    .promo-admin-btn {
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #000000;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+    }
+    
+    .promo-admin-btn-show {
+        background-color: #007BFF;
+    }
+    
+    .promo-admin-btn-edit {
+        background-color: #FFC107;
+    }
+    
+    .promo-admin-btn-new {
+        margin-top: 20px;
+        display: inline-block;
+    }
+    
+    .promo-admin-btn:hover {
+        transform: scale(1.05);
+        background-color: #45a049;
+    }
+    
+    .promo-admin-btn-show:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+    
+    .promo-admin-btn-edit:hover {
+        background-color: #fff;
+        text-decoration: none;
+        color: #e0a800;
+    }
+    
+    .promo-admin-no-records {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        padding: 20px;
+    }
+    
+    @media (max-width: 768px) {
+        .promo-admin-table, .promo-admin-table-header, .promo-admin-table-row, .promo-admin-table-row td {
+            display: block;
+            width: 100%;
+        }
+    
+        .promo-admin-table-header {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+    
+        .promo-admin-table-row {
+            margin-bottom: 20px;
+        }
+    
+        .promo-admin-table-row td {
+            border-bottom: 1px solid #ddd;
+            position: relative;
+            padding-left: 50%;
+            text-align: left;
+        }
+    
+        .promo-admin-table-row td:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            width: 45%;
+            padding-left: 15px;
+            font-weight: bold;
+            text-align: left;
+        }
+    }

@@ -1,0 +1,137 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Promo{% endblock %}
+
+{% block body %}
+<style>
+
+.promo-admin-detail-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.promo-admin-detail-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.promo-admin-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.promo-admin-detail-table th,
+.promo-admin-detail-table td {
+    padding: 15px;
+    text-align: left;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.promo-admin-detail-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.promo-admin-detail-btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.promo-admin-detail-btn-back {
+    background-color: #0056b3;
+    color: #fff;
+    text-decoration: none;
+}
+
+.promo-admin-detail-btn-edit {
+    background-color: #FFC107;
+    color: #fff;
+    text-decoration: none;
+}
+
+.promo-admin-detail-btn-delete {
+    background-color: #ff0000;
+    color: #fff;
+    text-decoration: none;
+}
+
+.promo-admin-detail-btn:hover {
+    transform: scale(1.05);
+    background-color: #45a049;
+}
+
+.promo-admin-detail-btn-back:hover {
+    background-color: #fff;
+    text-decoration: none;
+    color: #0056b3;
+}
+
+.promo-admin-detail-btn-edit:hover {
+    background-color: #fff;
+    color: #FFC107;
+    text-decoration: none;
+}
+
+.promo-admin-detail-btn-delete:hover {
+    background-color: #fff;
+    color: #ff0000;
+    text-decoration: none;
+}
+</style>
+
+<div class="promo-admin-detail-container">
+
+    <table class="promo-admin-detail-table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ promo.id }}</td>
+            </tr>
+            <tr>
+                <th>Reduction</th>
+                <td>{{ promo.reduction }}</td>
+            </tr>
+            <tr>
+                <th>Date_fin</th>
+                <td>{{ promo.dateFin ? promo.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_debut</th>
+                <td>{{ promo.dateDebut ? promo.dateDebut|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ promo.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-group" role="group" aria-label="Buttons">
+        <a href="{{ path('app_promo_admin_index') }}" class="promo-admin-detail-btn promo-admin-detail-btn-back">< Retour</a>
+        <a href="{{ path('app_promo_admin_edit', {'id': promo.id}) }}" class="promo-admin-detail-btn promo-admin-detail-btn-edit">Modifier</a>
+        <form method="post" action="{{ path('app_promo_admin_delete', {'id': promo.id}) }}" onsubmit="return confirm('Es-tu sur de vouloir supprimer ce produit en réduction?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ promo.id) }}">
+            <button class="btn promo-admin-detail-btn promo-admin-detail-btn-delete">Supprimer</button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

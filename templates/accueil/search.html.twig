@@ -1,0 +1,52 @@
+{% extends 'header.html.twig' %}
+
+{% block body %}
+
+
+<div class="container">
+    <br>
+    <h2>Résultats de la recherche</h2>
+    <br>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 col-lg-4">
+            <div class="product-card">
+                <img src="{{ asset('images/' ~ product.images) }}" alt="{{ product.name }}" class="product-image">
+                <div class="product-details">
+                    <h3>{{ product.name }}</h3>
+                    {% set aUnePromotion = false %}
+                    {% for promo in promotions %}
+                        {% if promo.idproduct.id == product.id %}
+                            {% set aUnePromotion = true %}
+                            {% set aujourdhui = 'now'|date('Y-m-d') %}
+                            {% set joursRest = (promo.dateFin|date('U') - aujourdhui|date('U')) / (24 * 3600) %}
+                            {% if joursRest > 0 %}
+                                <p class="promo-description" style="font-weight: bold;">Jour(s) restant(s): {{ joursRest|round(0, 'floor') }}</p>
+                            {% else %}
+                                <p class="promo-description" style="font-weight: bold;">Offre expirée</p>
+                            {% endif %}
+                            <p class="btn-reduction"> - {{ promo.reduction }} %</p>
+                            <p style="font-size:80%">A partir de :</p>
+                            <p class="product-price original-price">{{ product.price }} €</p>
+                            <p class="product-price discounted-price" style="color: red;">{{ product.price * (1 - (promo.reduction / 100)) }} €</p>
+                        {% endif %}
+                    {% endfor %}
+                    {% if not aUnePromotion %}
+                        <p class="product-price">{{ product.price }} €</p>
+                    {% endif %}
+                    <p>{{ product.description }}</p>
+                    <p class="product-quantity">Quantité disponible: {{ product.quantity }}</p>
+                        <a href="{{ path('details_produit', {'id': product.id}) }}" class="btn btn-details"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"/>
+</svg></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    {% if products is empty %}
+    <p>Aucun résultat trouvé.</p>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

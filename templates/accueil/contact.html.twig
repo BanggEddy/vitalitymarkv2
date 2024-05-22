@@ -1,0 +1,117 @@
+{% extends 'header.html.twig' %}
+
+{% block body %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa; 
+    }
+
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px; 
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+        transition: transform 0.3s ease; 
+    }
+
+    .container:hover {
+        transform: translateY(-5px); 
+    }
+
+    h2 {
+        color: #000; 
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, transform 0.3s ease; 
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+        border-color: #4CAF50; 
+    }
+
+    input[type="text"]:hover,
+    input[type="email"]:hover,
+    textarea:hover {
+        transform: translateY(-5px); 
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50; 
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease; 
+    }
+
+    button:hover {
+        background-color: #45a049; 
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .alert-success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+    }
+</style>
+
+<div class="container">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h2>Nous Contacter</h2>
+    <form action="{{ path('app_contact_submit') }}" method="POST">
+        <div class="form-group">
+            <label for="subject">Sujet :</label>
+            <select id="subject" name="subject" class="form-select" required>
+                <option value="">Sélectionnez un sujet</option>
+                <option value="Livraison">Livraison</option>
+                <option value="Produits">Produits</option>
+                <option value="Programme de Fidélité">Programme de Fidélité</option>
+                <option value="Magasins">Magasins</option>
+                <option value="Stockage des Données">Stockage des Données</option>
+                <option value="Informations personnelles">Informations personnelle</option>
+                <option value="Autre">Autre</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="message">Votre Message :</label>
+            <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-details">Envoyer le Message</button>
+    </form>
+</div>
+{% endblock %}

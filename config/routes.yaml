@@ -1,0 +1,108 @@
+controllers:
+  resource:
+    path: ../src/Controller/
+    namespace: App\Controller
+  type: attribute
+uservue:
+  path: /uservue
+  controller: App\Controller\UservueController::index
+
+#ADMINS
+adminproducts:
+  path: /adminproducts
+  controller: App\Controller\AdminproductsController::index
+#CRUD
+#Ajouter produits
+adminajouterproducts:
+  path: /product/new
+  controller: App\Controller\AdminproductsController::new
+#Supp
+admindeleteproducts:
+  path: /product/delete
+  controller: App\Controller\AdminproductsController::delete
+#UPDATE
+adminupdateproducts:
+  path: /product/update
+  controller: App\Controller\AdminupdateController::update
+app_edit_product:
+  path: "/editproduct/{id}"
+  controller: 'App\Controller\AdminproductsController::editProductFormFront'
+  methods: ["POST"]
+#COMPTE ADMIN
+compteadmin:
+  path: /compteadmin
+  controller: App\Controller\AdminproductsController::adminPage
+#PANIER USER
+api_user_panier:
+  path: /api/user/panier
+  controller: App\Controller\UserController::getUserPanier
+panier_index:
+  path: /user/panier
+  controller: App\Controller\UserController::getUserPanier
+#ADD QUANTITY PRODUCTS
+add_quantity:
+  path: "/admin/products/{productId}/add_quantity"
+  methods: ["POST"]
+  controller: 'App\Controller\AdminproductsController::ajoutQuantiteProduitAdmin'
+#Supp Quantité Produit
+remove_quantity:
+  path: "/admin/products/{productId}/remove_quantity"
+  methods: ["POST"]
+  controller: 'App\Controller\AdminproductsController::enleverQuantiteProduitAdmin'
+admin_products_list:
+  path: "/admin/products/list"
+  controller: 'App\Controller\AdminproductsController::index'
+
+# Routes pour afficher les détails du produit ou de la promotion dans ACCUEIL
+details_produit:
+  path: "/details-produit/{id}"
+  controller: 'App\Controller\AccueilController::detailsDunProduit'
+details_promotion:
+  path: "/details-promotion/{id}"
+  controller: 'App\Controller\AccueilController::detailsPromotion'
+#Routes détails User:
+details_produit_user:
+  path: "/details-produit-user/{id}"
+  controller: 'App\Controller\UservueController::detailsProduit'
+details_promotion_user:
+  path: "/details-promotion-user/{id}"
+  controller: 'App\Controller\UservueController::detailsPromotion'
+
+#Contact for anonymous
+app_contact:
+  path: "/contact"
+  controller: 'App\Controller\AccueilController::indexcontact'
+
+#Contact for Users:
+
+api_loyalty_card:
+  path: /api/loyalty-card
+  controller: App\Controller\UservueController::getLoyaltyCard
+  methods: [GET]
+
+user_profile_view:
+  path: /user/profile
+  controller: App\Controller\UserController::viewProfile
+
+accueil_category_products:
+  path: /accueil/categorie/{category}
+  controller: App\Controller\AccueilController::categorieAccueil
+  methods: ["GET", "POST"]
+
+admin_category_products:
+  path: /admin/adminproducts/categorie/{category}
+  controller: App\Controller\AdminproductsController::showCategoryProductsAdmin
+  methods: ["GET", "POST"]
+
+user_category_products:
+  path: "/user/uservue/categorie/{category}"
+  controller: 'App\Controller\UservueController::pageCategoriesUser'
+  methods: ["GET", "POST"]
+
+delete_user_account:
+  path: "/delete_account"
+  controller: 'App\Controller\UservueController::suppressionCompte'
+  methods: ["POST"]
+api_login:
+  path: /api/login_check
+  controller: App\Security\AuthAuthenticator::onAuthenticationSuccess
