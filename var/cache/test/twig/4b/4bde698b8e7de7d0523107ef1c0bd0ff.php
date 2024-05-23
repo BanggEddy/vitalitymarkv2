@@ -189,57 +189,59 @@ class __TwigTemplate_7331e3f29bf078cddb29ce0ee2629514 extends Template
             // line 42
             if ((CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 42) > 0)) {
                 // line 43
-                yield "                        <form action=\"";
+                yield "                    <form id=\"panierForm\" action=\"";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_dans_panier", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 43)]), "html", null, true);
                 yield "\" method=\"post\">
-                            <div class=\"form-group\">
-                                <label for=\"quantity\">Quantité :</label>
-                                <select name=\"quantity\" id=\"quantity\" class=\"form-control custom-select\">
-                                    ";
+                        <div class=\"form-group\">
+                            <label for=\"quantity\">Quantité :</label>
+                            <select name=\"quantity\" id=\"quantity\" class=\"form-control custom-select\">
+                                ";
                 // line 47
                 $context['_parent'] = $context;
-                $context['_seq'] = CoreExtension::ensureTraversable(range(0, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 47)));
+                $context['_seq'] = CoreExtension::ensureTraversable(range(1, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 47)));
                 foreach ($context['_seq'] as $context["_key"] => $context["qty"]) {
                     // line 48
-                    yield "                                        <option value=\"";
+                    yield "                                    <option value=\"";
                     yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["qty"], "html", null, true);
                     yield "\">";
                     yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["qty"], "html", null, true);
                     yield "</option>
-                                    ";
+                                ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['qty'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
                 // line 50
-                yield "                                </select>
-                            </div>
-                            <br>
-                            <div class=\"d-flex justify-content-between\">
-                                <div>
-                                    <a href=\"";
+                yield "                            </select>
+                        </div>
+                        <br>
+                        <div class=\"d-flex justify-content-between\">
+                            <div>
+                                <a href=\"";
                 // line 55
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("details_produit_user", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 55)]), "html", null, true);
-                yield "\" class=\"btn btn-details\" style=\"margin-top:0px !important;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
-  <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
-</svg></a>
-                                </div>
-                                <div>
-                                    <button type=\"submit\" class=\"btn btn-primary\">
-                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-basket\" viewBox=\"0 0 16 16\">
-                                    <path d=\"M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9zM1 7v1h14V7zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5\"/>
+                yield "\" class=\"btn btn-details\" style=\"margin-top:0px !important;\">
+                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
+                                        <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
                                     </svg>
-                                    </button>
-                                </div>
+                                </a>
                             </div>
-                        </form>
-                    ";
+                            <div>
+                                <button type=\"submit\" class=\"btn btn-primary\">
+                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-basket\" viewBox=\"0 0 16 16\">
+                                        <path d=\"M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9zM1 7v1h14V7zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5\"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                ";
             } else {
-                // line 69
-                yield "                        <p>Rupture de stock</p>
-                    ";
+                // line 71
+                yield "                    <p>Rupture de stock</p>
+                ";
             }
-            // line 71
+            // line 73
             yield "                </div>
             </div>
         </div>
@@ -248,7 +250,7 @@ class __TwigTemplate_7331e3f29bf078cddb29ce0ee2629514 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['product'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 75
+        // line 77
         yield "    </div>
 </div>
 ";
@@ -282,7 +284,7 @@ class __TwigTemplate_7331e3f29bf078cddb29ce0ee2629514 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  252 => 75,  243 => 71,  239 => 69,  222 => 55,  215 => 50,  204 => 48,  200 => 47,  192 => 43,  190 => 42,  184 => 39,  179 => 38,  173 => 36,  170 => 35,  164 => 34,  159 => 32,  155 => 31,  149 => 29,  145 => 27,  139 => 25,  136 => 24,  133 => 23,  130 => 22,  127 => 21,  124 => 20,  119 => 19,  117 => 18,  113 => 17,  106 => 15,  102 => 13,  98 => 12,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  254 => 77,  245 => 73,  241 => 71,  222 => 55,  215 => 50,  204 => 48,  200 => 47,  192 => 43,  190 => 42,  184 => 39,  179 => 38,  173 => 36,  170 => 35,  164 => 34,  159 => 32,  155 => 31,  149 => 29,  145 => 27,  139 => 25,  136 => 24,  133 => 23,  130 => 22,  127 => 21,  124 => 20,  119 => 19,  117 => 18,  113 => 17,  106 => 15,  102 => 13,  98 => 12,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -329,34 +331,36 @@ class __TwigTemplate_7331e3f29bf078cddb29ce0ee2629514 extends Template
                 </div>
                 <div class=\"product-footer\">
                     {% if product.quantity > 0 %}
-                        <form action=\"{{ path('add_dans_panier', {'id': product.id}) }}\" method=\"post\">
-                            <div class=\"form-group\">
-                                <label for=\"quantity\">Quantité :</label>
-                                <select name=\"quantity\" id=\"quantity\" class=\"form-control custom-select\">
-                                    {% for qty in 0..product.quantity %}
-                                        <option value=\"{{ qty }}\">{{ qty }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <br>
-                            <div class=\"d-flex justify-content-between\">
-                                <div>
-                                    <a href=\"{{ path('details_produit_user', {'id': product.id}) }}\" class=\"btn btn-details\" style=\"margin-top:0px !important;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
-  <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
-</svg></a>
-                                </div>
-                                <div>
-                                    <button type=\"submit\" class=\"btn btn-primary\">
-                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-basket\" viewBox=\"0 0 16 16\">
-                                    <path d=\"M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9zM1 7v1h14V7zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5\"/>
+                    <form id=\"panierForm\" action=\"{{ path('add_dans_panier', {'id': product.id}) }}\" method=\"post\">
+                        <div class=\"form-group\">
+                            <label for=\"quantity\">Quantité :</label>
+                            <select name=\"quantity\" id=\"quantity\" class=\"form-control custom-select\">
+                                {% for qty in 1..product.quantity %}
+                                    <option value=\"{{ qty }}\">{{ qty }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <br>
+                        <div class=\"d-flex justify-content-between\">
+                            <div>
+                                <a href=\"{{ path('details_produit_user', {'id': product.id}) }}\" class=\"btn btn-details\" style=\"margin-top:0px !important;\">
+                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
+                                        <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
                                     </svg>
-                                    </button>
-                                </div>
+                                </a>
                             </div>
-                        </form>
-                    {% else %}
-                        <p>Rupture de stock</p>
-                    {% endif %}
+                            <div>
+                                <button type=\"submit\" class=\"btn btn-primary\">
+                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-basket\" viewBox=\"0 0 16 16\">
+                                        <path d=\"M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9zM1 7v1h14V7zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5\"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                {% else %}
+                    <p>Rupture de stock</p>
+                {% endif %}
                 </div>
             </div>
         </div>
@@ -364,6 +368,7 @@ class __TwigTemplate_7331e3f29bf078cddb29ce0ee2629514 extends Template
     </div>
 </div>
 {% endblock %}
+
 ", "user/uservue/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\user\\uservue\\index.html.twig");
     }
 }

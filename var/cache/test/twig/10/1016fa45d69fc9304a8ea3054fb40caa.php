@@ -97,7 +97,7 @@ class __TwigTemplate_5f46d3f6e68a5ef584592a4b1553205c extends Template
         $context['_seq'] = CoreExtension::ensureTraversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 10, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
             // line 11
-            yield "        <div class=\"col-md-4 col-lg-4\">
+            yield "        <div class=\"col-md-4 col-lg-4 product\">
             <div class=\"product-card\">
                 <img src=\"";
             // line 13
@@ -259,7 +259,7 @@ class __TwigTemplate_5f46d3f6e68a5ef584592a4b1553205c extends Template
     <br>
     <div class=\"row row-cols-1 row-cols-md-2 row-cols-lg-3\">
         {% for product in products %}
-        <div class=\"col-md-4 col-lg-4\">
+        <div class=\"col-md-4 col-lg-4 product\">
             <div class=\"product-card\">
                 <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"une image\" class=\"product-image\">
                 <div class=\"product-details\">

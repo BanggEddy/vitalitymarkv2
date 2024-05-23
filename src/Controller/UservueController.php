@@ -136,24 +136,12 @@ class UservueController extends AbstractController
     {
         $quantity = $request->request->get('quantity');
 
-        if ($quantity === null || !is_numeric($quantity) || $quantity <= 0) {
-            return new JsonResponse(['error' => 'Invalid quantity provided.'], Response::HTTP_BAD_REQUEST);
-        }
-
         $user = $this->getUser();
-
-        if (!$user instanceof User) {
-            return new JsonResponse(['error' => 'User not authenticated.'], Response::HTTP_UNAUTHORIZED);
-        }
 
         try {
             $this->entityManager->beginTransaction();
 
             $product = $productsRepository->find($id);
-
-            if ($product === null) {
-                return new JsonResponse(['error' => 'Product or Promotion not found.'], Response::HTTP_NOT_FOUND);
-            }
 
 
             if ($product) {
@@ -185,7 +173,6 @@ class UservueController extends AbstractController
         } catch (\Exception $e) {
             $this->entityManager->rollback();
             error_log('Erreur : ' . $e->getMessage());
-            return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -483,7 +470,6 @@ class UservueController extends AbstractController
             }
         }
         $panierDetails = $panierUserService->createPanierDetails($paniers);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
         return $this->render('user/uservue/categorie.html.twig', [
             'category' => $category,
             'products' => $products,
@@ -540,10 +526,6 @@ class UservueController extends AbstractController
         /** @var User|null $user */
         $user = $security->getUser();
 
-        if (!$user) {
-            throw $this->createAccessDeniedException('Vous devez être connecté pour soumettre le formulaire de contact.');
-        }
-
         $subject = $request->request->get('subject');
         $message = $request->request->get('message');
 
@@ -566,7 +548,6 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $panierDetails = [];
         $panierDetails = $panierUserService->createPanierDetails($paniers);
-        $user = $this->getUser();
         $userId = null;
 
         if ($user instanceof User) {
@@ -578,10 +559,9 @@ class UservueController extends AbstractController
 
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
         $barreDeRechercheCategorie->handleRequest($request);
+
         $product = $productsRepository->find($id);
-
         $category = $product->getCategory();
-
         $products = $productsRepository->findBy(['category' => $category]);
 
         $promotions = [];
@@ -633,13 +613,13 @@ class UservueController extends AbstractController
             if ($panier->getIdproducts()) {
                 $product = $panier->getIdproducts();
                 if ($product->getQuantity() === 0) {
-                    return new RedirectResponse('/user/panier', 302, ['danger' => 'La quantité du produit est déjà 0.']);
+                    return new RedirectResponse('/user/panier', 302);
                 }
                 $product->setQuantity($product->getQuantity() - 1);
             }
         } elseif ($action === 'subtract') {
             if ($panier->getQuantity() <= 0) {
-                return new RedirectResponse('/user/panier', 302, ['danger' => 'La quantité du panier est déjà zéro.']);
+                return new RedirectResponse('/user/panier', 302);
             }
 
             $panier->setQuantity($panier->getQuantity() - 1);
@@ -688,8 +668,6 @@ class UservueController extends AbstractController
 
         $entityManager->remove($panier);
         $entityManager->flush();
-
-        $this->addFlash('success', 'Le produit ou la promo a été supprimé du panier.');
 
         return new RedirectResponse('/user/panier', 302, ['success' => 'Le produit a bien était supprimé']);
     }

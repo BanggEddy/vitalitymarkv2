@@ -67,7 +67,7 @@ class SecurityControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/login');
         $this->assertSelectorTextContains('h3', 'Connectez vous');
         $form = $crawler->selectButton('Se connecter')->form([
-            'email' => 'david2@gmail.com',
+            'email' => 'comptepassupp@gmail.com',
             'password' => 'Roooooooot123@',
         ]);
         $client->submit($form);
@@ -96,6 +96,25 @@ class SecurityControllerTest extends WebTestCase
         $client->getContainer()->get('test.client')->getKernel()->shutdown();
     }
 
+    public function testLoginFormFindUserDeletedCompte()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/login');
+        $this->assertResponseIsSuccessful();
+
+        $csrfToken = $crawler->filter('input[name="_csrf_token"]')->attr('value');
+
+        $client->request('POST', '/login', [
+            'email' => 'david2@gmail.com',
+            'password' => 'Roooooooot123@',
+            '_csrf_token' => $csrfToken,
+        ]);
+        $this->assertResponseRedirects('/login');
+        $client->followRedirect();
+        $this->assertSelectorNotExists('.alert alert-danger', 'Le compte a était supprimé');
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+    }
     #Connection Admin
     public function testLoginFormFindAdminValide()
     {
@@ -113,5 +132,26 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
         $client->getContainer()->get('test.client')->getKernel()->shutdown();
+    }
+
+    public function testLoginFormFindAdminValidePOST()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/login');
+        $this->assertResponseIsSuccessful();
+
+        $csrfToken = $crawler->filter('input[name="_csrf_token"]')->attr('value');
+
+        $client->request('POST', '/login', [
+            'email' => 'admin@gmail.com',
+            'password' => 'Roooooooot123@',
+            '_csrf_token' => $csrfToken,
+        ]);
+
+        $this->assertResponseRedirects('/adminproducts');
+
+        $client->followRedirect();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 }

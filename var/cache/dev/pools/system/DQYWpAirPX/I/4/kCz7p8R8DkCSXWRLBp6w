@@ -236,27 +236,27 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
             'operations' => [
                 1 => [
                     [
-                        '_api_/products/{id}{._format}_get',
+                        '_api_/productss/{id}{._format}_get',
                         $o[2],
                     ],
                     [
-                        '_api_/products{._format}_get_collection',
+                        '_api_/productss{._format}_get_collection',
                         $o[6],
                     ],
                     [
-                        '_api_/products{._format}_post',
+                        '_api_/productss{._format}_post',
                         $o[9],
                     ],
                     [
-                        '_api_/products/{id}{._format}_put',
+                        '_api_/productss/{id}{._format}_put',
                         $o[12],
                     ],
                     [
-                        '_api_/products/{id}{._format}_patch',
+                        '_api_/productss/{id}{._format}_patch',
                         $o[16],
                     ],
                     [
-                        '_api_/products/{id}{._format}_delete',
+                        '_api_/productss/{id}{._format}_delete',
                         $o[20],
                     ],
                 ],
@@ -616,12 +616,12 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
                 20 => null,
             ],
             'name' => [
-                2 => '_api_/products/{id}{._format}_get',
-                6 => '_api_/products{._format}_get_collection',
-                9 => '_api_/products{._format}_post',
-                12 => '_api_/products/{id}{._format}_put',
-                16 => '_api_/products/{id}{._format}_patch',
-                20 => '_api_/products/{id}{._format}_delete',
+                2 => '_api_/productss/{id}{._format}_get',
+                6 => '_api_/productss{._format}_get_collection',
+                9 => '_api_/productss{._format}_post',
+                12 => '_api_/productss/{id}{._format}_put',
+                16 => '_api_/productss/{id}{._format}_patch',
+                20 => '_api_/productss/{id}{._format}_delete',
             ],
         ],
         'ApiPlatform\\Metadata\\HttpOperation' => [
@@ -642,12 +642,12 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
                 20 => 'DELETE',
             ],
             'uriTemplate' => [
-                2 => '/products/{id}{._format}',
-                6 => '/products{._format}',
-                9 => '/products{._format}',
-                12 => '/products/{id}{._format}',
-                16 => '/products/{id}{._format}',
-                20 => '/products/{id}{._format}',
+                2 => '/productss/{id}{._format}',
+                6 => '/productss{._format}',
+                9 => '/productss{._format}',
+                12 => '/productss/{id}{._format}',
+                16 => '/productss/{id}{._format}',
+                20 => '/productss/{id}{._format}',
             ],
             'types' => [
                 2 => null,
