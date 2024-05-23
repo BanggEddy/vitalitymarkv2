@@ -87,22 +87,97 @@ class __TwigTemplate_61b84054ca74628a0111ab70a1d24062 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "    <h1>Edit Coupon</h1>
+        yield "
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+
+    form {
+        display: inline;
+    }
+</style>
+
+<div class=\"container nature-card\">
+    <h1>Modifier le Coupon</h1>
 
     ";
-        // line 8
-        yield Twig\Extension\CoreExtension::include($this->env, $context, "admin/coupon/_form.html.twig", ["button_label" => "Update"]);
+        // line 65
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 65, $this->source); })()), 'form_start');
         yield "
-
-    <a href=\"";
-        // line 10
+        ";
+        // line 66
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 66, $this->source); })()), 'widget');
+        yield "
+        <a href=\"";
+        // line 67
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coupon_index");
-        yield "\">back to list</a>
+        yield "\" class=\"btn btn-details\">< Retour</a>
+                <button class=\"btn btn-details\">Enregistrer le Coupon</button>
 
+        <form method=\"post\" action=\"";
+        // line 70
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coupon_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 70, $this->source); })()), "id", [], "any", false, false, false, 70)]), "html", null, true);
+        yield "\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
+            <input type=\"hidden\" name=\"_token\" value=\"";
+        // line 71
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 71, $this->source); })()), "id", [], "any", false, false, false, 71))), "html", null, true);
+        yield "\">
+            <button class=\"btn btn-details\">Supprimer</button>
+        </form>
     ";
-        // line 12
-        yield Twig\Extension\CoreExtension::include($this->env, $context, "admin/coupon/_delete_form.html.twig");
+        // line 74
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 74, $this->source); })()), 'form_end');
         yield "
+
+
+</div>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -134,7 +209,7 @@ class __TwigTemplate_61b84054ca74628a0111ab70a1d24062 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  104 => 12,  99 => 10,  94 => 8,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  175 => 74,  169 => 71,  165 => 70,  159 => 67,  155 => 66,  151 => 65,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -144,13 +219,79 @@ class __TwigTemplate_61b84054ca74628a0111ab70a1d24062 extends Template
 {% block title %}Edit Coupon{% endblock %}
 
 {% block body %}
-    <h1>Edit Coupon</h1>
 
-    {{ include('admin/coupon/_form.html.twig', {'button_label': 'Update'}) }}
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
 
-    <a href=\"{{ path('app_coupon_index') }}\">back to list</a>
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
 
-    {{ include('admin/coupon/_delete_form.html.twig') }}
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+
+    form {
+        display: inline;
+    }
+</style>
+
+<div class=\"container nature-card\">
+    <h1>Modifier le Coupon</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <a href=\"{{ path('app_coupon_index') }}\" class=\"btn btn-details\">< Retour</a>
+                <button class=\"btn btn-details\">Enregistrer le Coupon</button>
+
+        <form method=\"post\" action=\"{{ path('app_coupon_delete', {'id': coupon.id}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
+            <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ coupon.id) }}\">
+            <button class=\"btn btn-details\">Supprimer</button>
+        </form>
+    {{ form_end(form) }}
+
+
+</div>
+
 {% endblock %}
 ", "admin/coupon/edit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\coupon\\edit.html.twig");
     }

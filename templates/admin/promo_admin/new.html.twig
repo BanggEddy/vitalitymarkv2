@@ -21,25 +21,6 @@
         margin-bottom: 20px;
     }
 
-    .nature-card button {
-        background-color: #4CAF50; 
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-
-    .nature-card button:hover {
-        background-color: #45a049; 
-    }
-
     .nature-card input[type=text],
     .nature-card input[type=date],
     .nature-card textarea {
@@ -104,10 +85,8 @@
             {{ form_label(form.idproduct) }}
             {{ form_widget(form.idproduct) }}
         </div>
-    <div class="btn-group" role="group" aria-label="Buttons">
-        <a href="{{ path('app_promo_admin_index') }}" class="promo-admin-detail-btn-back">< Retour</a>
-        <button class="btn">{{ button_label|default('Save') }}</button>
-    </div>
+        <a href="{{ path('app_promo_admin_index') }}" class="btn btn-details">< Retour</a>
+        <button class="btn btn-details">Ajouter un produit en promo</button>
     {{ form_end(form) }}
 
 

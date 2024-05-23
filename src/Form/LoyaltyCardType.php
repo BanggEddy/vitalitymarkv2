@@ -25,11 +25,7 @@ class LoyaltyCardType extends AbstractType
                 'label' => 'Type de carte',
             ])
             ->add('points')
-            ->add('personalized_offer')
-            ->add('iduser', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ]);
+            ->add('personalized_offer');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

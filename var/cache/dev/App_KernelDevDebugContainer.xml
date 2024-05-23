@@ -710,7 +710,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.5AOYZqL"/>
+      <argument type="service" id=".service_locator.nqjEt9H"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3120,7 +3120,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.5AOYZqL"/>
+      <argument type="service" id=".service_locator.nqjEt9H"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -8956,7 +8956,7 @@
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.5AOYZqL" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.nqjEt9H" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AccueilController::afficherLesPromos" type="service_closure" id=".service_locator.1j13wVw"/>
@@ -8986,7 +8986,6 @@
         <argument key="App\Controller\LoyaltyCardController::delete" type="service_closure" id=".service_locator.DxJ_gkE"/>
         <argument key="App\Controller\LoyaltyCardController::edit" type="service_closure" id=".service_locator.DxJ_gkE"/>
         <argument key="App\Controller\LoyaltyCardController::index" type="service_closure" id=".service_locator.7i3BCB3"/>
-        <argument key="App\Controller\LoyaltyCardController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\LoyaltyCardController::show" type="service_closure" id=".service_locator.oFpVnn4"/>
         <argument key="App\Controller\PromoAdminController::delete" type="service_closure" id=".service_locator.DtsKEqY"/>
         <argument key="App\Controller\PromoAdminController::edit" type="service_closure" id=".service_locator.DtsKEqY"/>
@@ -9042,7 +9041,6 @@
         <argument key="App\Controller\LoyaltyCardController:delete" type="service_closure" id=".service_locator.DxJ_gkE"/>
         <argument key="App\Controller\LoyaltyCardController:edit" type="service_closure" id=".service_locator.DxJ_gkE"/>
         <argument key="App\Controller\LoyaltyCardController:index" type="service_closure" id=".service_locator.7i3BCB3"/>
-        <argument key="App\Controller\LoyaltyCardController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\LoyaltyCardController:show" type="service_closure" id=".service_locator.oFpVnn4"/>
         <argument key="App\Controller\PromoAdminController:delete" type="service_closure" id=".service_locator.DtsKEqY"/>
         <argument key="App\Controller\PromoAdminController:edit" type="service_closure" id=".service_locator.DtsKEqY"/>
@@ -11521,7 +11519,7 @@
     <service id="lexik_jwt_authentication.key_loader" alias="lexik_jwt_authentication.key_loader.raw" public="true"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.5AOYZqL"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.nqjEt9H"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
@@ -11545,7 +11543,7 @@
     <service id=".service_locator.o9i7EFx" alias=".service_locator.84xubWY"/>
     <service id=".service_locator.EsSTjMC" alias=".service_locator.dAO6ypm"/>
     <service id=".service_locator.sH.bvlR" alias=".service_locator.2qiSyMX"/>
-    <service id=".service_locator.UafBqVG" alias=".service_locator.5AOYZqL"/>
+    <service id=".service_locator.Y8r7e7t" alias=".service_locator.nqjEt9H"/>
     <service id=".service_locator.sO2baFT" alias=".service_locator.UXbUH6B"/>
     <service id=".service_locator.chy.Yq_" alias=".service_locator.yhILtYu"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>

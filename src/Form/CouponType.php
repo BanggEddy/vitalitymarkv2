@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Entity\User;
 
 class CouponType extends AbstractType
 {
@@ -33,9 +34,13 @@ class CouponType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('reduction')
+            ->add('qty')
             ->add('idloyaltycard', EntityType::class, [
                 'class' => LoyaltyCard::class,
-                'choice_label' => 'id',
+                'choice_label' => function ($loyaltyCard) {
+                    return $loyaltyCard->getIduser()->getName();
+                },
+                'label' => "Nom de l'utilisateur :",
                 'multiple' => true,
             ]);
     }

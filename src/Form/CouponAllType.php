@@ -26,9 +26,14 @@ class CouponAllType extends AbstractType
                 'label' => 'Type de carte',
             ])
             ->add('description', TextType::class)
-            ->add('start_date', DateType::class)
-            ->add('end_date', DateType::class)
-            ->add('reduction', TextType::class);
+            ->add('start_date', null, [
+                'widget' => 'single_text',
+            ])
+            ->add('end_date', null, [
+                'widget' => 'single_text',
+            ])
+            ->add('qty')
+            ->add('reduction');
     }
 
     public function configureOptions(OptionsResolver $resolver)

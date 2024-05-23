@@ -83,6 +83,14 @@ class PromoAdminController extends AbstractController
     #[Route('/{id}', name: 'app_promo_admin_show', methods: ['GET'])]
     public function show(Promo $promo, Request $request): Response
     {
+        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
+        $barreDeRechercheCategorie->handleRequest($request);
+        if ($barreDeRechercheCategorie->isSubmitted() && $$barreDeRechercheCategorie->isValid()) {
+            $category = $barreDeRechercheCategoriem->getData()['category'];
+
+            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        }
+
         $form = $this->createForm(ProductSearchType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -93,7 +101,7 @@ class PromoAdminController extends AbstractController
         return $this->render('admin/promo_admin/show.html.twig', [
             'promo' => $promo,
             'form' => $form->createView(),
-
+            'barreRechercheCategory' => $barreDeRechercheCategorie,
         ]);
     }
 

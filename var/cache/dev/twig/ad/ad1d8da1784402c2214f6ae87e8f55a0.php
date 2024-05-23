@@ -182,7 +182,7 @@ class __TwigTemplate_11bae142063a227bb47b4e122732727f extends Template
 </style>
 
 <div class=\"promo-admin-detail-container\">
-
+<h3> Détail du promo</h3>
     <table class=\"promo-admin-detail-table\">
         <tbody>
             <tr>
@@ -381,7 +381,7 @@ class __TwigTemplate_11bae142063a227bb47b4e122732727f extends Template
 </style>
 
 <div class=\"promo-admin-detail-container\">
-
+<h3> Détail du promo</h3>
     <table class=\"promo-admin-detail-table\">
         <tbody>
             <tr>

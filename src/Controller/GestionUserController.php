@@ -77,7 +77,7 @@ class GestionUserController extends AbstractController
 
         return $this->render('admin/gestion_user/edit.html.twig', [
             'user' => $user,
-            'barreRechercheCategory' => $form->createView(),
+            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
             'form' => $form,
         ]);
     }

@@ -34,7 +34,7 @@ class __TwigTemplate_ea869a9f9e45f340ffd068de57519724 extends Template
     protected function doGetParent(array $context)
     {
         // line 1
-        return "base.html.twig";
+        return "headeradmin.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -46,7 +46,7 @@ class __TwigTemplate_ea869a9f9e45f340ffd068de57519724 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "admin/coupon/show.html.twig"));
 
-        $this->parent = $this->loadTemplate("base.html.twig", "admin/coupon/show.html.twig", 1);
+        $this->parent = $this->loadTemplate("headeradmin.html.twig", "admin/coupon/show.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -87,69 +87,145 @@ class __TwigTemplate_ea869a9f9e45f340ffd068de57519724 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "    <h1>Coupon</h1>
+        yield "
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table tbody + tbody {
+        border-top: 2px solid #dee2e6;
+    }
+
+    .table .table {
+        background-color: #fff;
+    }
+
+
+</style>
+
+<div class=\"container nature-card\">
+    <h1>Détail du Coupon</h1>
 
     <table class=\"table\">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>";
-        // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 12, $this->source); })()), "id", [], "any", false, false, false, 12), "html", null, true);
-        yield "</td>
-            </tr>
-            <tr>
                 <th>Type</th>
                 <td>";
-        // line 16
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 16, $this->source); })()), "type", [], "any", false, false, false, 16), "html", null, true);
+        // line 89
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 89, $this->source); })()), "type", [], "any", false, false, false, 89), "html", null, true);
         yield "</td>
             </tr>
             <tr>
                 <th>Description</th>
                 <td>";
-        // line 20
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 20, $this->source); })()), "description", [], "any", false, false, false, 20), "html", null, true);
+        // line 93
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 93, $this->source); })()), "description", [], "any", false, false, false, 93), "html", null, true);
         yield "</td>
             </tr>
             <tr>
                 <th>Start_date</th>
                 <td>";
-        // line 24
-        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 24, $this->source); })()), "startDate", [], "any", false, false, false, 24)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 24, $this->source); })()), "startDate", [], "any", false, false, false, 24), "Y-m-d"), "html", null, true)) : (yield ""));
+        // line 97
+        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 97, $this->source); })()), "startDate", [], "any", false, false, false, 97)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 97, $this->source); })()), "startDate", [], "any", false, false, false, 97), "Y-m-d"), "html", null, true)) : (yield ""));
         yield "</td>
             </tr>
             <tr>
                 <th>End_date</th>
                 <td>";
-        // line 28
-        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 28, $this->source); })()), "endDate", [], "any", false, false, false, 28)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 28, $this->source); })()), "endDate", [], "any", false, false, false, 28), "Y-m-d"), "html", null, true)) : (yield ""));
+        // line 101
+        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 101, $this->source); })()), "endDate", [], "any", false, false, false, 101)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 101, $this->source); })()), "endDate", [], "any", false, false, false, 101), "Y-m-d"), "html", null, true)) : (yield ""));
         yield "</td>
             </tr>
             <tr>
                 <th>Reduction</th>
                 <td>";
-        // line 32
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 32, $this->source); })()), "reduction", [], "any", false, false, false, 32), "html", null, true);
+        // line 105
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 105, $this->source); })()), "reduction", [], "any", false, false, false, 105), "html", null, true);
         yield "</td>
             </tr>
         </tbody>
     </table>
 
-    <a href=\"";
-        // line 37
+        <a href=\"";
+        // line 110
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coupon_index");
-        yield "\">back to list</a>
+        yield "\" class=\"btn btn-details\">< Retour</a>
+        <a href=\"";
+        // line 111
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coupon_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 111, $this->source); })()), "id", [], "any", false, false, false, 111)]), "html", null, true);
+        yield "\" class=\"btn btn-details\">Editer</a>
+        <form method=\"post\" action=\"";
+        // line 112
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coupon_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 112, $this->source); })()), "id", [], "any", false, false, false, 112)]), "html", null, true);
+        yield "\" onsubmit=\"return confirm('Voulez vous vraiment supprimer le coupon?');\" style=\"display:inline;\">
+            <input type=\"hidden\" name=\"_token\" value=\"";
+        // line 113
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 113, $this->source); })()), "id", [], "any", false, false, false, 113))), "html", null, true);
+        yield "\">
+            <button class=\"btn btn-details\">Supprimer le Coupon</button>
+        </form>
+</div>
 
-    <a href=\"";
-        // line 39
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coupon_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 39, $this->source); })()), "id", [], "any", false, false, false, 39)]), "html", null, true);
-        yield "\">edit</a>
-
-    ";
-        // line 41
-        yield Twig\Extension\CoreExtension::include($this->env, $context, "admin/coupon/_delete_form.html.twig");
-        yield "
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -181,24 +257,97 @@ class __TwigTemplate_ea869a9f9e45f340ffd068de57519724 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  151 => 41,  146 => 39,  141 => 37,  133 => 32,  126 => 28,  119 => 24,  112 => 20,  105 => 16,  98 => 12,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  223 => 113,  219 => 112,  215 => 111,  211 => 110,  203 => 105,  196 => 101,  189 => 97,  182 => 93,  175 => 89,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("{% extends 'base.html.twig' %}
+        return new Source("{% extends 'headeradmin.html.twig' %}
 
 {% block title %}Coupon{% endblock %}
 
 {% block body %}
-    <h1>Coupon</h1>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table tbody + tbody {
+        border-top: 2px solid #dee2e6;
+    }
+
+    .table .table {
+        background-color: #fff;
+    }
+
+
+</style>
+
+<div class=\"container nature-card\">
+    <h1>Détail du Coupon</h1>
 
     <table class=\"table\">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ coupon.id }}</td>
-            </tr>
             <tr>
                 <th>Type</th>
                 <td>{{ coupon.type }}</td>
@@ -222,11 +371,14 @@ class __TwigTemplate_ea869a9f9e45f340ffd068de57519724 extends Template
         </tbody>
     </table>
 
-    <a href=\"{{ path('app_coupon_index') }}\">back to list</a>
+        <a href=\"{{ path('app_coupon_index') }}\" class=\"btn btn-details\">< Retour</a>
+        <a href=\"{{ path('app_coupon_edit', {'id': coupon.id}) }}\" class=\"btn btn-details\">Editer</a>
+        <form method=\"post\" action=\"{{ path('app_coupon_delete', {'id': coupon.id}) }}\" onsubmit=\"return confirm('Voulez vous vraiment supprimer le coupon?');\" style=\"display:inline;\">
+            <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ coupon.id) }}\">
+            <button class=\"btn btn-details\">Supprimer le Coupon</button>
+        </form>
+</div>
 
-    <a href=\"{{ path('app_coupon_edit', {'id': coupon.id}) }}\">edit</a>
-
-    {{ include('admin/coupon/_delete_form.html.twig') }}
 {% endblock %}
 ", "admin/coupon/show.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\coupon\\show.html.twig");
     }

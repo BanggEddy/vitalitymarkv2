@@ -27,6 +27,7 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
 
         $this->blocks = [
             'title' => [$this, 'block_title'],
+            'stylesheets' => [$this, 'block_stylesheets'],
             'body' => [$this, 'block_body'],
         ];
     }
@@ -34,7 +35,7 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
     protected function doGetParent(array $context)
     {
         // line 1
-        return "base.html.twig";
+        return "headeradmin.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -46,7 +47,7 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "admin/loyalty_card/show.html.twig"));
 
-        $this->parent = $this->loadTemplate("base.html.twig", "admin/loyalty_card/show.html.twig", 1);
+        $this->parent = $this->loadTemplate("headeradmin.html.twig", "admin/loyalty_card/show.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -77,6 +78,68 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
     }
 
     // line 5
+    public function block_stylesheets($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        // line 6
+        yield "    ";
+        yield from $this->yieldParentBlock("stylesheets", $context, $blocks);
+        yield "
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 3% auto;
+            padding: 20px;
+            border-radius: 2%;
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+
+        .loyalty-card h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .loyalty-card table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+
+        .loyalty-card th,
+        .loyalty-card td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .loyalty-card tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .loyalty-card .table .table {
+            background-color: #fff;
+        }
+
+    </style>
+";
+        
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
+        
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
+
+        return; yield '';
+    }
+
+    // line 47
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -86,63 +149,71 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 6
-        yield "    <h1>LoyaltyCard</h1>
+        // line 48
+        yield "    <div class=\"container loyalty-card\">
+        <h1>Les détails de la carte: </h1>
 
-    <table class=\"table\">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>";
-        // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 12, $this->source); })()), "id", [], "any", false, false, false, 12), "html", null, true);
+        <table class=\"table\">
+            <tbody>
+                <tr>
+                    <th>Card_number</th>
+                    <td>";
+        // line 55
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 55, $this->source); })()), "cardNumber", [], "any", false, false, false, 55), "html", null, true);
         yield "</td>
-            </tr>
-            <tr>
-                <th>Card_number</th>
-                <td>";
-        // line 16
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 16, $this->source); })()), "cardNumber", [], "any", false, false, false, 16), "html", null, true);
+                </tr>
+                <tr>
+                    <th>Card_type</th>
+                    <td>";
+        // line 59
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 59, $this->source); })()), "cardType", [], "any", false, false, false, 59), "html", null, true);
         yield "</td>
-            </tr>
-            <tr>
-                <th>Card_type</th>
-                <td>";
-        // line 20
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 20, $this->source); })()), "cardType", [], "any", false, false, false, 20), "html", null, true);
+                </tr>
+                <tr>
+                    <th>Points</th>
+                    <td>";
+        // line 63
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 63, $this->source); })()), "points", [], "any", false, false, false, 63), "html", null, true);
         yield "</td>
-            </tr>
-            <tr>
-                <th>Points</th>
-                <td>";
-        // line 24
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 24, $this->source); })()), "points", [], "any", false, false, false, 24), "html", null, true);
+                </tr>
+                <tr>
+                    <th>Personalized_offer</th>
+                    <td>";
+        // line 67
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 67, $this->source); })()), "personalizedOffer", [], "any", false, false, false, 67), "html", null, true);
         yield "</td>
-            </tr>
-            <tr>
-                <th>Personalized_offer</th>
-                <td>";
-        // line 28
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 28, $this->source); })()), "personalizedOffer", [], "any", false, false, false, 28), "html", null, true);
-        yield "</td>
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href=\"";
-        // line 33
+        <ul style=\"list-style-type: none; padding: 0; margin: 0;\">
+            <li style=\"display: inline-block; margin-right: 10px;\">
+                <a href=\"";
+        // line 74
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_index");
-        yield "\">back to list</a>
+        yield "\" class=\"btn btn-details\">< Retour</a>
+            </li>
+            <li style=\"display: inline-block; margin-right: 10px;\">
+                <a href=\"";
+        // line 77
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 77, $this->source); })()), "id", [], "any", false, false, false, 77)]), "html", null, true);
+        yield "\" class=\"btn btn-details\">Editer</a>
+            </li>
+            <li style=\"display: inline-block;\">
+                <form method=\"post\" action=\"";
+        // line 80
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 80, $this->source); })()), "id", [], "any", false, false, false, 80)]), "html", null, true);
+        yield "\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
+                    <input type=\"hidden\" name=\"_token\" value=\"";
+        // line 81
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 81, $this->source); })()), "id", [], "any", false, false, false, 81))), "html", null, true);
+        yield "\">
+                    <button class=\"btn btn-details\">Supprimer</button>
+                </form>
+            </li>
+        </ul>
 
-    <a href=\"";
-        // line 35
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 35, $this->source); })()), "id", [], "any", false, false, false, 35)]), "html", null, true);
-        yield "\">edit</a>
-
-    ";
-        // line 37
-        yield Twig\Extension\CoreExtension::include($this->env, $context, "admin/loyalty_card/_delete_form.html.twig");
-        yield "
+    </div>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -174,48 +245,98 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
      */
     public function getDebugInfo()
     {
-        return array (  144 => 37,  139 => 35,  134 => 33,  126 => 28,  119 => 24,  112 => 20,  105 => 16,  98 => 12,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  209 => 81,  205 => 80,  199 => 77,  193 => 74,  183 => 67,  176 => 63,  169 => 59,  162 => 55,  153 => 48,  143 => 47,  91 => 6,  81 => 5,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("{% extends 'base.html.twig' %}
+        return new Source("{% extends 'headeradmin.html.twig' %}
 
 {% block title %}LoyaltyCard{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 3% auto;
+            padding: 20px;
+            border-radius: 2%;
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+
+        .loyalty-card h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .loyalty-card table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+
+        .loyalty-card th,
+        .loyalty-card td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .loyalty-card tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .loyalty-card .table .table {
+            background-color: #fff;
+        }
+
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1>LoyaltyCard</h1>
+    <div class=\"container loyalty-card\">
+        <h1>Les détails de la carte: </h1>
 
-    <table class=\"table\">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ loyalty_card.id }}</td>
-            </tr>
-            <tr>
-                <th>Card_number</th>
-                <td>{{ loyalty_card.cardNumber }}</td>
-            </tr>
-            <tr>
-                <th>Card_type</th>
-                <td>{{ loyalty_card.cardType }}</td>
-            </tr>
-            <tr>
-                <th>Points</th>
-                <td>{{ loyalty_card.points }}</td>
-            </tr>
-            <tr>
-                <th>Personalized_offer</th>
-                <td>{{ loyalty_card.personalizedOffer }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class=\"table\">
+            <tbody>
+                <tr>
+                    <th>Card_number</th>
+                    <td>{{ loyalty_card.cardNumber }}</td>
+                </tr>
+                <tr>
+                    <th>Card_type</th>
+                    <td>{{ loyalty_card.cardType }}</td>
+                </tr>
+                <tr>
+                    <th>Points</th>
+                    <td>{{ loyalty_card.points }}</td>
+                </tr>
+                <tr>
+                    <th>Personalized_offer</th>
+                    <td>{{ loyalty_card.personalizedOffer }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href=\"{{ path('app_loyalty_card_index') }}\">back to list</a>
+        <ul style=\"list-style-type: none; padding: 0; margin: 0;\">
+            <li style=\"display: inline-block; margin-right: 10px;\">
+                <a href=\"{{ path('app_loyalty_card_index') }}\" class=\"btn btn-details\">< Retour</a>
+            </li>
+            <li style=\"display: inline-block; margin-right: 10px;\">
+                <a href=\"{{ path('app_loyalty_card_edit', {'id': loyalty_card.id}) }}\" class=\"btn btn-details\">Editer</a>
+            </li>
+            <li style=\"display: inline-block;\">
+                <form method=\"post\" action=\"{{ path('app_loyalty_card_delete', {'id': loyalty_card.id}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
+                    <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ loyalty_card.id) }}\">
+                    <button class=\"btn btn-details\">Supprimer</button>
+                </form>
+            </li>
+        </ul>
 
-    <a href=\"{{ path('app_loyalty_card_edit', {'id': loyalty_card.id}) }}\">edit</a>
-
-    {{ include('admin/loyalty_card/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
 ", "admin/loyalty_card/show.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\loyalty_card\\show.html.twig");
     }

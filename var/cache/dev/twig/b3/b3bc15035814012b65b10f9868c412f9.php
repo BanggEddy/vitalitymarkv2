@@ -32,7 +32,7 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
 
     protected function doGetParent(array $context)
     {
-        // line 3
+        // line 1
         return "headeradmin.html.twig";
     }
 
@@ -45,7 +45,7 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "admin/coupon/newtype.html.twig"));
 
-        $this->parent = $this->loadTemplate("headeradmin.html.twig", "admin/coupon/newtype.html.twig", 3);
+        $this->parent = $this->loadTemplate("headeradmin.html.twig", "admin/coupon/newtype.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -55,7 +55,7 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
 
     }
 
-    // line 5
+    // line 3
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -65,21 +65,80 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 6
-        yield "    <h1>Add New Coupon</h1>
-    ";
-        // line 7
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 7, $this->source); })()), 'form_start');
+        // line 4
         yield "
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+</style>
+
+<div class=\"container nature-card\">
+    <h1>Ajouter un coupon pour un type</h1>
     ";
-        // line 8
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 8, $this->source); })()), 'widget');
+        // line 57
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 57, $this->source); })()), 'form_start');
         yield "
-    <button type=\"submit\" class=\"btn btn-primary\">Create</button>
+        ";
+        // line 58
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 58, $this->source); })()), 'widget');
+        yield "
+                    <button type=\"submit\" class=\"btn btn-details\">Ajouter le coupon</button>
+        <a href=\"";
+        // line 60
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coupon_index");
+        yield "\" class=\"btn btn-details\">< Retour</a>
     ";
-        // line 10
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 10, $this->source); })()), 'form_end');
+        // line 61
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 61, $this->source); })()), 'form_end');
         yield "
+
+</div>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -111,21 +170,75 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  81 => 10,  76 => 8,  72 => 7,  69 => 6,  59 => 5,  36 => 3,);
+        return array (  137 => 61,  133 => 60,  128 => 58,  124 => 57,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("{# templates/admin/loyalty_card/newtype.html.twig #}
-
-{% extends 'headeradmin.html.twig' %}
+        return new Source("{% extends 'headeradmin.html.twig' %}
 
 {% block body %}
-    <h1>Add New Coupon</h1>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+</style>
+
+<div class=\"container nature-card\">
+    <h1>Ajouter un coupon pour un type</h1>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type=\"submit\" class=\"btn btn-primary\">Create</button>
+        {{ form_widget(form) }}
+                    <button type=\"submit\" class=\"btn btn-details\">Ajouter le coupon</button>
+        <a href=\"{{ path('app_coupon_index') }}\" class=\"btn btn-details\">< Retour</a>
     {{ form_end(form) }}
+
+</div>
+
 {% endblock %}
 ", "admin/coupon/newtype.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\coupon\\newtype.html.twig");
     }

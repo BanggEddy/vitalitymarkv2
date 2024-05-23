@@ -21,25 +21,6 @@
         margin-bottom: 20px;
     }
 
-    .nature-card button {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-
-    .nature-card button:hover {
-        background-color: #45a049; /
-    }
-
     .nature-card input[type=text],
     .nature-card input[type=date],
     .nature-card textarea {
@@ -60,25 +41,7 @@
         border-radius: 4px;
         background-color: #f8f8f8;
     }
-    .promo-admin-detail-btn-back {
-        background-color: #0056b3;
-        color: #fff;
-        text-decoration: none;
-        padding: 10px 10px;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        margin-right: 5px;
-        display: inline-block;
-        width: 80%;
-        height: fit-content;
-        margin-top: 2%;
-    }
-    .promo-admin-detail-btn-back:hover {
-        background-color: #fff;
-        text-decoration: none;
-        color: #0056b3;
-    }
+
 
 </style>
 <div class="container nature-card">
@@ -101,11 +64,14 @@
             {{ form_label(form.description) }}
             {{ form_widget(form.description) }}
         </div>
-<div class="btn-group" role="group" aria-label="Buttons">
-    <a href="{{ path('app_promo_admin_index') }}" style="text-align:center;" class="promo-admin-detail-btn-back">< Retour</a>
-    {{ include('admin/promo_admin/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+            <a href="{{ path('app_promo_admin_index') }}" style="text-align:center;" class="btn btn-details">< Retour</a>
 
-</div>
+        <button class="btn btn-details">Editer</button>
+    {{ form_end(form) }}
+
+
 
 </div>
 {% endblock %}

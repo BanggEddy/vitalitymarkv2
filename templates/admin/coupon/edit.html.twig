@@ -3,11 +3,77 @@
 {% block title %}Edit Coupon{% endblock %}
 
 {% block body %}
-    <h1>Edit Coupon</h1>
 
-    {{ include('admin/coupon/_form.html.twig', {'button_label': 'Update'}) }}
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
 
-    <a href="{{ path('app_coupon_index') }}">back to list</a>
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
 
-    {{ include('admin/coupon/_delete_form.html.twig') }}
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+
+    form {
+        display: inline;
+    }
+</style>
+
+<div class="container nature-card">
+    <h1>Modifier le Coupon</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <a href="{{ path('app_coupon_index') }}" class="btn btn-details">< Retour</a>
+                <button class="btn btn-details">Enregistrer le Coupon</button>
+
+        <form method="post" action="{{ path('app_coupon_delete', {'id': coupon.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ coupon.id) }}">
+            <button class="btn btn-details">Supprimer</button>
+        </form>
+    {{ form_end(form) }}
+
+
+</div>
+
 {% endblock %}

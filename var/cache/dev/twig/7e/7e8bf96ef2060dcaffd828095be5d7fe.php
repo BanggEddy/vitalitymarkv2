@@ -213,7 +213,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
 
 ";
         // line 129
-        if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 129, $this->source); })()), "request", [], "any", false, false, false, 129), "attributes", [], "any", false, false, false, 129), "get", ["_route"], "method", false, false, false, 129), ["user_loyalty_card", "user_loyalty_card_page", "user_panier", "user_profile", "app_contact_user"])) {
+        if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 129, $this->source); })()), "request", [], "any", false, false, false, 129), "attributes", [], "any", false, false, false, 129), "get", ["_route"], "method", false, false, false, 129), ["user_panier", "user_profile", "app_contact_user"])) {
             // line 130
             yield "<div class=\"container\" style=\"margin-bottom: 40px; margin-top: 40px\">
     <div class=\"row justify-content-center align-items-center\">
@@ -243,7 +243,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
 
 ";
             // line 151
-            if (array_key_exists("getIdloyalty_card", $context)) {
+            if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 151, $this->source); })()), "request", [], "any", false, false, false, 151), "attributes", [], "any", false, false, false, 151), "get", ["_route"], "method", false, false, false, 151), ["user_loyalty_card_page"])) {
                 // line 152
                 yield "<section style=\"background-color:#DBFFCA; margin-bottom:40px;\">
     <div class=\"container\">
@@ -618,7 +618,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
             </div>
         </section>
 
-{% if app.request.attributes.get('_route') not in ['user_loyalty_card', 'user_loyalty_card_page', 'user_panier', 'user_profile', 'app_contact_user'] %}
+{% if app.request.attributes.get('_route') not in ['user_panier', 'user_profile', 'app_contact_user'] %}
 <div class=\"container\" style=\"margin-bottom: 40px; margin-top: 40px\">
     <div class=\"row justify-content-center align-items-center\">
         <div class=\"col-md-6\" style=\"text-align: right; margin-bottom: 20px;\">
@@ -640,7 +640,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
     </div>
 </div>
 
-{% if getIdloyalty_card is defined %}
+{% if app.request.attributes.get('_route') not in ['user_loyalty_card_page'] %}
 <section style=\"background-color:#DBFFCA; margin-bottom:40px;\">
     <div class=\"container\">
         <div class=\"row align-items-center\">

@@ -1,16 +1,89 @@
-{% extends 'base.html.twig' %}
+{% extends 'headeradmin.html.twig' %}
 
 {% block title %}Coupon{% endblock %}
 
 {% block body %}
-    <h1>Coupon</h1>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table tbody + tbody {
+        border-top: 2px solid #dee2e6;
+    }
+
+    .table .table {
+        background-color: #fff;
+    }
+
+
+</style>
+
+<div class="container nature-card">
+    <h1>Détail du Coupon</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ coupon.id }}</td>
-            </tr>
             <tr>
                 <th>Type</th>
                 <td>{{ coupon.type }}</td>
@@ -34,9 +107,12 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_coupon_index') }}">back to list</a>
+        <a href="{{ path('app_coupon_index') }}" class="btn btn-details">< Retour</a>
+        <a href="{{ path('app_coupon_edit', {'id': coupon.id}) }}" class="btn btn-details">Editer</a>
+        <form method="post" action="{{ path('app_coupon_delete', {'id': coupon.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer le coupon?');" style="display:inline;">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ coupon.id) }}">
+            <button class="btn btn-details">Supprimer le Coupon</button>
+        </form>
+</div>
 
-    <a href="{{ path('app_coupon_edit', {'id': coupon.id}) }}">edit</a>
-
-    {{ include('admin/coupon/_delete_form.html.twig') }}
 {% endblock %}

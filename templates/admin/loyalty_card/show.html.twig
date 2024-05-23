@@ -1,38 +1,88 @@
-{% extends 'base.html.twig' %}
+{% extends 'headeradmin.html.twig' %}
 
 {% block title %}LoyaltyCard{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 3% auto;
+            padding: 20px;
+            border-radius: 2%;
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+
+        .loyalty-card h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .loyalty-card table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+
+        .loyalty-card th,
+        .loyalty-card td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .loyalty-card tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .loyalty-card .table .table {
+            background-color: #fff;
+        }
+
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1>LoyaltyCard</h1>
+    <div class="container loyalty-card">
+        <h1>Les détails de la carte: </h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ loyalty_card.id }}</td>
-            </tr>
-            <tr>
-                <th>Card_number</th>
-                <td>{{ loyalty_card.cardNumber }}</td>
-            </tr>
-            <tr>
-                <th>Card_type</th>
-                <td>{{ loyalty_card.cardType }}</td>
-            </tr>
-            <tr>
-                <th>Points</th>
-                <td>{{ loyalty_card.points }}</td>
-            </tr>
-            <tr>
-                <th>Personalized_offer</th>
-                <td>{{ loyalty_card.personalizedOffer }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Card_number</th>
+                    <td>{{ loyalty_card.cardNumber }}</td>
+                </tr>
+                <tr>
+                    <th>Card_type</th>
+                    <td>{{ loyalty_card.cardType }}</td>
+                </tr>
+                <tr>
+                    <th>Points</th>
+                    <td>{{ loyalty_card.points }}</td>
+                </tr>
+                <tr>
+                    <th>Personalized_offer</th>
+                    <td>{{ loyalty_card.personalizedOffer }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_loyalty_card_index') }}">back to list</a>
+        <ul style="list-style-type: none; padding: 0; margin: 0;">
+            <li style="display: inline-block; margin-right: 10px;">
+                <a href="{{ path('app_loyalty_card_index') }}" class="btn btn-details">< Retour</a>
+            </li>
+            <li style="display: inline-block; margin-right: 10px;">
+                <a href="{{ path('app_loyalty_card_edit', {'id': loyalty_card.id}) }}" class="btn btn-details">Editer</a>
+            </li>
+            <li style="display: inline-block;">
+                <form method="post" action="{{ path('app_loyalty_card_delete', {'id': loyalty_card.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ loyalty_card.id) }}">
+                    <button class="btn btn-details">Supprimer</button>
+                </form>
+            </li>
+        </ul>
 
-    <a href="{{ path('app_loyalty_card_edit', {'id': loyalty_card.id}) }}">edit</a>
-
-    {{ include('admin/loyalty_card/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

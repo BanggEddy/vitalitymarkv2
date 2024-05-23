@@ -36,6 +36,9 @@ class Coupon
     #[ORM\Column(nullable: true)]
     private ?float $reduction = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $qty = null;
+
     public function __construct()
     {
         $this->idloyaltycard = new ArrayCollection();
@@ -126,6 +129,18 @@ class Coupon
     public function setReduction(?float $reduction): static
     {
         $this->reduction = $reduction;
+
+        return $this;
+    }
+
+    public function getQty(): ?int
+    {
+        return $this->qty;
+    }
+
+    public function setQty(?int $qty): static
+    {
+        $this->qty = $qty;
 
         return $this;
     }

@@ -1,11 +1,65 @@
-{# templates/admin/loyalty_card/newtype.html.twig #}
-
 {% extends 'headeradmin.html.twig' %}
 
 {% block body %}
-    <h1>Add New Coupon</h1>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: 3% auto;
+        padding: 20px;
+        border-radius: 2%;
+        background-color: #fff;
+        border: 1px solid #000;
+    }
+
+    .nature-card h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+
+    .nature-card input[type=text],
+    .nature-card input[type=date],
+    .nature-card textarea,
+    .nature-card select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+    }
+
+    .promo-admin-detail-btn-back {
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-right: 5px;
+        display: inline-block;
+        width: 80%;
+        height: fit-content;
+        margin-top: 2%;
+        text-align: center;
+    }
+
+    .promo-admin-detail-btn-back:hover {
+        background-color: #fff;
+        color: #0056b3;
+        text-decoration: none;
+    }
+</style>
+
+<div class="container nature-card">
+    <h1>Ajouter un coupon pour un type</h1>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-primary">Create</button>
+        {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-details">Ajouter le coupon</button>
+        <a href="{{ path('app_coupon_index') }}" class="btn btn-details">< Retour</a>
     {{ form_end(form) }}
+
+</div>
+
 {% endblock %}
