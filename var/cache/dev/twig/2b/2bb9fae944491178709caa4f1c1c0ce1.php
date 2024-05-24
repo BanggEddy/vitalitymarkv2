@@ -110,6 +110,18 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                         </a>
                     </li>
                     <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"";
+        // line 52
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_legals");
+        yield "\">
+                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text\" viewBox=\"0 0 16 16\">
+                            <path d=\"M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5\"/>
+                            <path d=\"M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/>
+                            </svg> 
+                            Mentions légales
+                        </a>
+                    </li>
+                    <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"/login\">
                                 <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-person-fill\" viewBox=\"0 0 16 16\">
                                     <path d=\"M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6\"/>
@@ -138,13 +150,13 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                             <p>Drive, Piéton, Cliquez Collectez, Livraison... C'est à vous de décider !</p>
                                 <form class=\"form-inline\" method=\"POST\">
                                     ";
-        // line 79
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 79, $this->source); })()), 'form_start', ["attr" => ["class" => "form-inline"]]);
+        // line 88
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 88, $this->source); })()), 'form_start', ["attr" => ["class" => "form-inline"]]);
         yield "
                                     <div class=\"input-group\">
                                         ";
-        // line 81
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 81, $this->source); })()), "category", [], "any", false, false, false, 81), 'row', ["attr" => ["class" => "form-control", "placeholder" => "Rechercher", "aria-label" => "Search"]]);
+        // line 90
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 90, $this->source); })()), "category", [], "any", false, false, false, 90), 'row', ["attr" => ["class" => "form-control", "placeholder" => "Rechercher", "aria-label" => "Search"]]);
         yield "
                                         <div class=\"input-group-append\">
                                             <button type=\"submit\" class=\"btn btn-success\">
@@ -155,8 +167,8 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                                         </div>
                                     </div>
                                 ";
-        // line 90
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 90, $this->source); })()), 'form_end');
+        // line 99
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 99, $this->source); })()), 'form_end');
         yield "
                             </form>
                         </div>
@@ -165,9 +177,9 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
             </div>
         </section> 
     ";
-        // line 97
+        // line 106
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 99
+        // line 108
         yield "
 <br>
 <br>
@@ -261,7 +273,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
         return; yield '';
     }
 
-    // line 97
+    // line 106
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -301,7 +313,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  265 => 97,  246 => 9,  226 => 5,  171 => 99,  169 => 97,  159 => 90,  147 => 81,  142 => 79,  95 => 35,  72 => 15,  65 => 10,  63 => 9,  59 => 8,  53 => 5,  47 => 1,);
+        return array (  277 => 106,  258 => 9,  238 => 5,  183 => 108,  181 => 106,  171 => 99,  159 => 90,  154 => 88,  115 => 52,  95 => 35,  72 => 15,  65 => 10,  63 => 9,  59 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -354,6 +366,15 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                                     <path d=\"M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2\"/>
                                 </svg>
                             Aide et Contact
+                        </a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"{{ path('app_legals') }}\">
+                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text\" viewBox=\"0 0 16 16\">
+                            <path d=\"M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5\"/>
+                            <path d=\"M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/>
+                            </svg> 
+                            Mentions légales
                         </a>
                     </li>
                     <li class=\"nav-item\">

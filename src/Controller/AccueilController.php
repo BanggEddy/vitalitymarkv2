@@ -52,10 +52,26 @@ class AccueilController extends AbstractController
         }
 
         return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
             'products' => $products,
             'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
             'promotions' => $promotions,
+        ]);
+    }
+
+    #[Route('/legals', name: 'app_legals')]
+    public function mentionsLegalsPage(
+        Request $request,
+    ): Response {
+        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
+        $barreDeRechercheCategorie->handleRequest($request);
+
+        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
+            $category = $barreDeRechercheCategorie->get('category')->getData();
+            return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
+        }
+
+        return $this->render('accueil/legals.html.twig', [
+            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
         ]);
     }
 

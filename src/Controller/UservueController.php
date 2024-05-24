@@ -41,9 +41,10 @@ class UservueController extends AbstractController
     public function index(
         Request $request,
         ProductsRepository $productsRepository,
-        PanierRepository $panierRepository,
         PromoRepository $promoRepository,
         PanierUser $panierUserService,
+        PanierRepository $panierRepository,
+
     ): Response {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
         $barreDeRechercheCategorie->handleRequest($request);
@@ -695,5 +696,40 @@ class UservueController extends AbstractController
         }
 
         return $this->render('confirmation_delete_account.html.twig');
+    }
+    #[Route('/legals/user', name: 'app_legals_user')]
+    public function mentionsLegalsPage(
+        Request $request,
+        PanierUser $panierUserService,
+        PanierRepository $panierRepository,
+    ): Response {
+
+        $user = $this->getUser();
+        $userId = $user instanceof User ? $user->getId() : null;
+
+        if ($user instanceof User) {
+            $userId = $user->getId();
+        }
+
+
+        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
+        $barreDeRechercheCategorie->handleRequest($request);
+
+        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
+            $category = $barreDeRechercheCategorie->get('category')->getData();
+            return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
+        }
+        $paniers = $panierRepository->findBy(['iduser' => $user]);
+
+
+        $panierDetails = $panierUserService->createPanierDetails($paniers);
+        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+
+        return $this->render('user/uservue/legals.html.twig', [
+            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'user_id' => $userId,
+            'totalPrice' => $totalPrice,
+            'panierDetails' => $panierDetails,
+        ]);
     }
 }
