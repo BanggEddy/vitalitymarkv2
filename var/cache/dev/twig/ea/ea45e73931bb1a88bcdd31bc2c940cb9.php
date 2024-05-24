@@ -156,14 +156,14 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
         <table class=\"table\">
             <tbody>
                 <tr>
-                    <th>Card_number</th>
+                    <th>Numéro de carte</th>
                     <td>";
         // line 55
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 55, $this->source); })()), "cardNumber", [], "any", false, false, false, 55), "html", null, true);
         yield "</td>
                 </tr>
                 <tr>
-                    <th>Card_type</th>
+                    <th>Type de carte</th>
                     <td>";
         // line 59
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 59, $this->source); })()), "cardType", [], "any", false, false, false, 59), "html", null, true);
@@ -177,7 +177,7 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
         yield "</td>
                 </tr>
                 <tr>
-                    <th>Personalized_offer</th>
+                    <th>Les offres personnalisées</th>
                     <td>";
         // line 67
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 67, $this->source); })()), "personalizedOffer", [], "any", false, false, false, 67), "html", null, true);
@@ -303,11 +303,11 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
         <table class=\"table\">
             <tbody>
                 <tr>
-                    <th>Card_number</th>
+                    <th>Numéro de carte</th>
                     <td>{{ loyalty_card.cardNumber }}</td>
                 </tr>
                 <tr>
-                    <th>Card_type</th>
+                    <th>Type de carte</th>
                     <td>{{ loyalty_card.cardType }}</td>
                 </tr>
                 <tr>
@@ -315,7 +315,7 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
                     <td>{{ loyalty_card.points }}</td>
                 </tr>
                 <tr>
-                    <th>Personalized_offer</th>
+                    <th>Les offres personnalisées</th>
                     <td>{{ loyalty_card.personalizedOffer }}</td>
                 </tr>
             </tbody>

@@ -183,14 +183,14 @@ class __TwigTemplate_ea869a9f9e45f340ffd068de57519724 extends Template
         yield "</td>
             </tr>
             <tr>
-                <th>Start_date</th>
+                <th>Date de début</th>
                 <td>";
         // line 97
         ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 97, $this->source); })()), "startDate", [], "any", false, false, false, 97)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 97, $this->source); })()), "startDate", [], "any", false, false, false, 97), "Y-m-d"), "html", null, true)) : (yield ""));
         yield "</td>
             </tr>
             <tr>
-                <th>End_date</th>
+                <th>Date de fin</th>
                 <td>";
         // line 101
         ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 101, $this->source); })()), "endDate", [], "any", false, false, false, 101)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["coupon"]) || array_key_exists("coupon", $context) ? $context["coupon"] : (function () { throw new RuntimeError('Variable "coupon" does not exist.', 101, $this->source); })()), "endDate", [], "any", false, false, false, 101), "Y-m-d"), "html", null, true)) : (yield ""));
@@ -357,11 +357,11 @@ class __TwigTemplate_ea869a9f9e45f340ffd068de57519724 extends Template
                 <td>{{ coupon.description }}</td>
             </tr>
             <tr>
-                <th>Start_date</th>
+                <th>Date de début</th>
                 <td>{{ coupon.startDate ? coupon.startDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>End_date</th>
+                <th>Date de fin</th>
                 <td>{{ coupon.endDate ? coupon.endDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>

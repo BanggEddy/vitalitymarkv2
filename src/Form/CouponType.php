@@ -29,12 +29,18 @@ class CouponType extends AbstractType
             ->add('description')
             ->add('start_date', null, [
                 'widget' => 'single_text',
+                'label' => 'Date de début',
             ])
             ->add('end_date', null, [
                 'widget' => 'single_text',
+                'label' => 'Date de fin',
             ])
-            ->add('reduction')
-            ->add('qty')
+            ->add('reduction', null, [
+                'label' => 'Réduction',
+            ])
+            ->add('qty', null, [
+                'label' => 'Quantité',
+            ])
             ->add('idloyaltycard', EntityType::class, [
                 'class' => LoyaltyCard::class,
                 'choice_label' => function ($loyaltyCard) {

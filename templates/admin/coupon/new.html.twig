@@ -54,7 +54,7 @@
 </style>
 
 <div class="container nature-card">
-    <h1>Create new Coupon</h1>
+    <h1>Ajouter un coupon pour un utilisateur</h1>
 
     {{ form_start(form) }}
         <div class="form-group">
@@ -85,10 +85,8 @@
             {{ form_label(form.idloyaltycard) }}
             {{ form_widget(form.idloyaltycard) }}
         </div>
-        <div class="btn-group" role="group" aria-label="Buttons">
             <a href="{{ path('app_coupon_index') }}" class="btn btn-details">< Retour</a>
             <button class="btn btn-details">Créer</button>
-        </div>
     {{ form_end(form) }}
 </div>
 

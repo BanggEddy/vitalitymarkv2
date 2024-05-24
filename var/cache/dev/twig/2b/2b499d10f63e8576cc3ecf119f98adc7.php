@@ -109,7 +109,7 @@ class __TwigTemplate_400153f5543ef44420d1cc2ccd0ba309 extends Template
 
 </style>
 <div class=\"container nature-card\">
-    <h1>Modifier la promo</h1>
+    <h1>Modifier la promotion</h1>
 
     ";
         // line 50
@@ -260,7 +260,7 @@ class __TwigTemplate_400153f5543ef44420d1cc2ccd0ba309 extends Template
 
 </style>
 <div class=\"container nature-card\">
-    <h1>Modifier la promo</h1>
+    <h1>Modifier la promotion</h1>
 
     {{ form_start(form) }}
         <div class=\"form-group\">

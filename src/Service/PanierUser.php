@@ -17,13 +17,12 @@ class PanierUser
                 $reduction = $promo ? $promo->getReduction() : null;
                 $category = $product->getCategory();
 
-                $panierDetails[] = $this->createPanierItemDetails($panier, $product, $productPrice, $reduction, $category);
+                $panierDetails[] = $this->createPanierItemDetails($panier, $product, $productPrice, $reduction, $promo, $category); // Pass promo to createPanierItemDetails
             }
         }
 
         return $panierDetails;
     }
-
 
     public function createPanierItemDetails($panier, $product, $productPrice, $reduction, $promo = null, $category = null)
     {
@@ -33,11 +32,12 @@ class PanierUser
                 'images' => $product->getImages(),
                 'name' => $product->getName(),
                 'price' => $productPrice,
-                'category' => $product->getCategory(),
+                'category' => $category,
                 'quantity' => $panier->getQuantity(),
                 'description' => $product->getDescription(),
                 'subtotal' => $productPrice * $panier->getQuantity(),
                 'reduction' => $reduction,
+                'promo' => $promo
             ];
         } else {
             return [
@@ -48,9 +48,11 @@ class PanierUser
                 'description' => 'Unknown Description',
                 'subtotal' => $productPrice * $panier->getQuantity(),
                 'reduction' => $reduction,
+                'promo' => $promo
             ];
         }
     }
+
 
     public function calculateTotalPrice($paniers): float
     {

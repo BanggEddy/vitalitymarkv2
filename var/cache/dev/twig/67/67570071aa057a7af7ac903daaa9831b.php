@@ -138,7 +138,7 @@ class __TwigTemplate_f9447c3e66aac2e6eac9bcc02c80abd0 extends Template
 </style>
 
 <div class=\"container nature-card\">
-    <h1>Create new Coupon</h1>
+    <h1>Ajouter un coupon pour un utilisateur</h1>
 
     ";
         // line 59
@@ -214,16 +214,14 @@ class __TwigTemplate_f9447c3e66aac2e6eac9bcc02c80abd0 extends Template
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 86, $this->source); })()), "idloyaltycard", [], "any", false, false, false, 86), 'widget');
         yield "
         </div>
-        <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
             <a href=\"";
-        // line 89
+        // line 88
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_coupon_index");
         yield "\" class=\"btn btn-details\">< Retour</a>
             <button class=\"btn btn-details\">Créer</button>
-        </div>
     ";
-        // line 92
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 92, $this->source); })()), 'form_end');
+        // line 90
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 90, $this->source); })()), 'form_end');
         yield "
 </div>
 
@@ -258,7 +256,7 @@ class __TwigTemplate_f9447c3e66aac2e6eac9bcc02c80abd0 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  226 => 92,  220 => 89,  214 => 86,  210 => 85,  204 => 82,  200 => 81,  194 => 78,  190 => 77,  184 => 74,  180 => 73,  174 => 70,  170 => 69,  164 => 66,  160 => 65,  154 => 62,  150 => 61,  145 => 59,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  224 => 90,  219 => 88,  214 => 86,  210 => 85,  204 => 82,  200 => 81,  194 => 78,  190 => 77,  184 => 74,  180 => 73,  174 => 70,  170 => 69,  164 => 66,  160 => 65,  154 => 62,  150 => 61,  145 => 59,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -319,7 +317,7 @@ class __TwigTemplate_f9447c3e66aac2e6eac9bcc02c80abd0 extends Template
 </style>
 
 <div class=\"container nature-card\">
-    <h1>Create new Coupon</h1>
+    <h1>Ajouter un coupon pour un utilisateur</h1>
 
     {{ form_start(form) }}
         <div class=\"form-group\">
@@ -350,10 +348,8 @@ class __TwigTemplate_f9447c3e66aac2e6eac9bcc02c80abd0 extends Template
             {{ form_label(form.idloyaltycard) }}
             {{ form_widget(form.idloyaltycard) }}
         </div>
-        <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
             <a href=\"{{ path('app_coupon_index') }}\" class=\"btn btn-details\">< Retour</a>
             <button class=\"btn btn-details\">Créer</button>
-        </div>
     {{ form_end(form) }}
 </div>
 

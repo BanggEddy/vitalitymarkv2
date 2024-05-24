@@ -28,12 +28,18 @@ class CouponAllType extends AbstractType
             ->add('description', TextType::class)
             ->add('start_date', null, [
                 'widget' => 'single_text',
+                'label' => 'Date de début',
             ])
             ->add('end_date', null, [
                 'widget' => 'single_text',
+                'label' => 'Date de fin',
             ])
-            ->add('qty')
-            ->add('reduction');
+            ->add('qty', null, [
+                'label' => 'Quantité',
+            ])
+            ->add('reduction', null, [
+                'label' => 'Réduction',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

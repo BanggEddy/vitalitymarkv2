@@ -92,7 +92,7 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
 
     <table class=\"table promo-admin-table\">
         <thead>
-            <tr class=\"promo-admin-table-header\">
+            <tr class=\"\">
                 <th>Id</th>
                 <th>Numéro de Carte</th>
                 <th>Type de Carte</th>
@@ -217,7 +217,7 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
 
     <table class=\"table promo-admin-table\">
         <thead>
-            <tr class=\"promo-admin-table-header\">
+            <tr class=\"\">
                 <th>Id</th>
                 <th>Numéro de Carte</th>
                 <th>Type de Carte</th>

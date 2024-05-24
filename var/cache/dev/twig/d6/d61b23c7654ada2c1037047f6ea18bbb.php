@@ -207,10 +207,7 @@ class __TwigTemplate_1b11c87c90950827ec729ef13be88d45 extends Template
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_index");
         yield "\" class=\"btn btn-details me-2\" style=\"text-align:center;\">< Retour</a>
 
-    <button class=\"btn btn-details me-2\">";
-        // line 90
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("button_label", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["button_label"]) || array_key_exists("button_label", $context) ? $context["button_label"] : (function () { throw new RuntimeError('Variable "button_label" does not exist.', 90, $this->source); })()), "Update")) : ("Update")), "html", null, true);
-        yield "</button>
+    <button class=\"btn btn-details me-2\">Modifier</button>
     ";
         // line 91
         yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 91, $this->source); })()), 'form_end');
@@ -225,7 +222,7 @@ class __TwigTemplate_1b11c87c90950827ec729ef13be88d45 extends Template
         // line 95
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 95, $this->source); })()), "id", [], "any", false, false, false, 95))), "html", null, true);
         yield "\">
-        <button class=\"btn btn-details\">Delete</button>
+        <button class=\"btn btn-details\">Supprimer l'user</button>
     </form>
 </div>
 
@@ -261,7 +258,7 @@ class __TwigTemplate_1b11c87c90950827ec729ef13be88d45 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  226 => 95,  222 => 94,  216 => 91,  212 => 90,  207 => 88,  201 => 85,  197 => 84,  191 => 81,  187 => 80,  181 => 77,  177 => 76,  171 => 73,  167 => 72,  161 => 69,  157 => 68,  152 => 66,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  223 => 95,  219 => 94,  213 => 91,  207 => 88,  201 => 85,  197 => 84,  191 => 81,  187 => 80,  181 => 77,  177 => 76,  171 => 73,  167 => 72,  161 => 69,  157 => 68,  152 => 66,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -355,13 +352,13 @@ class __TwigTemplate_1b11c87c90950827ec729ef13be88d45 extends Template
 <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
     <a href=\"{{ path('app_gestion_user_index') }}\" class=\"btn btn-details me-2\" style=\"text-align:center;\">< Retour</a>
 
-    <button class=\"btn btn-details me-2\">{{ button_label|default('Update') }}</button>
+    <button class=\"btn btn-details me-2\">Modifier</button>
     {{ form_end(form) }}
 
 
     <form method=\"post\" action=\"{{ path('app_gestion_user_delete', {'id': user.id}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
         <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ user.id) }}\">
-        <button class=\"btn btn-details\">Delete</button>
+        <button class=\"btn btn-details\">Supprimer l'user</button>
     </form>
 </div>
 

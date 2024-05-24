@@ -87,11 +87,11 @@ class __TwigTemplate_81452a84d461a6ca0a98befc343aaf53 extends Template
 
         // line 6
         yield "    <div class=\"promo-admin-container\">
-        <h1 class=\"promo-admin-title\">Liste des utilisateurs</h1>
+        <h3>Liste des utilisateurs</h3>
 
         <table class=\"table promo-admin-table\">
             <thead>
-                <tr class=\"promo-admin-table-header\">
+                <tr class=\"\">
                     <th>Id</th>
                     <th>Email</th>
                     <th>Roles</th>
@@ -217,11 +217,11 @@ class __TwigTemplate_81452a84d461a6ca0a98befc343aaf53 extends Template
 
 {% block body %}
     <div class=\"promo-admin-container\">
-        <h1 class=\"promo-admin-title\">Liste des utilisateurs</h1>
+        <h3>Liste des utilisateurs</h3>
 
         <table class=\"table promo-admin-table\">
             <thead>
-                <tr class=\"promo-admin-table-header\">
+                <tr class=\"\">
                     <th>Id</th>
                     <th>Email</th>
                     <th>Roles</th>

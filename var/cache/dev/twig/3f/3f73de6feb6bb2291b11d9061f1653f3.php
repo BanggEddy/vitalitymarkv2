@@ -94,13 +94,13 @@ class __TwigTemplate_21523c866832c0bac901f8d5d3b26453 extends Template
 
     <table class=\"table promo-admin-table\">
         <thead>
-            <tr class=\"promo-admin-table-header\">
+            <tr class=\"\">
                 <th>Id</th>
-                <th>Type</th>
+                <th>Type de coupon</th>
                 <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Reduction</th>
+                <th>Date début</th>
+                <th>Date de fin</th>
+                <th>Réduction</th>
                 <th>Quantité</th>
                 <th>Actions</th>
             </tr>
@@ -236,13 +236,13 @@ class __TwigTemplate_21523c866832c0bac901f8d5d3b26453 extends Template
 
     <table class=\"table promo-admin-table\">
         <thead>
-            <tr class=\"promo-admin-table-header\">
+            <tr class=\"\">
                 <th>Id</th>
-                <th>Type</th>
+                <th>Type de coupon</th>
                 <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Reduction</th>
+                <th>Date début</th>
+                <th>Date de fin</th>
+                <th>Réduction</th>
                 <th>Quantité</th>
                 <th>Actions</th>
             </tr>

@@ -185,87 +185,74 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
     <table class=\"promo-admin-detail-table\">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>";
-        // line 105
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 105, $this->source); })()), "id", [], "any", false, false, false, 105), "html", null, true);
-        yield "</td>
-            </tr>
-            <tr>
                 <th>Email</th>
                 <td>";
-        // line 109
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 109, $this->source); })()), "email", [], "any", false, false, false, 109), "html", null, true);
+        // line 105
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 105, $this->source); })()), "email", [], "any", false, false, false, 105), "html", null, true);
         yield "</td>
             </tr>
             <tr>
                 <th>Roles</th>
                 <td>";
+        // line 109
+        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 109, $this->source); })()), "roles", [], "any", false, false, false, 109)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 109, $this->source); })()), "roles", [], "any", false, false, false, 109)), "html", null, true)) : (yield ""));
+        yield "</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>";
         // line 113
-        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 113, $this->source); })()), "roles", [], "any", false, false, false, 113)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(json_encode(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 113, $this->source); })()), "roles", [], "any", false, false, false, 113)), "html", null, true)) : (yield ""));
-        yield "</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>";
-        // line 117
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 117, $this->source); })()), "password", [], "any", false, false, false, 117), "html", null, true);
-        yield "</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>";
-        // line 121
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 121, $this->source); })()), "name", [], "any", false, false, false, 121), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 113, $this->source); })()), "name", [], "any", false, false, false, 113), "html", null, true);
         yield "</td>
             </tr>
             <tr>
                 <th>Adresse</th>
                 <td>";
-        // line 125
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 125, $this->source); })()), "adresse", [], "any", false, false, false, 125), "html", null, true);
+        // line 117
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 117, $this->source); })()), "adresse", [], "any", false, false, false, 117), "html", null, true);
         yield "</td>
             </tr>
             <tr>
-                <th>Civilite</th>
+                <th>Civilité</th>
+                <td>";
+        // line 121
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 121, $this->source); })()), "civilite", [], "any", false, false, false, 121), "html", null, true);
+        yield "</td>
+            </tr>
+            <tr>
+                <th>Date création compte</th>
+                <td>";
+        // line 125
+        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 125, $this->source); })()), "dateCreate", [], "any", false, false, false, 125)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 125, $this->source); })()), "dateCreate", [], "any", false, false, false, 125), "Y-m-d"), "html", null, true)) : (yield ""));
+        yield "</td>
+            </tr>
+            <tr>
+                <th>Supprimé à</th>
                 <td>";
         // line 129
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 129, $this->source); })()), "civilite", [], "any", false, false, false, 129), "html", null, true);
+        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 129, $this->source); })()), "deletedAt", [], "any", false, false, false, 129)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 129, $this->source); })()), "deletedAt", [], "any", false, false, false, 129), "Y-m-d H:i:s"), "html", null, true)) : (yield ""));
         yield "</td>
             </tr>
             <tr>
-                <th>Date_create</th>
+                <th>Expired à</th>
                 <td>";
         // line 133
-        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 133, $this->source); })()), "dateCreate", [], "any", false, false, false, 133)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 133, $this->source); })()), "dateCreate", [], "any", false, false, false, 133), "Y-m-d"), "html", null, true)) : (yield ""));
-        yield "</td>
-            </tr>
-            <tr>
-                <th>DeletedAt</th>
-                <td>";
-        // line 137
-        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 137, $this->source); })()), "deletedAt", [], "any", false, false, false, 137)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 137, $this->source); })()), "deletedAt", [], "any", false, false, false, 137), "Y-m-d H:i:s"), "html", null, true)) : (yield ""));
-        yield "</td>
-            </tr>
-            <tr>
-                <th>ExpiredAt</th>
-                <td>";
-        // line 141
-        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 141, $this->source); })()), "expiredAt", [], "any", false, false, false, 141)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 141, $this->source); })()), "expiredAt", [], "any", false, false, false, 141), "Y-m-d H:i:s"), "html", null, true)) : (yield ""));
+        ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 133, $this->source); })()), "expiredAt", [], "any", false, false, false, 133)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 133, $this->source); })()), "expiredAt", [], "any", false, false, false, 133), "Y-m-d H:i:s"), "html", null, true)) : (yield ""));
         yield "</td>
             </tr>
         </tbody>
     </table>
 
     <a href=\"";
-        // line 146
+        // line 138
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_index");
         yield "\" class=\"btn btn-details\" >< Retour</a>
 
     <a href=\"";
-        // line 148
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 148, $this->source); })()), "id", [], "any", false, false, false, 148)]), "html", null, true);
+        // line 140
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 140, $this->source); })()), "id", [], "any", false, false, false, 140)]), "html", null, true);
         yield "\" class=\"btn btn-details\">Editer</a>
+
     </div>
 
 </div>
@@ -300,7 +287,7 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  267 => 148,  262 => 146,  254 => 141,  247 => 137,  240 => 133,  233 => 129,  226 => 125,  219 => 121,  212 => 117,  205 => 113,  198 => 109,  191 => 105,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  253 => 140,  248 => 138,  240 => 133,  233 => 129,  226 => 125,  219 => 121,  212 => 117,  205 => 113,  198 => 109,  191 => 105,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -408,10 +395,6 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
     <table class=\"promo-admin-detail-table\">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
@@ -420,11 +403,7 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <td>{{ user.name }}</td>
             </tr>
             <tr>
@@ -432,19 +411,19 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
                 <td>{{ user.adresse }}</td>
             </tr>
             <tr>
-                <th>Civilite</th>
+                <th>Civilité</th>
                 <td>{{ user.civilite }}</td>
             </tr>
             <tr>
-                <th>Date_create</th>
+                <th>Date création compte</th>
                 <td>{{ user.dateCreate ? user.dateCreate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>DeletedAt</th>
+                <th>Supprimé à</th>
                 <td>{{ user.deletedAt ? user.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>ExpiredAt</th>
+                <th>Expired à</th>
                 <td>{{ user.expiredAt ? user.expiredAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
@@ -453,6 +432,7 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
     <a href=\"{{ path('app_gestion_user_index') }}\" class=\"btn btn-details\" >< Retour</a>
 
     <a href=\"{{ path('app_gestion_user_edit', {'id': user.id}) }}\" class=\"btn btn-details\">Editer</a>
+
     </div>
 
 </div>

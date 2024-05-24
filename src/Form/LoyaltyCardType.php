@@ -15,7 +15,9 @@ class LoyaltyCardType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('card_number')
+            ->add('card_number', null, [
+                'label' => 'Numéro de carte:',
+            ])
             ->add('card_type', ChoiceType::class, [
                 'choices' => [
                     'Normale' => 'normal',
@@ -25,7 +27,9 @@ class LoyaltyCardType extends AbstractType
                 'label' => 'Type de carte',
             ])
             ->add('points')
-            ->add('personalized_offer');
+            ->add('personalized_offer', null, [
+                'label' => 'Les offres personnalisées',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

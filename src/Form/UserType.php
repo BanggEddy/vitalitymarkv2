@@ -26,12 +26,15 @@ class UserType extends AbstractType
             ])
             ->add('date_create', null, [
                 'widget' => 'single_text',
+                'label' => 'Date de création',
             ])
             ->add('deletedAt', null, [
                 'widget' => 'single_text',
+                'label' => 'Date de suppression',
             ])
             ->add('expiredAt', null, [
                 'widget' => 'single_text',
+                'label' => 'Date d expération',
             ]);
     }
 

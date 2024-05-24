@@ -118,7 +118,7 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
 </style>
 
 <div class=\"container nature-card\">
-    <h1>Ajouter un coupon pour un type</h1>
+    <h1>Ajouter un coupon pour un type de carte</h1>
     ";
         // line 57
         yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 57, $this->source); })()), 'form_start');
@@ -230,7 +230,7 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
 </style>
 
 <div class=\"container nature-card\">
-    <h1>Ajouter un coupon pour un type</h1>
+    <h1>Ajouter un coupon pour un type de carte</h1>
     {{ form_start(form) }}
         {{ form_widget(form) }}
                     <button type=\"submit\" class=\"btn btn-details\">Ajouter le coupon</button>

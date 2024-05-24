@@ -14,12 +14,16 @@ class PromoEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('reduction', TextType::class)
+            ->add('reduction', TextType::class, [
+                'label' => 'Réduction',
+            ])
             ->add('date_fin', DateType::class, [
                 'widget' => 'single_text',
+                'label' => 'Date de fin',
             ])
             ->add('date_debut', DateType::class, [
                 'widget' => 'single_text',
+                'label' => 'Date de début',
             ])
             ->add('description', TextType::class);
     }

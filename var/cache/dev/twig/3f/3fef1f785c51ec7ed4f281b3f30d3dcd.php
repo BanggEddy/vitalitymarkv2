@@ -90,11 +90,11 @@ class __TwigTemplate_7702abc247c379338929000a2c669956 extends Template
         yield "
 
 <div class=\"promo-admin-container\">
-    <h1 class=\"promo-admin-title\">La liste des produits en promotion</h1>
+    <h3 class=\"\">La liste des produits en promotion</h3>
 
     <table class=\"table promo-admin-table\">
         <thead>
-            <tr class=\"promo-admin-table-header\">
+            <tr class=\"\">
                 <th>Id</th>
                 <th>Réduction %</th>
                 <th>Date fin</th>
@@ -221,11 +221,11 @@ class __TwigTemplate_7702abc247c379338929000a2c669956 extends Template
 
 
 <div class=\"promo-admin-container\">
-    <h1 class=\"promo-admin-title\">La liste des produits en promotion</h1>
+    <h3 class=\"\">La liste des produits en promotion</h3>
 
     <table class=\"table promo-admin-table\">
         <thead>
-            <tr class=\"promo-admin-table-header\">
+            <tr class=\"\">
                 <th>Id</th>
                 <th>Réduction %</th>
                 <th>Date fin</th>
