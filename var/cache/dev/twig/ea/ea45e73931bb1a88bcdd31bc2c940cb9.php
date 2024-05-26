@@ -203,7 +203,7 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
                 <form method=\"post\" action=\"";
         // line 80
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 80, $this->source); })()), "id", [], "any", false, false, false, 80)]), "html", null, true);
-        yield "\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
+        yield "\" onsubmit=\"return confirm('Être vous sûr de vouloir supprimer la carte?');\">
                     <input type=\"hidden\" name=\"_token\" value=\"";
         // line 81
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 81, $this->source); })()), "id", [], "any", false, false, false, 81))), "html", null, true);
@@ -329,7 +329,7 @@ class __TwigTemplate_d2de7a49e0bde719c1cb6e739208d5cc extends Template
                 <a href=\"{{ path('app_loyalty_card_edit', {'id': loyalty_card.id}) }}\" class=\"btn btn-details\">Editer</a>
             </li>
             <li style=\"display: inline-block;\">
-                <form method=\"post\" action=\"{{ path('app_loyalty_card_delete', {'id': loyalty_card.id}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
+                <form method=\"post\" action=\"{{ path('app_loyalty_card_delete', {'id': loyalty_card.id}) }}\" onsubmit=\"return confirm('Être vous sûr de vouloir supprimer la carte?');\">
                     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ loyalty_card.id) }}\">
                     <button class=\"btn btn-details\">Supprimer</button>
                 </form>

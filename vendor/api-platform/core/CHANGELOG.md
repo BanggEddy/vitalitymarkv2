@@ -1,5 +1,14 @@
 # Changelog
 
+## v3.3.4
+
+### Bug fixes
+
+* [002d8e514](https://github.com/api-platform/core/commit/002d8e51490dbe9f5d8e5551226d70db8a33c706) fix(validation): ValidationException causes TypeError exception when called with $code=null (#6375)
+* [77a917f2a](https://github.com/api-platform/core/commit/77a917f2a51b50af84bdc96c1a32ff671b3951db) fix(metadata): resource class php doc (#6381)
+* [d809315fb](https://github.com/api-platform/core/commit/d809315fbb3822dbc6fe50d5c908183f4428f0f2) fix(symfony): store original data without clone (#6367)
+* [fb7c4658c](https://github.com/api-platform/core/commit/fb7c4658c327c9628bcc86d42e85c3546a74d993) fix(test): canonicalizing json arrays (#6386)
+
 ## v3.3.3
 
 ### Bug fixes
@@ -37,6 +46,8 @@ if (null === $operation->canDeserialize()) {
 ```
 
 Previously listeners did the checks before reading our flags and you could not force the values. 
+
+When using GraphQl, with `event_listeners_backward_compatibility_layer: true`, mutation resolver gets called before validation, when using `false` (the future default) validation occurs on the user's input.
 
 ## v3.3.1 (pre-release)
 
@@ -113,7 +124,7 @@ The v3.3.0-beta.1 introduces a new `QueryParameter` attribute to improve [the fi
 ### Features
 
 * [24a1a18cb](https://github.com/api-platform/core/commit/24a1a18cbe706c5a3bb4d5602b70c0a68ff8a757) feat: improve ApiProperty::security using property name (#5853)
-* [3d1428e4d](https://github.com/api-platform/core/commit/3d1428e4d2e4342918becf098da8832ac50fef1b) feat(symfony): add getOperation Expression Language function on Mercure topics (#5854)
+* [3d1428e4d](https://github.com/api-platform/core/commit/3d1428e4d2e4342918becf098da8832ac50fef1b) feat(symfony): add get_operation Expression Language function on Mercure topics (#5854)
 * [6b00cea91](https://github.com/api-platform/core/commit/6b00cea914dc5f9c42ca237a3ff498d629a0efb8) feat(graphql): partial pagination for page based pagination (#6120)
 * [79fe01b97](https://github.com/api-platform/core/commit/79fe01b970d90e3c80880f54fc0446b5294173f0) feat(doctrine): paginators for Doctrine Collection & Selectable (#6153)
 * [89c9229f4](https://github.com/api-platform/core/commit/89c9229f484cb409ef3eb2bd88cccc6ddc856378) feat(graphql): support nullable embedded relations in GraphQL types (#6100)
@@ -182,6 +193,12 @@ api_platform:
         jsonld: ['application/ld+json']
         form: ['multipart/form-data']
 ```
+
+## v3.2.23
+
+### Bug fixes
+
+* [fb7c4658c](https://github.com/api-platform/core/commit/fb7c4658c327c9628bcc86d42e85c3546a74d993) fix(test): canonicalizing json arrays (#6386)
 
 ## v3.2.22
 
@@ -465,6 +482,13 @@ Listeners will not get removed in API Platform 4 but will rather use our new Pro
 ```php
 #[Post(read: true)] // to force reading even though it's a POST
 ```
+
+- `ApiPlatform\Api` got moved to `ApiPlatform\Metadata`
+
+- Adds `assertMercureUpdateMatchesJsonSchema(Update $update, array $topics, array|object|string $jsonSchema = '', bool $private = false, string $id = null, string $type = null, int $retry = null, string $message = '')`
+- The handle links feature is experimental
+
+When using GraphQl, with `event_listeners_backward_compatibility_layer: true`, mutation resolver gets called before validation, when using `false` (the future default) validation occurs on the user's input.
 
 ## v3.2.0-beta.2
 

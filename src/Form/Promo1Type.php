@@ -36,11 +36,6 @@ class Promo1Type extends AbstractType
                 'class' => Products::class,
                 'choice_label' => 'name',
                 'label' => 'Nom du produit que vous voulez mettre en promo',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('p')
-                        ->leftJoin('p.promos', 'pr')
-                        ->where('pr.id IS NULL');
-                },
             ]);
     }
 

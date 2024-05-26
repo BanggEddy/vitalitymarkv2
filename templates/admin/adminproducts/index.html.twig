@@ -1,18 +1,18 @@
 {% extends 'headeradmin.html.twig' %}
 
-{% block title %}Page Accueil Admin{% endblock %}
+{% block title %}VitalityMark{% endblock %}
 
 {% block body %}
 
 <div class="container">
     <br>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    <div class="row">
         {% for product in products %}
-        <div class="col-md-4 col-lg-4 product">
-            <div class="product-card">
+        <div class="col-md-5 col-lg-4 mb-4">
+            <div class="card h-100 product-card">
                 <img src="{{ asset('images/' ~ product.images) }}" alt="une image" class="product-image">
-                <div class="product-details">
-                    <h3>{{ product.name }}</h3>
+                <div class="card-body product-details">
+                    <h3 class="card-title">{{ product.name }}</h3>
                     {% set aUnePromotion = false %}
                     {% for promo in promotions %}
                         {% if promo.idproduct.id == product.id %}
@@ -20,14 +20,14 @@
                             {% set aujourdhui = 'now'|date('Y-m-d') %}
                             {% set joursRest = (promo.dateFin|date('U') - aujourdhui|date('U')) / (24 * 3600) %}
                             {% if joursRest > 0 %}
-                                <p class="promo-description" style="font-weight: bold;">Jour(s) restant(s): {{ joursRest|round(0, 'floor') }}</p>
+                                <p class="promo-description font-weight-bold">Jour(s) restant(s): {{ joursRest|round(0, 'floor') }}</p>
                             {% else %}
-                                <p class="promo-description" style="font-weight: bold;">Offre expirée</p>
+                                <p class="promo-description font-weight-bold">Offre expirée</p>
                             {% endif %}
-                            <p class="btn-reduction"> - {{ promo.reduction }} %</p>
-                            <p style="font-size:80%">À partir de :</p>
+                            <p class="btn-reduction">- {{ promo.reduction }} %</p>
+                            <p class="font-size-80">À partir de :</p>
                             <p class="product-price original-price">{{ product.price }} €</p>
-                            <p class="product-price discounted-price" style="color: red;">{{ promo.getPriceafterpromo }} €</p>
+                            <p class="product-price discounted-price text-danger">{{ promo.getPriceafterpromo }} €</p>
                         {% endif %}
                     {% endfor %}
                     {% if not aUnePromotion %}
@@ -35,7 +35,8 @@
                     {% endif %}
                     <p>{{ product.description }}</p>
                     <p class="product-quantity">Quantité disponible: {{ product.quantity }}</p>
-                    
+                </div>
+                <div class=" mt-auto product-footer">
                     <form action="{{ path('add_quantity', {'productId': product.id}) }}" method="post" class="mb-3">
                         <div class="input-group">
                             <label for="add_quantity" class="input-group-text">Ajouter Quantité:</label>

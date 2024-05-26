@@ -66,12 +66,17 @@
         </div>
     {{ form_start(form) }}
         {{ form_widget(form) }}
+                <div class="btn-group" role="group" aria-label="Buttons">
+
             <a href="{{ path('app_promo_admin_index') }}" style="text-align:center;" class="btn btn-details">< Retour</a>
 
         <button class="btn btn-details">Editer</button>
     {{ form_end(form) }}
-
-
+                    <form method="post" action="{{ path('app_promo_admin_delete', {'id': promo.id}) }}" onsubmit="return confirm('Es-tu sur de vouloir supprimer ce produit en réduction?');" style="display: inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ promo.id) }}">
+                <button class="btn btn-details">Supprimer</button>
+            </form>
+</div>
 
 </div>
 {% endblock %}

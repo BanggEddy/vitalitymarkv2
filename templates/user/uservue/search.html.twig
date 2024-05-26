@@ -7,13 +7,11 @@
 
     <br>
     <div class="row justify-content-center">
-
-    
         {% for product in products %}
-        <div class="col-md-3 col-lg-3">
-            <div class="product-card">
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 product-card">
                 <img src="{{ asset('images/' ~ product.images) }}" alt="{{ product.name }}" class="product-image">
-                <div class="product-details">
+                <div class="card-body product-details">
                     <h3>{{ product.name }}</h3>
                     {% set aUnePromotion = false %}
                     {% for promo in promotions %}

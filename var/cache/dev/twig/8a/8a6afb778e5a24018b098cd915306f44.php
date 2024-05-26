@@ -106,15 +106,15 @@ class __TwigTemplate_7d257d893420ace00d3ad667af51cc1b extends Template
         $context['_seq'] = CoreExtension::ensureTraversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 14, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
             // line 15
-            yield "        <div class=\"col-md-3 col-lg-3\">
-            <div class=\"product-card\">
+            yield "        <div class=\"col-md-6 col-lg-3 mb-4\">
+            <div class=\"card h-100 product-card\">
                 <img src=\"";
             // line 17
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 17))), "html", null, true);
             yield "\" alt=\"";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 17), "html", null, true);
             yield "\" class=\"product-image\">
-                <div class=\"product-details\">
+                <div class=\"card-body product-details\">
                     <h3>";
             // line 19
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 19), "html", null, true);
@@ -309,10 +309,10 @@ class __TwigTemplate_7d257d893420ace00d3ad667af51cc1b extends Template
     {% endif %}
     
         {% for product in products %}
-        <div class=\"col-md-3 col-lg-3\">
-            <div class=\"product-card\">
+        <div class=\"col-md-6 col-lg-3 mb-4\">
+            <div class=\"card h-100 product-card\">
                 <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"{{ product.name }}\" class=\"product-image\">
-                <div class=\"product-details\">
+                <div class=\"card-body product-details\">
                     <h3>{{ product.name }}</h3>
                     {% set aUnePromotion = false %}
                     {% for promo in promotions %}

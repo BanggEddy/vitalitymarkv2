@@ -48,7 +48,7 @@
         </div>
     </div>
     <br><br>
-<div class="container">
+   <div class="container">
     <h2>VitalityMarket vous recommande</h2>
     <br>
     <div class="row">
@@ -59,10 +59,10 @@
                     {% for promo in promotions %}
                         {% if promo.idproduct.id == prod.id %}
                             {% set produitenpromooupas = true %}
-                            <div class="col-md-4 col-lg-4">
-                                <div class="product-card">
+                            <div class="col-md-6 col-lg-3 mb-4">
+                                <div class="card h-100 product-card">
                                     <img src="{{ asset('images/' ~ prod.images) }}" alt="image du produit" class="product-image">
-                                    <div class="product-details">
+                                    <div class="card-body product-details">
                                         {% set aujourdhui = 'now'|date('Y-m-d') %}
                                         {% set joursRest = (promo.dateFin|date('U') - aujourdhui|date('U')) / (24 * 3600) %}
                                         {% if joursRest > 0 %}
@@ -74,28 +74,41 @@
                                         <p style="font-size:80%">A partir de :</p>
                                         <p class="product-price original-price">{{ prod.price }} €</p>
                                         <p class="product-price discounted-price" style="color: red;">{{ promo.getPriceafterpromo }} €</p>
-                                        <a href="{{ path('details_produit', {'id': prod.id}) }}" class="btn btn-details"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                                        </div>
+                                                                  <div class="product-footer">
+                                                    <div class="d-flex justify-content-between">
+                                        <a href="{{ path('details_produit_user', {'id': prod.id}) }}" class="btn btn-details"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
   <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"/>
 </svg></a>
-                                    </div>
+
+                                   
+                                     </div>
+                            </div>
                                 </div>
                             </div>
                         {% endif %}
                     {% endfor %}
                     {% if not produitenpromooupas %}
-                        <div class="col-md-4 col-lg-4">
-                            <div class="product-card">
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card h-100 product-card">
                                 <img src="{{ asset('images/' ~ prod.images) }}" alt="image du produit" class="product-image">
-                                <div class="product-details">
+                                <div class="card-body product-details">
+
                                     <p class="product-price">{{ prod.price }} €</p>
                                     <p>{{ prod.description }}</p>
                                     <p class="product-quantity">Quantité disponible: {{ prod.quantity }}</p>
-                                    <a href="{{ path('details_produit', {'id': prod.id}) }}" class="btn btn-details"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                                    </div>
+                                    <div class="product-footer">
+                                                    <div class="d-flex justify-content-between">
+
+                                    <a href="{{ path('details_produit_user', {'id': prod.id}) }}" class="btn btn-details"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
   <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"/>
 </svg></a>
                                 </div>
+                                 </div>
+                                </div>
                             </div>
-                        </div>
+                        
                     {% endif %}
                 {% endif %}
             {% endfor %}

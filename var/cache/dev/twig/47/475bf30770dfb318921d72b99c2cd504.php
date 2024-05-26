@@ -98,8 +98,8 @@ class __TwigTemplate_59024be47f42b49f2c84e4040b19da27 extends Template
         $context['_seq'] = CoreExtension::ensureTraversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 11, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
             // line 12
-            yield "        <div class=\"col-md-3 col-lg-3\">
-            <div class=\"product-card\">
+            yield "        <div class=\"col-md-6 col-lg-3 mb-4\">
+            <div class=\"card h-100 product-card\">
                 <img src=\"";
             // line 14
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 14))), "html", null, true);
@@ -295,8 +295,8 @@ class __TwigTemplate_59024be47f42b49f2c84e4040b19da27 extends Template
     <br>
     <div class=\"row\">
     {% for product in products %}
-        <div class=\"col-md-3 col-lg-3\">
-            <div class=\"product-card\">
+        <div class=\"col-md-6 col-lg-3 mb-4\">
+            <div class=\"card h-100 product-card\">
                 <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"{{ product.name }}\" class=\"product-image\">
                 <div class=\"product-details\">
                     <h3>{{ product.name }}</h3>

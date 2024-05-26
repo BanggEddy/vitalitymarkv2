@@ -180,27 +180,30 @@ class __TwigTemplate_c0862a968f942e7f55e3e3948f4c90e4 extends Template
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 70, $this->source); })()), 'widget');
         yield "
         </div>
+        <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
+
         <a href=\"";
-        // line 72
+        // line 74
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_index");
         yield "\" class=\"btn btn-details\">< Retour</a>
 
         <button class=\"btn btn-details\">Editer la carte</button>
 
-        <form method=\"post\" action=\"";
-        // line 76
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 76, $this->source); })()), "id", [], "any", false, false, false, 76)]), "html", null, true);
-        yield "\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
+        ";
+        // line 78
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 78, $this->source); })()), 'form_end');
+        yield "
+                <form method=\"post\" action=\"";
+        // line 79
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 79, $this->source); })()), "id", [], "any", false, false, false, 79)]), "html", null, true);
+        yield "\" onsubmit=\"return confirm('Être vous sûr de vouloir supprimer la carte?');\">
             <input type=\"hidden\" name=\"_token\" value=\"";
-        // line 77
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 77, $this->source); })()), "id", [], "any", false, false, false, 77))), "html", null, true);
+        // line 80
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["loyalty_card"]) || array_key_exists("loyalty_card", $context) ? $context["loyalty_card"] : (function () { throw new RuntimeError('Variable "loyalty_card" does not exist.', 80, $this->source); })()), "id", [], "any", false, false, false, 80))), "html", null, true);
         yield "\">
             <button class=\"btn btn-details\">Supprimer la carte</button>
         </form>
-        ";
-        // line 80
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 80, $this->source); })()), 'form_end');
-        yield "
+        </div>
     </div>
 ";
         
@@ -233,7 +236,7 @@ class __TwigTemplate_c0862a968f942e7f55e3e3948f4c90e4 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  202 => 80,  196 => 77,  192 => 76,  185 => 72,  180 => 70,  175 => 68,  170 => 65,  160 => 64,  91 => 6,  81 => 5,  61 => 3,  38 => 1,);
+        return array (  202 => 80,  198 => 79,  194 => 78,  187 => 74,  180 => 70,  175 => 68,  170 => 65,  160 => 64,  91 => 6,  81 => 5,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -309,15 +312,18 @@ class __TwigTemplate_c0862a968f942e7f55e3e3948f4c90e4 extends Template
         <div class=\"form-group\">
             {{ form_widget(form) }}
         </div>
+        <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
+
         <a href=\"{{ path('app_loyalty_card_index') }}\" class=\"btn btn-details\">< Retour</a>
 
         <button class=\"btn btn-details\">Editer la carte</button>
 
-        <form method=\"post\" action=\"{{ path('app_loyalty_card_delete', {'id': loyalty_card.id}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this item?');\">
+        {{ form_end(form) }}
+                <form method=\"post\" action=\"{{ path('app_loyalty_card_delete', {'id': loyalty_card.id}) }}\" onsubmit=\"return confirm('Être vous sûr de vouloir supprimer la carte?');\">
             <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ loyalty_card.id) }}\">
             <button class=\"btn btn-details\">Supprimer la carte</button>
         </form>
-        {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
 ", "admin/loyalty_card/edit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\loyalty_card\\edit.html.twig");

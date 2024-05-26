@@ -242,18 +242,29 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
             </tr>
         </tbody>
     </table>
+        <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
 
     <a href=\"";
-        // line 138
+        // line 139
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_index");
         yield "\" class=\"btn btn-details\" >< Retour</a>
 
     <a href=\"";
-        // line 140
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 140, $this->source); })()), "id", [], "any", false, false, false, 140)]), "html", null, true);
+        // line 141
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 141, $this->source); })()), "id", [], "any", false, false, false, 141)]), "html", null, true);
         yield "\" class=\"btn btn-details\">Editer</a>
-
+    <form method=\"post\" action=\"";
+        // line 142
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 142, $this->source); })()), "id", [], "any", false, false, false, 142)]), "html", null, true);
+        yield "\" onsubmit=\"return confirm('Être vous sûr de vouloir supprimer l'utilisateur?');\">
+        <input type=\"hidden\" name=\"_token\" value=\"";
+        // line 143
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 143, $this->source); })()), "id", [], "any", false, false, false, 143))), "html", null, true);
+        yield "\">
+        <button class=\"btn btn-details\">Supprimer l'user</button>
+    </form>
     </div>
+     </div>
 
 </div>
 ";
@@ -287,7 +298,7 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  253 => 140,  248 => 138,  240 => 133,  233 => 129,  226 => 125,  219 => 121,  212 => 117,  205 => 113,  198 => 109,  191 => 105,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  262 => 143,  258 => 142,  254 => 141,  249 => 139,  240 => 133,  233 => 129,  226 => 125,  219 => 121,  212 => 117,  205 => 113,  198 => 109,  191 => 105,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -428,12 +439,17 @@ class __TwigTemplate_1490a40aa7ab65e32f2c191cdec64de6 extends Template
             </tr>
         </tbody>
     </table>
+        <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
 
     <a href=\"{{ path('app_gestion_user_index') }}\" class=\"btn btn-details\" >< Retour</a>
 
     <a href=\"{{ path('app_gestion_user_edit', {'id': user.id}) }}\" class=\"btn btn-details\">Editer</a>
-
+    <form method=\"post\" action=\"{{ path('app_gestion_user_delete', {'id': user.id}) }}\" onsubmit=\"return confirm('Être vous sûr de vouloir supprimer l'utilisateur?');\">
+        <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ user.id) }}\">
+        <button class=\"btn btn-details\">Supprimer l'user</button>
+    </form>
     </div>
+     </div>
 
 </div>
 {% endblock %}

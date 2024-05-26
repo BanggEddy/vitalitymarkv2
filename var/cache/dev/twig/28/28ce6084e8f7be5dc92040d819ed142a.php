@@ -178,123 +178,121 @@ class __TwigTemplate_7e9d9707cca1bb4e7e5bcc1d7b8ad237 extends Template
 
 
 <div class=\"container\">
-<h2>Nos articles</h2>
     <br>
-    ";
-        // line 88
-        if (Twig\Extension\CoreExtension::testEmpty((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 88, $this->source); })()))) {
-            // line 89
-            yield "        <p style=\"text-align: center; font-size: 200%\">Malheureusement, on a pas de produit dans cette catégorie</p>
-    ";
-        }
+    <h2>Résultats de la recherche</h2>
+    <br>
+        <div class=\"row justify-content-center\">
+
+            ";
         // line 91
-        yield "    <div class=\"row\">
-    
-        ";
-        // line 93
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 93, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 91, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
-            // line 94
-            yield "        <div class=\"col-md-3 col-lg-3\">
-            <div class=\"product-card\">
+            // line 92
+            yield "    <div class=\"col-md-6 col-lg-3 mb-4\">
+        <div class=\"card h-100 product-card\">
                 <img src=\"";
-            // line 96
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 96))), "html", null, true);
+            // line 94
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 94))), "html", null, true);
             yield "\" alt=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 96), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 94), "html", null, true);
             yield "\" class=\"product-image\">
-                <div class=\"product-details\">
+                <div class=\"card-body product-details\">
                     <h3>";
-            // line 98
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 98), "html", null, true);
+            // line 96
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 96), "html", null, true);
             yield "</h3>
                     ";
-            // line 99
+            // line 97
             $context["aUnePromotion"] = false;
-            // line 100
+            // line 98
             yield "                    ";
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["promotions"]) || array_key_exists("promotions", $context) ? $context["promotions"] : (function () { throw new RuntimeError('Variable "promotions" does not exist.', 100, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["promotions"]) || array_key_exists("promotions", $context) ? $context["promotions"] : (function () { throw new RuntimeError('Variable "promotions" does not exist.', 98, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["promo"]) {
-                // line 101
+                // line 99
                 yield "                        ";
-                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "idproduct", [], "any", false, false, false, 101), "id", [], "any", false, false, false, 101) == CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 101))) {
-                    // line 102
+                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "idproduct", [], "any", false, false, false, 99), "id", [], "any", false, false, false, 99) == CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 99))) {
+                    // line 100
                     yield "                            ";
                     $context["aUnePromotion"] = true;
-                    // line 103
+                    // line 101
                     yield "                            ";
                     $context["aujourdhui"] = $this->extensions['Twig\Extension\CoreExtension']->formatDate("now", "Y-m-d");
-                    // line 104
+                    // line 102
                     yield "                            ";
-                    $context["joursRest"] = (($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "dateFin", [], "any", false, false, false, 104), "U") - $this->extensions['Twig\Extension\CoreExtension']->formatDate((isset($context["aujourdhui"]) || array_key_exists("aujourdhui", $context) ? $context["aujourdhui"] : (function () { throw new RuntimeError('Variable "aujourdhui" does not exist.', 104, $this->source); })()), "U")) / (24 * 3600));
-                    // line 105
+                    $context["joursRest"] = (($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "dateFin", [], "any", false, false, false, 102), "U") - $this->extensions['Twig\Extension\CoreExtension']->formatDate((isset($context["aujourdhui"]) || array_key_exists("aujourdhui", $context) ? $context["aujourdhui"] : (function () { throw new RuntimeError('Variable "aujourdhui" does not exist.', 102, $this->source); })()), "U")) / (24 * 3600));
+                    // line 103
                     yield "                            ";
-                    if (((isset($context["joursRest"]) || array_key_exists("joursRest", $context) ? $context["joursRest"] : (function () { throw new RuntimeError('Variable "joursRest" does not exist.', 105, $this->source); })()) > 0)) {
-                        // line 106
+                    if (((isset($context["joursRest"]) || array_key_exists("joursRest", $context) ? $context["joursRest"] : (function () { throw new RuntimeError('Variable "joursRest" does not exist.', 103, $this->source); })()) > 0)) {
+                        // line 104
                         yield "                                <p class=\"promo-description\" style=\"font-weight: bold;\">Jour(s) restant(s): ";
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round((isset($context["joursRest"]) || array_key_exists("joursRest", $context) ? $context["joursRest"] : (function () { throw new RuntimeError('Variable "joursRest" does not exist.', 106, $this->source); })()), 0, "floor"), "html", null, true);
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::round((isset($context["joursRest"]) || array_key_exists("joursRest", $context) ? $context["joursRest"] : (function () { throw new RuntimeError('Variable "joursRest" does not exist.', 104, $this->source); })()), 0, "floor"), "html", null, true);
                         yield "</p>
                             ";
                     } else {
-                        // line 108
+                        // line 106
                         yield "                                <p class=\"promo-description\" style=\"font-weight: bold;\">Offre expirée</p>
                             ";
                     }
-                    // line 110
+                    // line 108
                     yield "                            <p class=\"btn-reduction\"> - ";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "reduction", [], "any", false, false, false, 110), "html", null, true);
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "reduction", [], "any", false, false, false, 108), "html", null, true);
                     yield " %</p>
                             <p style=\"font-size:80%\">A partir de :</p>
                             <p class=\"product-price original-price\">";
-                    // line 112
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 112), "html", null, true);
+                    // line 110
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 110), "html", null, true);
                     yield " €</p>
                             <p class=\"product-price discounted-price\" style=\"color: red;\">";
-                    // line 113
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 113) * (1 - (CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "reduction", [], "any", false, false, false, 113) / 100))), "html", null, true);
+                    // line 111
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 111) * (1 - (CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "reduction", [], "any", false, false, false, 111) / 100))), "html", null, true);
                     yield " €</p>
                         ";
                 }
-                // line 115
+                // line 113
                 yield "                    ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['promo'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 116
+            // line 114
             yield "                    ";
-            if ( !(isset($context["aUnePromotion"]) || array_key_exists("aUnePromotion", $context) ? $context["aUnePromotion"] : (function () { throw new RuntimeError('Variable "aUnePromotion" does not exist.', 116, $this->source); })())) {
-                // line 117
+            if ( !(isset($context["aUnePromotion"]) || array_key_exists("aUnePromotion", $context) ? $context["aUnePromotion"] : (function () { throw new RuntimeError('Variable "aUnePromotion" does not exist.', 114, $this->source); })())) {
+                // line 115
                 yield "                        <p class=\"product-price\">";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 117), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 115), "html", null, true);
                 yield " €</p>
                     ";
             }
-            // line 119
+            // line 117
             yield "                    <p>";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "description", [], "any", false, false, false, 119), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "description", [], "any", false, false, false, 117), "html", null, true);
             yield "</p>
+                    </div>
+                                        
+
                     <p class=\"product-quantity\">Quantité disponible: ";
-            // line 120
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 120), "html", null, true);
-            yield "</p>
-                        <a href=\"";
             // line 121
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("details_produit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 121)]), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 121), "html", null, true);
+            yield "</p>
+                    <div class=\"d-flex justify-content-between\">
+                        <a href=\"";
+            // line 123
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("details_produit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 123)]), "html", null, true);
             yield "\" class=\"btn btn-details\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
   <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
 </svg></a>
+ </div>
                     </div>
                 </div>
-            </div>
+            
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['product'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 128
+        // line 131
         yield "    </div>
 </div>
 ";
@@ -328,7 +326,7 @@ class __TwigTemplate_7e9d9707cca1bb4e7e5bcc1d7b8ad237 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  298 => 128,  285 => 121,  281 => 120,  276 => 119,  270 => 117,  267 => 116,  261 => 115,  256 => 113,  252 => 112,  246 => 110,  242 => 108,  236 => 106,  233 => 105,  230 => 104,  227 => 103,  224 => 102,  221 => 101,  216 => 100,  214 => 99,  210 => 98,  203 => 96,  199 => 94,  195 => 93,  191 => 91,  187 => 89,  185 => 88,  166 => 74,  153 => 66,  140 => 58,  127 => 50,  101 => 29,  86 => 19,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  296 => 131,  282 => 123,  277 => 121,  269 => 117,  263 => 115,  260 => 114,  254 => 113,  249 => 111,  245 => 110,  239 => 108,  235 => 106,  229 => 104,  226 => 103,  223 => 102,  220 => 101,  217 => 100,  214 => 99,  209 => 98,  207 => 97,  203 => 96,  196 => 94,  192 => 92,  188 => 91,  166 => 74,  153 => 66,  140 => 58,  127 => 50,  101 => 29,  86 => 19,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -418,18 +416,16 @@ class __TwigTemplate_7e9d9707cca1bb4e7e5bcc1d7b8ad237 extends Template
 
 
 <div class=\"container\">
-<h2>Nos articles</h2>
     <br>
-    {% if products is empty %}
-        <p style=\"text-align: center; font-size: 200%\">Malheureusement, on a pas de produit dans cette catégorie</p>
-    {% endif %}
-    <div class=\"row\">
-    
-        {% for product in products %}
-        <div class=\"col-md-3 col-lg-3\">
-            <div class=\"product-card\">
+    <h2>Résultats de la recherche</h2>
+    <br>
+        <div class=\"row justify-content-center\">
+
+            {% for product in products %}
+    <div class=\"col-md-6 col-lg-3 mb-4\">
+        <div class=\"card h-100 product-card\">
                 <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"{{ product.name }}\" class=\"product-image\">
-                <div class=\"product-details\">
+                <div class=\"card-body product-details\">
                     <h3>{{ product.name }}</h3>
                     {% set aUnePromotion = false %}
                     {% for promo in promotions %}
@@ -452,13 +448,18 @@ class __TwigTemplate_7e9d9707cca1bb4e7e5bcc1d7b8ad237 extends Template
                         <p class=\"product-price\">{{ product.price }} €</p>
                     {% endif %}
                     <p>{{ product.description }}</p>
+                    </div>
+                                        
+
                     <p class=\"product-quantity\">Quantité disponible: {{ product.quantity }}</p>
+                    <div class=\"d-flex justify-content-between\">
                         <a href=\"{{ path('details_produit', {'id': product.id}) }}\" class=\"btn btn-details\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
   <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
 </svg></a>
+ </div>
                     </div>
                 </div>
-            </div>
+            
         {% endfor %}
     </div>
 </div>

@@ -294,11 +294,7 @@ body{
     .quantity-btn.subtract:hover {
         background-color: #666666; 
     }
-    @media (max-width: 768px) {
-        .card-details {
-            flex-direction: column;
-        }
-    }
+
     .right-align {
         text-align: right;
     }
@@ -379,7 +375,7 @@ body{
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         max-width: 1200px;
         margin: 20px auto;
-        border: 2px solid #000; /* Ajoute une bordure noire de 1px de largeur */
+        border: 2px solid #000; 
     }
     
     
@@ -473,36 +469,3 @@ body{
         padding: 20px;
     }
     
-    @media (max-width: 768px) {
-        .promo-admin-table, .promo-admin-table-header, .promo-admin-table-row, .promo-admin-table-row td {
-            display: block;
-            width: 100%;
-        }
-    
-        .promo-admin-table-header {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
-    
-        .promo-admin-table-row {
-            margin-bottom: 20px;
-        }
-    
-        .promo-admin-table-row td {
-            border-bottom: 1px solid #ddd;
-            position: relative;
-            padding-left: 50%;
-            text-align: left;
-        }
-    
-        .promo-admin-table-row td:before {
-            content: attr(data-label);
-            position: absolute;
-            left: 0;
-            width: 45%;
-            padding-left: 15px;
-            font-weight: bold;
-            text-align: left;
-        }
-    }

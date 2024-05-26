@@ -189,15 +189,15 @@ class __TwigTemplate_bc07ecded1e92deaf1d25943286d7d71 extends Template
         $context['_seq'] = CoreExtension::ensureTraversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 91, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
             // line 92
-            yield "        <div class=\"col-md-3 col-lg-3\">
-            <div class=\"product-card\">
+            yield "    <div class=\"col-md-6 col-lg-3 mb-4\">
+        <div class=\"card h-100 product-card\">
                 <img src=\"";
             // line 94
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 94))), "html", null, true);
             yield "\" alt=\"";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 94), "html", null, true);
             yield "\" class=\"product-image\">
-                <div class=\"product-details\">
+                <div class=\"card-body product-details\">
                     <h3>";
             // line 96
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 96), "html", null, true);
@@ -269,25 +269,30 @@ class __TwigTemplate_bc07ecded1e92deaf1d25943286d7d71 extends Template
             yield "                    <p>";
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "description", [], "any", false, false, false, 117), "html", null, true);
             yield "</p>
+                    </div>
+                                        
+
                     <p class=\"product-quantity\">Quantité disponible: ";
-            // line 118
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 118), "html", null, true);
+            // line 121
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 121), "html", null, true);
             yield "</p>
+                    <div class=\"d-flex justify-content-between\">
                         <a href=\"";
-            // line 119
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("details_produit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 119)]), "html", null, true);
+            // line 123
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("details_produit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 123)]), "html", null, true);
             yield "\" class=\"btn btn-details\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
   <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
 </svg></a>
+ </div>
                     </div>
                 </div>
-            </div>
+            
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['product'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 126
+        // line 131
         yield "    </div>
 </div>
 ";
@@ -321,7 +326,7 @@ class __TwigTemplate_bc07ecded1e92deaf1d25943286d7d71 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  291 => 126,  278 => 119,  274 => 118,  269 => 117,  263 => 115,  260 => 114,  254 => 113,  249 => 111,  245 => 110,  239 => 108,  235 => 106,  229 => 104,  226 => 103,  223 => 102,  220 => 101,  217 => 100,  214 => 99,  209 => 98,  207 => 97,  203 => 96,  196 => 94,  192 => 92,  188 => 91,  166 => 74,  153 => 66,  140 => 58,  127 => 50,  101 => 29,  86 => 19,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  296 => 131,  282 => 123,  277 => 121,  269 => 117,  263 => 115,  260 => 114,  254 => 113,  249 => 111,  245 => 110,  239 => 108,  235 => 106,  229 => 104,  226 => 103,  223 => 102,  220 => 101,  217 => 100,  214 => 99,  209 => 98,  207 => 97,  203 => 96,  196 => 94,  192 => 92,  188 => 91,  166 => 74,  153 => 66,  140 => 58,  127 => 50,  101 => 29,  86 => 19,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -417,10 +422,10 @@ class __TwigTemplate_bc07ecded1e92deaf1d25943286d7d71 extends Template
     <div class=\"row justify-content-center\">
     
         {% for product in products %}
-        <div class=\"col-md-3 col-lg-3\">
-            <div class=\"product-card\">
+    <div class=\"col-md-6 col-lg-3 mb-4\">
+        <div class=\"card h-100 product-card\">
                 <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"{{ product.name }}\" class=\"product-image\">
-                <div class=\"product-details\">
+                <div class=\"card-body product-details\">
                     <h3>{{ product.name }}</h3>
                     {% set aUnePromotion = false %}
                     {% for promo in promotions %}
@@ -443,13 +448,18 @@ class __TwigTemplate_bc07ecded1e92deaf1d25943286d7d71 extends Template
                         <p class=\"product-price\">{{ product.price }} €</p>
                     {% endif %}
                     <p>{{ product.description }}</p>
+                    </div>
+                                        
+
                     <p class=\"product-quantity\">Quantité disponible: {{ product.quantity }}</p>
+                    <div class=\"d-flex justify-content-between\">
                         <a href=\"{{ path('details_produit', {'id': product.id}) }}\" class=\"btn btn-details\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
   <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
 </svg></a>
+ </div>
                     </div>
                 </div>
-            </div>
+            
         {% endfor %}
     </div>
 </div>

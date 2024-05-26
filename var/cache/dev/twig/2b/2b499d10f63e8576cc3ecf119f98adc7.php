@@ -163,18 +163,29 @@ class __TwigTemplate_400153f5543ef44420d1cc2ccd0ba309 extends Template
         // line 68
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 68, $this->source); })()), 'widget');
         yield "
+                <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
+
             <a href=\"";
-        // line 69
+        // line 71
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_promo_admin_index");
         yield "\" style=\"text-align:center;\" class=\"btn btn-details\">< Retour</a>
 
         <button class=\"btn btn-details\">Editer</button>
     ";
-        // line 72
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 72, $this->source); })()), 'form_end');
+        // line 74
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 74, $this->source); })()), 'form_end');
         yield "
-
-
+                    <form method=\"post\" action=\"";
+        // line 75
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_promo_admin_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["promo"]) || array_key_exists("promo", $context) ? $context["promo"] : (function () { throw new RuntimeError('Variable "promo" does not exist.', 75, $this->source); })()), "id", [], "any", false, false, false, 75)]), "html", null, true);
+        yield "\" onsubmit=\"return confirm('Es-tu sur de vouloir supprimer ce produit en réduction?');\" style=\"display: inline;\">
+                <input type=\"hidden\" name=\"_token\" value=\"";
+        // line 76
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["promo"]) || array_key_exists("promo", $context) ? $context["promo"] : (function () { throw new RuntimeError('Variable "promo" does not exist.', 76, $this->source); })()), "id", [], "any", false, false, false, 76))), "html", null, true);
+        yield "\">
+                <button class=\"btn btn-details\">Supprimer</button>
+            </form>
+</div>
 
 </div>
 ";
@@ -208,7 +219,7 @@ class __TwigTemplate_400153f5543ef44420d1cc2ccd0ba309 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  174 => 72,  168 => 69,  164 => 68,  160 => 67,  155 => 65,  151 => 64,  145 => 61,  141 => 60,  135 => 57,  131 => 56,  125 => 53,  121 => 52,  116 => 50,  69 => 5,  59 => 4,  36 => 1,);
+        return array (  184 => 76,  180 => 75,  176 => 74,  170 => 71,  164 => 68,  160 => 67,  155 => 65,  151 => 64,  145 => 61,  141 => 60,  135 => 57,  131 => 56,  125 => 53,  121 => 52,  116 => 50,  69 => 5,  59 => 4,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -281,12 +292,17 @@ class __TwigTemplate_400153f5543ef44420d1cc2ccd0ba309 extends Template
         </div>
     {{ form_start(form) }}
         {{ form_widget(form) }}
+                <div class=\"btn-group\" role=\"group\" aria-label=\"Buttons\">
+
             <a href=\"{{ path('app_promo_admin_index') }}\" style=\"text-align:center;\" class=\"btn btn-details\">< Retour</a>
 
         <button class=\"btn btn-details\">Editer</button>
     {{ form_end(form) }}
-
-
+                    <form method=\"post\" action=\"{{ path('app_promo_admin_delete', {'id': promo.id}) }}\" onsubmit=\"return confirm('Es-tu sur de vouloir supprimer ce produit en réduction?');\" style=\"display: inline;\">
+                <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ promo.id) }}\">
+                <button class=\"btn btn-details\">Supprimer</button>
+            </form>
+</div>
 
 </div>
 {% endblock %}

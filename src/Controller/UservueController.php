@@ -196,10 +196,6 @@ class UservueController extends AbstractController
         /** @var UserInterface|null $user */
         $user = $this->getUser();
 
-        if (!$user) {
-            throw $this->createNotFoundException('User not found');
-        }
-
         $userId = $user->getId();
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
@@ -228,9 +224,6 @@ class UservueController extends AbstractController
         /** @var UserInterface|null $user */
         $user = $this->getUser();
 
-        if (!$user) {
-            throw $this->createNotFoundException('User not found');
-        }
         $userId = null;
         if ($user instanceof User) {
             $userId = $user->getId();
@@ -310,9 +303,6 @@ class UservueController extends AbstractController
         }
         /** @var UserInterface|null $user */
         $user = $this->getUser();
-        if (!$user) {
-            throw $this->createNotFoundException('User not found');
-        }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $panierDetails = $panierUserService->createPanierDetails($paniers);
@@ -345,9 +335,6 @@ class UservueController extends AbstractController
     {
         /** @var User|null $user */
         $user = $this->getUser();
-        if (!$user) {
-            throw $this->createNotFoundException('User not found');
-        }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
 
@@ -383,10 +370,6 @@ class UservueController extends AbstractController
 
         /** @var UserInterface|null $user */
         $user = $this->getUser();
-
-        if (!$user) {
-            throw $this->createNotFoundException('User not found');
-        }
 
         $userId = $user->getId();
 
@@ -499,11 +482,7 @@ class UservueController extends AbstractController
         }
 
         $user = $this->getUser();
-        $userId = null;
-
-        if ($user instanceof User) {
-            $userId = $user->getId();
-        }
+        $userId = $user instanceof User ? $user->getId() : null;
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
 
@@ -522,10 +501,9 @@ class UservueController extends AbstractController
     }
 
     #[Route('/contact/user/submit', name: 'app_contact_user_submit')]
-    public function submitContact(Request $request, EntityManagerInterface $entityManager, Security $security): Response
+    public function submitContact(Request $request, EntityManagerInterface $entityManager): Response
     {
-        /** @var User|null $user */
-        $user = $security->getUser();
+        $user = $this->getUser();
 
         $subject = $request->request->get('subject');
         $message = $request->request->get('message');
@@ -533,7 +511,10 @@ class UservueController extends AbstractController
         $contact = new Contact();
         $contact->setSubject($subject);
         $contact->setObject($message);
-        $contact->setIduser($user);
+
+        if ($user instanceof User) {
+            $contact->setIduser($user);
+        }
 
         $entityManager->persist($contact);
         $entityManager->flush();
@@ -678,10 +659,6 @@ class UservueController extends AbstractController
     {
         /** @var User|null $user */
         $user = $this->getUser();
-
-        if (!$user) {
-            throw $this->createNotFoundException('Utilisateur non trouvé');
-        }
 
         if ($request->isMethod('POST')) {
             foreach ($user->getPaniers() as $panier) {
