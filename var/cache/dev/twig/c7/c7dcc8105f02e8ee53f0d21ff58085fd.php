@@ -132,7 +132,7 @@ class __TwigTemplate_8eeb52f5f7580950754759159603e81b extends Template
                     // line 30
                     yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 30), "html", null, true);
                     yield " €</p>
-                            <p class=\"product-price discounted-price\" style=\"color: red;\">";
+                            <p class=\"product-price remise-price\" style=\"color: red;\">";
                     // line 31
                     yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "getPriceafterpromo", [], "any", false, false, false, 31), "html", null, true);
                     yield " €</p>
@@ -247,7 +247,7 @@ class __TwigTemplate_8eeb52f5f7580950754759159603e81b extends Template
                             <p class=\"btn-reduction\"> - {{ promo.reduction }} %</p>
                             <p style=\"font-size:80%\">À partir de :</p>
                             <p class=\"product-price original-price\">{{ product.price }} €</p>
-                            <p class=\"product-price discounted-price\" style=\"color: red;\">{{ promo.getPriceafterpromo }} €</p>
+                            <p class=\"product-price remise-price\" style=\"color: red;\">{{ promo.getPriceafterpromo }} €</p>
                         {% endif %}
                     {% endfor %}
                     {% if not aUnePromotion %}

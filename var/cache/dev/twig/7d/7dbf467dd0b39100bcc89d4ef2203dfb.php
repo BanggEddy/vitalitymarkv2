@@ -134,7 +134,7 @@ class __TwigTemplate_23bbbc99f614897c0217fbe4a4a641f2 extends Template
                     // line 30
                     yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 30), "html", null, true);
                     yield " €</p>
-                            <p class=\"product-price discounted-price\" style=\"color: red;\">";
+                            <p class=\"product-price remise-price\" style=\"color: red;\">";
                     // line 31
                     yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 31) * (1 - (CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "reduction", [], "any", false, false, false, 31) / 100))), "html", null, true);
                     yield " €</p>
@@ -249,7 +249,7 @@ class __TwigTemplate_23bbbc99f614897c0217fbe4a4a641f2 extends Template
                             <p class=\"btn-reduction\"> - {{ promo.reduction }} %</p>
                             <p style=\"font-size:80%\">A partir de :</p>
                             <p class=\"product-price original-price\">{{ product.price }} €</p>
-                            <p class=\"product-price discounted-price\" style=\"color: red;\">{{ product.price * (1 - (promo.reduction / 100)) }} €</p>
+                            <p class=\"product-price remise-price\" style=\"color: red;\">{{ product.price * (1 - (promo.reduction / 100)) }} €</p>
                         {% endif %}
                     {% endfor %}
                     {% if not aUnePromotion %}

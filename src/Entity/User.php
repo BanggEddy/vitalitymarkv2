@@ -15,6 +15,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\src\Enum\UserRole;
 
 #[ApiResource]
 #[ApiFilter(SearchFilter::class, properties: ['email' => 'exact'])]
@@ -79,6 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->paniers = new ArrayCollection();
         $this->contacts = new ArrayCollection();
+        $this->roles = [UserRole::User->value];
     }
 
     public function getId(): ?int
@@ -213,12 +215,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removePanier(Panier $panier, EntityManagerInterface $entityManager): static
     {
         if ($this->paniers->removeElement($panier)) {
-            // set the owning side to null (unless already changed)
             if ($panier->getIduser() === $this) {
                 $panier->setIduser(null);
             }
 
-            // Supprimer l'entrée du panier de la base de données
             $entityManager->remove($panier);
             $entityManager->flush();
         }
@@ -247,7 +247,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeContact(Contact $contact): static
     {
         if ($this->contacts->removeElement($contact)) {
-            // set the owning side to null (unless already changed)
             if ($contact->getIduser() === $this) {
                 $contact->setIduser(null);
             }

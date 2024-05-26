@@ -152,7 +152,7 @@ class __TwigTemplate_29067ea62a84e193a6984e29e785a716 extends Template
                     // line 34
                     yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 34, $this->source); })()), "price", [], "any", false, false, false, 34), "html", null, true);
                     yield " €</p>
-                                <p class=\"product-price discounted-price\" style=\"color: red;\">";
+                                <p class=\"product-price remise-price\" style=\"color: red;\">";
                     // line 35
                     yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((CoreExtension::getAttribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 35, $this->source); })()), "price", [], "any", false, false, false, 35) * (1 - (CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "reduction", [], "any", false, false, false, 35) / 100))), "html", null, true);
                     yield " €</p>
@@ -298,7 +298,7 @@ class __TwigTemplate_29067ea62a84e193a6984e29e785a716 extends Template
                             // line 96
                             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["prod"], "price", [], "any", false, false, false, 96), "html", null, true);
                             yield " €</p>
-                                        <p class=\"product-price discounted-price\" style=\"color: red;\">";
+                                        <p class=\"product-price remise-price\" style=\"color: red;\">";
                             // line 97
                             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["promo"], "getPriceafterpromo", [], "any", false, false, false, 97), "html", null, true);
                             yield " €</p>
@@ -458,7 +458,7 @@ class __TwigTemplate_29067ea62a84e193a6984e29e785a716 extends Template
                                 <p class=\"btn-reduction\"> - {{ promo.reduction }} %</p>
                                 <p style=\"font-size: 80%\">À partir de :</p>
                                 <p class=\"product-price original-price\">{{ product.price }} €</p>
-                                <p class=\"product-price discounted-price\" style=\"color: red;\">{{ product.price * (1 - (promo.reduction / 100)) }} €</p>
+                                <p class=\"product-price remise-price\" style=\"color: red;\">{{ product.price * (1 - (promo.reduction / 100)) }} €</p>
                             {% endif %}
                         {% endfor %}
                         {% if aUnePromotion == false %}
@@ -520,7 +520,7 @@ class __TwigTemplate_29067ea62a84e193a6984e29e785a716 extends Template
                                         <p class=\"btn-reduction\"> - {{ promo.reduction }} %</p>
                                         <p style=\"font-size:80%\">A partir de :</p>
                                         <p class=\"product-price original-price\">{{ prod.price }} €</p>
-                                        <p class=\"product-price discounted-price\" style=\"color: red;\">{{ promo.getPriceafterpromo }} €</p>
+                                        <p class=\"product-price remise-price\" style=\"color: red;\">{{ promo.getPriceafterpromo }} €</p>
                                         </div>
                                                                   <div class=\"product-footer\">
                                                     <div class=\"d-flex justify-content-between\">

@@ -32,7 +32,7 @@
                                 <p class="btn-reduction"> - {{ promo.reduction }} %</p>
                                 <p style="font-size: 80%">À partir de :</p>
                                 <p class="product-price original-price">{{ product.price }} €</p>
-                                <p class="product-price discounted-price" style="color: red;">{{ product.price * (1 - (promo.reduction / 100)) }} €</p>
+                                <p class="product-price remise-price" style="color: red;">{{ product.price * (1 - (promo.reduction / 100)) }} €</p>
                             {% endif %}
                         {% endfor %}
                         {% if aUnePromotion == false %}
@@ -94,7 +94,7 @@
                                         <p class="btn-reduction"> - {{ promo.reduction }} %</p>
                                         <p style="font-size:80%">A partir de :</p>
                                         <p class="product-price original-price">{{ prod.price }} €</p>
-                                        <p class="product-price discounted-price" style="color: red;">{{ promo.getPriceafterpromo }} €</p>
+                                        <p class="product-price remise-price" style="color: red;">{{ promo.getPriceafterpromo }} €</p>
                                         </div>
                                                                   <div class="product-footer">
                                                     <div class="d-flex justify-content-between">

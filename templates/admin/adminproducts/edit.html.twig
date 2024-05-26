@@ -28,7 +28,7 @@
                             <p class="btn-reduction"> - {{ promo.reduction }} %</p>
                             <p style="font-size:80%">À partir de :</p>
                             <p class="product-price original-price">{{ product.price }} €</p>
-                            <p class="product-price discounted-price" style="color: red;">{{ promo.getPriceafterpromo }} €</p>
+                            <p class="product-price remise-price" style="color: red;">{{ promo.getPriceafterpromo }} €</p>
                         {% endif %}
                     {% endfor %}
                     {% if not aUnePromotion %}
