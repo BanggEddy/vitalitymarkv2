@@ -99,6 +99,23 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
                         </div>
                     </li>
                     <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"/loyalty/card\">
+                            Carte de Fidélité
+                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-card-heading\" viewBox=\"0 0 16 16\">
+                            <path d=\"M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z\"/>
+                            <path d=\"M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5z\"/>
+                            </svg></a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"/coupon\">
+                            Coupons
+                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-ticket-detailed\" viewBox=\"0 0 16 16\">
+                            <path d=\"M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2z\"/>
+                            <path d=\"M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5z\"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"/gestion/user\">
                             Gérer les utilisateurs
                             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-person-lines-fill\" viewBox=\"0 0 16 16\">
@@ -109,7 +126,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
                 </ul>
                 <ul class=\"navbar-nav ml-auto\">
                     <form action=\"";
-        // line 53
+        // line 70
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("search_admin");
         yield "\" method=\"post\" class=\"form-inline my-2 my-lg-0 mr-auto\">
                         <input class=\"form-control\" type=\"text\" name=\"keyword\" placeholder=\"Rechercher un produit\" aria-label=\"Search\">
@@ -146,12 +163,12 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
                 <h1>Admin</h1>
                 <p>
                             ";
-        // line 87
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 87, $this->source); })()), 'form_start', ["attr" => ["class" => "form-inline my-2 my-lg-0"]]);
+        // line 104
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 104, $this->source); })()), 'form_start', ["attr" => ["class" => "form-inline my-2 my-lg-0"]]);
         yield "
                             ";
-        // line 88
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 88, $this->source); })()), "category", [], "any", false, false, false, 88), 'row', ["attr" => ["class" => "form-control", "placeholder" => "Rechercher", "aria-label" => "Search"]]);
+        // line 105
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 105, $this->source); })()), "category", [], "any", false, false, false, 105), 'row', ["attr" => ["class" => "form-control", "placeholder" => "Rechercher", "aria-label" => "Search"]]);
         yield "
                             <button type=\"submit\" class=\"btn btn-success my-2 my-sm-0\">
                                 <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-search\" viewBox=\"0 0 16 16\">
@@ -159,8 +176,8 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
                                 </svg>
                             </button>
                             ";
-        // line 94
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 94, $this->source); })()), 'form_end');
+        // line 111
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 111, $this->source); })()), 'form_end');
         yield "
                 </p>
             </div>
@@ -168,13 +185,13 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
     
 
     ";
-        // line 100
+        // line 117
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 102
+        // line 119
         yield "<br>
 <br>
 
-<section2 class=\"row justify-content-around\">
+<section2 class=\"justify-content-around\">
     <div class=\"col-md-3\">
         <div class=\"card\">
             <div class=\"card-body\">
@@ -265,7 +282,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
         return; yield '';
     }
 
-    // line 100
+    // line 117
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -275,7 +292,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 101
+        // line 118
         yield "    ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -307,7 +324,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  279 => 101,  269 => 100,  250 => 9,  230 => 5,  174 => 102,  172 => 100,  163 => 94,  154 => 88,  150 => 87,  113 => 53,  74 => 17,  65 => 10,  63 => 9,  59 => 8,  53 => 5,  47 => 1,);
+        return array (  296 => 118,  286 => 117,  267 => 9,  247 => 5,  191 => 119,  189 => 117,  180 => 111,  171 => 105,  167 => 104,  130 => 70,  74 => 17,  65 => 10,  63 => 9,  59 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -353,6 +370,23 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
                             <a class=\"dropdown-item\" href=\"/adminupdateproducts\">Modifier un produit</a>
                             <a class=\"dropdown-item\" href=\"/admindeleteproducts\">Supprimer un produit</a>
                         </div>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"/loyalty/card\">
+                            Carte de Fidélité
+                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-card-heading\" viewBox=\"0 0 16 16\">
+                            <path d=\"M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z\"/>
+                            <path d=\"M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5z\"/>
+                            </svg></a>
+                    </li>
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"/coupon\">
+                            Coupons
+                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-ticket-detailed\" viewBox=\"0 0 16 16\">
+                            <path d=\"M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2z\"/>
+                            <path d=\"M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6zM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5z\"/>
+                            </svg>
+                        </a>
                     </li>
                     <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"/gestion/user\">
@@ -416,7 +450,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
 <br>
 <br>
 
-<section2 class=\"row justify-content-around\">
+<section2 class=\"justify-content-around\">
     <div class=\"col-md-3\">
         <div class=\"card\">
             <div class=\"card-body\">

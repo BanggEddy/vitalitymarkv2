@@ -112,7 +112,7 @@ class SecurityControllerTest extends WebTestCase
         ]);
         $this->assertResponseRedirects('/login');
         $client->followRedirect();
-        $this->assertSelectorNotExists('.alert alert-danger', 'Le compte a était supprimé');
+        $this->assertSelectorTextContains('.alert.alert-danger', 'Le compte a était supprimé');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
     #Connection Admin

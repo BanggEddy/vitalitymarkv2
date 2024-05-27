@@ -707,7 +707,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.5AOYZqL"/>
+      <argument type="service" id=".service_locator.UfdADMz"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -2723,7 +2723,7 @@
         <argument key="Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\TokenExtractorInterface" type="service_closure" id="lexik_jwt_authentication.extractor.chain_extractor" on-invalid="ignore_uninitialized"/>
         <argument key="Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface" type="service_closure" id="lexik_jwt_authentication.encoder.lcobucci" on-invalid="ignore_uninitialized"/>
         <argument key="twig.loader.filesystem" type="service_closure" id="twig.loader.native_filesystem" on-invalid="ignore_uninitialized"/>
-        <argument key="argument_resolver.controller_locator" type="service_closure" id=".service_locator.5AOYZqL" on-invalid="ignore_uninitialized"/>
+        <argument key="argument_resolver.controller_locator" type="service_closure" id=".service_locator.UfdADMz" on-invalid="ignore_uninitialized"/>
         <argument key="twig.loader" type="service_closure" id="twig.loader.native_filesystem" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.id_generator_locator" type="service_closure" id=".service_locator.KLVvNIq" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.name_converter" type="service_closure" id="serializer.name_converter.metadata_aware" on-invalid="ignore_uninitialized"/>
@@ -4137,7 +4137,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.5AOYZqL"/>
+      <argument type="service" id=".service_locator.UfdADMz"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -9325,6 +9325,15 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
+    <service id=".service_locator.3ZSxAxz" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
+        <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
+        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
+        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.aEXkTBP" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -9341,13 +9350,6 @@
         <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
         <argument key="urlGenerator" type="service_closure" id="router.default"/>
-      </argument>
-    </service>
-    <service id=".service_locator.SE3MauL" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
-        <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
       </argument>
     </service>
     <service id=".service_locator.dQqFLKh" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -9386,13 +9388,6 @@
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.AUQz.CV" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="security" type="service_closure" id="security.helper"/>
-      </argument>
-    </service>
     <service id=".service_locator.ncyOCPw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -9402,7 +9397,14 @@
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.5AOYZqL" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.n2aaCnD" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
+        <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
+      </argument>
+    </service>
+    <service id=".service_locator.UfdADMz" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AccueilController::afficherLesPromos" type="service_closure" id=".service_locator.1j13wVw"/>
@@ -9432,7 +9434,6 @@
         <argument key="App\Controller\LoyaltyCardController::delete" type="service_closure" id=".service_locator.DxJ_gkE"/>
         <argument key="App\Controller\LoyaltyCardController::edit" type="service_closure" id=".service_locator.DxJ_gkE"/>
         <argument key="App\Controller\LoyaltyCardController::index" type="service_closure" id=".service_locator.7i3BCB3"/>
-        <argument key="App\Controller\LoyaltyCardController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\LoyaltyCardController::show" type="service_closure" id=".service_locator.oFpVnn4"/>
         <argument key="App\Controller\PromoAdminController::delete" type="service_closure" id=".service_locator.DtsKEqY"/>
         <argument key="App\Controller\PromoAdminController::edit" type="service_closure" id=".service_locator.DtsKEqY"/>
@@ -9444,19 +9445,20 @@
         <argument key="App\Controller\UservueController::CreerCarteLoyalty" type="service_closure" id=".service_locator.dAO6ypm"/>
         <argument key="App\Controller\UservueController::addDansPanier" type="service_closure" id=".service_locator.pXnaH3B"/>
         <argument key="App\Controller\UservueController::detailsProduit" type="service_closure" id=".service_locator.ncyOCPw"/>
-        <argument key="App\Controller\UservueController::getUserPanier" type="service_closure" id=".service_locator.SE3MauL"/>
-        <argument key="App\Controller\UservueController::index" type="service_closure" id=".service_locator.aEXkTBP"/>
-        <argument key="App\Controller\UservueController::indexcontact" type="service_closure" id=".service_locator.SE3MauL"/>
+        <argument key="App\Controller\UservueController::getUserPanier" type="service_closure" id=".service_locator.n2aaCnD"/>
+        <argument key="App\Controller\UservueController::index" type="service_closure" id=".service_locator.3ZSxAxz"/>
+        <argument key="App\Controller\UservueController::indexcontact" type="service_closure" id=".service_locator.n2aaCnD"/>
+        <argument key="App\Controller\UservueController::mentionsLegalsPage" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="App\Controller\UservueController::modifierProfilUser" type="service_closure" id=".service_locator.EU0TCmr"/>
         <argument key="App\Controller\UservueController::pageCategoriesUser" type="service_closure" id=".service_locator.2qiSyMX"/>
         <argument key="App\Controller\UservueController::promo" type="service_closure" id=".service_locator.aEXkTBP"/>
         <argument key="App\Controller\UservueController::removeFromCartProduit" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\UservueController::search" type="service_closure" id=".service_locator.dQqFLKh"/>
         <argument key="App\Controller\UservueController::showUserLoyaltyCardPage" type="service_closure" id=".service_locator.84xubWY"/>
-        <argument key="App\Controller\UservueController::submitContact" type="service_closure" id=".service_locator.AUQz.CV"/>
+        <argument key="App\Controller\UservueController::submitContact" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\UservueController::suppressionCompte" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\UservueController::updateQuantityProduit" type="service_closure" id=".service_locator.CsMkqUa"/>
-        <argument key="App\Controller\UservueController::userProfile" type="service_closure" id=".service_locator.SE3MauL"/>
+        <argument key="App\Controller\UservueController::userProfile" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -9488,7 +9490,6 @@
         <argument key="App\Controller\LoyaltyCardController:delete" type="service_closure" id=".service_locator.DxJ_gkE"/>
         <argument key="App\Controller\LoyaltyCardController:edit" type="service_closure" id=".service_locator.DxJ_gkE"/>
         <argument key="App\Controller\LoyaltyCardController:index" type="service_closure" id=".service_locator.7i3BCB3"/>
-        <argument key="App\Controller\LoyaltyCardController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\LoyaltyCardController:show" type="service_closure" id=".service_locator.oFpVnn4"/>
         <argument key="App\Controller\PromoAdminController:delete" type="service_closure" id=".service_locator.DtsKEqY"/>
         <argument key="App\Controller\PromoAdminController:edit" type="service_closure" id=".service_locator.DtsKEqY"/>
@@ -9500,19 +9501,20 @@
         <argument key="App\Controller\UservueController:CreerCarteLoyalty" type="service_closure" id=".service_locator.dAO6ypm"/>
         <argument key="App\Controller\UservueController:addDansPanier" type="service_closure" id=".service_locator.pXnaH3B"/>
         <argument key="App\Controller\UservueController:detailsProduit" type="service_closure" id=".service_locator.ncyOCPw"/>
-        <argument key="App\Controller\UservueController:getUserPanier" type="service_closure" id=".service_locator.SE3MauL"/>
-        <argument key="App\Controller\UservueController:index" type="service_closure" id=".service_locator.aEXkTBP"/>
-        <argument key="App\Controller\UservueController:indexcontact" type="service_closure" id=".service_locator.SE3MauL"/>
+        <argument key="App\Controller\UservueController:getUserPanier" type="service_closure" id=".service_locator.n2aaCnD"/>
+        <argument key="App\Controller\UservueController:index" type="service_closure" id=".service_locator.3ZSxAxz"/>
+        <argument key="App\Controller\UservueController:indexcontact" type="service_closure" id=".service_locator.n2aaCnD"/>
+        <argument key="App\Controller\UservueController:mentionsLegalsPage" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="App\Controller\UservueController:modifierProfilUser" type="service_closure" id=".service_locator.EU0TCmr"/>
         <argument key="App\Controller\UservueController:pageCategoriesUser" type="service_closure" id=".service_locator.2qiSyMX"/>
         <argument key="App\Controller\UservueController:promo" type="service_closure" id=".service_locator.aEXkTBP"/>
         <argument key="App\Controller\UservueController:removeFromCartProduit" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\UservueController:search" type="service_closure" id=".service_locator.dQqFLKh"/>
         <argument key="App\Controller\UservueController:showUserLoyaltyCardPage" type="service_closure" id=".service_locator.84xubWY"/>
-        <argument key="App\Controller\UservueController:submitContact" type="service_closure" id=".service_locator.AUQz.CV"/>
+        <argument key="App\Controller\UservueController:submitContact" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\UservueController:suppressionCompte" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\UservueController:updateQuantityProduit" type="service_closure" id=".service_locator.CsMkqUa"/>
-        <argument key="App\Controller\UservueController:userProfile" type="service_closure" id=".service_locator.SE3MauL"/>
+        <argument key="App\Controller\UservueController:userProfile" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
@@ -11301,7 +11303,7 @@
     <service id="lexik_jwt_authentication.key_loader" alias="lexik_jwt_authentication.key_loader.raw" public="true"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.5AOYZqL"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.UfdADMz"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
@@ -11325,7 +11327,8 @@
     <service id=".service_locator.o9i7EFx" alias=".service_locator.84xubWY"/>
     <service id=".service_locator.EsSTjMC" alias=".service_locator.dAO6ypm"/>
     <service id=".service_locator.sH.bvlR" alias=".service_locator.2qiSyMX"/>
-    <service id=".service_locator.UafBqVG" alias=".service_locator.5AOYZqL"/>
+    <service id=".service_locator.SE3MauL" alias=".service_locator.n2aaCnD"/>
+    <service id=".service_locator.NUPxWwO" alias=".service_locator.UfdADMz"/>
     <service id=".service_locator.sO2baFT" alias=".service_locator.UXbUH6B"/>
     <service id=".service_locator.chy.Yq_" alias=".service_locator.yhILtYu"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
@@ -11425,12 +11428,11 @@
     <service id=".service_locator.7NIAq8D" alias=".service_locator.rSTd.nA"/>
     <service id=".service_locator.MG1CPb3" alias=".service_locator.ncyOCPw"/>
     <service id=".service_locator.MhNSvul" alias=".service_locator.pXnaH3B"/>
-    <service id=".service_locator.Hg4prJc" alias=".service_locator.SE3MauL"/>
     <service id=".service_locator.un8JN07" alias=".service_locator.dQqFLKh"/>
     <service id=".service_locator.F_ZVviv" alias=".service_locator.84xubWY"/>
     <service id=".service_locator.AAKjXqG" alias=".service_locator.dAO6ypm"/>
     <service id=".service_locator.5mW9J9q" alias=".service_locator.2qiSyMX"/>
-    <service id=".service_locator.xC7XRz4" alias=".service_locator.AUQz.CV"/>
+    <service id=".service_locator.Hg4prJc" alias=".service_locator.n2aaCnD"/>
     <service id=".service_locator.Q1z.f9O" alias=".service_locator.O2p6Lk7"/>
     <service id=".service_locator.B_yLtTQ" alias=".service_locator.Lo8jEUu"/>
     <service id=".service_locator.ro9MXaF" alias=".service_locator.Oannbdp"/>

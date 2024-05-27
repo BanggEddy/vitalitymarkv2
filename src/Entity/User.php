@@ -15,7 +15,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\src\Enum\UserRole;
+use App\Enum\UserRole;
 
 #[ApiResource]
 #[ApiFilter(SearchFilter::class, properties: ['email' => 'exact'])]

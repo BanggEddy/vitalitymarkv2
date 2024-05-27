@@ -603,9 +603,6 @@
       <tag name="doctrine.fixture.orm"/>
       <argument type="service" id="security.user_password_hasher"/>
     </service>
-    <service id="App\Enum\UserRole" class="App\Enum\UserRole" autowire="true" autoconfigure="true">
-      <tag name="container.error" message="The autoloader expected class &quot;App\Enum\UserRole&quot; to be defined in file &quot;C:\Users\David\Desktop\vitalitymarkv2\vendor\composer/../../src\Enum\UserRole.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
-    </service>
     <service id="App\Form\AjoutPromo" class="App\Form\AjoutPromo" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>

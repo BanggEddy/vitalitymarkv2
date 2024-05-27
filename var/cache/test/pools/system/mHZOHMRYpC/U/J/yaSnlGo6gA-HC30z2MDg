@@ -16,6 +16,7 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
                     'end_date',
                     'idloyaltycard',
                     'reduction',
+                    'qty',
                     'startDate',
                     'endDate',
                 ],
