@@ -391,19 +391,19 @@ class AdminproductsController extends AbstractController
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
-        $keyword = $request->request->get('keyword');
+        $motrecherche = $request->request->get('motrecherche');
 
         $productsRepository = $entityManager->getRepository(Products::class);
         $products = $productsRepository->createQueryBuilder('p')
-            ->where('p.name LIKE :keyword')
-            ->setParameter('keyword', '%' . $keyword . '%')
+            ->where('p.name LIKE :motrecherche')
+            ->setParameter('motrecherche', '%' . $motrecherche . '%')
             ->getQuery()
             ->getResult();
 
         return $this->render('admin/adminproducts/search.html.twig', [
             'products' => $products,
             'promotions' => $promotions,
-            'keyword' => $keyword,
+            'motrecherche' => $motrecherche,
             'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
         ]);
     }

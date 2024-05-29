@@ -1,9 +1,5 @@
 <?php
 
-// retenir la commande: 
-// php bin/console doctrine:fixtures:load --append --env=test
-// pour faire le test dans le .env
-
 namespace App\DataFixtures;
 
 use App\Entity\User;

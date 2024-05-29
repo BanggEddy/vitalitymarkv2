@@ -152,12 +152,12 @@ class AccueilController extends AbstractController
             return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
         }
 
-        $keyword = $request->request->get('keyword');
+        $motrecherche = $request->request->get('motrecherche');
 
         $productsRepository = $entityManager->getRepository(Products::class);
         $products = $productsRepository->createQueryBuilder('p')
-            ->where('p.name LIKE :keyword')
-            ->setParameter('keyword', '%' . $keyword . '%')
+            ->where('p.name LIKE :motrecherche')
+            ->setParameter('motrecherche', '%' . $motrecherche . '%')
             ->getQuery()
             ->getResult();
 
@@ -173,7 +173,7 @@ class AccueilController extends AbstractController
         return $this->render('accueil/search.html.twig', [
             'products' => $products,
             'promotions' => $promotions,
-            'keyword' => $keyword,
+            'motrecherche' => $motrecherche,
             'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
         ]);
     }

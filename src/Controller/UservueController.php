@@ -241,23 +241,16 @@ class UservueController extends AbstractController
             return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
         }
 
-        $keyword = $request->request->get('keyword');
+        $motrecherche = $request->request->get('motrecherche');
 
         $productsRepository = $entityManager->getRepository(Products::class);
         $products = $productsRepository->createQueryBuilder('p')
-            ->where('p.name LIKE :keyword')
-            ->setParameter('keyword', '%' . $keyword . '%')
+            ->where('p.name LIKE :motrecherche')
+            ->setParameter('motrecherche', '%' . $motrecherche . '%')
             ->getQuery()
             ->getResult();
 
         $promotions = [];
-
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
 
         $totalPrice = 0;
 
@@ -273,7 +266,7 @@ class UservueController extends AbstractController
         return $this->render('user/uservue/search.html.twig', [
             'products' => $products,
             'promotions' => $promotions,
-            'keyword' => $keyword,
+            'motrecherche' => $motrecherche,
             'totalPrice' => $totalPrice,
             'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
             'user_id' => $userId,

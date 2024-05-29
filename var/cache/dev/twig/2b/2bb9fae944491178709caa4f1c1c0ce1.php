@@ -94,7 +94,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
         // line 35
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("search");
         yield "\" method=\"post\" class=\"form-inline my-2 my-lg-0 mr-auto\">
-                        <input class=\"form-control\" type=\"text\" name=\"keyword\" placeholder=\"Rechercher un produit\" aria-label=\"Search\">
+                        <input class=\"form-control\" type=\"text\" name=\"motrecherche\" placeholder=\"Rechercher un produit\" aria-label=\"Search\">
                         <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">
                             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-search\" viewBox=\"0 0 16 16\">
                                 <path d=\"M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0\"/>
@@ -353,7 +353,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                 </ul>
                 <ul class=\"navbar-nav ml-auto\">
                     <form action=\"{{ path('search') }}\" method=\"post\" class=\"form-inline my-2 my-lg-0 mr-auto\">
-                        <input class=\"form-control\" type=\"text\" name=\"keyword\" placeholder=\"Rechercher un produit\" aria-label=\"Search\">
+                        <input class=\"form-control\" type=\"text\" name=\"motrecherche\" placeholder=\"Rechercher un produit\" aria-label=\"Search\">
                         <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">
                             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-search\" viewBox=\"0 0 16 16\">
                                 <path d=\"M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0\"/>
