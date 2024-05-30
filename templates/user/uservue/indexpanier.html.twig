@@ -20,25 +20,25 @@
                         {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
                             <img src="{{ asset('images/' ~ panierDetail['images']) }}" alt="image" class="img-fluid card-img">
                         {% else %}
-                            <p>No image available</p>
+                            <p>image pas trouvé</p>
                         {% endif %}
                     </div>
                     <div class="col-md-9 card-details">
                         <div>
                             {% if panierDetail['promo'] is not null %}
-                                <h5>{{ panierDetail['promo'].getDescription() ?? 'No description available' }}</h5>
+                                <p> {{ panierDetail['name'] }} </p>
+                                <h5>{{ panierDetail['promo'].getDescription() ?? 'Trouve pas de description' }}</h5>
                                 <p>Promotion</p>
                             {% else %}
-                                <h5>{{ panierDetail['name'] ?? 'No name available' }}</h5>
-                                <p>{{ panierDetail['description'] ?? 'No description available' }}</p>
-                                <p>{{ panierDetail['category'] ?? 'No category available' }}</p>
+                                <h5>{{ panierDetail['name'] ?? 'Trouve pas de name' }}</h5>
+                                <p>{{ panierDetail['description'] ?? 'Trouve pas de description' }}</p>
+                                <p>{{ panierDetail['category'] ?? 'Trouve pas de category' }}</p>
                             {% endif %}
                         </div>
                         <div class="card-price">
-                            <p>{{ panierDetail['price'] ?? 'No price available' }} €/unité</p>
                             {% if panierDetail['promo'] is not null %}
-                                <p>Prix après promo: {{ panierDetail['price'] }} €</p>
-                                <p>Réduction: {{ panierDetail['reduction'] }} %</p>
+                                <p style="color: red">Prix après réduction: {{ panierDetail['price'] }} €/u</p>
+                                <p  style="color: red">-{{ panierDetail['reduction'] }} %</p>
                             {% endif %}
                         </div>
 

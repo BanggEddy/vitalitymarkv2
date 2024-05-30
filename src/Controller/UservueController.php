@@ -89,12 +89,12 @@ class UservueController extends AbstractController
     public function promo(ProductsRepository $productsRepository, PanierRepository $panierRepository, PromoRepository $promoRepository, Request $request, PanierUser $panierUserService): Response
     {
         $user = $this->getUser();
-        $userId = $user instanceof User ? $user->getId() : null;
-        $paniers = $panierRepository->findBy(['iduser' => $user]);
         $userId = null;
         if ($user instanceof User) {
             $userId = $user->getId();
+            $paniers = $panierRepository->findBy(['iduser' => $userId]);
         }
+
 
         $panierDetails = [];
         $panierDetails = $panierUserService->createPanierDetails($paniers);
@@ -133,7 +133,7 @@ class UservueController extends AbstractController
     }
 
     #[Route('/add-dans-panier/{id}', name: 'add_dans_panier')]
-    public function addDansPanier(Request $request, ProductsRepository $productsRepository, PromoRepository $promoRepository, $id, EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator): Response
+    public function addDansPanier(PanierRepository $panierRepository, Request $request, ProductsRepository $productsRepository, PromoRepository $promoRepository, $id, EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator): Response
     {
         $quantity = $request->request->get('quantity');
 
@@ -149,7 +149,7 @@ class UservueController extends AbstractController
                 $product->setQuantity($product->getQuantity() - $quantity);
             }
 
-            $panierItem = $this->entityManager->getRepository(Panier::class)->findOneBy(['idproducts' => $product, 'iduser' => $user]);
+            $panierItem = $panierRepository->findOneBy(['idproducts' => $product, 'iduser' => $user]);
 
             if ($panierItem) {
                 $panierItem->setQuantity($panierItem->getQuantity() + $quantity);
@@ -169,11 +169,9 @@ class UservueController extends AbstractController
             $this->entityManager->commit();
 
             $url = $urlGenerator->generate('uservue');
-            error_log('Redirection vers : ' . $url);
             return new RedirectResponse($url);
         } catch (\Exception $e) {
             $this->entityManager->rollback();
-            error_log('Erreur : ' . $e->getMessage());
         }
     }
 
@@ -219,7 +217,8 @@ class UservueController extends AbstractController
         EntityManagerInterface $entityManager,
         PanierRepository $panierRepository,
         PromoRepository $promoRepository,
-        PanierUser $panierUserService
+        PanierUser $panierUserService,
+        ProductsRepository $productsRepository,
     ) {
         /** @var UserInterface|null $user */
         $user = $this->getUser();
@@ -243,7 +242,6 @@ class UservueController extends AbstractController
 
         $motrecherche = $request->request->get('motrecherche');
 
-        $productsRepository = $entityManager->getRepository(Products::class);
         $products = $productsRepository->createQueryBuilder('p')
             ->where('p.name LIKE :motrecherche')
             ->setParameter('motrecherche', '%' . $motrecherche . '%')
@@ -435,7 +433,7 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $totalPrice = $panierUserService->calculateTotalPrice($paniers);
 
-        $products = $entityManager->getRepository(Products::class)->findBy(['category' => $category]);
+        $products = $productsRepository->findBy(['category' => $category]);
         $product = $productsRepository->findAll();
 
         $promotions = [];
@@ -553,7 +551,7 @@ class UservueController extends AbstractController
             return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
         }
 
-        $product = $this->entityManager->getRepository(Products::class)->find($id);
+        $product = $productsRepository->find($id);
 
         return $this->render('user/uservue/details.html.twig', [
             'promotions' => $promotions,
@@ -569,33 +567,21 @@ class UservueController extends AbstractController
 
     #Soustraire/Ajout quantité d'un "produits" depuis le panier
     #[Route('/update-quantity', name: 'update_quantity', methods: ['POST'])]
-    public function updateQuantityProduit(Request $request, EntityManagerInterface $entityManager): Response
+    public function updateQuantityProduit(Request $request, EntityManagerInterface $entityManager, PanierRepository $panierRepository): Response
     {
         $panierId = $request->request->get('panierId');
         $action = $request->request->get('action');
 
-        $panierRepository = $entityManager->getRepository(Panier::class);
-
         $panier = $panierRepository->find($panierId);
-
-        if (!$panier) {
-            return new RedirectResponse('/user/panier', 302, ['danger' => 'Le panier n\'existe pas.']);
-        }
 
         if ($action === 'add') {
             $panier->setQuantity($panier->getQuantity() + 1);
 
             if ($panier->getIdproducts()) {
                 $product = $panier->getIdproducts();
-                if ($product->getQuantity() === 0) {
-                    return new RedirectResponse('/user/panier', 302);
-                }
                 $product->setQuantity($product->getQuantity() - 1);
             }
         } elseif ($action === 'subtract') {
-            if ($panier->getQuantity() <= 0) {
-                return new RedirectResponse('/user/panier', 302);
-            }
 
             $panier->setQuantity($panier->getQuantity() - 1);
 
@@ -620,15 +606,11 @@ class UservueController extends AbstractController
     }
 
     #[Route('/remove_from_cart', name: 'remove_from_cart', methods: ['POST'])]
-    public function removeFromCartProduit(Request $request, EntityManagerInterface $entityManager): Response
+    public function removeFromCartProduit(PanierRepository $panierRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $panierId = $request->request->get('panierId');
 
-        $panier = $entityManager->getRepository(Panier::class)->find($panierId);
-
-        if (!$panier) {
-            throw $this->createNotFoundException('Panier non trouvé');
-        }
+        $panier = $panierRepository->find($panierId);
 
         $product = $panier->getIdproducts();
 
@@ -644,7 +626,7 @@ class UservueController extends AbstractController
         $entityManager->remove($panier);
         $entityManager->flush();
 
-        return new RedirectResponse('/user/panier', 302, ['success' => 'Le produit a bien était supprimé']);
+        return new RedirectResponse('/user/panier');
     }
 
     #[Route('/delete_account', name: 'delete_user_account', methods: ['POST'])]

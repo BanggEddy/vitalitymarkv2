@@ -6,11 +6,9 @@ class PanierUser
 {
     public function createPanierDetails($paniers)
     {
-        $panierDetails = [];
-
         foreach ($paniers as $panier) {
             $product = $panier->getIdproducts();
-            $promo = $product->getCurrentPromo();
+            $promo = $product ? $product->getCurrentPromo() : null;
 
             if ($product) {
                 $productPrice = $promo ? $promo->getPriceafterpromo() : $product->getPrice();

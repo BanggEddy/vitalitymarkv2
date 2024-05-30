@@ -127,7 +127,7 @@
                     {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
                     <img src="{{ asset('images/' ~ panierDetail['images']) }}" alt="image" class="img-fluid img-small">
                     {% else %}
-                    <p>No image available</p>
+                    <p>image pas trouvé</p>
                     {% endif %}
                   </div>
                 </div>
@@ -138,7 +138,7 @@
                         {% if panierDetail['name'] is defined and panierDetail['name'] is not null %}
                         <h5>{{ panierDetail['name'] }}</h5>
                         {% else %}
-                        <p>No name available</p>
+                        <p>Trouve pas de name</p>
                         {% endif %}
                         {% if panierDetail['quantity'] is defined and panierDetail['quantity'] is not null %}
                         <p class="btn-quantity">Quantité: {{ panierDetail['quantity'] }}</p>

@@ -44,8 +44,8 @@ class Promo
 
     public function isCurrent(): bool
     {
-        $now = new \DateTime();
-        return $this->date_debut <= $now && $this->date_fin >= $now;
+        $mtn = new \DateTime();
+        return $this->date_debut <= $mtn && $this->date_fin >= $mtn;
     }
 
     public function getId(): ?int

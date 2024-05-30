@@ -182,7 +182,7 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
                     ";
             } else {
                 // line 130
-                yield "                    <p>No image available</p>
+                yield "                    <p>image pas trouvé</p>
                     ";
             }
             // line 132
@@ -202,7 +202,7 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
                         ";
             } else {
                 // line 141
-                yield "                        <p>No name available</p>
+                yield "                        <p>Trouve pas de name</p>
                         ";
             }
             // line 143
@@ -460,7 +460,7 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
                     {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
                     <img src=\"{{ asset('images/' ~ panierDetail['images']) }}\" alt=\"image\" class=\"img-fluid img-small\">
                     {% else %}
-                    <p>No image available</p>
+                    <p>image pas trouvé</p>
                     {% endif %}
                   </div>
                 </div>
@@ -471,7 +471,7 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
                         {% if panierDetail['name'] is defined and panierDetail['name'] is not null %}
                         <h5>{{ panierDetail['name'] }}</h5>
                         {% else %}
-                        <p>No name available</p>
+                        <p>Trouve pas de name</p>
                         {% endif %}
                         {% if panierDetail['quantity'] is defined and panierDetail['quantity'] is not null %}
                         <p class=\"btn-quantity\">Quantité: {{ panierDetail['quantity'] }}</p>

@@ -137,7 +137,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
                         ";
             } else {
                 // line 23
-                yield "                            <p>No image available</p>
+                yield "                            <p>image pas trouvé</p>
                         ";
             }
             // line 25
@@ -148,41 +148,41 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
             // line 28
             if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, false, false, 28))) {
                 // line 29
-                yield "                                <h5>";
-                (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, true, false, 29), "getDescription", [], "method", true, true, false, 29) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, true, false, 29), "getDescription", [], "method", false, false, false, 29)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, true, false, 29), "getDescription", [], "method", false, false, false, 29), "html", null, true)) : (yield "No description available"));
+                yield "                                <p> ";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "name", [], "array", false, false, false, 29), "html", null, true);
+                yield " </p>
+                                <h5>";
+                // line 30
+                (((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, true, false, 30), "getDescription", [], "method", true, true, false, 30) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, true, false, 30), "getDescription", [], "method", false, false, false, 30)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, true, false, 30), "getDescription", [], "method", false, false, false, 30), "html", null, true)) : (yield "Trouve pas de description"));
                 yield "</h5>
                                 <p>Promotion</p>
                             ";
             } else {
-                // line 32
+                // line 33
                 yield "                                <h5>";
-                (((CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "name", [], "array", true, true, false, 32) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "name", [], "array", false, false, false, 32)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "name", [], "array", false, false, false, 32), "html", null, true)) : (yield "No name available"));
+                (((CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "name", [], "array", true, true, false, 33) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "name", [], "array", false, false, false, 33)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "name", [], "array", false, false, false, 33), "html", null, true)) : (yield "Trouve pas de name"));
                 yield "</h5>
                                 <p>";
-                // line 33
-                (((CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "description", [], "array", true, true, false, 33) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "description", [], "array", false, false, false, 33)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "description", [], "array", false, false, false, 33), "html", null, true)) : (yield "No description available"));
+                // line 34
+                (((CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "description", [], "array", true, true, false, 34) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "description", [], "array", false, false, false, 34)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "description", [], "array", false, false, false, 34), "html", null, true)) : (yield "Trouve pas de description"));
                 yield "</p>
                                 <p>";
-                // line 34
-                (((CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "category", [], "array", true, true, false, 34) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "category", [], "array", false, false, false, 34)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "category", [], "array", false, false, false, 34), "html", null, true)) : (yield "No category available"));
+                // line 35
+                (((CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "category", [], "array", true, true, false, 35) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "category", [], "array", false, false, false, 35)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "category", [], "array", false, false, false, 35), "html", null, true)) : (yield "Trouve pas de category"));
                 yield "</p>
                             ";
             }
-            // line 36
+            // line 37
             yield "                        </div>
                         <div class=\"card-price\">
-                            <p>";
-            // line 38
-            (((CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "price", [], "array", true, true, false, 38) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "price", [], "array", false, false, false, 38)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "price", [], "array", false, false, false, 38), "html", null, true)) : (yield "No price available"));
-            yield " €/unité</p>
                             ";
             // line 39
             if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, false, false, 39))) {
                 // line 40
-                yield "                                <p>Prix après promo: ";
+                yield "                                <p style=\"color: red\">Prix après réduction: ";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "price", [], "array", false, false, false, 40), "html", null, true);
-                yield " €</p>
-                                <p>Réduction: ";
+                yield " €/u</p>
+                                <p  style=\"color: red\">-";
                 // line 41
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "reduction", [], "array", false, false, false, 41), "html", null, true);
                 yield " %</p>
@@ -283,7 +283,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  245 => 68,  239 => 65,  235 => 63,  224 => 58,  217 => 54,  211 => 51,  207 => 50,  201 => 47,  197 => 46,  192 => 43,  187 => 41,  182 => 40,  180 => 39,  176 => 38,  172 => 36,  167 => 34,  163 => 33,  158 => 32,  151 => 29,  149 => 28,  144 => 25,  140 => 23,  134 => 21,  132 => 20,  128 => 18,  124 => 17,  115 => 10,  105 => 9,  91 => 6,  81 => 5,  61 => 3,  38 => 1,);
+        return array (  245 => 68,  239 => 65,  235 => 63,  224 => 58,  217 => 54,  211 => 51,  207 => 50,  201 => 47,  197 => 46,  192 => 43,  187 => 41,  182 => 40,  180 => 39,  176 => 37,  171 => 35,  167 => 34,  162 => 33,  156 => 30,  151 => 29,  149 => 28,  144 => 25,  140 => 23,  134 => 21,  132 => 20,  128 => 18,  124 => 17,  115 => 10,  105 => 9,  91 => 6,  81 => 5,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -310,25 +310,25 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
                         {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
                             <img src=\"{{ asset('images/' ~ panierDetail['images']) }}\" alt=\"image\" class=\"img-fluid card-img\">
                         {% else %}
-                            <p>No image available</p>
+                            <p>image pas trouvé</p>
                         {% endif %}
                     </div>
                     <div class=\"col-md-9 card-details\">
                         <div>
                             {% if panierDetail['promo'] is not null %}
-                                <h5>{{ panierDetail['promo'].getDescription() ?? 'No description available' }}</h5>
+                                <p> {{ panierDetail['name'] }} </p>
+                                <h5>{{ panierDetail['promo'].getDescription() ?? 'Trouve pas de description' }}</h5>
                                 <p>Promotion</p>
                             {% else %}
-                                <h5>{{ panierDetail['name'] ?? 'No name available' }}</h5>
-                                <p>{{ panierDetail['description'] ?? 'No description available' }}</p>
-                                <p>{{ panierDetail['category'] ?? 'No category available' }}</p>
+                                <h5>{{ panierDetail['name'] ?? 'Trouve pas de name' }}</h5>
+                                <p>{{ panierDetail['description'] ?? 'Trouve pas de description' }}</p>
+                                <p>{{ panierDetail['category'] ?? 'Trouve pas de category' }}</p>
                             {% endif %}
                         </div>
                         <div class=\"card-price\">
-                            <p>{{ panierDetail['price'] ?? 'No price available' }} €/unité</p>
                             {% if panierDetail['promo'] is not null %}
-                                <p>Prix après promo: {{ panierDetail['price'] }} €</p>
-                                <p>Réduction: {{ panierDetail['reduction'] }} %</p>
+                                <p style=\"color: red\">Prix après réduction: {{ panierDetail['price'] }} €/u</p>
+                                <p  style=\"color: red\">-{{ panierDetail['reduction'] }} %</p>
                             {% endif %}
                         </div>
 

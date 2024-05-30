@@ -308,10 +308,10 @@ class AdminproductsController extends AbstractController
     }
 
     #[Route('/admin/add_quantity/{productId}', name: 'admin_add_quantity')]
-    public function ajoutQuantiteProduitAdmin(Request $request, $productId): Response
+    public function ajoutQuantiteProduitAdmin(ProductsRepository $productsRepository, Request $request, $productId): Response
     {
-        $productRepository = $this->entityManager->getRepository(Products::class);
-        $product = $productRepository->find($productId);
+
+        $product = $productsRepository->find($productId);
 
         if (!$product) {
             throw $this->createNotFoundException('Le produit avec l\'ID ' . $productId . ' n\'existe pas.');
@@ -328,10 +328,9 @@ class AdminproductsController extends AbstractController
     }
 
     #[Route('/admin/remove_quantity/{productId}', name: 'admin_remove_quantity')]
-    public function enleverQuantiteProduitAdmin(Request $request, $productId): Response
+    public function enleverQuantiteProduitAdmin(ProductsRepository $productsRepository,  Request $request, $productId): Response
     {
-        $productRepository = $this->entityManager->getRepository(Products::class);
-        $product = $productRepository->find($productId);
+        $product = $productsRepository->find($productId);
 
         if (!$product) {
             throw $this->createNotFoundException('Le produit avec l\'ID ' . $productId . ' n\'existe pas.');
@@ -393,7 +392,6 @@ class AdminproductsController extends AbstractController
 
         $motrecherche = $request->request->get('motrecherche');
 
-        $productsRepository = $entityManager->getRepository(Products::class);
         $products = $productsRepository->createQueryBuilder('p')
             ->where('p.name LIKE :motrecherche')
             ->setParameter('motrecherche', '%' . $motrecherche . '%')
@@ -432,7 +430,7 @@ class AdminproductsController extends AbstractController
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
-        $products = $entityManager->getRepository(Products::class)->findBy(['category' => $category]);
+        $products = $productsRepository->findBy(['category' => $category]);
 
         return $this->render('admin/adminproducts/categorie.html.twig', [
             'category' => $category,

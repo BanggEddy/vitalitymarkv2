@@ -140,7 +140,7 @@ class AccueilController extends AbstractController
 
 
     #[Route('/search', name: 'search')]
-    public function rechercherUnProduitVisiteur(Request $request, EntityManagerInterface $entityManager, PromoRepository $promoRepository,)
+    public function rechercherUnProduitVisiteur(ProductsRepository $productsRepository, Request $request, EntityManagerInterface $entityManager, PromoRepository $promoRepository,)
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
         $barreDeRechercheCategorie->handleRequest($request);
@@ -154,7 +154,6 @@ class AccueilController extends AbstractController
 
         $motrecherche = $request->request->get('motrecherche');
 
-        $productsRepository = $entityManager->getRepository(Products::class);
         $products = $productsRepository->createQueryBuilder('p')
             ->where('p.name LIKE :motrecherche')
             ->setParameter('motrecherche', '%' . $motrecherche . '%')
@@ -237,7 +236,7 @@ class AccueilController extends AbstractController
             return new RedirectResponse($this->generateUrl('accueil_category_products', ['category' => $category]));
         }
 
-        $products = $entityManager->getRepository(Products::class)->findBy(['category' => $category]);
+        $products = $productsRepository->findBy(['category' => $category]);
 
         return $this->render('accueil/categorie.html.twig', [
             'category' => $category,
