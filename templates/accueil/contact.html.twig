@@ -103,7 +103,7 @@
                 <option value="Programme de Fidélité">Programme de Fidélité</option>
                 <option value="Magasins">Magasins</option>
                 <option value="Stockage des Données">Stockage des Données</option>
-                <option value="Informations personnelles">Informations personnelle</option>
+                <option value="Informations personnelles">Informations personnelles</option>
                 <option value="Autre">Autre</option>
             </select>
         </div>
@@ -111,7 +111,9 @@
             <label for="message">Votre Message :</label>
             <textarea id="message" name="message" required></textarea>
         </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('contact') }}">
         <button type="submit" class="btn btn-details">Envoyer le Message</button>
     </form>
+
 </div>
 {% endblock %}

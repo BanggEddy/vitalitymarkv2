@@ -6,6 +6,8 @@ class PanierUser
 {
     public function createPanierDetails($paniers)
     {
+        $panierDetails = [];
+
         foreach ($paniers as $panier) {
             $product = $panier->getIdproducts();
             $promo = $product ? $product->getCurrentPromo() : null;
@@ -18,6 +20,7 @@ class PanierUser
                 $panierDetails[] = $this->createPanierItemDetails($panier, $product, $productPrice, $reduction, $promo, $category); // Pass promo to createPanierItemDetails
             }
         }
+
 
         return $panierDetails;
     }
@@ -50,6 +53,7 @@ class PanierUser
             ];
         }
     }
+
 
 
     public function calculateTotalPrice($paniers): float

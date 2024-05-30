@@ -18,6 +18,8 @@ use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Symfony\Component\Validator\Constraints\Email;
 
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -71,6 +73,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Votre mot de passe doit contenir au moins 12 caractères comprenant au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.',
                     ]),
                 ],
+            ])
+            ->add('captcha', ReCaptchaType::class, [
+                'type' => 'invisible',
             ]);
     }
 

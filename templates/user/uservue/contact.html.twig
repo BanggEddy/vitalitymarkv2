@@ -27,6 +27,7 @@
                             <label for="message">Votre Message :</label>
                             <textarea class="form-control" id="message" name="message" required></textarea>
                         </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('contact') }}">
                         <button type="submit" class="btn btn-details">Envoyer le Message</button>
                     </form>
                 </div>

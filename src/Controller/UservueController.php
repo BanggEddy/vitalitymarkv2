@@ -22,19 +22,22 @@ use App\Repository\PromoRepository;
 use App\Form\ProductSearchType;
 use App\Service\PromoFilter;
 use App\Service\PanierUser;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+
 
 class UservueController extends AbstractController
 {
     private $entityManager;
     private $promoFilter;
     private $panierUserService;
+    private $csrfTokenManager;
 
-    public function __construct(EntityManagerInterface $entityManager, PromoFilter $promoFilter, PanierUser $panierUserService,)
+    public function __construct(CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PromoFilter $promoFilter, PanierUser $panierUserService,)
     {
         $this->entityManager = $entityManager;
         $this->promoFilter = $promoFilter;
         $this->panierUserService = $panierUserService;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     #[Route('/uservue', name: 'app_uservue')]
@@ -494,6 +497,8 @@ class UservueController extends AbstractController
     #[Route('/contact/user/submit', name: 'app_contact_user_submit')]
     public function submitContact(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $token = $request->request->get('_csrf_token');
+
         $user = $this->getUser();
 
         $subject = $request->request->get('subject');
@@ -507,8 +512,13 @@ class UservueController extends AbstractController
             $contact->setIduser($user);
         }
 
-        $entityManager->persist($contact);
-        $entityManager->flush();
+        if (!$this->isCsrfTokenValid('contact', $token)) {
+            $this->addFlash('error', 'le Token CSRF est invalide.');
+            return $this->redirectToRoute('app_contact_user');
+        }
+
+        $this->entityManager->persist($contact);
+        $this->entityManager->flush();
 
         return $this->redirectToRoute('app_contact_user');
     }

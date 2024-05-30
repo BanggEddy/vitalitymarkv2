@@ -26,6 +26,7 @@
       <parameter key="KarserRecaptcha3Bundle">Karser\Recaptcha3Bundle\KarserRecaptcha3Bundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="LexikJWTAuthenticationBundle">Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle</parameter>
+      <parameter key="RecaptchaBundle">VictorPrdh\RecaptchaBundle\RecaptchaBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -79,6 +80,10 @@
       <parameter key="LexikJWTAuthenticationBundle" type="collection">
         <parameter key="path">C:\Users\David\Desktop\vitalitymarkv2\vendor\lexik\jwt-authentication-bundle</parameter>
         <parameter key="namespace">Lexik\Bundle\JWTAuthenticationBundle</parameter>
+      </parameter>
+      <parameter key="RecaptchaBundle" type="collection">
+        <parameter key="path">C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src</parameter>
+        <parameter key="namespace">VictorPrdh\RecaptchaBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -149,6 +154,7 @@
     <parameter key="profiler_listener.only_main_requests">false</parameter>
     <parameter key="profiler.storage.dsn">file:C:/Users/David/Desktop/vitalitymarkv2/var/cache/dev/profiler</parameter>
     <parameter key="twig.form.resources" type="collection">
+      <parameter>@Recaptcha/form/recaptcha.html.twig</parameter>
       <parameter>form_div_layout.html.twig</parameter>
       <parameter>@KarserRecaptcha3/Form/karser_recaptcha3_widget.html.twig</parameter>
     </parameter>
@@ -428,6 +434,8 @@
     <parameter key="lexik_jwt_authentication.allow_no_expiration">false</parameter>
     <parameter key="lexik_jwt_authentication.user_id_claim">username</parameter>
     <parameter key="lexik_jwt_authentication.encoder.signature_algorithm">RS256</parameter>
+    <parameter key="victor_prdh_recaptcha.google_site_key">%env(GOOGLE_RECAPTCHA_SITE_KEY)%</parameter>
+    <parameter key="victor_prdh_recaptcha.google_secret_key">%env(GOOGLE_RECAPTCHA_SECRET_KEY)%</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -521,6 +529,7 @@
     <service id="App\Controller\AccueilController" class="App\Controller\AccueilController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="App\Service\PromoFilter"/>
       <call method="setContainer">
@@ -581,6 +590,7 @@
     <service id="App\Controller\UservueController" class="App\Controller\UservueController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="App\Service\PromoFilter"/>
       <argument type="service" id="App\Service\PanierUser"/>
@@ -1329,6 +1339,7 @@
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations</argument>
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations</argument>
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations</argument>
+        <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations</argument>
       </argument>
       <argument type="collection">
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\twig-bridge/Resources/views/Form</argument>
@@ -1355,6 +1366,7 @@
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations</argument>
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations</argument>
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations</argument>
+        <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations</argument>
       </argument>
       <argument type="collection">
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\twig-bridge/Resources/views/Form</argument>
@@ -1437,6 +1449,7 @@
         <argument>App\Form</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
         <argument>Karser\Recaptcha3Bundle\Form</argument>
+        <argument>VictorPrdh\RecaptchaBundle\Form</argument>
       </argument>
       <argument type="collection">
         <argument>App\Form\AjoutPromo</argument>
@@ -1456,6 +1469,7 @@
         <argument>Symfony\Component\Form\Extension\Core\Type\ColorType</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type\EntityType</argument>
         <argument>Karser\Recaptcha3Bundle\Form\Recaptcha3Type</argument>
+        <argument>VictorPrdh\RecaptchaBundle\Form\ReCaptchaType</argument>
       </argument>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension</argument>
@@ -1901,6 +1915,7 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.de.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.de.yaml</argument>
           </argument>
           <argument key="el" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
@@ -1912,12 +1927,14 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.en.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.en.yaml</argument>
           </argument>
           <argument key="es" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.es.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.es.yaml</argument>
           </argument>
           <argument key="et" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
@@ -1947,6 +1964,7 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fr.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.fr.yaml</argument>
           </argument>
           <argument key="gl" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
@@ -1986,6 +2004,7 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.it.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.it.yaml</argument>
           </argument>
           <argument key="ja" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
@@ -2165,6 +2184,7 @@
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations</argument>
+          <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\framework-bundle/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\twig-bundle/translations</argument>
@@ -2185,6 +2205,7 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations</argument>
             <argument>translations</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\framework-bundle/translations</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\twig-bundle/translations</argument>
@@ -2372,6 +2393,7 @@
         <argument>UniqueEntity</argument>
         <argument>UserPassword</argument>
         <argument>Recaptcha3</argument>
+        <argument>IsValidCaptcha</argument>
       </argument>
     </service>
     <service id="translation.reader" class="Symfony\Component\Translation\Reader\TranslationReader">
@@ -3581,7 +3603,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.yhILtYu"/>
+      <argument type="service" id=".service_locator.nqgTVJj"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3725,7 +3747,7 @@
       <argument type="service" id="cache.validator"/>
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
-      <argument type="service" id=".service_locator.UXbUH6B"/>
+      <argument type="service" id=".service_locator.RI9wyLm"/>
     </service>
     <service id="Symfony\Component\Validator\Constraints\ExpressionLanguageSyntaxValidator" class="Symfony\Component\Validator\Constraints\ExpressionLanguageSyntaxValidator" abstract="true">
       <tag name="container.excluded" source="in &quot;config/validator.php&quot;"/>
@@ -4454,6 +4476,14 @@
       <call method="addPath">
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/templates</argument>
         <argument>!KnpPaginator</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/views</argument>
+        <argument>Recaptcha</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/views</argument>
+        <argument>!Recaptcha</argument>
       </call>
       <call method="addPath">
         <argument>C:\Users\David\Desktop\vitalitymarkv2/templates</argument>
@@ -8187,6 +8217,20 @@
       <argument>username</argument>
       <argument>password</argument>
     </service>
+    <service id="victor_prdh_recaptcha_bundle.recaptcha_type" class="VictorPrdh\RecaptchaBundle\Form\ReCaptchaType" public="true" autowire="true">
+      <tag name="form.type" alias="captcha"/>
+      <argument type="service" id="parameter_bag"/>
+    </service>
+    <service id="victor_prdh_recaptcha_bundle.recaptcha_validator" class="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" public="true" autowire="true" autoconfigure="true">
+      <tag name="validator.is_valid" alias="victor_prdh_recaptcha.true"/>
+      <tag name="validator.constraint_validator"/>
+      <argument type="service" id="victor_prdh.recaptcha"/>
+      <argument type="service" id="request_stack"/>
+      <argument type="service" id="translator.data_collector"/>
+    </service>
+    <service id="victor_prdh.recaptcha" class="ReCaptcha\ReCaptcha" public="true">
+      <argument>%env(GOOGLE_RECAPTCHA_SECRET_KEY)%</argument>
+    </service>
     <service id="annotated_app_entity_user_api_platform_doctrine_orm_filter_search_filter" class="ApiPlatform\Doctrine\Orm\Filter\SearchFilter" autowire="true">
       <tag name="api_platform.filter"/>
       <argument type="service" id="doctrine"/>
@@ -8268,6 +8312,8 @@
     <service id=".abstract.instanceof.App\Repository\PromoRepository" class="App\Repository\PromoRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Validator\ConstraintValidatorInterface.0.victor_prdh_recaptcha_bundle.recaptcha_validator" class="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" public="true" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.victor_prdh_recaptcha_bundle.recaptcha_validator" class="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" public="true" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.w7.f4fT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -9075,7 +9121,7 @@
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
     </service>
-    <service id=".service_locator.UXbUH6B" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.RI9wyLm" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator" type="service_closure" id="karser_recaptcha3.validator"/>
@@ -9086,6 +9132,7 @@
         <argument key="Symfony\Component\Validator\Constraints\NoSuspiciousCharactersValidator" type="service_closure" id="validator.no_suspicious_characters"/>
         <argument key="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator" type="service_closure" id="validator.not_compromised_password"/>
         <argument key="Symfony\Component\Validator\Constraints\WhenValidator" type="service_closure" id="validator.when"/>
+        <argument key="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" type="service_closure" id="victor_prdh_recaptcha_bundle.recaptcha_validator"/>
         <argument key="doctrine.orm.validator.unique" type="service_closure" id="doctrine.orm.validator.unique"/>
         <argument key="karser_recaptcha3_validator" type="service_closure" id="karser_recaptcha3.validator"/>
         <argument key="security.validator.user_password" type="service_closure" id="security.validator.user_password"/>
@@ -9314,7 +9361,7 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.yhILtYu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.nqgTVJj" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\AjoutPromo" type="service_closure" id="App\Form\AjoutPromo"/>
@@ -9334,6 +9381,7 @@
         <argument key="Symfony\Component\Form\Extension\Core\Type\ColorType" type="service_closure" id="form.type.color"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FileType" type="service_closure" id="form.type.file"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service_closure" id="form.type.form"/>
+        <argument key="VictorPrdh\RecaptchaBundle\Form\ReCaptchaType" type="service_closure" id="victor_prdh_recaptcha_bundle.recaptcha_type"/>
       </argument>
     </service>
     <service id=".service_locator.VHsrTPK" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -11544,8 +11592,8 @@
     <service id=".service_locator.EU0TCmr" alias=".service_locator.cdXheJO"/>
     <service id=".service_locator.SE3MauL" alias=".service_locator.n2aaCnD"/>
     <service id=".service_locator.hTGeGeX" alias=".service_locator.Mqtldmh"/>
-    <service id=".service_locator.sO2baFT" alias=".service_locator.UXbUH6B"/>
-    <service id=".service_locator.chy.Yq_" alias=".service_locator.yhILtYu"/>
+    <service id=".service_locator.izYZ3jJ" alias=".service_locator.RI9wyLm"/>
+    <service id=".service_locator.wwtcNAh" alias=".service_locator.nqgTVJj"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>

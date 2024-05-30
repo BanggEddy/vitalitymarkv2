@@ -26,7 +26,7 @@ class AuthAuthenticator extends AbstractLoginFormAuthenticator
 
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
-        private JWTTokenManagerInterface $jwtManager // Injection du gestionnaire de jetons JWT
+        private JWTTokenManagerInterface $jwtManager
     ) {
     }
 

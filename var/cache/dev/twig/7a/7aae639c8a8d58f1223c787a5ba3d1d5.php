@@ -94,6 +94,10 @@ class __TwigTemplate_f2d08927c6cadb7b4ad9644bc961af9d extends Template
                             <label for=\"message\">Votre Message :</label>
                             <textarea class=\"form-control\" id=\"message\" name=\"message\" required></textarea>
                         </div>
+                        <input type=\"hidden\" name=\"_csrf_token\" value=\"";
+        // line 30
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("contact"), "html", null, true);
+        yield "\">
                         <button type=\"submit\" class=\"btn btn-details\">Envoyer le Message</button>
                     </form>
                 </div>
@@ -134,7 +138,7 @@ class __TwigTemplate_f2d08927c6cadb7b4ad9644bc961af9d extends Template
      */
     public function getDebugInfo()
     {
-        return array (  78 => 12,  69 => 5,  59 => 4,  36 => 1,);
+        return array (  99 => 30,  78 => 12,  69 => 5,  59 => 4,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -168,6 +172,7 @@ class __TwigTemplate_f2d08927c6cadb7b4ad9644bc961af9d extends Template
                             <label for=\"message\">Votre Message :</label>
                             <textarea class=\"form-control\" id=\"message\" name=\"message\" required></textarea>
                         </div>
+                        <input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('contact') }}\">
                         <button type=\"submit\" class=\"btn btn-details\">Envoyer le Message</button>
                     </form>
                 </div>

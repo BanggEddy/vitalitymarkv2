@@ -28,7 +28,8 @@
         "symfony/security-bundle": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
         "symfony/validator": "6.4.*",
-        "symfony/yaml": "6.4.*"
+        "symfony/yaml": "6.4.*",
+        "victor-prdh/recaptcha-bundle": "^1.9"
     },
     "config": {
         "allow-plugins": {

@@ -184,7 +184,7 @@ class __TwigTemplate_ecee0a6ebb7659bdd22c5b7055053cb8 extends Template
                 <option value=\"Programme de Fidélité\">Programme de Fidélité</option>
                 <option value=\"Magasins\">Magasins</option>
                 <option value=\"Stockage des Données\">Stockage des Données</option>
-                <option value=\"Informations personnelles\">Informations personnelle</option>
+                <option value=\"Informations personnelles\">Informations personnelles</option>
                 <option value=\"Autre\">Autre</option>
             </select>
         </div>
@@ -192,8 +192,13 @@ class __TwigTemplate_ecee0a6ebb7659bdd22c5b7055053cb8 extends Template
             <label for=\"message\">Votre Message :</label>
             <textarea id=\"message\" name=\"message\" required></textarea>
         </div>
+        <input type=\"hidden\" name=\"_csrf_token\" value=\"";
+        // line 114
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("contact"), "html", null, true);
+        yield "\">
         <button type=\"submit\" class=\"btn btn-details\">Envoyer le Message</button>
     </form>
+
 </div>
 ";
         
@@ -226,7 +231,7 @@ class __TwigTemplate_ecee0a6ebb7659bdd22c5b7055053cb8 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  176 => 96,  172 => 94,  163 => 91,  160 => 90,  156 => 89,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  197 => 114,  176 => 96,  172 => 94,  163 => 91,  160 => 90,  156 => 89,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -336,7 +341,7 @@ class __TwigTemplate_ecee0a6ebb7659bdd22c5b7055053cb8 extends Template
                 <option value=\"Programme de Fidélité\">Programme de Fidélité</option>
                 <option value=\"Magasins\">Magasins</option>
                 <option value=\"Stockage des Données\">Stockage des Données</option>
-                <option value=\"Informations personnelles\">Informations personnelle</option>
+                <option value=\"Informations personnelles\">Informations personnelles</option>
                 <option value=\"Autre\">Autre</option>
             </select>
         </div>
@@ -344,8 +349,10 @@ class __TwigTemplate_ecee0a6ebb7659bdd22c5b7055053cb8 extends Template
             <label for=\"message\">Votre Message :</label>
             <textarea id=\"message\" name=\"message\" required></textarea>
         </div>
+        <input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('contact') }}\">
         <button type=\"submit\" class=\"btn btn-details\">Envoyer le Message</button>
     </form>
+
 </div>
 {% endblock %}
 ", "accueil/contact.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\accueil\\contact.html.twig");

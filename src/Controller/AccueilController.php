@@ -15,16 +15,19 @@ use App\Form\ProductSearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Service\PromoFilter;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class AccueilController extends AbstractController
 {
     private $entityManager;
     private $promoFilter;
+    private $csrfTokenManager;
 
-    public function __construct(EntityManagerInterface $entityManager, PromoFilter $promoFilter)
+    public function __construct(CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PromoFilter $promoFilter)
     {
         $this->entityManager = $entityManager;
         $this->promoFilter = $promoFilter;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     #[Route('/', name: 'app_accueil')]
@@ -196,10 +199,15 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/contact/submit', name: 'app_contact_submit')]
+    #[Route('/contact/submit', name: 'app_contact_submit', methods: ['POST'])]
     public function submitContact(Request $request): Response
     {
-        $entityManager = $this->entityManager;
+        $token = $request->request->get('_csrf_token');
+
+        if (!$this->isCsrfTokenValid('contact', $token)) {
+            $this->addFlash('error', 'Token CSRF invalide.');
+            return $this->redirectToRoute('app_contact');
+        }
 
         $subject = $request->request->get('subject');
         $message = $request->request->get('message');
@@ -208,8 +216,10 @@ class AccueilController extends AbstractController
         $contact->setSubject($subject);
         $contact->setObject($message);
 
-        $entityManager->persist($contact);
-        $entityManager->flush();
+        $this->entityManager->persist($contact);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
         return $this->redirectToRoute('app_contact');
     }
