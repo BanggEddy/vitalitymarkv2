@@ -10,6 +10,9 @@ services:
   # default configuration for services in *this* file
   App\Entity\LoyaltyCard:
     autowire: true
+  App\Service\PromotionService:
+    arguments:
+      $promoRepository: '@App\Repository\PromoRepository'
   _defaults:
     autowire: true # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.

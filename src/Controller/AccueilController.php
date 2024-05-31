@@ -16,47 +16,44 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Service\PromoFilter;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use App\Service\BarreRechercheCategory;
+use App\Service\PromotionService;
 
 class AccueilController extends AbstractController
 {
     private $entityManager;
     private $promoFilter;
     private $csrfTokenManager;
+    private $barreRechercheCategory;
+    private $promotionService;
 
-    public function __construct(CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PromoFilter $promoFilter)
+    public function __construct(PromotionService $promotionService, BarreRechercheCategory $barreRechercheCategory, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PromoFilter $promoFilter)
     {
         $this->entityManager = $entityManager;
         $this->promoFilter = $promoFilter;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->barreRechercheCategory = $barreRechercheCategory;
+        $this->promotionService = $promotionService;
     }
+
 
     #[Route('/', name: 'app_accueil')]
     public function index(
         ProductsRepository $productsRepository,
-        PromoRepository $promoRepository,
-        Request $request,
+        Request $request
     ): Response {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $barreDeRechercheCategorieView = $this->barreRechercheCategory->handleSearchForm($request);
+
+        if (is_string($barreDeRechercheCategorieView)) {
+            return $this->redirect($barreDeRechercheCategorieView);
+        }
 
         $products = $productsRepository->findAll();
-        $promotions = [];
-
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
-
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->get('category')->getData();
-            return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         return $this->render('accueil/index.html.twig', [
             'products' => $products,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $barreDeRechercheCategorieView,
             'promotions' => $promotions,
         ]);
     }
@@ -65,24 +62,26 @@ class AccueilController extends AbstractController
     public function mentionsLegalsPage(
         Request $request,
     ): Response {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->get('category')->getData();
-            return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
+        $barreDeRechercheCategorieView = $this->barreRechercheCategory->handleSearchForm($request);
+
+        if (is_string($barreDeRechercheCategorieView)) {
+            return $this->redirect($barreDeRechercheCategorieView);
         }
 
         return $this->render('accueil/legals.html.twig', [
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $barreDeRechercheCategorieView,
         ]);
     }
 
     #[Route('/promo', name: 'app_promo')]
     public function afficherLesPromos(PromoRepository $promoRepository, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $barreDeRechercheCategorieView = $this->barreRechercheCategory->handleSearchForm($request);
+
+        if (is_string($barreDeRechercheCategorieView)) {
+            return $this->redirect($barreDeRechercheCategorieView);
+        }
 
         $promotions = $promoRepository->findAll();
 
@@ -99,7 +98,7 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
             'promotions' => $promotions,
             'products' => $productsInPromotion,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $barreDeRechercheCategorieView
         ]);
     }
 
@@ -108,33 +107,22 @@ class AccueilController extends AbstractController
         $id,
         Request $request,
         ProductsRepository $productsRepository,
-        PromoRepository $promoRepository,
     ): Response {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
-        $category = null;
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        $barreDeRechercheCategorieView = $this->barreRechercheCategory->handleSearchForm($request);
 
-            return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
+        if (is_string($barreDeRechercheCategorieView)) {
+            return $this->redirect($barreDeRechercheCategorieView);
         }
-        $product = $productsRepository->find($id);
 
+        $product = $productsRepository->find($id);
         $category = $product->getCategory();
 
         $products = $productsRepository->findBy(['category' => $category]);
-
-        $promotions = [];
-        foreach ($products as $prod) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $prod->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         return $this->render('accueil/indexproduit.html.twig', [
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $barreDeRechercheCategorieView,
             'promotions' => $promotions,
             'products' => $products,
             'product' => $product,
@@ -143,16 +131,12 @@ class AccueilController extends AbstractController
 
 
     #[Route('/search', name: 'search')]
-    public function rechercherUnProduitVisiteur(ProductsRepository $productsRepository, Request $request, EntityManagerInterface $entityManager, PromoRepository $promoRepository,)
+    public function rechercherUnProduitVisiteur(ProductsRepository $productsRepository, Request $request,)
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
-        $category = null;
+        $barreDeRechercheCategorieView = $this->barreRechercheCategory->handleSearchForm($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
+        if (is_string($barreDeRechercheCategorieView)) {
+            return $this->redirect($barreDeRechercheCategorieView);
         }
 
         $motrecherche = $request->request->get('motrecherche');
@@ -163,39 +147,28 @@ class AccueilController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        $promotions = [];
-
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         return $this->render('accueil/search.html.twig', [
             'products' => $products,
             'promotions' => $promotions,
             'motrecherche' => $motrecherche,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $barreDeRechercheCategorieView,
         ]);
     }
 
     #[Route('/', name: 'app_contact')]
     public function indexcontact(Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
-        $category = null;
+        $barreDeRechercheCategorieView = $this->barreRechercheCategory->handleSearchForm($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
+        if (is_string($barreDeRechercheCategorieView)) {
+            return $this->redirect($barreDeRechercheCategorieView);
         }
 
         return $this->render('accueil/contact.html.twig', [
             'controller_name' => 'AccueilController',
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $barreDeRechercheCategorieView,
         ]);
     }
 
@@ -226,24 +199,16 @@ class AccueilController extends AbstractController
 
 
     #[Route('/accueil/categorie/{category}', name: 'accueil_category_products')]
-    public function categorieAccueil(Request $request, string $category, PromoRepository $promoRepository, EntityManagerInterface $entityManager, ProductsRepository $productsRepository,): Response
+    public function categorieAccueil(Request $request, string $category, ProductsRepository $productsRepository,): Response
     {
         $products = $productsRepository->findAll();
-        $promotions = [];
 
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $barreDeRechercheCategorieView = $this->barreRechercheCategory->handleSearchForm($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-            return new RedirectResponse($this->generateUrl('accueil_category_products', ['category' => $category]));
+        if (is_string($barreDeRechercheCategorieView)) {
+            return $this->redirect($barreDeRechercheCategorieView);
         }
 
         $products = $productsRepository->findBy(['category' => $category]);
@@ -251,7 +216,7 @@ class AccueilController extends AbstractController
         return $this->render('accueil/categorie.html.twig', [
             'category' => $category,
             'products' => $products,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $barreDeRechercheCategorieView,
             'promotions' => $promotions,
         ]);
     }
