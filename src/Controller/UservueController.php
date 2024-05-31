@@ -22,6 +22,8 @@ use App\Repository\PromoRepository;
 use App\Form\ProductSearchType;
 use App\Service\PromoFilter;
 use App\Service\PanierUser;
+use App\Service\ProductCategorie;
+use App\Service\PromotionService;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 
@@ -31,30 +33,32 @@ class UservueController extends AbstractController
     private $promoFilter;
     private $panierUserService;
     private $csrfTokenManager;
+    private $productCategorie;
+    private $promotionService;
 
-    public function __construct(CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PromoFilter $promoFilter, PanierUser $panierUserService,)
+    public function __construct(PromotionService $promotionService, ProductCategorie $productCategorie, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PromoFilter $promoFilter, PanierUser $panierUserService,)
     {
         $this->entityManager = $entityManager;
         $this->promoFilter = $promoFilter;
         $this->panierUserService = $panierUserService;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->productCategorie = $productCategorie;
+        $this->promotionService = $promotionService;
     }
 
     #[Route('/uservue', name: 'app_uservue')]
     public function index(
         Request $request,
         ProductsRepository $productsRepository,
-        PromoRepository $promoRepository,
         PanierUser $panierUserService,
         PanierRepository $panierRepository,
 
     ): Response {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-            return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $user = $this->getUser();
@@ -63,15 +67,7 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $products = $productsRepository->findAll();
 
-        $promotions = [];
-
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
-
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
         $panierDetails = $panierUserService->createPanierDetails($paniers);
         $totalPrice = $panierUserService->calculateTotalPrice($paniers);
 
@@ -89,7 +85,7 @@ class UservueController extends AbstractController
 
 
     #[Route('/user/promo', name: 'app_user_promo')]
-    public function promo(ProductsRepository $productsRepository, PanierRepository $panierRepository, PromoRepository $promoRepository, Request $request, PanierUser $panierUserService): Response
+    public function promo(PanierRepository $panierRepository, PromoRepository $promoRepository, Request $request, PanierUser $panierUserService): Response
     {
         $user = $this->getUser();
         $userId = null;
@@ -101,14 +97,14 @@ class UservueController extends AbstractController
 
         $panierDetails = [];
         $panierDetails = $panierUserService->createPanierDetails($paniers);
+
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
+
 
         $promotions = $promoRepository->findAll();
 
@@ -136,7 +132,7 @@ class UservueController extends AbstractController
     }
 
     #[Route('/add-dans-panier/{id}', name: 'add_dans_panier')]
-    public function addDansPanier(PanierRepository $panierRepository, Request $request, ProductsRepository $productsRepository, PromoRepository $promoRepository, $id, EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator): Response
+    public function addDansPanier(PanierRepository $panierRepository, Request $request, ProductsRepository $productsRepository, $id, UrlGeneratorInterface $urlGenerator): Response
     {
         $quantity = $request->request->get('quantity');
 
@@ -183,16 +179,18 @@ class UservueController extends AbstractController
     public function getUserPanier(PanierRepository $panierRepository, Request $request, PanierUser $panierUserService): Response
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
+        }
+
+
         $user = $this->getUser();
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $totalPrice = $panierUserService->calculateTotalPrice($paniers);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
 
-            return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
-        }
 
         /** @var UserInterface|null $user */
         $user = $this->getUser();
@@ -217,7 +215,6 @@ class UservueController extends AbstractController
     #[Route('/search/user', name: 'search_user')]
     public function search(
         Request $request,
-        EntityManagerInterface $entityManager,
         PanierRepository $panierRepository,
         PromoRepository $promoRepository,
         PanierUser $panierUserService,
@@ -235,12 +232,10 @@ class UservueController extends AbstractController
         $panierDetails = $panierUserService->createPanierDetails($paniers);
 
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $motrecherche = $request->request->get('motrecherche');
@@ -251,18 +246,9 @@ class UservueController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        $promotions = [];
-
         $totalPrice = 0;
 
-        $promotions = $promoRepository->findAll();
-
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         return $this->render('user/uservue/search.html.twig', [
             'products' => $products,
@@ -285,16 +271,15 @@ class UservueController extends AbstractController
     }
 
     #[Route('/user/uservue/card/{id}', name: 'user_loyalty_card_page')]
-    public function showUserLoyaltyCardPage($id, PanierRepository $panierRepository, PanierUser $panierUserService, Request $request, EntityManagerInterface $entityManager): Response
+    public function showUserLoyaltyCardPage($id, PanierRepository $panierRepository, PanierUser $panierUserService, Request $request): Response
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
+
         /** @var UserInterface|null $user */
         $user = $this->getUser();
 
@@ -325,13 +310,12 @@ class UservueController extends AbstractController
     }
 
     #[Route('/user/uservue/creer/carte/loyalty', name: 'creer_carte_loyalty')]
-    public function CreerCarteLoyalty(LoyaltyCard $loyaltyCard, PanierRepository $panierRepository, PanierUser $panierUserService, EntityManagerInterface $entityManager): Response
+    public function CreerCarteLoyalty(LoyaltyCard $loyaltyCard, PanierRepository $panierRepository, EntityManagerInterface $entityManager): Response
     {
         /** @var User|null $user */
         $user = $this->getUser();
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-
 
         $loyaltyCardUser = $user->getIdloyaltycard();
 
@@ -373,12 +357,10 @@ class UservueController extends AbstractController
         $totalPrice = $panierUserService->calculateTotalPrice($paniers);
 
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $userId = null;
@@ -396,7 +378,7 @@ class UservueController extends AbstractController
     }
 
     #[Route('edit/user/profile', name: 'edit_user_profile')]
-    public function modifierProfilUser(Request $request, EntityManagerInterface $entityManager, PanierRepository $panierRepository): Response
+    public function modifierProfilUser(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
 
@@ -420,7 +402,7 @@ class UservueController extends AbstractController
     }
 
     #[Route('/user/uservue/categorie/{category}', name: 'user_category_products')]
-    public function pageCategoriesUser(ProductsRepository $productsRepository, PromoRepository $promoRepository, $category, Request $request, EntityManagerInterface $entityManager, PanierUser $panierUserService, PanierRepository $panierRepository): Response
+    public function pageCategoriesUser(ProductsRepository $productsRepository, $category, Request $request, PanierUser $panierUserService, PanierRepository $panierRepository): Response
     {
         $user = $this->getUser();
         $userId = $user instanceof User ? $user->getId() : null;
@@ -437,17 +419,10 @@ class UservueController extends AbstractController
         $totalPrice = $panierUserService->calculateTotalPrice($paniers);
 
         $products = $productsRepository->findBy(['category' => $category]);
-        $product = $productsRepository->findAll();
 
-        $promotions = [];
-
-        foreach ($product as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
         $panierDetails = $panierUserService->createPanierDetails($paniers);
+
         return $this->render('user/uservue/categorie.html.twig', [
             'category' => $category,
             'products' => $products,
@@ -466,13 +441,10 @@ class UservueController extends AbstractController
         PanierUser $panierUserService,
     ): Response {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
-        $category = null;
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $user = $this->getUser();
@@ -487,7 +459,6 @@ class UservueController extends AbstractController
         return $this->render('user/uservue/contact.html.twig', [
             'controller_name' => 'AccueilController',
             'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
-            'category' => $category,
             'user_id' => $userId,
             'totalPrice' => $totalPrice,
             'panierDetails' => $panierDetails,
@@ -495,7 +466,7 @@ class UservueController extends AbstractController
     }
 
     #[Route('/contact/user/submit', name: 'app_contact_user_submit')]
-    public function submitContact(Request $request, EntityManagerInterface $entityManager): Response
+    public function submitContact(Request $request): Response
     {
         $token = $request->request->get('_csrf_token');
 
@@ -524,8 +495,15 @@ class UservueController extends AbstractController
     }
 
     #[Route('/details/produit/user/{id}', name: 'details_produit_user')]
-    public function detailsProduit($id, Request $request, PanierUser $panierUserService, PanierRepository $panierRepository, ProductsRepository $productsRepository, PromoRepository $promoRepository): Response
+    public function detailsProduit($id, Request $request, PanierUser $panierUserService, PanierRepository $panierRepository, ProductsRepository $productsRepository,): Response
     {
+        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
+        }
+
         $user = $this->getUser();
         $userId = $user instanceof User ? $user->getId() : null;
         $paniers = $panierRepository->findBy(['iduser' => $user]);
@@ -540,28 +518,11 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $totalPrice = $panierUserService->calculateTotalPrice($paniers);
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
-
         $product = $productsRepository->find($id);
         $category = $product->getCategory();
         $products = $productsRepository->findBy(['category' => $category]);
 
-        $promotions = [];
-        foreach ($products as $prod) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $prod->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
-
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('user_category_products', ['category' => $category]));
-        }
-
-        $product = $productsRepository->find($id);
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         return $this->render('user/uservue/details.html.twig', [
             'promotions' => $promotions,
@@ -619,9 +580,7 @@ class UservueController extends AbstractController
     public function removeFromCartProduit(PanierRepository $panierRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $panierId = $request->request->get('panierId');
-
         $panier = $panierRepository->find($panierId);
-
         $product = $panier->getIdproducts();
 
         if ($product instanceof Products) {
@@ -673,17 +632,14 @@ class UservueController extends AbstractController
             $userId = $user->getId();
         }
 
-
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->get('category')->getData();
-            return $this->redirectToRoute('accueil_category_products', ['category' => $category]);
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
+
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-
-
         $panierDetails = $panierUserService->createPanierDetails($paniers);
         $totalPrice = $panierUserService->calculateTotalPrice($paniers);
 

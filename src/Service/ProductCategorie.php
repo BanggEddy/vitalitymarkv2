@@ -5,16 +5,17 @@ namespace App\Service;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProductCategorie
 {
     private $urlGenerator;
-    private $security;
+    private $tokenStorage;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(UrlGeneratorInterface $urlGenerator, TokenStorageInterface $tokenStorage)
     {
         $this->urlGenerator = $urlGenerator;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function barreCategoryChercher(FormInterface $form, Request $request)
@@ -23,10 +24,10 @@ class ProductCategorie
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->get('category')->getData();
-            $user = $this->security->getUser();
+            $token = $this->tokenStorage->getToken();
 
-            if ($user) {
-                $roles = $user->getRoles();
+            if ($token && $token->getUser()) {
+                $roles = $token->getUser()->getRoles();
 
                 if (in_array('ROLE_ADMIN', $roles, true)) {
                     return $this->urlGenerator->generate('admin_category_products', ['category' => $category]);
