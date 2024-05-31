@@ -12,50 +12,41 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\User;
-use App\Entity\Promo;
 use App\Form\ProductSearchType;
 use App\Form\ProductAdminType;
 use App\Repository\PromoRepository;
-use App\Repository\PanierRepository;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\File\File;
+use App\Service\ProductCategorie;
+use App\Service\PromotionService;
 
 class AdminproductsController extends AbstractController
 {
     private $entityManager;
     private $filesystem;
+    private $productCategorie;
+    private $promotionService;
 
-    public function __construct(EntityManagerInterface $entityManager, Filesystem $filesystem)
+    public function __construct(PromotionService $promotionService, ProductCategorie $productCategorie, EntityManagerInterface $entityManager, Filesystem $filesystem)
     {
         $this->entityManager = $entityManager;
         $this->filesystem = $filesystem;
+        $this->productCategorie = $productCategorie;
+        $this->promotionService = $promotionService;
     }
 
     #[Route('/adminproducts', name: 'app_adminproducts')]
-    public function index(ProductsRepository $productsRepository, PromoRepository $promoRepository, Request $request): Response
+    public function index(ProductsRepository $productsRepository, Request $request): Response
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $products = $productsRepository->findAll();
-        $promotions = [];
-
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         return $this->render('admin/adminproducts/index.html.twig', [
             'controller_name' => 'AdminproductsController',
@@ -69,12 +60,10 @@ class AdminproductsController extends AbstractController
     public function ajoutProductPage(Request $request): Response
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $productForm = $this->createForm(ProductAdminType::class);
@@ -90,12 +79,10 @@ class AdminproductsController extends AbstractController
     public function createProduit(Request $request, LoggerInterface $logger, EntityManagerInterface $entityManager): Response
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $productForm = $this->createForm(ProductAdminType::class);
@@ -134,26 +121,18 @@ class AdminproductsController extends AbstractController
     }
 
     #[Route('/admindeleteproducts', name: 'app_admin_delete_products')]
-    public function deleteProducts(PromoRepository $promoRepository, ProductsRepository $productsRepository, Request $request): Response
+    public function deleteProducts(ProductsRepository $productsRepository, Request $request): Response
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
+        }
 
         $products = $productsRepository->findAll();
-        $promotions = [];
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
-
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
-        }
         $products = $productsRepository->findAll();
 
         return $this->render('admin/adminproducts/delete.html.twig', [
@@ -185,11 +164,10 @@ class AdminproductsController extends AbstractController
     public function updateProducts(PromoRepository $promoRepository, ProductsRepository $productsRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $products = $productsRepository->findAll();
@@ -223,7 +201,11 @@ class AdminproductsController extends AbstractController
     public function editProductFormFront(Products $product, Request $request, EntityManagerInterface $entityManager): Response
     {
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
+        }
 
         $productForm = $this->createForm(ProductAdminType::class, $product);
 
@@ -261,15 +243,15 @@ class AdminproductsController extends AbstractController
     #[Route('/compte/admin', name: 'app_admin_compte')]
     public function adminCompte(Request $request): Response
     {
-        $user = $this->getUser();
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
+
+        $user = $this->getUser();
+
         if ($user instanceof User) {
             $userId = $user->getId();
         } else {
@@ -284,7 +266,7 @@ class AdminproductsController extends AbstractController
     }
 
     #[Route('edit/admin/profile', name: 'edit_admin_profile')]
-    public function modifierProfilAdminFlush(Request $request, EntityManagerInterface $entityManager, PanierRepository $panierRepository): Response
+    public function modifierProfilAdminFlush(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
 
@@ -343,8 +325,6 @@ class AdminproductsController extends AbstractController
             $product->setQuantity($newQuantity);
 
             $this->entityManager->flush();
-        } else {
-            throw new \Exception('La quantité à retirer est supérieure à la quantité disponible.');
         }
 
         return $this->redirectToRoute('admin_products_list');
@@ -355,12 +335,10 @@ class AdminproductsController extends AbstractController
     {
 
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         return $this->render('admin/adminproducts/compteadmin.html.twig', [
@@ -369,25 +347,16 @@ class AdminproductsController extends AbstractController
     }
 
     #[Route('/search/admin', name: 'search_admin')]
-    public function rechercherUnProduitAdmin(Request $request, EntityManagerInterface $entityManager, ProductsRepository $productsRepository, PromoRepository $promoRepository)
+    public function rechercherUnProduitAdmin(Request $request, ProductsRepository $productsRepository, PromoRepository $promoRepository)
     {
         $products = $productsRepository->findAll();
-        $promotions = [];
-
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $motrecherche = $request->request->get('motrecherche');
@@ -407,27 +376,19 @@ class AdminproductsController extends AbstractController
     }
 
     #[Route('/admin/adminproducts/categorie/{category}', name: 'admin_category_products')]
-    public function showCategoryProductsAdmin($category, Request $request, EntityManagerInterface $entityManager, ProductsRepository $productsRepository, PromoRepository $promoRepository): Response
+    public function showCategoryProductsAdmin($category, Request $request, ProductsRepository $productsRepository): Response
     {
         $products = $productsRepository->findAll();
-        $promotions = [];
-
-        foreach ($products as $product) {
-            $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
-            if ($promo) {
-                $promotions[] = $promo;
-            }
-        }
+        $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         $user = $this->getUser();
         $userId = $user instanceof User ? $user->getId() : null;
 
         $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $products = $productsRepository->findBy(['category' => $category]);

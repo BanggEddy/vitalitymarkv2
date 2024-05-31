@@ -526,14 +526,17 @@
     <service id="App\Service\PromotionService" class="App\Service\PromotionService" autowire="true" autoconfigure="true">
       <argument type="service" id="App\Repository\PromoRepository"/>
     </service>
+    <service id="App\Service\ProductCategorie" class="App\Service\ProductCategorie" autowire="true" autoconfigure="true">
+      <argument type="service" id="router.default"/>
+    </service>
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
     <service id="App\Controller\AccueilController" class="App\Controller\AccueilController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Service\ProductCategorie"/>
       <argument type="service" id="App\Service\PromotionService"/>
-      <argument type="service" id="App\Service\BarreRechercheCategory"/>
       <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="App\Service\PromoFilter"/>
@@ -544,6 +547,8 @@
     <service id="App\Controller\AdminproductsController" class="App\Controller\AdminproductsController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Service\PromotionService"/>
+      <argument type="service" id="App\Service\ProductCategorie"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="filesystem"/>
       <call method="setContainer">
@@ -681,14 +686,7 @@
       <argument type="service" id="lexik_jwt_authentication.jwt_manager"/>
     </service>
     <service id="App\Security\UserChecker" class="App\Security\UserChecker" autowire="true" autoconfigure="true"/>
-    <service id="App\Service\BarreRechercheCategory" class="App\Service\BarreRechercheCategory" autowire="true" autoconfigure="true">
-      <argument type="service" id="form.factory"/>
-      <argument type="service" id="router.default"/>
-    </service>
     <service id="App\Service\PanierUser" class="App\Service\PanierUser" autowire="true" autoconfigure="true"/>
-    <service id="App\Service\ProductCategorie" class="App\Service\ProductCategorie" autowire="true" autoconfigure="true">
-      <argument type="service" id="router.default"/>
-    </service>
     <service id="App\Service\PromoFilter" class="App\Service\PromoFilter" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
@@ -717,7 +715,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.uwgjSbD"/>
+      <argument type="service" id=".service_locator.FmSjnPe"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3139,7 +3137,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.uwgjSbD"/>
+      <argument type="service" id=".service_locator.FmSjnPe"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -8789,13 +8787,6 @@
         <argument key="logger" type="service_closure" id="logger"/>
       </argument>
     </service>
-    <service id=".service_locator.xfrE5I6" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
-        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
-      </argument>
-    </service>
     <service id=".service_locator.oG50dAC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8811,16 +8802,23 @@
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.KuADytJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="couponRepository" type="service_closure" id="App\Repository\CouponRepository"/>
-      </argument>
-    </service>
     <service id=".service_locator.CsMkqUa" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.C8cIOOc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
+        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.KuADytJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="couponRepository" type="service_closure" id="App\Repository\CouponRepository"/>
       </argument>
     </service>
     <service id=".service_locator.m2Z5Caj" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8991,7 +8989,7 @@
         <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
       </argument>
     </service>
-    <service id=".service_locator.uwgjSbD" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.FmSjnPe" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AccueilController::afficherLesPromos" type="service_closure" id=".service_locator.1j13wVw"/>
@@ -9002,13 +9000,13 @@
         <argument key="App\Controller\AdminproductsController::ajoutQuantiteProduitAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController::createProduit" type="service_closure" id=".service_locator.OTAdKRU"/>
         <argument key="App\Controller\AdminproductsController::deleteProduct" type="service_closure" id=".service_locator.oG50dAC"/>
-        <argument key="App\Controller\AdminproductsController::deleteProducts" type="service_closure" id=".service_locator.xfrE5I6"/>
+        <argument key="App\Controller\AdminproductsController::deleteProducts" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController::editProductFormFront" type="service_closure" id=".service_locator.oG50dAC"/>
         <argument key="App\Controller\AdminproductsController::enleverQuantiteProduitAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
-        <argument key="App\Controller\AdminproductsController::index" type="service_closure" id=".service_locator.xfrE5I6"/>
-        <argument key="App\Controller\AdminproductsController::modifierProfilAdminFlush" type="service_closure" id=".service_locator.cdXheJO"/>
-        <argument key="App\Controller\AdminproductsController::rechercherUnProduitAdmin" type="service_closure" id=".service_locator.KYY0qKo"/>
-        <argument key="App\Controller\AdminproductsController::showCategoryProductsAdmin" type="service_closure" id=".service_locator.KYY0qKo"/>
+        <argument key="App\Controller\AdminproductsController::index" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AdminproductsController::modifierProfilAdminFlush" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\AdminproductsController::rechercherUnProduitAdmin" type="service_closure" id=".service_locator.C8cIOOc"/>
+        <argument key="App\Controller\AdminproductsController::showCategoryProductsAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController::updateProducts" type="service_closure" id=".service_locator.KYY0qKo"/>
         <argument key="App\Controller\CouponController::delete" type="service_closure" id=".service_locator.FH0U8W3"/>
         <argument key="App\Controller\CouponController::edit" type="service_closure" id=".service_locator.FH0U8W3"/>
@@ -9060,13 +9058,13 @@
         <argument key="App\Controller\AdminproductsController:ajoutQuantiteProduitAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController:createProduit" type="service_closure" id=".service_locator.OTAdKRU"/>
         <argument key="App\Controller\AdminproductsController:deleteProduct" type="service_closure" id=".service_locator.oG50dAC"/>
-        <argument key="App\Controller\AdminproductsController:deleteProducts" type="service_closure" id=".service_locator.xfrE5I6"/>
+        <argument key="App\Controller\AdminproductsController:deleteProducts" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController:editProductFormFront" type="service_closure" id=".service_locator.oG50dAC"/>
         <argument key="App\Controller\AdminproductsController:enleverQuantiteProduitAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
-        <argument key="App\Controller\AdminproductsController:index" type="service_closure" id=".service_locator.xfrE5I6"/>
-        <argument key="App\Controller\AdminproductsController:modifierProfilAdminFlush" type="service_closure" id=".service_locator.cdXheJO"/>
-        <argument key="App\Controller\AdminproductsController:rechercherUnProduitAdmin" type="service_closure" id=".service_locator.KYY0qKo"/>
-        <argument key="App\Controller\AdminproductsController:showCategoryProductsAdmin" type="service_closure" id=".service_locator.KYY0qKo"/>
+        <argument key="App\Controller\AdminproductsController:index" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AdminproductsController:modifierProfilAdminFlush" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\AdminproductsController:rechercherUnProduitAdmin" type="service_closure" id=".service_locator.C8cIOOc"/>
+        <argument key="App\Controller\AdminproductsController:showCategoryProductsAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController:updateProducts" type="service_closure" id=".service_locator.KYY0qKo"/>
         <argument key="App\Controller\CouponController:delete" type="service_closure" id=".service_locator.FH0U8W3"/>
         <argument key="App\Controller\CouponController:edit" type="service_closure" id=".service_locator.FH0U8W3"/>
@@ -11555,7 +11553,7 @@
     <service id="lexik_jwt_authentication.key_loader" alias="lexik_jwt_authentication.key_loader.raw" public="true"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.uwgjSbD"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.FmSjnPe"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
@@ -11565,7 +11563,6 @@
     <service id=".service_locator.vblS2iM" alias="api_platform.filter_locator"/>
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
     <service id=".service_locator.uSVyOez" alias=".service_locator.OTAdKRU"/>
-    <service id=".service_locator.C8cIOOc" alias=".service_locator.xfrE5I6"/>
     <service id=".service_locator..0ITSiX" alias=".service_locator.oG50dAC"/>
     <service id=".service_locator.SsPgIct" alias=".service_locator.KYY0qKo"/>
     <service id=".service_locator.z4j2gRz" alias=".service_locator.Gv8Stob"/>
@@ -11580,7 +11577,7 @@
     <service id=".service_locator.EsSTjMC" alias=".service_locator.dAO6ypm"/>
     <service id=".service_locator.EU0TCmr" alias=".service_locator.cdXheJO"/>
     <service id=".service_locator.SE3MauL" alias=".service_locator.n2aaCnD"/>
-    <service id=".service_locator..Z3.2Qn" alias=".service_locator.uwgjSbD"/>
+    <service id=".service_locator.8kFb4WZ" alias=".service_locator.FmSjnPe"/>
     <service id=".service_locator.izYZ3jJ" alias=".service_locator.RI9wyLm"/>
     <service id=".service_locator.wwtcNAh" alias=".service_locator.nqgTVJj"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
@@ -11661,11 +11658,11 @@
     <service id=".service_locator.u4AVkgT" alias=".service_locator.czOFGB2"/>
     <service id=".service_locator.UtLq5wG" alias=".service_locator.1j13wVw"/>
     <service id=".service_locator.NQ48hbN" alias=".service_locator.OTAdKRU"/>
-    <service id=".service_locator.or6hf7N" alias=".service_locator.xfrE5I6"/>
     <service id=".service_locator.fHO51KC" alias=".service_locator.oG50dAC"/>
     <service id=".service_locator.UAzjlVh" alias=".service_locator.KYY0qKo"/>
-    <service id=".service_locator.vBfPDkp" alias=".service_locator.KuADytJ"/>
     <service id=".service_locator.9e2t_lq" alias=".service_locator.CsMkqUa"/>
+    <service id=".service_locator.or6hf7N" alias=".service_locator.C8cIOOc"/>
+    <service id=".service_locator.vBfPDkp" alias=".service_locator.KuADytJ"/>
     <service id=".service_locator.udod_Yt" alias=".service_locator.m2Z5Caj"/>
     <service id=".service_locator.gxNxuyE" alias=".service_locator.FH0U8W3"/>
     <service id=".service_locator.iQJrFxV" alias=".service_locator.Gv8Stob"/>
