@@ -54,8 +54,8 @@ class UservueController extends AbstractController
         PanierRepository $panierRepository,
 
     ): Response {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -68,17 +68,16 @@ class UservueController extends AbstractController
         $products = $productsRepository->findAll();
 
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
 
         return $this->render('user/uservue/index.html.twig', [
             'panierDetails' => $panierDetails,
-            'controller_name' => 'UservueController',
-            'totalPrice' => $totalPrice,
+            'prixTotalPanier' => $prixTotalPanier,
             'user_id' => $userId,
             'products' => $products,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'promotions' => $promotions,
         ]);
     }
@@ -96,10 +95,10 @@ class UservueController extends AbstractController
 
 
         $panierDetails = [];
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -118,16 +117,15 @@ class UservueController extends AbstractController
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
         return $this->render('user/uservue/promo.html.twig', [
             'panierDetails' => $panierDetails,
             'products' => $productsInPromotion,
-            'controller_name' => 'UservueController',
-            'totalPrice' => $totalPrice,
+            'prixTotalPanier' => $prixTotalPanier,
             'promotions' => $promotions,
             'user_id' => $userId,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -178,8 +176,8 @@ class UservueController extends AbstractController
     #[Route('/user/panier', name: 'user_panier')]
     public function getUserPanier(PanierRepository $panierRepository, Request $request, PanierUser $panierUserService): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -188,7 +186,7 @@ class UservueController extends AbstractController
 
         $user = $this->getUser();
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
 
 
@@ -200,14 +198,14 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
 
         $panierDetails = [];
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
         return $this->render('user/uservue/indexpanier.html.twig', [
             'panierDetails' => $panierDetails,
-            'totalPrice' => $totalPrice,
+            'prixTotalPanier' => $prixTotalPanier,
             'user_id' => $userId,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -229,10 +227,10 @@ class UservueController extends AbstractController
         }
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $panierDetails = [];
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -246,7 +244,7 @@ class UservueController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        $totalPrice = 0;
+        $prixTotalPanier = 0;
 
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
@@ -254,8 +252,8 @@ class UservueController extends AbstractController
             'products' => $products,
             'promotions' => $promotions,
             'motrecherche' => $motrecherche,
-            'totalPrice' => $totalPrice,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'prixTotalPanier' => $prixTotalPanier,
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'user_id' => $userId,
             'panierDetails' => $panierDetails,
 
@@ -273,8 +271,8 @@ class UservueController extends AbstractController
     #[Route('/user/uservue/card/{id}', name: 'user_loyalty_card_page')]
     public function showUserLoyaltyCardPage($id, PanierRepository $panierRepository, PanierUser $panierUserService, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -284,8 +282,8 @@ class UservueController extends AbstractController
         $user = $this->getUser();
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
         $loyaltyCard = $user->getIdloyaltycard();
 
@@ -294,8 +292,8 @@ class UservueController extends AbstractController
             return $this->render('user/uservue/card.html.twig', [
                 'loyaltyCard' => null,
                 'user_id' => $user->getId(),
-                'totalPrice' => $totalPrice,
-                'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+                'prixTotalPanier' => $prixTotalPanier,
+                'barreRechercheCategory' => $formRechercheCategory->createView(),
                 'panierDetails' => $panierDetails,
             ]);
         }
@@ -303,8 +301,8 @@ class UservueController extends AbstractController
         return $this->render('user/uservue/card.html.twig', [
             'loyaltyCard' => $loyaltyCard,
             'user_id' => $user->getId(),
-            'totalPrice' => $totalPrice,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'prixTotalPanier' => $prixTotalPanier,
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'panierDetails' => $panierDetails,
         ]);
     }
@@ -353,11 +351,11 @@ class UservueController extends AbstractController
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $panierDetails = [];
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -370,9 +368,9 @@ class UservueController extends AbstractController
         return $this->render('user/uservue/user.html.twig', [
             'user' => $user,
             'user_id' => $userId,
-            'totalPrice' => $totalPrice,
+            'prixTotalPanier' => $prixTotalPanier,
             'panierDetails' => $panierDetails,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'category' => $category,
         ]);
     }
@@ -416,19 +414,19 @@ class UservueController extends AbstractController
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
         $products = $productsRepository->findBy(['category' => $category]);
 
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
 
         return $this->render('user/uservue/categorie.html.twig', [
             'category' => $category,
             'products' => $products,
             'barreRechercheCategory' => $form->createView(),
             'user_id' => $userId,
-            'totalPrice' => $totalPrice,
+            'prixTotalPanier' => $prixTotalPanier,
             'panierDetails' => $panierDetails,
             'promotions' => $promotions,
         ]);
@@ -440,8 +438,8 @@ class UservueController extends AbstractController
         PanierRepository $panierRepository,
         PanierUser $panierUserService,
     ): Response {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -453,14 +451,14 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
 
         $panierDetails = [];
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
         return $this->render('user/uservue/contact.html.twig', [
             'controller_name' => 'AccueilController',
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'user_id' => $userId,
-            'totalPrice' => $totalPrice,
+            'prixTotalPanier' => $prixTotalPanier,
             'panierDetails' => $panierDetails,
         ]);
     }
@@ -497,8 +495,8 @@ class UservueController extends AbstractController
     #[Route('/details/produit/user/{id}', name: 'details_produit_user')]
     public function detailsProduit($id, Request $request, PanierUser $panierUserService, PanierRepository $panierRepository, ProductsRepository $productsRepository,): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -508,7 +506,7 @@ class UservueController extends AbstractController
         $userId = $user instanceof User ? $user->getId() : null;
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $panierDetails = [];
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
         $userId = null;
 
         if ($user instanceof User) {
@@ -516,7 +514,7 @@ class UservueController extends AbstractController
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
         $product = $productsRepository->find($id);
         $category = $product->getCategory();
@@ -529,8 +527,8 @@ class UservueController extends AbstractController
             'products' => $products,
             'product' => $product,
             'user_id' => $userId,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
-            'totalPrice' => $totalPrice,
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
+            'prixTotalPanier' => $prixTotalPanier,
             'panierDetails' => $panierDetails,
 
         ]);
@@ -632,21 +630,21 @@ class UservueController extends AbstractController
             $userId = $user->getId();
         }
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $panierDetails = $panierUserService->createPanierDetails($paniers);
-        $totalPrice = $panierUserService->calculateTotalPrice($paniers);
+        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
         return $this->render('user/uservue/legals.html.twig', [
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'user_id' => $userId,
-            'totalPrice' => $totalPrice,
+            'prixTotalPanier' => $prixTotalPanier,
             'panierDetails' => $panierDetails,
         ]);
     }

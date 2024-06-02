@@ -287,8 +287,8 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
                 <div class=\"col-md-6 text-right\">
                   <h3 class=\"total-price\">Prix total: ";
     // line 178
-    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["totalPrice"]) || array_key_exists("totalPrice", $context) ? $context["totalPrice"] : (function () {
-      throw new RuntimeError('Variable "totalPrice" does not exist.', 178, $this->source);
+    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["prixTotalPanier"]) || array_key_exists("prixTotalPanier", $context) ? $context["prixTotalPanier"] : (function () {
+      throw new RuntimeError('Variable "prixTotalPanier" does not exist.', 178, $this->source);
     })()), "html", null, true);
     yield " €</h3>
                   <a class=\"btn btn-details\" href=\"/user/panier\">Mon Panier</a>
@@ -515,7 +515,7 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
                   <p class=\"total-info\">Nombre d'articles: {{ panierDetails|length }}</p>
                 </div>
                 <div class=\"col-md-6 text-right\">
-                  <h3 class=\"total-price\">Prix total: {{ totalPrice }} €</h3>
+                  <h3 class=\"total-price\">Prix total: {{ prixTotalPanier }} €</h3>
                   <a class=\"btn btn-details\" href=\"/user/panier\">Mon Panier</a>
                 </div>
               </div>

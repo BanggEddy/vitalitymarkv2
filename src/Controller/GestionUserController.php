@@ -21,47 +21,47 @@ class GestionUserController extends AbstractController
     #[Route('/', name: 'app_gestion_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository, ProductsRepository $productsRepository, PromoRepository $promoRepository, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/gestion_user/index.html.twig', [
             'users' => $userRepository->findAll(),
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_gestion_user_show', methods: ['GET'])]
     public function show(User $user, Request $request,): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/gestion_user/show.html.twig', [
             'user' => $user,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_gestion_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
@@ -77,7 +77,7 @@ class GestionUserController extends AbstractController
 
         return $this->render('admin/gestion_user/edit.html.twig', [
             'user' => $user,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'form' => $form,
         ]);
     }

@@ -20,17 +20,17 @@ class CouponController extends AbstractController
     #[Route('/', name: 'app_coupon_index', methods: ['GET'])]
     public function index(CouponRepository $couponRepository, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/coupon/index.html.twig', [
             'coupons' => $couponRepository->findAll(),
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -48,35 +48,35 @@ class CouponController extends AbstractController
             return $this->redirectToRoute('app_coupon_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/coupon/new.html.twig', [
             'coupon' => $coupon,
             'form' => $form,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_coupon_show', methods: ['GET'])]
     public function show(Coupon $coupon, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/coupon/show.html.twig', [
             'coupon' => $coupon,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -92,18 +92,18 @@ class CouponController extends AbstractController
             return $this->redirectToRoute('app_coupon_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/coupon/edit.html.twig', [
             'coupon' => $coupon,
             'form' => $form,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -132,17 +132,17 @@ class CouponController extends AbstractController
             return $this->redirectToRoute('app_coupon_index');
         }
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/coupon/newtype.html.twig', [
             'form' => $form->createView(),
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 }

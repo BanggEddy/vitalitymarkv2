@@ -91,7 +91,7 @@ class SecurityControllerTest extends WebTestCase
         $client->submit($form);
         $this->assertResponseRedirects('/login');
         $client->followRedirect();
-        $this->assertSelectorNotExists('.alert alert-danger', 'Invalid credentials.');
+        $this->assertSelectorTextContains('.alert alert-danger', 'Invalid credentials.');
 
         $client->getContainer()->get('test.client')->getKernel()->shutdown();
     }

@@ -4,7 +4,7 @@ namespace App\Service;
 
 class PanierUser
 {
-    public function createPanierDetails($paniers)
+    public function creerDetailsPanier($paniers)
     {
         $panierDetails = [];
 
@@ -56,9 +56,9 @@ class PanierUser
 
 
 
-    public function calculateTotalPrice($paniers): float
+    public function PriceTotalPanier($paniers): float
     {
-        $totalPrice = 0;
+        $prixTotalPanier = 0;
 
         foreach ($paniers as $panier) {
             $product = $panier->getIdproducts();
@@ -70,10 +70,10 @@ class PanierUser
                 } else {
                     $productPrice = $product->getPrice();
                 }
-                $totalPrice += $productPrice * $panier->getQuantity();
+                $prixTotalPanier += $productPrice * $panier->getQuantity();
             }
         }
 
-        return $totalPrice;
+        return $prixTotalPanier;
     }
 }

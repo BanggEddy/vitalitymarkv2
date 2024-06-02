@@ -20,46 +20,46 @@ class LoyaltyCardController extends AbstractController
     #[Route('/', name: 'app_loyalty_card_index', methods: ['GET'])]
     public function index(LoyaltyCardRepository $loyaltyCardRepository, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/loyalty_card/index.html.twig', [
             'loyalty_cards' => $loyaltyCardRepository->findAll(),
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_loyalty_card_show', methods: ['GET'])]
     public function show(LoyaltyCard $loyaltyCard, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
         return $this->render('admin/loyalty_card/show.html.twig', [
             'loyalty_card' => $loyaltyCard,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_loyalty_card_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, LoyaltyCard $loyaltyCard, EntityManagerInterface $entityManager): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
@@ -75,7 +75,7 @@ class LoyaltyCardController extends AbstractController
         return $this->render('admin/loyalty_card/edit.html.twig', [
             'loyalty_card' => $loyaltyCard,
             'form' => $form,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 

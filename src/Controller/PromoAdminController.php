@@ -20,28 +20,28 @@ class PromoAdminController extends AbstractController
     #[Route('/', name: 'app_promo_admin_index', methods: ['GET'])]
     public function index(PromoRepository $promoRepository, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
 
-        if ($barreDeRechercheCategorie->isSubmitted() && $barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategorie->getData()['category'];
+        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
+            $category = $formRechercheCategory->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
         return $this->render('admin/promo_admin/index.html.twig', [
             'promos' => $promoRepository->findAll(),
-            'barreRechercheCategory' => $barreDeRechercheCategorie,
+            'barreRechercheCategory' => $formRechercheCategory,
         ]);
     }
 
     #[Route('/new', name: 'app_promo_admin_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
-        if ($barreDeRechercheCategorie->isSubmitted() && $$barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategoriem->getData()['category'];
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
+        if ($formRechercheCategory->isSubmitted() && $$formRechercheCategory->isValid()) {
+            $category = $formRechercheCategorym->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
@@ -75,7 +75,7 @@ class PromoAdminController extends AbstractController
         return $this->render('admin/promo_admin/new.html.twig', [
             'promo' => $promo,
             'form' => $form,
-            'barreRechercheCategory' => $barreDeRechercheCategorie,
+            'barreRechercheCategory' => $formRechercheCategory,
         ]);
     }
 
@@ -83,10 +83,10 @@ class PromoAdminController extends AbstractController
     #[Route('/{id}', name: 'app_promo_admin_show', methods: ['GET'])]
     public function show(Promo $promo, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
-        if ($barreDeRechercheCategorie->isSubmitted() && $$barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategoriem->getData()['category'];
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
+        if ($formRechercheCategory->isSubmitted() && $$formRechercheCategory->isValid()) {
+            $category = $formRechercheCategorym->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
@@ -101,17 +101,17 @@ class PromoAdminController extends AbstractController
         return $this->render('admin/promo_admin/show.html.twig', [
             'promo' => $promo,
             'form' => $form->createView(),
-            'barreRechercheCategory' => $barreDeRechercheCategorie,
+            'barreRechercheCategory' => $formRechercheCategory,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_promo_admin_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Promo $promo, EntityManagerInterface $entityManager): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $barreDeRechercheCategorie->handleRequest($request);
-        if ($barreDeRechercheCategorie->isSubmitted() && $$barreDeRechercheCategorie->isValid()) {
-            $category = $barreDeRechercheCategoriem->getData()['category'];
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $formRechercheCategory->handleRequest($request);
+        if ($formRechercheCategory->isSubmitted() && $$formRechercheCategory->isValid()) {
+            $category = $formRechercheCategorym->getData()['category'];
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
@@ -143,7 +143,7 @@ class PromoAdminController extends AbstractController
 
         return $this->render('admin/promo_admin/edit.html.twig', [
             'promo' => $promo,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'form' => $form,
         ]);
     }

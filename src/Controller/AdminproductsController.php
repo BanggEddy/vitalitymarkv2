@@ -38,8 +38,8 @@ class AdminproductsController extends AbstractController
     #[Route('/adminproducts', name: 'app_adminproducts')]
     public function index(ProductsRepository $productsRepository, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -51,7 +51,7 @@ class AdminproductsController extends AbstractController
         return $this->render('admin/adminproducts/index.html.twig', [
             'controller_name' => 'AdminproductsController',
             'products' => $products,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'promotions' => $promotions,
         ]);
     }
@@ -59,8 +59,8 @@ class AdminproductsController extends AbstractController
     #[Route('/adminajouterproducts', name: 'app_admin_add_products')]
     public function ajoutProductPage(Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -70,7 +70,7 @@ class AdminproductsController extends AbstractController
         $productForm->handleRequest($request);
 
         return $this->render('admin/adminproducts/new.html.twig', [
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'productForm' => $productForm->createView(),
         ]);
     }
@@ -78,8 +78,8 @@ class AdminproductsController extends AbstractController
     #[Route('/product/create', name: 'app_create_product')]
     public function createProduit(Request $request, LoggerInterface $logger, EntityManagerInterface $entityManager): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -116,15 +116,15 @@ class AdminproductsController extends AbstractController
 
         return $this->render('admin/adminproducts/new.html.twig', [
             'productForm' => $productForm->createView(),
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
     #[Route('/admindeleteproducts', name: 'app_admin_delete_products')]
     public function deleteProducts(ProductsRepository $productsRepository, Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -137,7 +137,7 @@ class AdminproductsController extends AbstractController
 
         return $this->render('admin/adminproducts/delete.html.twig', [
             'products' => $products,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'promotions' => $promotions,
         ]);
     }
@@ -163,8 +163,8 @@ class AdminproductsController extends AbstractController
     #[Route('/adminupdateproducts', name: 'app_admin_update_products')]
     public function updateProducts(PromoRepository $promoRepository, ProductsRepository $productsRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -192,7 +192,7 @@ class AdminproductsController extends AbstractController
 
         return $this->render('admin/adminproducts/edit.html.twig', [
             'products' => $products,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'promotions' => $promotions
         ]);
     }
@@ -200,8 +200,8 @@ class AdminproductsController extends AbstractController
     #[Route('/adminformedit/{id}', name: 'app_admin_form_edit')]
     public function editProductFormFront(Products $product, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -235,7 +235,7 @@ class AdminproductsController extends AbstractController
         return $this->render('admin/adminproducts/formedit.html.twig', [
             'product' => $product,
             'productForm' => $productForm->createView(),
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -243,8 +243,8 @@ class AdminproductsController extends AbstractController
     #[Route('/compte/admin', name: 'app_admin_compte')]
     public function adminCompte(Request $request): Response
     {
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -261,7 +261,7 @@ class AdminproductsController extends AbstractController
         return $this->render('admin/adminproducts/compteadmin.html.twig', [
             'userId' => $userId,
             'user' => $user,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -334,15 +334,15 @@ class AdminproductsController extends AbstractController
     public function modifierProfilAdmin(Request $request)
     {
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
         }
 
         return $this->render('admin/adminproducts/compteadmin.html.twig', [
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -352,8 +352,8 @@ class AdminproductsController extends AbstractController
         $products = $productsRepository->findAll();
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -371,7 +371,7 @@ class AdminproductsController extends AbstractController
             'products' => $products,
             'promotions' => $promotions,
             'motrecherche' => $motrecherche,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
 
@@ -384,8 +384,8 @@ class AdminproductsController extends AbstractController
         $user = $this->getUser();
         $userId = $user instanceof User ? $user->getId() : null;
 
-        $barreDeRechercheCategorie = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($barreDeRechercheCategorie, $request);
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
         if ($redirectUrl) {
             return $this->redirect($redirectUrl);
@@ -396,7 +396,7 @@ class AdminproductsController extends AbstractController
         return $this->render('admin/adminproducts/categorie.html.twig', [
             'category' => $category,
             'products' => $products,
-            'barreRechercheCategory' => $barreDeRechercheCategorie->createView(),
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'user_id' => $userId,
             'promotions' => $promotions,
         ]);

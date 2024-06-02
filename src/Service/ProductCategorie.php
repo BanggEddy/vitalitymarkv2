@@ -10,12 +10,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class ProductCategorie
 {
     private $urlGenerator;
-    private $tokenStorage;
+    private $tokenStor;
 
     public function __construct(UrlGeneratorInterface $urlGenerator, TokenStorageInterface $tokenStorage)
     {
         $this->urlGenerator = $urlGenerator;
-        $this->tokenStorage = $tokenStorage;
+        $this->tokenStor = $tokenStorage;
     }
 
     public function barreCategoryChercher(FormInterface $form, Request $request)
@@ -24,7 +24,7 @@ class ProductCategorie
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->get('category')->getData();
-            $token = $this->tokenStorage->getToken();
+            $token = $this->tokenStor->getToken();
 
             if ($token && $token->getUser()) {
                 $roles = $token->getUser()->getRoles();
