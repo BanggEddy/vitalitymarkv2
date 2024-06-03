@@ -29,8 +29,16 @@ class LoyaltyCardController extends AbstractController
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
+        $motrecherche = $request->query->get('motrecherche');
+
+        $rechercheloyaltyCard = $loyaltyCardRepository->createQueryBuilder('c')
+            ->where('c.card_number LIKE :motrecherche')
+            ->setParameter('motrecherche', '%' . $motrecherche . '%')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('admin/loyalty_card/index.html.twig', [
-            'loyalty_cards' => $loyaltyCardRepository->findAll(),
+            'loyalty_cards' => $rechercheloyaltyCard,
             'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }

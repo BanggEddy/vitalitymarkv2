@@ -30,8 +30,16 @@ class GestionUserController extends AbstractController
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
+        $motrecherche = $request->query->get('motrecherche');
+
+        $users = $userRepository->createQueryBuilder('u')
+            ->where('u.email LIKE :motrecherche')
+            ->setParameter('motrecherche', '%' . $motrecherche . '%')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('admin/gestion_user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
             'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }

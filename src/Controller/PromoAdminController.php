@@ -28,9 +28,16 @@ class PromoAdminController extends AbstractController
 
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
+        $motrecherche = $request->query->get('motrecherche');
+
+        $recherchepromo = $promoRepository->createQueryBuilder('u')
+            ->where('u.id LIKE :motrecherche')
+            ->setParameter('motrecherche', '%' . $motrecherche . '%')
+            ->getQuery()
+            ->getResult();
 
         return $this->render('admin/promo_admin/index.html.twig', [
-            'promos' => $promoRepository->findAll(),
+            'promos' => $recherchepromo,
             'barreRechercheCategory' => $formRechercheCategory,
         ]);
     }

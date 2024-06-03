@@ -88,7 +88,19 @@ class __TwigTemplate_81452a84d461a6ca0a98befc343aaf53 extends Template
         // line 6
         yield "    <div class=\"promo-admin-container\">
         <h3>Liste des utilisateurs</h3>
-
+    <div class=\"d-flex justify-content-end mb-3\">
+        <form method=\"get\" class=\"formrecherchecrud\">
+            <div class=\"input-group\">
+                <input type=\"text\" name=\"motrecherche\" class=\"form-control\" placeholder=\"Rechercher par l'email\" value=\"";
+        // line 11
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 11, $this->source); })()), "request", [], "any", false, false, false, 11), "get", ["motrecherche"], "method", false, false, false, 11), "html", null, true);
+        yield "\" class=\"promo-admin-search-input\">
+                <div class=\"input-group-append\">
+                    <button type=\"submit\" class=\"btn btn-outline-dark\">Rechercher</button>
+                </div>
+            </div>
+        </form>
+    </div>
         <table class=\"table promo-admin-table\">
             <thead>
                 <tr class=\"\">
@@ -104,51 +116,51 @@ class __TwigTemplate_81452a84d461a6ca0a98befc343aaf53 extends Template
             </thead>
             <tbody>
             ";
-        // line 23
+        // line 32
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["users"]) || array_key_exists("users", $context) ? $context["users"] : (function () { throw new RuntimeError('Variable "users" does not exist.', 23, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["users"]) || array_key_exists("users", $context) ? $context["users"] : (function () { throw new RuntimeError('Variable "users" does not exist.', 32, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["user"]) {
-            // line 24
+            // line 33
             yield "                <tr class=\"promo-admin-table-row\">
                     <td data-label=\"Id\">";
-            // line 25
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 25), "html", null, true);
+            // line 34
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 34), "html", null, true);
             yield "</td>
                     <td data-label=\"Email\">";
-            // line 26
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "email", [], "any", false, false, false, 26), "html", null, true);
+            // line 35
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "email", [], "any", false, false, false, 35), "html", null, true);
             yield "</td>
                     <td data-label=\"Roles\">";
-            // line 27
-            ((CoreExtension::getAttribute($this->env, $this->source, $context["user"], "roles", [], "any", false, false, false, 27)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(json_encode(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "roles", [], "any", false, false, false, 27)), "html", null, true)) : (yield ""));
+            // line 36
+            ((CoreExtension::getAttribute($this->env, $this->source, $context["user"], "roles", [], "any", false, false, false, 36)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(json_encode(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "roles", [], "any", false, false, false, 36)), "html", null, true)) : (yield ""));
             yield "</td>
                     <td data-label=\"Name\">";
-            // line 28
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "name", [], "any", false, false, false, 28), "html", null, true);
+            // line 37
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "name", [], "any", false, false, false, 37), "html", null, true);
             yield "</td>
                     <td data-label=\"Date_create\">";
-            // line 29
-            ((CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateCreate", [], "any", false, false, false, 29)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateCreate", [], "any", false, false, false, 29), "Y-m-d"), "html", null, true)) : (yield ""));
+            // line 38
+            ((CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateCreate", [], "any", false, false, false, 38)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "dateCreate", [], "any", false, false, false, 38), "Y-m-d"), "html", null, true)) : (yield ""));
             yield "</td>
                     <td data-label=\"DeletedAt\">";
-            // line 30
-            ((CoreExtension::getAttribute($this->env, $this->source, $context["user"], "deletedAt", [], "any", false, false, false, 30)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "deletedAt", [], "any", false, false, false, 30), "Y-m-d H:i:s"), "html", null, true)) : (yield ""));
+            // line 39
+            ((CoreExtension::getAttribute($this->env, $this->source, $context["user"], "deletedAt", [], "any", false, false, false, 39)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "deletedAt", [], "any", false, false, false, 39), "Y-m-d H:i:s"), "html", null, true)) : (yield ""));
             yield "</td>
                     <td data-label=\"ExpiredAt\">";
-            // line 31
-            ((CoreExtension::getAttribute($this->env, $this->source, $context["user"], "expiredAt", [], "any", false, false, false, 31)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "expiredAt", [], "any", false, false, false, 31), "Y-m-d H:i:s"), "html", null, true)) : (yield ""));
+            // line 40
+            ((CoreExtension::getAttribute($this->env, $this->source, $context["user"], "expiredAt", [], "any", false, false, false, 40)) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["user"], "expiredAt", [], "any", false, false, false, 40), "Y-m-d H:i:s"), "html", null, true)) : (yield ""));
             yield "</td>
                     <td data-label=\"Actions\">
                         <a href=\"";
-            // line 33
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 33)]), "html", null, true);
+            // line 42
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 42)]), "html", null, true);
             yield "\" class=\"promo-admin-btn promo-admin-btn-show\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
                         <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
                         </svg></a>
                         <a href=\"";
-            // line 36
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 36)]), "html", null, true);
+            // line 45
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_gestion_user_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["user"], "id", [], "any", false, false, false, 45)]), "html", null, true);
             yield "\" class=\"promo-admin-btn promo-admin-btn-edit\">
                                                 <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-pencil-square\" viewBox=\"0 0 16 16\">
                             <path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/>
@@ -161,7 +173,7 @@ class __TwigTemplate_81452a84d461a6ca0a98befc343aaf53 extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 45
+            // line 54
             yield "                <tr>
                     <td colspan=\"11\" class=\"promo-admin-no-records\">no records found</td>
                 </tr>
@@ -170,7 +182,7 @@ class __TwigTemplate_81452a84d461a6ca0a98befc343aaf53 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['user'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 49
+        // line 58
         yield "            </tbody>
         </table>
 
@@ -206,7 +218,7 @@ class __TwigTemplate_81452a84d461a6ca0a98befc343aaf53 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  174 => 49,  165 => 45,  151 => 36,  145 => 33,  140 => 31,  136 => 30,  132 => 29,  128 => 28,  124 => 27,  120 => 26,  116 => 25,  113 => 24,  108 => 23,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  186 => 58,  177 => 54,  163 => 45,  157 => 42,  152 => 40,  148 => 39,  144 => 38,  140 => 37,  136 => 36,  132 => 35,  128 => 34,  125 => 33,  120 => 32,  96 => 11,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -218,7 +230,16 @@ class __TwigTemplate_81452a84d461a6ca0a98befc343aaf53 extends Template
 {% block body %}
     <div class=\"promo-admin-container\">
         <h3>Liste des utilisateurs</h3>
-
+    <div class=\"d-flex justify-content-end mb-3\">
+        <form method=\"get\" class=\"formrecherchecrud\">
+            <div class=\"input-group\">
+                <input type=\"text\" name=\"motrecherche\" class=\"form-control\" placeholder=\"Rechercher par l'email\" value=\"{{ app.request.get('motrecherche') }}\" class=\"promo-admin-search-input\">
+                <div class=\"input-group-append\">
+                    <button type=\"submit\" class=\"btn btn-outline-dark\">Rechercher</button>
+                </div>
+            </div>
+        </form>
+    </div>
         <table class=\"table promo-admin-table\">
             <thead>
                 <tr class=\"\">

@@ -89,7 +89,19 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
         // line 6
         yield "<div class=\"promo-admin-container\">
     <h3>Les Cartes de Fidélité disponibles</h3>
-
+    <div class=\"d-flex justify-content-end mb-3\">
+        <form method=\"get\" class=\"formrecherchecrud\">
+            <div class=\"input-group\">
+                <input type=\"text\" name=\"motrecherche\" class=\"form-control\" placeholder=\"Num de carte\" value=\"";
+        // line 11
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 11, $this->source); })()), "request", [], "any", false, false, false, 11), "get", ["motrecherche"], "method", false, false, false, 11), "html", null, true);
+        yield "\" class=\"promo-admin-search-input\">
+                <div class=\"input-group-append\">
+                    <button type=\"submit\" class=\"btn btn-outline-dark\">Rechercher</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <table class=\"table promo-admin-table\">
         <thead>
             <tr class=\"\">
@@ -103,49 +115,49 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
         </thead>
         <tbody>
         ";
-        // line 21
+        // line 30
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["loyalty_cards"]) || array_key_exists("loyalty_cards", $context) ? $context["loyalty_cards"] : (function () { throw new RuntimeError('Variable "loyalty_cards" does not exist.', 21, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["loyalty_cards"]) || array_key_exists("loyalty_cards", $context) ? $context["loyalty_cards"] : (function () { throw new RuntimeError('Variable "loyalty_cards" does not exist.', 30, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["loyalty_card"]) {
-            // line 22
+            // line 31
             yield "            <tr class=\"promo-admin-table-row\">
                 <td data-label=\"Id\">";
-            // line 23
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 23), "html", null, true);
+            // line 32
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 32), "html", null, true);
             yield "</td>
                 <td data-label=\"Numéro de Carte\">";
-            // line 24
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "cardNumber", [], "any", false, false, false, 24), "html", null, true);
+            // line 33
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "cardNumber", [], "any", false, false, false, 33), "html", null, true);
             yield "</td>
                 <td data-label=\"Type de Carte\">";
-            // line 25
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "cardType", [], "any", false, false, false, 25), "html", null, true);
+            // line 34
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "cardType", [], "any", false, false, false, 34), "html", null, true);
             yield "</td>
                 <td data-label=\"Points\">";
-            // line 26
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "points", [], "any", false, false, false, 26), "html", null, true);
+            // line 35
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "points", [], "any", false, false, false, 35), "html", null, true);
             yield "</td>
                 <td data-label=\"Offre Personnalisée\">";
-            // line 27
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "personalizedOffer", [], "any", false, false, false, 27), "html", null, true);
+            // line 36
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "personalizedOffer", [], "any", false, false, false, 36), "html", null, true);
             yield "</td>
                 <td data-label=\"Actions\">
                     <a href=\"";
-            // line 29
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 29)]), "html", null, true);
+            // line 38
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 38)]), "html", null, true);
             yield "\" class=\"promo-admin-btn promo-admin-btn-show\" aria-label=\"Show details for loyalty card ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 29), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 38), "html", null, true);
             yield "\">
                         <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text-fill\" viewBox=\"0 0 16 16\">
                             <path d=\"M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z\"/>
                         </svg>
                     </a>
                     <a href=\"";
-            // line 34
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 34)]), "html", null, true);
+            // line 43
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_loyalty_card_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 43)]), "html", null, true);
             yield "\" class=\"promo-admin-btn promo-admin-btn-edit\" aria-label=\"Edit loyalty card ";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 34), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["loyalty_card"], "id", [], "any", false, false, false, 43), "html", null, true);
             yield "\">
                         <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-pencil-square\" viewBox=\"0 0 16 16\">
                             <path d=\"M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z\"/>
@@ -158,7 +170,7 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 43
+            // line 52
             yield "            <tr>
                 <td colspan=\"6\" class=\"promo-admin-no-records\">No records found</td>
             </tr>
@@ -167,7 +179,7 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['loyalty_card'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 47
+        // line 56
         yield "        </tbody>
     </table>
 </div>
@@ -202,7 +214,7 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
      */
     public function getDebugInfo()
     {
-        return array (  171 => 47,  162 => 43,  146 => 34,  136 => 29,  131 => 27,  127 => 26,  123 => 25,  119 => 24,  115 => 23,  112 => 22,  107 => 21,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  183 => 56,  174 => 52,  158 => 43,  148 => 38,  143 => 36,  139 => 35,  135 => 34,  131 => 33,  127 => 32,  124 => 31,  119 => 30,  97 => 11,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -214,7 +226,16 @@ class __TwigTemplate_18ce2a64a91a67fe92c4417f6ed4313d extends Template
 {% block body %}
 <div class=\"promo-admin-container\">
     <h3>Les Cartes de Fidélité disponibles</h3>
-
+    <div class=\"d-flex justify-content-end mb-3\">
+        <form method=\"get\" class=\"formrecherchecrud\">
+            <div class=\"input-group\">
+                <input type=\"text\" name=\"motrecherche\" class=\"form-control\" placeholder=\"Num de carte\" value=\"{{ app.request.get('motrecherche') }}\" class=\"promo-admin-search-input\">
+                <div class=\"input-group-append\">
+                    <button type=\"submit\" class=\"btn btn-outline-dark\">Rechercher</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <table class=\"table promo-admin-table\">
         <thead>
             <tr class=\"\">

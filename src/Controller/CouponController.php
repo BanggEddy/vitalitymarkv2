@@ -28,8 +28,17 @@ class CouponController extends AbstractController
             return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
         }
 
+        $motrecherche = $request->query->get('motrecherche');
+
+        $coupons = $couponRepository->createQueryBuilder('c')
+            ->where('c.id LIKE :motrecherche')
+            ->setParameter('motrecherche', '%' . $motrecherche . '%')
+            ->getQuery()
+            ->getResult();
+
+
         return $this->render('admin/coupon/index.html.twig', [
-            'coupons' => $couponRepository->findAll(),
+            'coupons' => $coupons,
             'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }

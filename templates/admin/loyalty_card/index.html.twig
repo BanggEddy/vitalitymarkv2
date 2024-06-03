@@ -5,7 +5,16 @@
 {% block body %}
 <div class="promo-admin-container">
     <h3>Les Cartes de Fidélité disponibles</h3>
-
+    <div class="d-flex justify-content-end mb-3">
+        <form method="get" class="formrecherchecrud">
+            <div class="input-group">
+                <input type="text" name="motrecherche" class="form-control" placeholder="Num de carte" value="{{ app.request.get('motrecherche') }}" class="promo-admin-search-input">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-dark">Rechercher</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <table class="table promo-admin-table">
         <thead>
             <tr class="">

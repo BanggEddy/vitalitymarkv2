@@ -14,7 +14,6 @@ use Twig\Source;
 use Twig\Template;
 
 /* user/uservue/indexpanier.html.twig */
-
 class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
 {
     private $source;
@@ -50,11 +49,12 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
 
         $this->parent = $this->loadTemplate("headeruser.html.twig", "user/uservue/indexpanier.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
-
+        
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
-
+        
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
+
     }
 
     // line 3
@@ -68,14 +68,13 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
         yield "Votre panier";
-
+        
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
-
+        
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
-        return;
-        yield '';
+        return; yield '';
     }
 
     // line 5
@@ -93,14 +92,13 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
         yield from $this->yieldParentBlock("stylesheets", $context, $blocks);
         yield "
 ";
-
+        
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
-
+        
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
-        return;
-        yield '';
+        return; yield '';
     }
 
     // line 9
@@ -124,9 +122,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
             ";
         // line 17
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["panierDetails"]) || array_key_exists("panierDetails", $context) ? $context["panierDetails"] : (function () {
-            throw new RuntimeError('Variable "panierDetails" does not exist.', 17, $this->source);
-        })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["panierDetails"]) || array_key_exists("panierDetails", $context) ? $context["panierDetails"] : (function () { throw new RuntimeError('Variable "panierDetails" does not exist.', 17, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["panierDetail"]) {
             // line 18
             yield "                <div class=\"row mb-4  row-with-margin-bottom\">
@@ -150,7 +146,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
                         <div>
                             ";
             // line 28
-            if (!(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, false, false, 28))) {
+            if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, false, false, 28))) {
                 // line 29
                 yield "                                <p> ";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "name", [], "array", false, false, false, 29), "html", null, true);
@@ -181,7 +177,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
                         <div class=\"card-price\">
                             ";
             // line 39
-            if (!(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, false, false, 39))) {
+            if ( !(null === CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "promo", [], "array", false, false, false, 39))) {
                 // line 40
                 yield "                                <p style=\"color: red\">Prix après réduction: ";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["panierDetail"], "price", [], "array", false, false, false, 40), "html", null, true);
@@ -240,17 +236,13 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
                 <div class=\"col\">
                     <p>Nombre d'articles: ";
         // line 65
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["panierDetails"]) || array_key_exists("panierDetails", $context) ? $context["panierDetails"] : (function () {
-            throw new RuntimeError('Variable "panierDetails" does not exist.', 65, $this->source);
-        })())), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::length($this->env->getCharset(), (isset($context["panierDetails"]) || array_key_exists("panierDetails", $context) ? $context["panierDetails"] : (function () { throw new RuntimeError('Variable "panierDetails" does not exist.', 65, $this->source); })())), "html", null, true);
         yield "</p>
                 </div>
                 <div class=\"col-lg-2\">
                     <h3>Prix total: ";
         // line 68
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["prixTotalPanier"]) || array_key_exists("prixTotalPanier", $context) ? $context["prixTotalPanier"] : (function () {
-            throw new RuntimeError('Variable "prixTotalPanier" does not exist.', 68, $this->source);
-        })()), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["prixTotalPanier"]) || array_key_exists("prixTotalPanier", $context) ? $context["prixTotalPanier"] : (function () { throw new RuntimeError('Variable "prixTotalPanier" does not exist.', 68, $this->source); })()), "html", null, true);
         yield " €</h3>
                     <button type=\"button\" class=\"btn btn-details\">Valider mon panier</button>
                 </div>
@@ -261,14 +253,13 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
 </div>
 <br><br>
 ";
-
+        
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
-
+        
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
-        return;
-        yield '';
+        return; yield '';
     }
 
     /**
@@ -292,7 +283,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
      */
     public function getDebugInfo()
     {
-        return array(245 => 68,  239 => 65,  235 => 63,  224 => 58,  217 => 54,  211 => 51,  207 => 50,  201 => 47,  197 => 46,  192 => 43,  187 => 41,  182 => 40,  180 => 39,  176 => 37,  171 => 35,  167 => 34,  162 => 33,  156 => 30,  151 => 29,  149 => 28,  144 => 25,  140 => 23,  134 => 21,  132 => 20,  128 => 18,  124 => 17,  115 => 10,  105 => 9,  91 => 6,  81 => 5,  61 => 3,  38 => 1,);
+        return array (  245 => 68,  239 => 65,  235 => 63,  224 => 58,  217 => 54,  211 => 51,  207 => 50,  201 => 47,  197 => 46,  192 => 43,  187 => 41,  182 => 40,  180 => 39,  176 => 37,  171 => 35,  167 => 34,  162 => 33,  156 => 30,  151 => 29,  149 => 28,  144 => 25,  140 => 23,  134 => 21,  132 => 20,  128 => 18,  124 => 17,  115 => 10,  105 => 9,  91 => 6,  81 => 5,  61 => 3,  38 => 1,);
     }
 
     public function getSourceContext()
