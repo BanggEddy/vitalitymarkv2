@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('tl', array (
     'Too many failed login attempts, please try again later.' => 'Napakaraming nabigong mga pagtatangka sa pag-login, mangyaring subukang muli sa ibang pagkakataon.',
     'Invalid or expired login link.' => 'Inbalido o nagexpire na ang link para makapaglogin.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Napakaraming nabigong mga pagtatangka sa pag-login, pakisubukan ulit sa% minuto% minuto.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Napakaraming nabigong pagtatangka ng pag-login, mangyaring subukang muli sa loob ng %minutes% minuto.|Napakaraming nabigong pagtatangka ng pag-login, mangyaring subukang muli sa loob ng %minutes% minuto.',
   ),
 ));
 
@@ -339,6 +340,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

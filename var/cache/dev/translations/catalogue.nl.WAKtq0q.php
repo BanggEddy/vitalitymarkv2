@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('nl', array (
     'Too many failed login attempts, please try again later.' => 'Te veel onjuiste inlogpogingen, probeer het later nogmaals.',
     'Invalid or expired login link.' => 'Ongeldige of verlopen inloglink.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Te veel onjuiste inlogpogingen, probeer het opnieuw over %minutes% minuut.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Te veel mislukte inlogpogingen, probeer het over %minutes% minuten opnieuw.',
   ),
   'KnpPaginatorBundle' => 
   array (
@@ -345,6 +346,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

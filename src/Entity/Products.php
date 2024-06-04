@@ -47,7 +47,7 @@ class Products
         $this->paniers = new ArrayCollection();
         $this->promos = new ArrayCollection();
     }
-    public function getCurrentPromo(): ?Promo
+    public function getPromoMaintenant(): ?Promo
     {
         foreach ($this->promos as $promo) {
             if ($promo->isCurrent()) {
@@ -59,7 +59,7 @@ class Products
 
     public function updatePriceAfterPromo(): void
     {
-        $promo = $this->getCurrentPromo();
+        $promo = $this->getPromoMaintenant();
         if ($promo && $this->price !== null) {
             $reduction = (float) $promo->getReduction();
             $priceAfterPromo = $this->price - ($this->price * ($reduction / 100));

@@ -36,7 +36,7 @@ class KnpPaginatorConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     }
 
     /**
-     * @default {"pagination":"@KnpPaginator\/Pagination\/sliding.html.twig","filtration":"@KnpPaginator\/Pagination\/filtration.html.twig","sortable":"@KnpPaginator\/Pagination\/sortable_link.html.twig"}
+     * @default {"pagination":"@KnpPaginator\/Pagination\/sliding.html.twig","rel_links":"@KnpPaginator\/Pagination\/rel_links.html.twig","filtration":"@KnpPaginator\/Pagination\/filtration.html.twig","sortable":"@KnpPaginator\/Pagination\/sortable_link.html.twig"}
     */
     public function template(array $value = []): \Symfony\Config\KnpPaginator\TemplateConfig
     {

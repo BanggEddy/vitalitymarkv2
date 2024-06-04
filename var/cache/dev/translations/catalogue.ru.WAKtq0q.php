@@ -168,7 +168,8 @@ $catalogue = new MessageCatalogue('ru', array (
     'Account is locked.' => 'Учетная запись заблокирована.',
     'Too many failed login attempts, please try again later.' => 'Слишком много неудачных попыток входа, пожалуйста, попробуйте позже.',
     'Invalid or expired login link.' => 'Ссылка для входа недействительна или просрочена.',
-    'Too many failed login attempts, please try again in %minutes% minute.' => 'Слишком много неудачных попыток входа в систему, повторите попытку через %minutes% минуту.',
+    'Too many failed login attempts, please try again in %minutes% minute.' => 'Слишком много неудачных попыток входа, повторите попытку через %minutes% минуту.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Слишком много неудачных попыток входа, повторите попытку через %minutes% минуту.|Слишком много неудачных попыток входа, повторите попытку через %minutes% минуты.|Слишком много неудачных попыток входа, повторите попытку через %minutes% минут.',
   ),
   'KnpPaginatorBundle' => 
   array (
@@ -345,6 +346,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

@@ -121,34 +121,28 @@ class __TwigTemplate_cbcd9c147dc907bd0fb4b05918812afb extends Template
             yield "        ";
         }
         // line 22
-        yield "        <p> Name : </p>
+        yield "        ";
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 22, $this->source); })()), "name", [], "any", false, false, false, 22), 'row', ["attr" => ["class" => "spaced-input"]]);
+        yield "
         ";
         // line 23
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 23, $this->source); })()), "name", [], "any", false, false, false, 23), 'widget', ["attr" => ["class" => "spaced-input"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 23, $this->source); })()), "category", [], "any", false, false, false, 23), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
-        <p> category : </p>
+        ";
+        // line 24
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 24, $this->source); })()), "quantity", [], "any", false, false, false, 24), 'row', ["attr" => ["class" => "spaced-input"]]);
+        yield "
         ";
         // line 25
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 25, $this->source); })()), "category", [], "any", false, false, false, 25), 'widget', ["attr" => ["class" => "spaced-input"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 25, $this->source); })()), "description", [], "any", false, false, false, 25), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
-        <p> Quantité : </p>
+        ";
+        // line 26
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 26, $this->source); })()), "images", [], "any", false, false, false, 26), 'row', ["attr" => ["class" => "spaced-input"]]);
+        yield "
         ";
         // line 27
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 27, $this->source); })()), "quantity", [], "any", false, false, false, 27), 'widget', ["attr" => ["class" => "spaced-input"]]);
-        yield "
-        <p> Description : </p>
-        ";
-        // line 29
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 29, $this->source); })()), "description", [], "any", false, false, false, 29), 'widget', ["attr" => ["class" => "spaced-input"]]);
-        yield "
-        ";
-        // line 30
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 30, $this->source); })()), "images", [], "any", false, false, false, 30), 'widget', ["attr" => ["class" => "spaced-input"]]);
-        yield "
-        <p> Prix : </p>
-        ";
-        // line 32
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 32, $this->source); })()), "price", [], "any", false, false, false, 32), 'widget', ["attr" => ["class" => "spaced-input"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 27, $this->source); })()), "price", [], "any", false, false, false, 27), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
         <button type=\"submit\" class=\"btn btn-details\" style=\"margin-bottom: 3% !important;\">Ajouter</button>
     </form>
@@ -185,7 +179,7 @@ class __TwigTemplate_cbcd9c147dc907bd0fb4b05918812afb extends Template
      */
     public function getDebugInfo()
     {
-        return array (  151 => 32,  146 => 30,  142 => 29,  137 => 27,  132 => 25,  127 => 23,  124 => 22,  121 => 21,  115 => 18,  112 => 17,  109 => 16,  107 => 15,  103 => 14,  99 => 13,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  145 => 27,  141 => 26,  137 => 25,  133 => 24,  129 => 23,  124 => 22,  121 => 21,  115 => 18,  112 => 17,  109 => 16,  107 => 15,  103 => 14,  99 => 13,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -211,17 +205,12 @@ class __TwigTemplate_cbcd9c147dc907bd0fb4b05918812afb extends Template
                 </div>
             {% endif %}
         {% endif %}
-        <p> Name : </p>
-        {{ form_widget(productForm.name, {'attr': {'class': 'spaced-input'}}) }}
-        <p> category : </p>
-        {{ form_widget(productForm.category, {'attr': {'class': 'spaced-input'}}) }}
-        <p> Quantité : </p>
-        {{ form_widget(productForm.quantity, {'attr': {'class': 'spaced-input'}}) }}
-        <p> Description : </p>
-        {{ form_widget(productForm.description, {'attr': {'class': 'spaced-input'}}) }}
-        {{ form_widget(productForm.images, {'attr': {'class': 'spaced-input'}}) }}
-        <p> Prix : </p>
-        {{ form_widget(productForm.price, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.name, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.category, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.quantity, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.description, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.images, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.price, {'attr': {'class': 'spaced-input'}}) }}
         <button type=\"submit\" class=\"btn btn-details\" style=\"margin-bottom: 3% !important;\">Ajouter</button>
     </form>
 </div>

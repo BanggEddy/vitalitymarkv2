@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('eu', array (
     'Too many failed login attempts, please try again later.' => 'Saioa hasteko saio huts gehiegi, saiatu berriro geroago.',
     'Invalid or expired login link.' => 'Sartzeko esteka baliogabea edo iraungia.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Saioa hasteko huts gehiegi egin dira, saiatu berriro minutu %minutes% geroago.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Saioa hasteko saiakera huts gehiegi, saiatu berriro %minutes% minututan.',
   ),
   'KnpPaginatorBundle' => 
   array (
@@ -345,6 +346,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

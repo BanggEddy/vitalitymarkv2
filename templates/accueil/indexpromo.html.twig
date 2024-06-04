@@ -91,7 +91,7 @@
         {% for product in products %}
         <div class="col-md-4 col-lg-4">
             <div class="product-card">
-                <img src="{{ asset('images/' ~ product.images) }}" alt="{{ product.name }}" class="product-image">
+                <img src="{{ asset('images/' ~ product.images) }}" alt="images" class="product-image">
                 <div class="product-details">
                     <h3>{{ product.name }}</h3>
                     {% set aUnePromotion = false %}

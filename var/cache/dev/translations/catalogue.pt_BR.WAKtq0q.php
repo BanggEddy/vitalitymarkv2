@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('pt_BR', array (
     'Too many failed login attempts, please try again later.' => 'Muitas tentativas de login malsucedidas, tente novamente mais tarde.',
     'Invalid or expired login link.' => 'Link de login inválido ou expirado.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Muitas tentativas de login inválidas, por favor, tente novamente em um minuto.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Muitas tentativas de login sem sucesso, por favor tente novamente em %minutes% minutos.',
   ),
   'KnpPaginatorBundle' => 
   array (
@@ -345,6 +346,7 @@ $cataloguePt = new MessageCatalogue('pt', array (
     'Too many failed login attempts, please try again later.' => 'Várias tentativas de login falhadas, por favor tente mais tarde.',
     'Invalid or expired login link.' => 'Ligação de login inválida ou expirada.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Demasiadas tentativas de login, tente novamente num minuto.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Muitas tentativas de login sem sucesso, por favor tente novamente em %minutes% minutos.',
   ),
 ));
 $catalogue->addFallbackCatalogue($cataloguePt);
@@ -515,6 +517,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

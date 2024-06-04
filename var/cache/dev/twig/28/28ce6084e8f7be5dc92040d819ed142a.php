@@ -194,9 +194,7 @@ class __TwigTemplate_7e9d9707cca1bb4e7e5bcc1d7b8ad237 extends Template
                 <img src=\"";
             // line 94
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 94))), "html", null, true);
-            yield "\" alt=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 94), "html", null, true);
-            yield "\" class=\"product-image\">
+            yield "\" alt=\"images\" class=\"product-image\">
                 <div class=\"card-body product-details\">
                     <h3>";
             // line 96
@@ -326,7 +324,7 @@ class __TwigTemplate_7e9d9707cca1bb4e7e5bcc1d7b8ad237 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  296 => 131,  282 => 123,  277 => 121,  269 => 117,  263 => 115,  260 => 114,  254 => 113,  249 => 111,  245 => 110,  239 => 108,  235 => 106,  229 => 104,  226 => 103,  223 => 102,  220 => 101,  217 => 100,  214 => 99,  209 => 98,  207 => 97,  203 => 96,  196 => 94,  192 => 92,  188 => 91,  166 => 74,  153 => 66,  140 => 58,  127 => 50,  101 => 29,  86 => 19,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  294 => 131,  280 => 123,  275 => 121,  267 => 117,  261 => 115,  258 => 114,  252 => 113,  247 => 111,  243 => 110,  237 => 108,  233 => 106,  227 => 104,  224 => 103,  221 => 102,  218 => 101,  215 => 100,  212 => 99,  207 => 98,  205 => 97,  201 => 96,  196 => 94,  192 => 92,  188 => 91,  166 => 74,  153 => 66,  140 => 58,  127 => 50,  101 => 29,  86 => 19,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -424,7 +422,7 @@ class __TwigTemplate_7e9d9707cca1bb4e7e5bcc1d7b8ad237 extends Template
             {% for product in products %}
     <div class=\"col-md-6 col-lg-3 mb-4\">
         <div class=\"card h-100 product-card\">
-                <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"{{ product.name }}\" class=\"product-image\">
+                <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"images\" class=\"product-image\">
                 <div class=\"card-body product-details\">
                     <h3>{{ product.name }}</h3>
                     {% set aUnePromotion = false %}

@@ -14,7 +14,6 @@ use App\Entity\Contact;
 use App\Form\ProductSearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Service\PromoFilter;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use App\Service\BarreRechercheCategory;
 use App\Service\ProductCategorie;
@@ -23,15 +22,13 @@ use App\Service\PromotionService;
 class AccueilController extends AbstractController
 {
     private $entityManager;
-    private $promoFilter;
     private $csrfTokenManager;
     private $promotionService;
     private $productCategorie;
 
-    public function __construct(ProductCategorie $productCategorie, PromotionService $promotionService, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PromoFilter $promoFilter)
+    public function __construct(ProductCategorie $productCategorie, PromotionService $promotionService, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->promoFilter = $promoFilter;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->promotionService = $promotionService;
         $this->productCategorie = $productCategorie;
@@ -146,7 +143,7 @@ class AccueilController extends AbstractController
         $motrecherche = $request->request->get('motrecherche');
 
         $products = $productsRepository->createQueryBuilder('p')
-            ->where('p.name LIKE :motrecherche')
+            ->where('p.id LIKE :motrecherche')
             ->setParameter('motrecherche', '%' . $motrecherche . '%')
             ->getQuery()
             ->getResult();

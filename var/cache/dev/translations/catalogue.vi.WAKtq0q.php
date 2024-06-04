@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('vi', array (
     'Too many failed login attempts, please try again later.' => 'Đăng nhập sai quá nhiều lần, vui lòng thử lại lần nữa.',
     'Invalid or expired login link.' => 'Liên kết đăng nhập không hợp lệ hoặc quá hạn.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Quá nhiều lần thử đăng nhập không thành công, vui lòng thử lại sau %minutes% phút.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Quá nhiều lần đăng nhập không thành công, vui lòng thử lại sau %minutes% phút.|Quá nhiều lần đăng nhập không thành công, vui lòng thử lại sau %minutes% phút.',
   ),
 ));
 
@@ -339,6 +340,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

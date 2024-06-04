@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('my', array (
     'Too many failed login attempts, please try again later.' => 'Login ၀င်ရန်ကြိုးစားမှုများလွန်းပါသည်၊ ကျေးဇူးပြု၍ နောက်မှထပ်ကြိုးစားပါ။',
     'Invalid or expired login link.' => 'မသင့်လျှော်သော် (သို့မဟုတ်) သက်တန်းကုန်သော login link ဖြစ်ပါသည်။',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Login ၀င်ရန်ကြိုးစားမှုများလွန်းပါသည်၊ ကျေးဇူးပြု၍ နောက် %minutes% မှထပ်မံကြိုးစားပါ။',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'ဝင်ရောက်မှု မအောင်မြင်သော ကြိုးပမ်းမှုများအတွက် တစ်ခါတည်း ပြန်လုပ်မည်။ ထပ်မံကြိုးစားကြည့်ပါ။ %minutes% မိနစ်အတွင်း|ဝင်ရောက်မှု မအောင်မြင်သော ကြိုးပမ်းမှုများအတွက် တစ်ခါတည်း ပြန်လုပ်မည်။ ထပ်မံကြိုးစားကြည့်ပါ။ %minutes% မိနစ်အတွင်း',
   ),
 ));
 
@@ -339,6 +340,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

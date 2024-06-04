@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('hr', array (
     'Too many failed login attempts, please try again later.' => 'Previše neuspjelih pokušaja prijave, molim pokušajte ponovo kasnije.',
     'Invalid or expired login link.' => 'Link za prijavu je isteako ili je neispravan.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Previše neuspjelih pokušaja prijave, molim pokušajte ponovo za %minutes% minutu.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Previše neuspjelih pokušaja prijave, pokušajte ponovo za %minutes% minutu.|Previše neuspjelih pokušaja prijave, pokušajte ponovo za %minutes% minute.|Previše neuspjelih pokušaja prijave, pokušajte ponovo za %minutes% minuta.',
   ),
   'KnpPaginatorBundle' => 
   array (
@@ -345,6 +346,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

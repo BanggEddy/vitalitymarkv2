@@ -18,7 +18,7 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
                     'paniers',
                     'promos',
                     'price',
-                    'currentPromo',
+                    'promoMaintenant',
                 ],
             ],
         ],

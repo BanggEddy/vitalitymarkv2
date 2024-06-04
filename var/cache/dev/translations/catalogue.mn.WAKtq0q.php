@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('mn', array (
     'Too many failed login attempts, please try again later.' => 'Хэтэрхий олон амжилтгүй оролдлого, түр хүлээгээд дахин оролдоно уу.',
     'Invalid or expired login link.' => 'Буруу эсвэл хугацаа нь дууссан нэвтрэх зам.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Нэвтрэх оролдлого ихээр амжилтгүй болсон, %minutes% минутын дараа дахин оролдоно уу.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Хэт олон бүтэлгүй нэвтрэх оролдлого, %minutes% минутын дараа дахин оролдоно уу.',
   ),
 ));
 
@@ -339,6 +340,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

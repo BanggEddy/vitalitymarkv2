@@ -151,13 +151,13 @@ $catalogue = new MessageCatalogue('id', array (
   ),
   'security' => 
   array (
-    'An authentication exception occurred.' => 'Terjadi sebuah pengecualian otentikasi.',
+    'An authentication exception occurred.' => 'Terjadi kesalahan otentikasi.',
     'Authentication credentials could not be found.' => 'Kredensial otentikasi tidak bisa ditemukan.',
     'Authentication request could not be processed due to a system problem.' => 'Permintaan otentikasi tidak bisa diproses karena masalah sistem.',
-    'Invalid credentials.' => 'Kredensial salah.',
+    'Invalid credentials.' => 'Kredensial tidak valid.',
     'Cookie has already been used by someone else.' => 'Cookie sudah digunakan oleh orang lain.',
     'Not privileged to request the resource.' => 'Tidak berhak untuk meminta sumber daya.',
-    'Invalid CSRF token.' => 'Token CSRF salah.',
+    'Invalid CSRF token.' => 'Token CSRF tidak valid.',
     'No authentication provider found to support the authentication token.' => 'Tidak ditemukan penyedia otentikasi untuk mendukung token otentikasi.',
     'No session available, it either timed out or cookies are not enabled.' => 'Tidak ada sesi yang tersedia, mungkin waktu sudah habis atau cookie tidak diaktifkan',
     'No token could be found.' => 'Tidak ada token yang bisa ditemukan.',
@@ -166,9 +166,10 @@ $catalogue = new MessageCatalogue('id', array (
     'Credentials have expired.' => 'Kredensial telah berakhir.',
     'Account is disabled.' => 'Akun dinonaktifkan.',
     'Account is locked.' => 'Akun terkunci.',
-    'Too many failed login attempts, please try again later.' => 'Terlalu banyak percobaan login yang salah, silahkan coba lagi nanti.',
-    'Invalid or expired login link.' => 'Link login salah atau sudah kedaluwarsa.',
-    'Too many failed login attempts, please try again in %minutes% minute.' => 'Terlalu banyak percobaan login yang salah, silahkan coba lagi dalam %minutes% menit.',
+    'Too many failed login attempts, please try again later.' => 'Terlalu banyak percobaan login yang gagal, silahkan coba lagi nanti.',
+    'Invalid or expired login link.' => 'Link login tidak valid atau sudah kedaluwarsa.',
+    'Too many failed login attempts, please try again in %minutes% minute.' => 'Terlalu banyak percobaan login yang gagal, silahkan coba lagi dalam %minutes% menit.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Terlalu banyak upaya login yang gagal, silakan coba lagi dalam beberapa %minutes% menit.',
   ),
   'KnpPaginatorBundle' => 
   array (
@@ -345,6 +346,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

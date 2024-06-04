@@ -84,9 +84,7 @@ class __TwigTemplate_23bbbc99f614897c0217fbe4a4a641f2 extends Template
                 <img src=\"";
             // line 14
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 14))), "html", null, true);
-            yield "\" alt=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 14), "html", null, true);
-            yield "\" class=\"product-image\">
+            yield "\" alt=\"images\" class=\"product-image\">
                 <div class=\"card-body product-details\">
                     <h3>";
             // line 16
@@ -214,7 +212,7 @@ class __TwigTemplate_23bbbc99f614897c0217fbe4a4a641f2 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  184 => 49,  172 => 43,  167 => 41,  159 => 37,  153 => 35,  150 => 34,  144 => 33,  139 => 31,  135 => 30,  129 => 28,  125 => 26,  119 => 24,  116 => 23,  113 => 22,  110 => 21,  107 => 20,  104 => 19,  99 => 18,  97 => 17,  93 => 16,  86 => 14,  82 => 12,  78 => 11,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  182 => 49,  170 => 43,  165 => 41,  157 => 37,  151 => 35,  148 => 34,  142 => 33,  137 => 31,  133 => 30,  127 => 28,  123 => 26,  117 => 24,  114 => 23,  111 => 22,  108 => 21,  105 => 20,  102 => 19,  97 => 18,  95 => 17,  91 => 16,  86 => 14,  82 => 12,  78 => 11,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -232,7 +230,7 @@ class __TwigTemplate_23bbbc99f614897c0217fbe4a4a641f2 extends Template
         {% for product in products %}
     <div class=\"col-md-6 col-lg-3 mb-4\">
         <div class=\"card h-100 product-card\">
-                <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"{{ product.name }}\" class=\"product-image\">
+                <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"images\" class=\"product-image\">
                 <div class=\"card-body product-details\">
                     <h3>{{ product.name }}</h3>
                     {% set aUnePromotion = false %}

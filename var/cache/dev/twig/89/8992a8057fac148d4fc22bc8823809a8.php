@@ -103,45 +103,44 @@ class __TwigTemplate_88a81360af4f4f7dda81a9ebafe13cc9 extends Template
         // line 12
         yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 12, $this->source); })()), "name", [], "any", false, false, false, 12), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
-        <p> Sélectionnez une catégorie </p>
             ";
-        // line 14
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 14, $this->source); })()), "category", [], "any", false, false, false, 14), 'row', ["attr" => ["class" => "spaced-input"]]);
+        // line 13
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 13, $this->source); })()), "category", [], "any", false, false, false, 13), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
 
             ";
-        // line 16
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 16, $this->source); })()), "quantity", [], "any", false, false, false, 16), 'row', ["attr" => ["class" => "spaced-input"]]);
+        // line 15
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 15, $this->source); })()), "quantity", [], "any", false, false, false, 15), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
             ";
-        // line 17
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 17, $this->source); })()), "description", [], "any", false, false, false, 17), 'row', ["attr" => ["class" => "spaced-input"]]);
+        // line 16
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 16, $this->source); })()), "description", [], "any", false, false, false, 16), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
 
         ";
-        // line 19
-        if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 19, $this->source); })()), "images", [], "any", false, false, false, 19), "vars", [], "any", false, false, false, 19), "value", [], "any", false, false, false, 19)) {
-            // line 20
+        // line 18
+        if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 18, $this->source); })()), "images", [], "any", false, false, false, 18), "vars", [], "any", false, false, false, 18), "value", [], "any", false, false, false, 18)) {
+            // line 19
             yield "            <div class=\"col-md-6\">
                 ";
-            // line 21
-            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 21, $this->source); })()), "images", [], "any", false, false, false, 21), 'row', ["attr" => ["class" => "form-control", "onchange" => "previewImage(this)"]]);
+            // line 20
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 20, $this->source); })()), "images", [], "any", false, false, false, 20), 'row', ["attr" => ["class" => "form-control", "onchange" => "previewImage(this)"]]);
             yield "
             </div>
         ";
         }
-        // line 24
+        // line 23
         yield "            ";
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 24, $this->source); })()), "images", [], "any", false, false, false, 24), 'row', ["attr" => ["class" => "spaced-input"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 23, $this->source); })()), "images", [], "any", false, false, false, 23), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
             ";
-        // line 25
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 25, $this->source); })()), "price", [], "any", false, false, false, 25), 'row', ["attr" => ["class" => "spaced-input"]]);
+        // line 24
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 24, $this->source); })()), "price", [], "any", false, false, false, 24), 'row', ["attr" => ["class" => "spaced-input"]]);
         yield "
             <button type=\"submit\" class=\"btn btn-details\">Enregistrer</button>
         ";
-        // line 27
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 27, $this->source); })()), 'form_end');
+        // line 26
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["productForm"]) || array_key_exists("productForm", $context) ? $context["productForm"] : (function () { throw new RuntimeError('Variable "productForm" does not exist.', 26, $this->source); })()), 'form_end');
         yield "
     </form>
     <br>
@@ -186,7 +185,7 @@ class __TwigTemplate_88a81360af4f4f7dda81a9ebafe13cc9 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  144 => 27,  139 => 25,  134 => 24,  128 => 21,  125 => 20,  123 => 19,  118 => 17,  114 => 16,  109 => 14,  104 => 12,  100 => 11,  96 => 10,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  143 => 26,  138 => 24,  133 => 23,  127 => 20,  124 => 19,  122 => 18,  117 => 16,  113 => 15,  108 => 13,  104 => 12,  100 => 11,  96 => 10,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -203,7 +202,6 @@ class __TwigTemplate_88a81360af4f4f7dda81a9ebafe13cc9 extends Template
     <form action=\"{{ path('app_edit_product', {'id': product.id}) }}\" method=\"post\" enctype=\"multipart/form-data\" class=\"mb-4\">
         {{ form_start(productForm, {'attr': {'class': 'row g-3'}}) }}
             {{ form_row(productForm.name, {'attr': {'class': 'spaced-input'}}) }}
-        <p> Sélectionnez une catégorie </p>
             {{ form_row(productForm.category, {'attr': {'class': 'spaced-input'}}) }}
 
             {{ form_row(productForm.quantity, {'attr': {'class': 'spaced-input'}}) }}

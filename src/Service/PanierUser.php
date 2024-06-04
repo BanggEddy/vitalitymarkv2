@@ -10,7 +10,7 @@ class PanierUser
 
         foreach ($paniers as $panier) {
             $product = $panier->getIdproducts();
-            $promo = $product ? $product->getCurrentPromo() : null;
+            $promo = $product ? $product->getPromoMaintenant() : null;
 
             if ($product) {
                 $productPrice = $promo ? $promo->getPriceafterpromo() : $product->getPrice();
@@ -43,10 +43,10 @@ class PanierUser
         } else {
             return [
                 'id' => $panier->getId(),
-                'name' => 'Unknown Product or Promotion',
+                'name' => 'pas Product or Promotion',
                 'price' => $productPrice,
                 'quantity' => $panier->getQuantity(),
-                'description' => 'Unknown Description',
+                'description' => 'pas Description',
                 'subtotal' => $productPrice * $panier->getQuantity(),
                 'reduction' => $reduction,
                 'promo' => $promo
@@ -64,7 +64,7 @@ class PanierUser
             $product = $panier->getIdproducts();
 
             if ($product) {
-                $promo = $product->getCurrentPromo();
+                $promo = $product->getPromoMaintenant();
                 if ($promo) {
                     $productPrice = $promo->getPriceafterpromo();
                 } else {

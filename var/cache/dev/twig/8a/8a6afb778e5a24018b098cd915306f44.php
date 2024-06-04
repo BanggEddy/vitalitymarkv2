@@ -111,9 +111,7 @@ class __TwigTemplate_7d257d893420ace00d3ad667af51cc1b extends Template
                 <img src=\"";
             // line 17
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 17))), "html", null, true);
-            yield "\" alt=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 17), "html", null, true);
-            yield "\" class=\"product-image\">
+            yield "\" alt=\"images\" class=\"product-image\">
                 <div class=\"card-body product-details\">
                     <h3>";
             // line 19
@@ -290,7 +288,7 @@ class __TwigTemplate_7d257d893420ace00d3ad667af51cc1b extends Template
      */
     public function getDebugInfo()
     {
-        return array (  259 => 77,  250 => 73,  246 => 71,  229 => 57,  222 => 52,  211 => 50,  207 => 49,  199 => 45,  197 => 44,  191 => 41,  186 => 40,  180 => 38,  177 => 37,  171 => 36,  166 => 34,  162 => 33,  156 => 31,  152 => 29,  146 => 27,  143 => 26,  140 => 25,  137 => 24,  134 => 23,  131 => 22,  126 => 21,  124 => 20,  120 => 19,  113 => 17,  109 => 15,  105 => 14,  102 => 13,  98 => 11,  96 => 10,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  257 => 77,  248 => 73,  244 => 71,  227 => 57,  220 => 52,  209 => 50,  205 => 49,  197 => 45,  195 => 44,  189 => 41,  184 => 40,  178 => 38,  175 => 37,  169 => 36,  164 => 34,  160 => 33,  154 => 31,  150 => 29,  144 => 27,  141 => 26,  138 => 25,  135 => 24,  132 => 23,  129 => 22,  124 => 21,  122 => 20,  118 => 19,  113 => 17,  109 => 15,  105 => 14,  102 => 13,  98 => 11,  96 => 10,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -311,7 +309,7 @@ class __TwigTemplate_7d257d893420ace00d3ad667af51cc1b extends Template
         {% for product in products %}
         <div class=\"col-md-6 col-lg-3 mb-4\">
             <div class=\"card h-100 product-card\">
-                <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"{{ product.name }}\" class=\"product-image\">
+                <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"images\" class=\"product-image\">
                 <div class=\"card-body product-details\">
                     <h3>{{ product.name }}</h3>
                     {% set aUnePromotion = false %}

@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('cy', array (
     'Too many failed login attempts, please try again later.' => 'Gormod o ymdrechion mewngofnodi wedi methu, ceisiwch eto\'n hwyrach.',
     'Invalid or expired login link.' => 'Dolen mewngofnodi annilys neu wedi dod i ben.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Gormod o ymdrechion mewngofnodi wedi methu, ceisiwch eto ymhen %minutes% munud.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Gormod o ymdrechion mewngofnodi wedi methu, rhowch gynnig arall arni mewn %minutes% munud.|Gormod o ymdrechion mewngofnodi wedi methu, rhowch gynnig arall arni mewn %minutes% munud.',
   ),
 ));
 
@@ -339,6 +340,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

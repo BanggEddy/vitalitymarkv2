@@ -121,7 +121,7 @@ class __TwigTemplate_8376d684118aa6f5d575f397ec9cde78 extends Template
                     }
 
                     tab.addEventListener('click', function(e) {
-                        const activeTab = e.target || e.srcElement;
+                        let activeTab = e.target || e.srcElement;
 
                         /* needed because when the tab contains HTML contents, user can click */
                         /* on any of those elements instead of their parent '<button>' element */
@@ -391,7 +391,7 @@ class __TwigTemplate_8376d684118aa6f5d575f397ec9cde78 extends Template
                     }
 
                     tab.addEventListener('click', function(e) {
-                        const activeTab = e.target || e.srcElement;
+                        let activeTab = e.target || e.srcElement;
 
                         /* needed because when the tab contains HTML contents, user can click */
                         /* on any of those elements instead of their parent '<button>' element */

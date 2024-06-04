@@ -20,7 +20,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Repository\PanierRepository;
 use App\Repository\PromoRepository;
 use App\Form\ProductSearchType;
-use App\Service\PromoFilter;
 use App\Service\PanierUser;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
@@ -30,16 +29,14 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 class UservueController extends AbstractController
 {
     private $entityManager;
-    private $promoFilter;
     private $panierUserService;
     private $csrfTokenManager;
     private $productCategorie;
     private $promotionService;
 
-    public function __construct(PromotionService $promotionService, ProductCategorie $productCategorie, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PromoFilter $promoFilter, PanierUser $panierUserService,)
+    public function __construct(PromotionService $promotionService, ProductCategorie $productCategorie, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, PanierUser $panierUserService,)
     {
         $this->entityManager = $entityManager;
-        $this->promoFilter = $promoFilter;
         $this->panierUserService = $panierUserService;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->productCategorie = $productCategorie;

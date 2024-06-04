@@ -19,17 +19,12 @@
                 </div>
             {% endif %}
         {% endif %}
-        <p> Name : </p>
-        {{ form_widget(productForm.name, {'attr': {'class': 'spaced-input'}}) }}
-        <p> category : </p>
-        {{ form_widget(productForm.category, {'attr': {'class': 'spaced-input'}}) }}
-        <p> Quantité : </p>
-        {{ form_widget(productForm.quantity, {'attr': {'class': 'spaced-input'}}) }}
-        <p> Description : </p>
-        {{ form_widget(productForm.description, {'attr': {'class': 'spaced-input'}}) }}
-        {{ form_widget(productForm.images, {'attr': {'class': 'spaced-input'}}) }}
-        <p> Prix : </p>
-        {{ form_widget(productForm.price, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.name, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.category, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.quantity, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.description, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.images, {'attr': {'class': 'spaced-input'}}) }}
+        {{ form_row(productForm.price, {'attr': {'class': 'spaced-input'}}) }}
         <button type="submit" class="btn btn-details" style="margin-bottom: 3% !important;">Ajouter</button>
     </form>
 </div>

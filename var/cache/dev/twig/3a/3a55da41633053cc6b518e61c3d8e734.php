@@ -109,9 +109,7 @@ class __TwigTemplate_70786fb9bf8f870cda0db8d54406a38f extends Template
                     <img src=\"";
                 // line 15
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "images", [], "any", false, false, false, 15))), "html", null, true);
-                yield "\" alt=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["product"], "name", [], "any", false, false, false, 15), "html", null, true);
-                yield "\" class=\"product-image\">
+                yield "\" alt=\"images\" class=\"product-image\">
                     <div class=\"product-details\">
                         <h3>";
                 // line 17
@@ -256,7 +254,7 @@ class __TwigTemplate_70786fb9bf8f870cda0db8d54406a38f extends Template
      */
     public function getDebugInfo()
     {
-        return array (  226 => 62,  222 => 60,  205 => 49,  194 => 41,  189 => 39,  184 => 38,  178 => 36,  175 => 35,  169 => 34,  164 => 32,  160 => 31,  154 => 29,  150 => 27,  144 => 25,  141 => 24,  138 => 23,  135 => 22,  132 => 21,  129 => 20,  124 => 19,  122 => 18,  118 => 17,  111 => 15,  107 => 13,  103 => 12,  100 => 11,  96 => 9,  94 => 8,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
+        return array (  224 => 62,  220 => 60,  203 => 49,  192 => 41,  187 => 39,  182 => 38,  176 => 36,  173 => 35,  167 => 34,  162 => 32,  158 => 31,  152 => 29,  148 => 27,  142 => 25,  139 => 24,  136 => 23,  133 => 22,  130 => 21,  127 => 20,  122 => 19,  120 => 18,  116 => 17,  111 => 15,  107 => 13,  103 => 12,  100 => 11,  96 => 9,  94 => 8,  90 => 6,  80 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -275,7 +273,7 @@ class __TwigTemplate_70786fb9bf8f870cda0db8d54406a38f extends Template
             {% for product in products %}
             <div class=\"col-md-4 col-lg-4\">
                 <div class=\"product-card\">
-                    <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"{{ product.name }}\" class=\"product-image\">
+                    <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"images\" class=\"product-image\">
                     <div class=\"product-details\">
                         <h3>{{ product.name }}</h3>
                         {% set aUnePromotion = false %}

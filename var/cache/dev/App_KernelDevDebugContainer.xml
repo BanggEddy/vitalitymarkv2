@@ -424,6 +424,7 @@
     <parameter key="karser_recaptcha3.enabled">true</parameter>
     <parameter key="karser_recaptcha3.host">www.google.com</parameter>
     <parameter key="knp_paginator.template.pagination">@KnpPaginator/Pagination/sliding.html.twig</parameter>
+    <parameter key="knp_paginator.template.rel_links">@KnpPaginator/Pagination/rel_links.html.twig</parameter>
     <parameter key="knp_paginator.template.filtration">@KnpPaginator/Pagination/filtration.html.twig</parameter>
     <parameter key="knp_paginator.template.sortable">@KnpPaginator/Pagination/sortable_link.html.twig</parameter>
     <parameter key="knp_paginator.page_range">5</parameter>
@@ -540,7 +541,6 @@
       <argument type="service" id="App\Service\PromotionService"/>
       <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
-      <argument type="service" id="App\Service\PromoFilter"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\AccueilController"/>
       </call>
@@ -605,7 +605,6 @@
       <argument type="service" id="App\Service\ProductCategorie"/>
       <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
-      <argument type="service" id="App\Service\PromoFilter"/>
       <argument type="service" id="App\Service\PanierUser"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\UservueController"/>
@@ -3382,6 +3381,8 @@
       <argument type="service" id="property_info" on-invalid="ignore"/>
       <argument type="service" id="serializer.mapping.class_discriminator_resolver" on-invalid="ignore"/>
       <argument>null</argument>
+      <argument type="collection"/>
+      <argument type="service" id="property_info" on-invalid="ignore"/>
     </service>
     <service id="serializer.normalizer.property" class="Symfony\Component\Serializer\Normalizer\PropertyNormalizer">
       <argument type="service" id="api_platform.serializer.mapping.class_metadata_factory"/>
@@ -3390,7 +3391,6 @@
       <argument type="service" id="serializer.mapping.class_discriminator_resolver" on-invalid="ignore"/>
       <argument>null</argument>
       <argument type="collection"/>
-      <argument type="service" id="property_info" on-invalid="ignore"/>
     </service>
     <service id="serializer.denormalizer.array" class="Symfony\Component\Serializer\Normalizer\ArrayDenormalizer">
       <tag name="serializer.normalizer" priority="-990"/>
@@ -4933,6 +4933,14 @@
         <argument>doctrine:cache:clear-collection-region</argument>
       </call>
     </service>
+    <service id="doctrine.mapping_convert_command" class="Doctrine\ORM\Tools\Console\Command\ConvertMappingCommand">
+      <tag name="console.command" command="doctrine:mapping:convert"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine.orm.command.entity_manager_provider"/>
+      <call method="setName">
+        <argument>doctrine:mapping:convert</argument>
+      </call>
+    </service>
     <service id="doctrine.schema_create_command" class="Doctrine\ORM\Tools\Console\Command\SchemaTool\CreateCommand">
       <tag name="console.command" command="doctrine:schema:create"/>
       <tag name="container.no_preload"/>
@@ -4947,6 +4955,14 @@
       <argument type="service" id="doctrine.orm.command.entity_manager_provider"/>
       <call method="setName">
         <argument>doctrine:schema:drop</argument>
+      </call>
+    </service>
+    <service id="doctrine.ensure_production_settings_command" class="Doctrine\ORM\Tools\Console\Command\EnsureProductionSettingsCommand">
+      <tag name="console.command" command="doctrine:ensure-production-settings"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine.orm.command.entity_manager_provider"/>
+      <call method="setName">
+        <argument>doctrine:ensure-production-settings</argument>
       </call>
     </service>
     <service id="doctrine.clear_entity_region_command" class="Doctrine\ORM\Tools\Console\Command\ClearCache\EntityRegionCommand">
@@ -4995,6 +5011,15 @@
       <argument type="service" id="doctrine.orm.command.entity_manager_provider"/>
       <call method="setName">
         <argument>doctrine:schema:validate</argument>
+      </call>
+    </service>
+    <service id="doctrine.mapping_import_command" class="Doctrine\Bundle\DoctrineBundle\Command\ImportMappingDoctrineCommand">
+      <tag name="console.command" command="doctrine:mapping:import"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine"/>
+      <argument>%kernel.bundles%</argument>
+      <call method="setName">
+        <argument>doctrine:mapping:import</argument>
       </call>
     </service>
     <service id="doctrine.orm.default_configuration" class="Doctrine\ORM\Configuration">
@@ -6895,7 +6920,7 @@
       <argument type="service" id="maker.generator"/>
     </service>
     <service id="api_platform.state_provider.locator" class="ApiPlatform\State\CallableProvider">
-      <argument type="service" id=".service_locator._7faqSO"/>
+      <argument type="service" id=".service_locator.zCMhoWZ"/>
     </service>
     <service id="api_platform.state_processor.locator" class="ApiPlatform\State\CallableProcessor">
       <argument type="service" id=".service_locator.czt1CzU"/>
@@ -6967,7 +6992,6 @@
       <argument type="service" id="api_platform.filter_locator"/>
     </service>
     <service id="api_platform.serializer.context_builder.filter" class="ApiPlatform\Serializer\SerializerFilterContextBuilder">
-      <tag name="container.decorator" id="api_platform.serializer.context_builder" inner="api_platform.serializer.context_builder.filter.inner"/>
       <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory.cached"/>
       <argument type="service" id="api_platform.filter_locator"/>
       <argument type="service" id="api_platform.serializer.context_builder.filter.inner"/>
@@ -7104,7 +7128,7 @@
     <service id="api_platform.state_processor.serialize" class="ApiPlatform\State\Processor\SerializeProcessor">
       <argument>null</argument>
       <argument type="service" id="debug.serializer"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="api_platform.state_processor.write" class="ApiPlatform\State\Processor\WriteProcessor">
       <argument>null</argument>
@@ -7144,7 +7168,7 @@
     <service id="api_platform.state_processor.documentation.serialize" class="ApiPlatform\State\Processor\SerializeProcessor">
       <argument type="service" id="api_platform.http_cache.processor.add_headers"/>
       <argument type="service" id="debug.serializer"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="api_platform.state_processor.documentation.write" class="ApiPlatform\State\Processor\WriteProcessor">
       <argument type="service" id="api_platform.state_processor.documentation.serialize"/>
@@ -7377,6 +7401,15 @@
       <argument type="collection">
         <argument type="service" id="serializer.encoder.json"/>
       </argument>
+    </service>
+    <service id="api_platform.openapi.provider" class="ApiPlatform\OpenApi\State\OpenApiProvider">
+      <tag name="api_platform.state_provider" priority="-100" key="ApiPlatform\OpenApi\State\OpenApiProvider"/>
+      <tag name="api_platform.state_provider" priority="-100" key="api_platform.openapi.provider"/>
+      <argument type="service" id="lexik_jwt_authentication.api_platform.openapi.factory"/>
+    </service>
+    <service id="api_platform.openapi.serializer_context_builder" class="ApiPlatform\OpenApi\Serializer\SerializerContextBuilder">
+      <tag name="container.decorator" id="api_platform.serializer.context_builder" inner="api_platform.serializer.context_builder.filter.inner"/>
+      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
     </service>
     <service id="api_platform.openapi.options" class="ApiPlatform\OpenApi\Options">
       <argument>Hello API Platform</argument>
@@ -7887,7 +7920,7 @@
     <service id="api_platform.argument_resolver.payload" class="ApiPlatform\Symfony\Bundle\ArgumentResolver\PayloadArgumentResolver">
       <tag name="controller.argument_value_resolver"/>
       <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory.cached"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController" public="true">
       <argument type="service" id="router.default" on-invalid="null"/>
@@ -8062,6 +8095,7 @@
       <tag name="container.hot_path"/>
       <argument type="collection">
         <argument key="defaultPaginationTemplate">@KnpPaginator/Pagination/sliding.html.twig</argument>
+        <argument key="defaultRelLinksTemplate">@KnpPaginator/Pagination/rel_links.html.twig</argument>
         <argument key="defaultSortableTemplate">@KnpPaginator/Pagination/sortable_link.html.twig</argument>
         <argument key="defaultFiltrationTemplate">@KnpPaginator/Pagination/filtration.html.twig</argument>
         <argument key="defaultPageRange">5</argument>
@@ -9909,15 +9943,17 @@
         <argument key="main" type="service_closure" id="security.authenticator.remember_me_handler.main"/>
       </argument>
     </service>
-    <service id=".service_locator._7faqSO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.zCMhoWZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="ApiPlatform\Doctrine\Orm\State\CollectionProvider" type="service_closure" id="api_platform.doctrine.orm.state.collection_provider"/>
         <argument key="ApiPlatform\Doctrine\Orm\State\ItemProvider" type="service_closure" id="api_platform.doctrine.orm.state.item_provider"/>
+        <argument key="ApiPlatform\OpenApi\State\OpenApiProvider" type="service_closure" id="api_platform.openapi.provider"/>
         <argument key="ApiPlatform\State\CreateProvider" type="service_closure" id="api_platform.state_provider.create"/>
         <argument key="ApiPlatform\State\ObjectProvider" type="service_closure" id="api_platform.state_provider.object"/>
         <argument key="api_platform.doctrine.orm.state.collection_provider" type="service_closure" id="api_platform.doctrine.orm.state.collection_provider"/>
         <argument key="api_platform.doctrine.orm.state.item_provider" type="service_closure" id="api_platform.doctrine.orm.state.item_provider"/>
+        <argument key="api_platform.openapi.provider" type="service_closure" id="api_platform.openapi.provider"/>
         <argument key="api_platform.state.error_provider" type="service_closure" id="api_platform.state.error_provider"/>
         <argument key="api_platform.state_provider.create" type="service_closure" id="api_platform.state_provider.create"/>
         <argument key="api_platform.state_provider.object" type="service_closure" id="api_platform.state_provider.object"/>
@@ -9953,7 +9989,7 @@
     </service>
     <service id="api_platform.state_provider.parameter.inner" class="ApiPlatform\State\Provider\ReadProvider">
       <argument type="service" id="api_platform.state_provider.locator"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="debug.validator.inner" class="Symfony\Component\Validator\Validator\ValidatorInterface">
       <factory service="validator.builder" method="getValidator"/>
@@ -10278,7 +10314,7 @@
     </service>
     <service id="api_platform.swagger_ui.documentation.provider.inner" class="ApiPlatform\State\Provider\ReadProvider">
       <argument type="service" id="api_platform.state_provider.locator"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="api_platform.hydra.json_schema.schema_factory.inner" class="ApiPlatform\JsonSchema\SchemaFactory">
       <argument type="service" id="api_platform.json_schema.type_factory" on-invalid="ignore"/>
@@ -10303,7 +10339,7 @@
     <service id="api_platform.state_provider.access_checker.post_deserialize.inner" class="ApiPlatform\State\Provider\DeserializeProvider">
       <argument>null</argument>
       <argument type="service" id="debug.serializer"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
       <argument type="service" id="translator.data_collector" on-invalid="null"/>
     </service>
     <service id="lexik_jwt_authentication.api_platform.openapi.factory.inner" class="ApiPlatform\OpenApi\Factory\OpenApiFactory">
@@ -10957,7 +10993,7 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.2AJQH.5"/>
+      <argument type="service" id=".service_locator.2s_41l5"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -11002,14 +11038,17 @@
         <argument key="doctrine:cache:clear-query">doctrine.cache_clear_query_cache_command</argument>
         <argument key="doctrine:cache:clear-result">doctrine.cache_clear_result_command</argument>
         <argument key="doctrine:cache:clear-collection-region">doctrine.cache_collection_region_command</argument>
+        <argument key="doctrine:mapping:convert">doctrine.mapping_convert_command</argument>
         <argument key="doctrine:schema:create">doctrine.schema_create_command</argument>
         <argument key="doctrine:schema:drop">doctrine.schema_drop_command</argument>
+        <argument key="doctrine:ensure-production-settings">doctrine.ensure_production_settings_command</argument>
         <argument key="doctrine:cache:clear-entity-region">doctrine.clear_entity_region_command</argument>
         <argument key="doctrine:mapping:info">doctrine.mapping_info_command</argument>
         <argument key="doctrine:cache:clear-query-region">doctrine.clear_query_region_command</argument>
         <argument key="doctrine:query:dql">doctrine.query_dql_command</argument>
         <argument key="doctrine:schema:update">doctrine.schema_update_command</argument>
         <argument key="doctrine:schema:validate">doctrine.schema_validate_command</argument>
+        <argument key="doctrine:mapping:import">doctrine.mapping_import_command</argument>
         <argument key="doctrine:migrations:diff">doctrine_migrations.diff_command</argument>
         <argument key="doctrine:migrations:sync-metadata-storage">doctrine_migrations.sync_metadata_command</argument>
         <argument key="doctrine:migrations:list">doctrine_migrations.versions_command</argument>
@@ -11068,7 +11107,7 @@
         <argument key="make:state-provider">maker.auto_command.make_state_provider</argument>
       </argument>
     </service>
-    <service id=".service_locator.2AJQH.5" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.2s_41l5" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
@@ -11114,14 +11153,17 @@
         <argument key="doctrine.cache_clear_query_cache_command" type="service_closure" id="doctrine.cache_clear_query_cache_command"/>
         <argument key="doctrine.cache_clear_result_command" type="service_closure" id="doctrine.cache_clear_result_command"/>
         <argument key="doctrine.cache_collection_region_command" type="service_closure" id="doctrine.cache_collection_region_command"/>
+        <argument key="doctrine.mapping_convert_command" type="service_closure" id="doctrine.mapping_convert_command"/>
         <argument key="doctrine.schema_create_command" type="service_closure" id="doctrine.schema_create_command"/>
         <argument key="doctrine.schema_drop_command" type="service_closure" id="doctrine.schema_drop_command"/>
+        <argument key="doctrine.ensure_production_settings_command" type="service_closure" id="doctrine.ensure_production_settings_command"/>
         <argument key="doctrine.clear_entity_region_command" type="service_closure" id="doctrine.clear_entity_region_command"/>
         <argument key="doctrine.mapping_info_command" type="service_closure" id="doctrine.mapping_info_command"/>
         <argument key="doctrine.clear_query_region_command" type="service_closure" id="doctrine.clear_query_region_command"/>
         <argument key="doctrine.query_dql_command" type="service_closure" id="doctrine.query_dql_command"/>
         <argument key="doctrine.schema_update_command" type="service_closure" id="doctrine.schema_update_command"/>
         <argument key="doctrine.schema_validate_command" type="service_closure" id="doctrine.schema_validate_command"/>
+        <argument key="doctrine.mapping_import_command" type="service_closure" id="doctrine.mapping_import_command"/>
         <argument key="doctrine_migrations.diff_command" type="service_closure" id=".doctrine_migrations.diff_command.lazy"/>
         <argument key="doctrine_migrations.sync_metadata_command" type="service_closure" id=".doctrine_migrations.sync_metadata_command.lazy"/>
         <argument key="doctrine_migrations.versions_command" type="service_closure" id=".doctrine_migrations.versions_command.lazy"/>
@@ -11468,7 +11510,7 @@
     <service id="ApiPlatform\Metadata\ResourceClassResolverInterface" alias="api_platform.resource_class_resolver"/>
     <service id="ApiPlatform\Api\UrlGeneratorInterface" alias="api_platform.router"/>
     <service id="ApiPlatform\Metadata\UrlGeneratorInterface" alias="api_platform.router"/>
-    <service id="ApiPlatform\Serializer\SerializerContextBuilderInterface" alias="api_platform.serializer.context_builder.filter"/>
+    <service id="ApiPlatform\Serializer\SerializerContextBuilderInterface" alias="api_platform.openapi.serializer_context_builder"/>
     <service id="ApiPlatform\Serializer\Filter\PropertyFilter" alias="api_platform.serializer.property_filter"/>
     <service id="ApiPlatform\Serializer\Filter\GroupFilter" alias="api_platform.serializer.group_filter"/>
     <service id="api_platform.identifiers_extractor" alias="api_platform.api.identifiers_extractor"/>
@@ -11600,13 +11642,14 @@
     <service id="security.firewall.authenticator.login" alias="debug.security.firewall.authenticator.login"/>
     <service id="security.firewall.authenticator.api" alias="debug.security.firewall.authenticator.api"/>
     <service id="security.firewall.authenticator.main" alias="debug.security.firewall.authenticator.main"/>
-    <service id="api_platform.serializer.context_builder" alias="api_platform.serializer.context_builder.filter"/>
+    <service id="api_platform.serializer.context_builder" alias="api_platform.openapi.serializer_context_builder"/>
     <service id="api_platform.state_processor.add_link_header.inner" alias="api_platform.hydra.processor.link"/>
     <service id="api_platform.metadata.resource.name_collection_factory.attributes.inner" alias="api_platform.metadata.resource.name_collection_factory.xml"/>
     <service id="api_platform.metadata.resource.name_collection_factory.class_name.inner" alias="api_platform.metadata.resource.name_collection_factory.attributes"/>
     <service id="api_platform.metadata.property.name_collection_factory.xml.inner" alias="api_platform.metadata.property.name_collection_factory.property_info"/>
     <service id="api_platform.metadata.resource.name_collection_factory.yaml.inner" alias="api_platform.metadata.resource.name_collection_factory.class_name"/>
     <service id="api_platform.metadata.property.name_collection_factory.yaml.inner" alias="api_platform.metadata.property.name_collection_factory.xml"/>
+    <service id="api_platform.openapi.serializer_context_builder.inner" alias="api_platform.serializer.context_builder.filter"/>
     <service id="api_platform.state_provider.documentation.read" alias="api_platform.swagger_ui.documentation.provider"/>
     <service id="api_platform.swagger_ui.provider.inner" alias="api_platform.symfony.parameter_validator"/>
     <service id="api_platform.json_schema.schema_factory" alias="api_platform.json_schema.backward_compatible_schema_factory"/>
@@ -11662,7 +11705,7 @@
     <service id=".service_locator.ro9MXaF" alias=".service_locator.Oannbdp"/>
     <service id=".service_locator.u6DWx23" alias=".service_locator.cXsfP3P"/>
     <service id=".service_locator.BlxN3Cw" alias=".service_locator.LrCXAmX"/>
-    <service id=".service_locator.OavZKAY" alias=".service_locator._7faqSO"/>
+    <service id=".service_locator..2cOjlF" alias=".service_locator.zCMhoWZ"/>
     <service id=".service_locator.j1woMnS" alias=".service_locator.czt1CzU"/>
   </services>
 </container>

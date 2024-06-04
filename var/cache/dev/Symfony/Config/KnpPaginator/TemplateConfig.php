@@ -11,6 +11,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 class TemplateConfig 
 {
     private $pagination;
+    private $relLinks;
     private $filtration;
     private $sortable;
     private $_usedProperties = [];
@@ -24,6 +25,19 @@ class TemplateConfig
     {
         $this->_usedProperties['pagination'] = true;
         $this->pagination = $value;
+
+        return $this;
+    }
+
+    /**
+     * @default '@KnpPaginator/Pagination/rel_links.html.twig'
+     * @param ParamConfigurator|mixed $value
+     * @return $this
+     */
+    public function relLinks($value): static
+    {
+        $this->_usedProperties['relLinks'] = true;
+        $this->relLinks = $value;
 
         return $this;
     }
@@ -62,6 +76,12 @@ class TemplateConfig
             unset($value['pagination']);
         }
 
+        if (array_key_exists('rel_links', $value)) {
+            $this->_usedProperties['relLinks'] = true;
+            $this->relLinks = $value['rel_links'];
+            unset($value['rel_links']);
+        }
+
         if (array_key_exists('filtration', $value)) {
             $this->_usedProperties['filtration'] = true;
             $this->filtration = $value['filtration'];
@@ -84,6 +104,9 @@ class TemplateConfig
         $output = [];
         if (isset($this->_usedProperties['pagination'])) {
             $output['pagination'] = $this->pagination;
+        }
+        if (isset($this->_usedProperties['relLinks'])) {
+            $output['rel_links'] = $this->relLinks;
         }
         if (isset($this->_usedProperties['filtration'])) {
             $output['filtration'] = $this->filtration;

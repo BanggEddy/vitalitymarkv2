@@ -22,7 +22,7 @@ class ProductAdminType extends AbstractType
                 'required' => true,
             ])
             ->add('category', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Catégorie',
                 'choices' => [
                     'Sélectionner une catégorie' => '',
                     'Produits frais' => 'Produits frais',

@@ -169,6 +169,7 @@ $catalogue = new MessageCatalogue('ca', array (
     'Too many failed login attempts, please try again later.' => 'Massa intents d\'inici de sessió fallits, torneu-ho a provar més tard.',
     'Invalid or expired login link.' => 'Enllaç d\'inici de sessió no vàlid o caducat.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Massa intents d\'inici de sessió fallits, torneu-ho a provar en %minutes% minut.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Massa intents fallits d\'inici de sessió, torneu-ho a provar d\'aquí a %minutes% minuts.',
   ),
   'KnpPaginatorBundle' => 
   array (
@@ -345,6 +346,7 @@ $catalogueEn = new MessageCatalogue('en', array (
     'Too many failed login attempts, please try again later.' => 'Too many failed login attempts, please try again later.',
     'Invalid or expired login link.' => 'Invalid or expired login link.',
     'Too many failed login attempts, please try again in %minutes% minute.' => 'Too many failed login attempts, please try again in %minutes% minute.',
+    'Too many failed login attempts, please try again in %minutes% minutes.' => 'Too many failed login attempts, please try again in %minutes% minutes.',
   ),
   'KnpPaginatorBundle' => 
   array (

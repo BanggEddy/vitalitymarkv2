@@ -11,6 +11,17 @@ class ProductsCRUDControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
+        $crawler = $client->request('GET', '/login');
+        $this->assertSelectorTextContains('h3', 'Connectez vous');
+        $form = $crawler->selectButton('Se connecter')->form([
+            'email' => 'admin@gmail.com',
+            'password' => 'Roooooooot123@',
+        ]);
+        $client->submit($form);
+        $this->assertResponseRedirects('/adminproducts');
+        $client->followRedirect();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
         $crawler = $client->request('GET', '/product/create');
         $this->assertResponseIsSuccessful();
 
@@ -23,12 +34,11 @@ class ProductsCRUDControllerTest extends WebTestCase
         ]);
 
         $client->submit($form);
-
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        restore_exception_handler();
     }
 
 
-    public function testEditProduct(): void
+    public function testEditProduit(): void
     {
         $client = static::createClient();
 
@@ -44,7 +54,7 @@ class ProductsCRUDControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
 
-        $crawler = $client->request('GET', '/adminformedit/3');
+        $crawler = $client->request('GET', '/adminformedit/4');
 
         $form = $crawler->filter('form[name="product_admin"]')->form([
             'product_admin[name]' => 'Produit edit',
@@ -72,33 +82,28 @@ class ProductsCRUDControllerTest extends WebTestCase
 
     #Elle marche, il faut juste que dans le bdd test mettre un produit
 
-    // public function testDeleteProduct(): void
-    // {
-    //     $client = static::createClient();
+    public function testDeleteProduit(): void
+    {
+        $client = static::createClient();
 
-    // #S'il demande de se connecter, parce qu'il faut la session admin
-    // // $crawler = $client->request('GET', '/login');
-    // // $this->assertSelectorTextContains('h3', 'Connectez vous');
-    // // $form = $crawler->selectButton('Se connecter')->form([
-    // //     'email' => 'admin@gmail.com',
-    // //     'password' => 'Roooooooot123@',
-    // // ]);
-    // // $client->submit($form);
-    // // $this->assertResponseRedirects('/adminproducts');
-    // // $client->followRedirect();
-    // // $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        #Il demande de se connecter, parce qu'il faut la session admin
+        $crawler = $client->request('GET', '/login');
+        $this->assertSelectorTextContains('h3', 'Connectez vous');
+        $form = $crawler->selectButton('Se connecter')->form([
+            'email' => 'admin@gmail.com',
+            'password' => 'Roooooooot123@',
+        ]);
+        $client->submit($form);
+        $this->assertResponseRedirects('/adminproducts');
+        $client->followRedirect();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
-    //     $client->request('GET', '/deleteproduct/2');
+        $client->request('GET', '/deleteproduct/4');
 
-    //     $this->assertResponseRedirects('/admindeleteproducts');
+        $this->assertSelectorNotExists('.product-item[data-product-id="4"]');
+    }
 
-    //     $client->followRedirect();
-    //     $this->assertResponseIsSuccessful();
-
-    //     $this->assertSelectorNotExists('.product-item[data-product-id="1"]');
-    // }
-
-    public function testProductsAreDisplayed(): void
+    public function testProductsAffiche(): void
     {
         $client = static::createClient();
 

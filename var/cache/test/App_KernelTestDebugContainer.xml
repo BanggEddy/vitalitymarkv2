@@ -26,6 +26,7 @@
       <parameter key="KarserRecaptcha3Bundle">Karser\Recaptcha3Bundle\KarserRecaptcha3Bundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="LexikJWTAuthenticationBundle">Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle</parameter>
+      <parameter key="RecaptchaBundle">VictorPrdh\RecaptchaBundle\RecaptchaBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -79,6 +80,10 @@
       <parameter key="LexikJWTAuthenticationBundle" type="collection">
         <parameter key="path">C:\Users\David\Desktop\vitalitymarkv2\vendor\lexik\jwt-authentication-bundle</parameter>
         <parameter key="namespace">Lexik\Bundle\JWTAuthenticationBundle</parameter>
+      </parameter>
+      <parameter key="RecaptchaBundle" type="collection">
+        <parameter key="path">C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src</parameter>
+        <parameter key="namespace">VictorPrdh\RecaptchaBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -150,6 +155,7 @@
     <parameter key="profiler_listener.only_main_requests">false</parameter>
     <parameter key="profiler.storage.dsn">file:C:\Users\David\Desktop\vitalitymarkv2\var\cache\test/profiler</parameter>
     <parameter key="twig.form.resources" type="collection">
+      <parameter>@Recaptcha/form/recaptcha.html.twig</parameter>
       <parameter>form_div_layout.html.twig</parameter>
       <parameter>@KarserRecaptcha3/Form/karser_recaptcha3_widget.html.twig</parameter>
     </parameter>
@@ -419,6 +425,7 @@
     <parameter key="karser_recaptcha3.enabled">true</parameter>
     <parameter key="karser_recaptcha3.host">www.google.com</parameter>
     <parameter key="knp_paginator.template.pagination">@KnpPaginator/Pagination/sliding.html.twig</parameter>
+    <parameter key="knp_paginator.template.rel_links">@KnpPaginator/Pagination/rel_links.html.twig</parameter>
     <parameter key="knp_paginator.template.filtration">@KnpPaginator/Pagination/filtration.html.twig</parameter>
     <parameter key="knp_paginator.template.sortable">@KnpPaginator/Pagination/sortable_link.html.twig</parameter>
     <parameter key="knp_paginator.page_range">5</parameter>
@@ -429,6 +436,8 @@
     <parameter key="lexik_jwt_authentication.allow_no_expiration">false</parameter>
     <parameter key="lexik_jwt_authentication.user_id_claim">username</parameter>
     <parameter key="lexik_jwt_authentication.encoder.signature_algorithm">RS256</parameter>
+    <parameter key="victor_prdh_recaptcha.google_site_key">%env(GOOGLE_RECAPTCHA_SITE_KEY)%</parameter>
+    <parameter key="victor_prdh_recaptcha.google_secret_key">%env(GOOGLE_RECAPTCHA_SECRET_KEY)%</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -512,14 +521,23 @@
       <tag name="routing.route_loader"/>
     </service>
     <service id="App\Entity\LoyaltyCard" class="App\Entity\LoyaltyCard" autowire="true" autoconfigure="true"/>
+    <service id="App\Service\PromotionService" class="App\Service\PromotionService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Repository\PromoRepository"/>
+    </service>
+    <service id="App\Service\ProductCategorie" class="App\Service\ProductCategorie" autowire="true" autoconfigure="true">
+      <argument type="service" id="router.default"/>
+      <argument type="service" id="security.token_storage"/>
+    </service>
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
     <service id="App\Controller\AccueilController" class="App\Controller\AccueilController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Service\ProductCategorie"/>
+      <argument type="service" id="App\Service\PromotionService"/>
+      <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
-      <argument type="service" id="App\Service\PromoFilter"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\AccueilController"/>
       </call>
@@ -527,6 +545,8 @@
     <service id="App\Controller\AdminproductsController" class="App\Controller\AdminproductsController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Service\PromotionService"/>
+      <argument type="service" id="App\Service\ProductCategorie"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="filesystem"/>
       <call method="setContainer">
@@ -545,14 +565,6 @@
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\GestionUserController"/>
-      </call>
-    </service>
-    <service id="App\Controller\LoginController" class="App\Controller\LoginController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="doctrine.orm.default_entity_manager"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\LoginController"/>
       </call>
     </service>
     <service id="App\Controller\LoyaltyCardController" class="App\Controller\LoyaltyCardController" public="true" autowire="true" autoconfigure="true">
@@ -586,8 +598,10 @@
     <service id="App\Controller\UservueController" class="App\Controller\UservueController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Service\PromotionService"/>
+      <argument type="service" id="App\Service\ProductCategorie"/>
+      <argument type="service" id="security.csrf.token_manager"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
-      <argument type="service" id="App\Service\PromoFilter"/>
       <argument type="service" id="App\Service\PanierUser"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\UservueController"/>
@@ -671,14 +685,7 @@
       <argument type="service" id="lexik_jwt_authentication.jwt_manager"/>
     </service>
     <service id="App\Security\UserChecker" class="App\Security\UserChecker" autowire="true" autoconfigure="true"/>
-    <service id="App\Service\ArticleFilter" class="App\Service\ArticleFilter" autowire="true" autoconfigure="true">
-      <argument type="service" id="App\Repository\ProductsRepository"/>
-      <argument type="service" id="App\Repository\PromoRepository"/>
-    </service>
     <service id="App\Service\PanierUser" class="App\Service\PanierUser" autowire="true" autoconfigure="true"/>
-    <service id="App\Service\ProductCategorie" class="App\Service\ProductCategorie" autowire="true" autoconfigure="true">
-      <argument type="service" id="router.default"/>
-    </service>
     <service id="App\Service\PromoFilter" class="App\Service\PromoFilter" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="argument_resolver.backed_enum_resolver" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver">
@@ -707,7 +714,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.UfdADMz"/>
+      <argument type="service" id=".service_locator.yh7FGo1"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1330,6 +1337,7 @@
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations</argument>
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations</argument>
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations</argument>
+        <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations</argument>
       </argument>
       <argument type="collection">
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\twig-bridge/Resources/views/Form</argument>
@@ -1356,6 +1364,7 @@
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations</argument>
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations</argument>
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations</argument>
+        <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations</argument>
       </argument>
       <argument type="collection">
         <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\twig-bridge/Resources/views/Form</argument>
@@ -1438,6 +1447,7 @@
         <argument>App\Form</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
         <argument>Karser\Recaptcha3Bundle\Form</argument>
+        <argument>VictorPrdh\RecaptchaBundle\Form</argument>
       </argument>
       <argument type="collection">
         <argument>App\Form\AjoutPromo</argument>
@@ -1457,6 +1467,7 @@
         <argument>Symfony\Component\Form\Extension\Core\Type\ColorType</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type\EntityType</argument>
         <argument>Karser\Recaptcha3Bundle\Form\Recaptcha3Type</argument>
+        <argument>VictorPrdh\RecaptchaBundle\Form\ReCaptchaType</argument>
       </argument>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension</argument>
@@ -1775,6 +1786,8 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Entity\LoyaltyCard" type="service_closure" id="App\Entity\LoyaltyCard" on-invalid="ignore_uninitialized"/>
+        <argument key="App\Service\PromotionService" type="service_closure" id="App\Service\PromotionService" on-invalid="ignore_uninitialized"/>
+        <argument key="App\Service\ProductCategorie" type="service_closure" id="App\Service\ProductCategorie" on-invalid="ignore_uninitialized"/>
         <argument key="App\DataFixtures\AppFixtures" type="service_closure" id="App\DataFixtures\AppFixtures" on-invalid="ignore_uninitialized"/>
         <argument key="App\DataFixtures\UserFixtures" type="service_closure" id="App\DataFixtures\UserFixtures" on-invalid="ignore_uninitialized"/>
         <argument key="App\Form\AjoutPromo" type="service_closure" id="App\Form\AjoutPromo" on-invalid="ignore_uninitialized"/>
@@ -1798,9 +1811,7 @@
         <argument key="App\Repository\UserRepository" type="service_closure" id="App\Repository\UserRepository" on-invalid="ignore_uninitialized"/>
         <argument key="App\Security\AuthAuthenticator" type="service_closure" id="App\Security\AuthAuthenticator" on-invalid="ignore_uninitialized"/>
         <argument key="App\Security\UserChecker" type="service_closure" id="App\Security\UserChecker" on-invalid="ignore_uninitialized"/>
-        <argument key="App\Service\ArticleFilter" type="service_closure" id="App\Service\ArticleFilter" on-invalid="ignore_uninitialized"/>
         <argument key="App\Service\PanierUser" type="service_closure" id="App\Service\PanierUser" on-invalid="ignore_uninitialized"/>
-        <argument key="App\Service\ProductCategorie" type="service_closure" id="App\Service\ProductCategorie" on-invalid="ignore_uninitialized"/>
         <argument key="App\Service\PromoFilter" type="service_closure" id="App\Service\PromoFilter" on-invalid="ignore_uninitialized"/>
         <argument key="argument_metadata_factory" type="service_closure" id="argument_metadata_factory" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver.backed_enum_resolver" type="service_closure" id="argument_resolver.backed_enum_resolver" on-invalid="ignore_uninitialized"/>
@@ -2136,14 +2147,17 @@
         <argument key="doctrine.cache_clear_query_cache_command" type="service_closure" id="doctrine.cache_clear_query_cache_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.cache_clear_result_command" type="service_closure" id="doctrine.cache_clear_result_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.cache_collection_region_command" type="service_closure" id="doctrine.cache_collection_region_command" on-invalid="ignore_uninitialized"/>
+        <argument key="doctrine.mapping_convert_command" type="service_closure" id="doctrine.mapping_convert_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.schema_create_command" type="service_closure" id="doctrine.schema_create_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.schema_drop_command" type="service_closure" id="doctrine.schema_drop_command" on-invalid="ignore_uninitialized"/>
+        <argument key="doctrine.ensure_production_settings_command" type="service_closure" id="doctrine.ensure_production_settings_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.clear_entity_region_command" type="service_closure" id="doctrine.clear_entity_region_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.mapping_info_command" type="service_closure" id="doctrine.mapping_info_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.clear_query_region_command" type="service_closure" id="doctrine.clear_query_region_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.query_dql_command" type="service_closure" id="doctrine.query_dql_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.schema_update_command" type="service_closure" id="doctrine.schema_update_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.schema_validate_command" type="service_closure" id="doctrine.schema_validate_command" on-invalid="ignore_uninitialized"/>
+        <argument key="doctrine.mapping_import_command" type="service_closure" id="doctrine.mapping_import_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.orm.default_configuration" type="service_closure" id="doctrine.orm.default_configuration" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.orm.default_attribute_metadata_driver" type="service_closure" id="doctrine.orm.default_attribute_metadata_driver" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.default.metadata" type="service_closure" id="cache.doctrine.orm.default.metadata" on-invalid="ignore_uninitialized"/>
@@ -2363,6 +2377,8 @@
         <argument key="api_platform.json_schema.metadata.property.metadata_factory.schema" type="service_closure" id="api_platform.json_schema.metadata.property.metadata_factory.schema" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.json_schema.backward_compatible_schema_factory" type="service_closure" id="api_platform.json_schema.backward_compatible_schema_factory" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.json_schema.definition_name_factory" type="service_closure" id="api_platform.json_schema.definition_name_factory" on-invalid="ignore_uninitialized"/>
+        <argument key="api_platform.openapi.provider" type="service_closure" id="api_platform.openapi.provider" on-invalid="ignore_uninitialized"/>
+        <argument key="api_platform.openapi.serializer_context_builder" type="service_closure" id="api_platform.openapi.serializer_context_builder" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.openapi.options" type="service_closure" id="api_platform.openapi.options" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.openapi.command" type="service_closure" id="api_platform.openapi.command" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.openapi.normalizer.legacy" type="service_closure" id="api_platform.openapi.normalizer.legacy" on-invalid="ignore_uninitialized"/>
@@ -2674,7 +2690,7 @@
         <argument key="ApiPlatform\Metadata\ResourceClassResolverInterface" type="service_closure" id="api_platform.resource_class_resolver" on-invalid="ignore_uninitialized"/>
         <argument key="ApiPlatform\Api\UrlGeneratorInterface" type="service_closure" id="api_platform.router" on-invalid="ignore_uninitialized"/>
         <argument key="ApiPlatform\Metadata\UrlGeneratorInterface" type="service_closure" id="api_platform.router" on-invalid="ignore_uninitialized"/>
-        <argument key="ApiPlatform\Serializer\SerializerContextBuilderInterface" type="service_closure" id="api_platform.serializer.context_builder.filter" on-invalid="ignore_uninitialized"/>
+        <argument key="ApiPlatform\Serializer\SerializerContextBuilderInterface" type="service_closure" id="api_platform.openapi.serializer_context_builder" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.identifiers_extractor" type="service_closure" id="api_platform.api.identifiers_extractor" on-invalid="ignore_uninitialized"/>
         <argument key="ApiPlatform\Api\IdentifiersExtractorInterface" type="service_closure" id="api_platform.api.identifiers_extractor" on-invalid="ignore_uninitialized"/>
         <argument key="ApiPlatform\Metadata\IdentifiersExtractorInterface" type="service_closure" id="api_platform.api.identifiers_extractor" on-invalid="ignore_uninitialized"/>
@@ -2723,7 +2739,7 @@
         <argument key="Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\TokenExtractorInterface" type="service_closure" id="lexik_jwt_authentication.extractor.chain_extractor" on-invalid="ignore_uninitialized"/>
         <argument key="Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface" type="service_closure" id="lexik_jwt_authentication.encoder.lcobucci" on-invalid="ignore_uninitialized"/>
         <argument key="twig.loader.filesystem" type="service_closure" id="twig.loader.native_filesystem" on-invalid="ignore_uninitialized"/>
-        <argument key="argument_resolver.controller_locator" type="service_closure" id=".service_locator.UfdADMz" on-invalid="ignore_uninitialized"/>
+        <argument key="argument_resolver.controller_locator" type="service_closure" id=".service_locator.yh7FGo1" on-invalid="ignore_uninitialized"/>
         <argument key="twig.loader" type="service_closure" id="twig.loader.native_filesystem" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.id_generator_locator" type="service_closure" id=".service_locator.KLVvNIq" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.name_converter" type="service_closure" id="serializer.name_converter.metadata_aware" on-invalid="ignore_uninitialized"/>
@@ -2768,13 +2784,14 @@
         <argument key="security.firewall.authenticator.login" type="service_closure" id="debug.security.firewall.authenticator.login" on-invalid="ignore_uninitialized"/>
         <argument key="security.firewall.authenticator.api" type="service_closure" id="debug.security.firewall.authenticator.api" on-invalid="ignore_uninitialized"/>
         <argument key="security.firewall.authenticator.main" type="service_closure" id="debug.security.firewall.authenticator.main" on-invalid="ignore_uninitialized"/>
-        <argument key="api_platform.serializer.context_builder" type="service_closure" id="api_platform.serializer.context_builder.filter" on-invalid="ignore_uninitialized"/>
+        <argument key="api_platform.serializer.context_builder" type="service_closure" id="api_platform.openapi.serializer_context_builder" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.state_processor.add_link_header.inner" type="service_closure" id="api_platform.hydra.processor.link" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.metadata.resource.name_collection_factory.attributes.inner" type="service_closure" id="api_platform.metadata.resource.name_collection_factory.xml" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.metadata.resource.name_collection_factory.class_name.inner" type="service_closure" id="api_platform.metadata.resource.name_collection_factory.attributes" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.metadata.property.name_collection_factory.xml.inner" type="service_closure" id="api_platform.metadata.property.name_collection_factory.property_info" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.metadata.resource.name_collection_factory.yaml.inner" type="service_closure" id="api_platform.metadata.resource.name_collection_factory.class_name" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.metadata.property.name_collection_factory.yaml.inner" type="service_closure" id="api_platform.metadata.property.name_collection_factory.xml" on-invalid="ignore_uninitialized"/>
+        <argument key="api_platform.openapi.serializer_context_builder.inner" type="service_closure" id="api_platform.serializer.context_builder.filter" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.state_provider.documentation.read" type="service_closure" id="api_platform.swagger_ui.documentation.provider" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.swagger_ui.provider.inner" type="service_closure" id="api_platform.symfony.parameter_validator" on-invalid="ignore_uninitialized"/>
         <argument key="api_platform.json_schema.schema_factory" type="service_closure" id="api_platform.json_schema.backward_compatible_schema_factory" on-invalid="ignore_uninitialized"/>
@@ -2950,6 +2967,7 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.de.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.de.yaml</argument>
           </argument>
           <argument key="el" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
@@ -2961,12 +2979,14 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.en.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.en.yaml</argument>
           </argument>
           <argument key="es" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.es.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.es.yaml</argument>
           </argument>
           <argument key="et" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
@@ -2996,6 +3016,7 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fr.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.fr.yaml</argument>
           </argument>
           <argument key="gl" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
@@ -3035,6 +3056,7 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.it.xliff</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations\victorprdh_recaptcha.it.yaml</argument>
           </argument>
           <argument key="ja" type="collection">
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
@@ -3214,6 +3236,7 @@
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations</argument>
+          <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\framework-bundle/translations</argument>
           <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\twig-bundle/translations</argument>
@@ -3234,6 +3257,7 @@
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\form/Resources/translations</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\security-core/Resources/translations</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\knplabs\knp-paginator-bundle/translations</argument>
+            <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/translations</argument>
             <argument>translations</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\framework-bundle/translations</argument>
             <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\symfony\twig-bundle/translations</argument>
@@ -3421,6 +3445,7 @@
         <argument>UniqueEntity</argument>
         <argument>UserPassword</argument>
         <argument>Recaptcha3</argument>
+        <argument>IsValidCaptcha</argument>
       </argument>
     </service>
     <service id="translation.reader" class="Symfony\Component\Translation\Reader\TranslationReader">
@@ -4137,7 +4162,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.UfdADMz"/>
+      <argument type="service" id=".service_locator.yh7FGo1"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -4424,6 +4449,8 @@
       <argument type="service" id="property_info" on-invalid="ignore"/>
       <argument type="service" id="serializer.mapping.class_discriminator_resolver" on-invalid="ignore"/>
       <argument>null</argument>
+      <argument type="collection"/>
+      <argument type="service" id="property_info" on-invalid="ignore"/>
     </service>
     <service id="serializer.normalizer.property" class="Symfony\Component\Serializer\Normalizer\PropertyNormalizer">
       <argument type="service" id="api_platform.serializer.mapping.class_metadata_factory"/>
@@ -4432,7 +4459,6 @@
       <argument type="service" id="serializer.mapping.class_discriminator_resolver" on-invalid="ignore"/>
       <argument>null</argument>
       <argument type="collection"/>
-      <argument type="service" id="property_info" on-invalid="ignore"/>
     </service>
     <service id="serializer.denormalizer.array" class="Symfony\Component\Serializer\Normalizer\ArrayDenormalizer">
       <tag name="serializer.normalizer" priority="-990"/>
@@ -4642,7 +4668,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.yhILtYu"/>
+      <argument type="service" id=".service_locator.nqgTVJj"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4786,7 +4812,7 @@
       <argument type="service" id="cache.validator"/>
     </service>
     <service id="validator.validator_factory" class="Symfony\Component\Validator\ContainerConstraintValidatorFactory">
-      <argument type="service" id=".service_locator.UXbUH6B"/>
+      <argument type="service" id=".service_locator.RI9wyLm"/>
     </service>
     <service id="Symfony\Component\Validator\Constraints\ExpressionLanguageSyntaxValidator" class="Symfony\Component\Validator\Constraints\ExpressionLanguageSyntaxValidator" abstract="true">
       <tag name="container.excluded" source="in &quot;config/validator.php&quot;"/>
@@ -5506,6 +5532,14 @@
         <argument>!KnpPaginator</argument>
       </call>
       <call method="addPath">
+        <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/views</argument>
+        <argument>Recaptcha</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\Users\David\Desktop\vitalitymarkv2\vendor\victor-prdh\recaptcha-bundle\src/Resources/views</argument>
+        <argument>!Recaptcha</argument>
+      </call>
+      <call method="addPath">
         <argument>C:\Users\David\Desktop\vitalitymarkv2/templates</argument>
       </call>
       <call method="addPath">
@@ -5948,6 +5982,14 @@
         <argument>doctrine:cache:clear-collection-region</argument>
       </call>
     </service>
+    <service id="doctrine.mapping_convert_command" class="Doctrine\ORM\Tools\Console\Command\ConvertMappingCommand">
+      <tag name="console.command" command="doctrine:mapping:convert"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine.orm.command.entity_manager_provider"/>
+      <call method="setName">
+        <argument>doctrine:mapping:convert</argument>
+      </call>
+    </service>
     <service id="doctrine.schema_create_command" class="Doctrine\ORM\Tools\Console\Command\SchemaTool\CreateCommand">
       <tag name="console.command" command="doctrine:schema:create"/>
       <tag name="container.no_preload"/>
@@ -5962,6 +6004,14 @@
       <argument type="service" id="doctrine.orm.command.entity_manager_provider"/>
       <call method="setName">
         <argument>doctrine:schema:drop</argument>
+      </call>
+    </service>
+    <service id="doctrine.ensure_production_settings_command" class="Doctrine\ORM\Tools\Console\Command\EnsureProductionSettingsCommand">
+      <tag name="console.command" command="doctrine:ensure-production-settings"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine.orm.command.entity_manager_provider"/>
+      <call method="setName">
+        <argument>doctrine:ensure-production-settings</argument>
       </call>
     </service>
     <service id="doctrine.clear_entity_region_command" class="Doctrine\ORM\Tools\Console\Command\ClearCache\EntityRegionCommand">
@@ -6010,6 +6060,15 @@
       <argument type="service" id="doctrine.orm.command.entity_manager_provider"/>
       <call method="setName">
         <argument>doctrine:schema:validate</argument>
+      </call>
+    </service>
+    <service id="doctrine.mapping_import_command" class="Doctrine\Bundle\DoctrineBundle\Command\ImportMappingDoctrineCommand">
+      <tag name="console.command" command="doctrine:mapping:import"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="doctrine"/>
+      <argument>%kernel.bundles%</argument>
+      <call method="setName">
+        <argument>doctrine:mapping:import</argument>
       </call>
     </service>
     <service id="doctrine.orm.default_configuration" class="Doctrine\ORM\Configuration">
@@ -7711,7 +7770,7 @@
       </call>
     </service>
     <service id="api_platform.state_provider.locator" class="ApiPlatform\State\CallableProvider">
-      <argument type="service" id=".service_locator._7faqSO"/>
+      <argument type="service" id=".service_locator.zCMhoWZ"/>
     </service>
     <service id="api_platform.state_processor.locator" class="ApiPlatform\State\CallableProcessor">
       <argument type="service" id=".service_locator.czt1CzU"/>
@@ -7783,7 +7842,6 @@
       <argument type="service" id="api_platform.filter_locator"/>
     </service>
     <service id="api_platform.serializer.context_builder.filter" class="ApiPlatform\Serializer\SerializerFilterContextBuilder">
-      <tag name="container.decorator" id="api_platform.serializer.context_builder" inner="api_platform.serializer.context_builder.filter.inner"/>
       <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory.cached"/>
       <argument type="service" id="api_platform.filter_locator"/>
       <argument type="service" id="api_platform.serializer.context_builder.filter.inner"/>
@@ -7920,7 +7978,7 @@
     <service id="api_platform.state_processor.serialize" class="ApiPlatform\State\Processor\SerializeProcessor">
       <argument>null</argument>
       <argument type="service" id="serializer"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="api_platform.state_processor.write" class="ApiPlatform\State\Processor\WriteProcessor">
       <argument>null</argument>
@@ -7960,7 +8018,7 @@
     <service id="api_platform.state_processor.documentation.serialize" class="ApiPlatform\State\Processor\SerializeProcessor">
       <argument type="service" id="api_platform.http_cache.processor.add_headers"/>
       <argument type="service" id="serializer"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="api_platform.state_processor.documentation.write" class="ApiPlatform\State\Processor\WriteProcessor">
       <argument type="service" id="api_platform.state_processor.documentation.serialize"/>
@@ -8193,6 +8251,15 @@
       <argument type="collection">
         <argument type="service" id="serializer.encoder.json"/>
       </argument>
+    </service>
+    <service id="api_platform.openapi.provider" class="ApiPlatform\OpenApi\State\OpenApiProvider">
+      <tag name="api_platform.state_provider" priority="-100" key="ApiPlatform\OpenApi\State\OpenApiProvider"/>
+      <tag name="api_platform.state_provider" priority="-100" key="api_platform.openapi.provider"/>
+      <argument type="service" id="lexik_jwt_authentication.api_platform.openapi.factory"/>
+    </service>
+    <service id="api_platform.openapi.serializer_context_builder" class="ApiPlatform\OpenApi\Serializer\SerializerContextBuilder">
+      <tag name="container.decorator" id="api_platform.serializer.context_builder" inner="api_platform.serializer.context_builder.filter.inner"/>
+      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
     </service>
     <service id="api_platform.openapi.options" class="ApiPlatform\OpenApi\Options">
       <argument>Hello API Platform</argument>
@@ -8703,7 +8770,7 @@
     <service id="api_platform.argument_resolver.payload" class="ApiPlatform\Symfony\Bundle\ArgumentResolver\PayloadArgumentResolver">
       <tag name="controller.argument_value_resolver"/>
       <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory.cached"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController" public="true">
       <argument type="service" id="router.default" on-invalid="null"/>
@@ -8900,6 +8967,7 @@
       <tag name="container.hot_path"/>
       <argument type="collection">
         <argument key="defaultPaginationTemplate">@KnpPaginator/Pagination/sliding.html.twig</argument>
+        <argument key="defaultRelLinksTemplate">@KnpPaginator/Pagination/rel_links.html.twig</argument>
         <argument key="defaultSortableTemplate">@KnpPaginator/Pagination/sortable_link.html.twig</argument>
         <argument key="defaultFiltrationTemplate">@KnpPaginator/Pagination/filtration.html.twig</argument>
         <argument key="defaultPageRange">5</argument>
@@ -9061,6 +9129,20 @@
       <argument>username</argument>
       <argument>password</argument>
     </service>
+    <service id="victor_prdh_recaptcha_bundle.recaptcha_type" class="VictorPrdh\RecaptchaBundle\Form\ReCaptchaType" public="true" autowire="true">
+      <tag name="form.type" alias="captcha"/>
+      <argument type="service" id="parameter_bag"/>
+    </service>
+    <service id="victor_prdh_recaptcha_bundle.recaptcha_validator" class="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" public="true" autowire="true" autoconfigure="true">
+      <tag name="validator.is_valid" alias="victor_prdh_recaptcha.true"/>
+      <tag name="validator.constraint_validator"/>
+      <argument type="service" id="victor_prdh.recaptcha"/>
+      <argument type="service" id="request_stack"/>
+      <argument type="service" id="translator.data_collector"/>
+    </service>
+    <service id="victor_prdh.recaptcha" class="ReCaptcha\ReCaptcha" public="true">
+      <argument>%env(GOOGLE_RECAPTCHA_SECRET_KEY)%</argument>
+    </service>
     <service id="annotated_app_entity_user_api_platform_doctrine_orm_filter_search_filter" class="ApiPlatform\Doctrine\Orm\Filter\SearchFilter" autowire="true">
       <tag name="api_platform.filter"/>
       <argument type="service" id="doctrine"/>
@@ -9085,9 +9167,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\GestionUserController" class="App\Controller\GestionUserController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\GestionUserController" class="App\Controller\GestionUserController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\GestionUserController" class="App\Controller\GestionUserController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\LoginController" class="App\Controller\LoginController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\LoginController" class="App\Controller\LoginController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\LoginController" class="App\Controller\LoginController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\LoyaltyCardController" class="App\Controller\LoyaltyCardController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\LoyaltyCardController" class="App\Controller\LoyaltyCardController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\LoyaltyCardController" class="App\Controller\LoyaltyCardController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -9145,6 +9224,8 @@
     <service id=".abstract.instanceof.App\Repository\PromoRepository" class="App\Repository\PromoRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Validator\ConstraintValidatorInterface.0.victor_prdh_recaptcha_bundle.recaptcha_validator" class="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" public="true" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.victor_prdh_recaptcha_bundle.recaptcha_validator" class="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" public="true" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.w7.f4fT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -9176,24 +9257,15 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.czOFGB2" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.1j13wVw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.497Dqc6" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.DdYZow0" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
@@ -9202,13 +9274,6 @@
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="logger" type="service_closure" id="logger"/>
-      </argument>
-    </service>
-    <service id=".service_locator.xfrE5I6" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
-        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
     <service id=".service_locator.oG50dAC" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -9226,23 +9291,23 @@
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.EU0TCmr" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.CsMkqUa" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.C8cIOOc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
+        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
     <service id=".service_locator.KuADytJ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="couponRepository" type="service_closure" id="App\Repository\CouponRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.CsMkqUa" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
     <service id=".service_locator.m2Z5Caj" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -9325,76 +9390,60 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.3ZSxAxz" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.EAxvjXD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
         <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
         <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
-        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.aEXkTBP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.oVtQ36_" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
         <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
-        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.pXnaH3B" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.wV15JaV" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
         <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
-        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
         <argument key="urlGenerator" type="service_closure" id="router.default"/>
       </argument>
     </service>
-    <service id=".service_locator.dQqFLKh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.DxyeUEA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
         <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
+        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
         <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.84xubWY" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
-        <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
-      </argument>
-    </service>
-    <service id=".service_locator.dAO6ypm" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.GlqAerr" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="loyaltyCard" type="service_closure" id="App\Entity\LoyaltyCard"/>
         <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
-        <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
       </argument>
     </service>
-    <service id=".service_locator.2qiSyMX" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.haFivEw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
+        <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
+        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.cdXheJO" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
-        <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
-        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
-        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.ncyOCPw" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
-        <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
-        <argument key="productsRepository" type="service_closure" id="App\Repository\ProductsRepository"/>
-        <argument key="promoRepository" type="service_closure" id="App\Repository\PromoRepository"/>
       </argument>
     </service>
     <service id=".service_locator.n2aaCnD" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -9404,22 +9453,24 @@
         <argument key="panierUserService" type="service_closure" id="App\Service\PanierUser"/>
       </argument>
     </service>
-    <service id=".service_locator.UfdADMz" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.yh7FGo1" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AccueilController::afficherLesPromos" type="service_closure" id=".service_locator.1j13wVw"/>
-        <argument key="App\Controller\AccueilController::categorieAccueil" type="service_closure" id=".service_locator.DdYZow0"/>
-        <argument key="App\Controller\AccueilController::detailsDunProduit" type="service_closure" id=".service_locator.xfrE5I6"/>
-        <argument key="App\Controller\AccueilController::index" type="service_closure" id=".service_locator.xfrE5I6"/>
-        <argument key="App\Controller\AccueilController::rechercherUnProduitVisiteur" type="service_closure" id=".service_locator.497Dqc6"/>
+        <argument key="App\Controller\AccueilController::categorieAccueil" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AccueilController::detailsDunProduit" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AccueilController::index" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AccueilController::rechercherUnProduitVisiteur" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AdminproductsController::ajoutQuantiteProduitAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController::createProduit" type="service_closure" id=".service_locator.OTAdKRU"/>
         <argument key="App\Controller\AdminproductsController::deleteProduct" type="service_closure" id=".service_locator.oG50dAC"/>
-        <argument key="App\Controller\AdminproductsController::deleteProducts" type="service_closure" id=".service_locator.xfrE5I6"/>
+        <argument key="App\Controller\AdminproductsController::deleteProducts" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController::editProductFormFront" type="service_closure" id=".service_locator.oG50dAC"/>
-        <argument key="App\Controller\AdminproductsController::index" type="service_closure" id=".service_locator.xfrE5I6"/>
-        <argument key="App\Controller\AdminproductsController::modifierProfilAdminFlush" type="service_closure" id=".service_locator.EU0TCmr"/>
-        <argument key="App\Controller\AdminproductsController::rechercherUnProduitAdmin" type="service_closure" id=".service_locator.KYY0qKo"/>
-        <argument key="App\Controller\AdminproductsController::showCategoryProductsAdmin" type="service_closure" id=".service_locator.KYY0qKo"/>
+        <argument key="App\Controller\AdminproductsController::enleverQuantiteProduitAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AdminproductsController::index" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AdminproductsController::modifierProfilAdminFlush" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\AdminproductsController::rechercherUnProduitAdmin" type="service_closure" id=".service_locator.C8cIOOc"/>
+        <argument key="App\Controller\AdminproductsController::showCategoryProductsAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController::updateProducts" type="service_closure" id=".service_locator.KYY0qKo"/>
         <argument key="App\Controller\CouponController::delete" type="service_closure" id=".service_locator.FH0U8W3"/>
         <argument key="App\Controller\CouponController::edit" type="service_closure" id=".service_locator.FH0U8W3"/>
@@ -9442,40 +9493,41 @@
         <argument key="App\Controller\PromoAdminController::show" type="service_closure" id=".service_locator.mcb6ZOo"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.ywU5Sl_"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.rSTd.nA"/>
-        <argument key="App\Controller\UservueController::CreerCarteLoyalty" type="service_closure" id=".service_locator.dAO6ypm"/>
-        <argument key="App\Controller\UservueController::addDansPanier" type="service_closure" id=".service_locator.pXnaH3B"/>
-        <argument key="App\Controller\UservueController::detailsProduit" type="service_closure" id=".service_locator.ncyOCPw"/>
+        <argument key="App\Controller\UservueController::CreerCarteLoyalty" type="service_closure" id=".service_locator.GlqAerr"/>
+        <argument key="App\Controller\UservueController::addDansPanier" type="service_closure" id=".service_locator.wV15JaV"/>
+        <argument key="App\Controller\UservueController::detailsProduit" type="service_closure" id=".service_locator.haFivEw"/>
         <argument key="App\Controller\UservueController::getUserPanier" type="service_closure" id=".service_locator.n2aaCnD"/>
-        <argument key="App\Controller\UservueController::index" type="service_closure" id=".service_locator.3ZSxAxz"/>
+        <argument key="App\Controller\UservueController::index" type="service_closure" id=".service_locator.EAxvjXD"/>
         <argument key="App\Controller\UservueController::indexcontact" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="App\Controller\UservueController::mentionsLegalsPage" type="service_closure" id=".service_locator.n2aaCnD"/>
-        <argument key="App\Controller\UservueController::modifierProfilUser" type="service_closure" id=".service_locator.EU0TCmr"/>
-        <argument key="App\Controller\UservueController::pageCategoriesUser" type="service_closure" id=".service_locator.2qiSyMX"/>
-        <argument key="App\Controller\UservueController::promo" type="service_closure" id=".service_locator.aEXkTBP"/>
-        <argument key="App\Controller\UservueController::removeFromCartProduit" type="service_closure" id=".service_locator.CsMkqUa"/>
-        <argument key="App\Controller\UservueController::search" type="service_closure" id=".service_locator.dQqFLKh"/>
-        <argument key="App\Controller\UservueController::showUserLoyaltyCardPage" type="service_closure" id=".service_locator.84xubWY"/>
-        <argument key="App\Controller\UservueController::submitContact" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\UservueController::modifierProfilUser" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\UservueController::pageCategoriesUser" type="service_closure" id=".service_locator.EAxvjXD"/>
+        <argument key="App\Controller\UservueController::promo" type="service_closure" id=".service_locator.oVtQ36_"/>
+        <argument key="App\Controller\UservueController::removeFromCartProduit" type="service_closure" id=".service_locator.cdXheJO"/>
+        <argument key="App\Controller\UservueController::search" type="service_closure" id=".service_locator.DxyeUEA"/>
+        <argument key="App\Controller\UservueController::showUserLoyaltyCardPage" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="App\Controller\UservueController::suppressionCompte" type="service_closure" id=".service_locator.CsMkqUa"/>
-        <argument key="App\Controller\UservueController::updateQuantityProduit" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\UservueController::updateQuantityProduit" type="service_closure" id=".service_locator.cdXheJO"/>
         <argument key="App\Controller\UservueController::userProfile" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Controller\AccueilController:afficherLesPromos" type="service_closure" id=".service_locator.1j13wVw"/>
-        <argument key="App\Controller\AccueilController:categorieAccueil" type="service_closure" id=".service_locator.DdYZow0"/>
-        <argument key="App\Controller\AccueilController:detailsDunProduit" type="service_closure" id=".service_locator.xfrE5I6"/>
-        <argument key="App\Controller\AccueilController:index" type="service_closure" id=".service_locator.xfrE5I6"/>
-        <argument key="App\Controller\AccueilController:rechercherUnProduitVisiteur" type="service_closure" id=".service_locator.497Dqc6"/>
+        <argument key="App\Controller\AccueilController:categorieAccueil" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AccueilController:detailsDunProduit" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AccueilController:index" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AccueilController:rechercherUnProduitVisiteur" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AdminproductsController:ajoutQuantiteProduitAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController:createProduit" type="service_closure" id=".service_locator.OTAdKRU"/>
         <argument key="App\Controller\AdminproductsController:deleteProduct" type="service_closure" id=".service_locator.oG50dAC"/>
-        <argument key="App\Controller\AdminproductsController:deleteProducts" type="service_closure" id=".service_locator.xfrE5I6"/>
+        <argument key="App\Controller\AdminproductsController:deleteProducts" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController:editProductFormFront" type="service_closure" id=".service_locator.oG50dAC"/>
-        <argument key="App\Controller\AdminproductsController:index" type="service_closure" id=".service_locator.xfrE5I6"/>
-        <argument key="App\Controller\AdminproductsController:modifierProfilAdminFlush" type="service_closure" id=".service_locator.EU0TCmr"/>
-        <argument key="App\Controller\AdminproductsController:rechercherUnProduitAdmin" type="service_closure" id=".service_locator.KYY0qKo"/>
-        <argument key="App\Controller\AdminproductsController:showCategoryProductsAdmin" type="service_closure" id=".service_locator.KYY0qKo"/>
+        <argument key="App\Controller\AdminproductsController:enleverQuantiteProduitAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AdminproductsController:index" type="service_closure" id=".service_locator.czOFGB2"/>
+        <argument key="App\Controller\AdminproductsController:modifierProfilAdminFlush" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\AdminproductsController:rechercherUnProduitAdmin" type="service_closure" id=".service_locator.C8cIOOc"/>
+        <argument key="App\Controller\AdminproductsController:showCategoryProductsAdmin" type="service_closure" id=".service_locator.czOFGB2"/>
         <argument key="App\Controller\AdminproductsController:updateProducts" type="service_closure" id=".service_locator.KYY0qKo"/>
         <argument key="App\Controller\CouponController:delete" type="service_closure" id=".service_locator.FH0U8W3"/>
         <argument key="App\Controller\CouponController:edit" type="service_closure" id=".service_locator.FH0U8W3"/>
@@ -9498,28 +9550,27 @@
         <argument key="App\Controller\PromoAdminController:show" type="service_closure" id=".service_locator.mcb6ZOo"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.ywU5Sl_"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.rSTd.nA"/>
-        <argument key="App\Controller\UservueController:CreerCarteLoyalty" type="service_closure" id=".service_locator.dAO6ypm"/>
-        <argument key="App\Controller\UservueController:addDansPanier" type="service_closure" id=".service_locator.pXnaH3B"/>
-        <argument key="App\Controller\UservueController:detailsProduit" type="service_closure" id=".service_locator.ncyOCPw"/>
+        <argument key="App\Controller\UservueController:CreerCarteLoyalty" type="service_closure" id=".service_locator.GlqAerr"/>
+        <argument key="App\Controller\UservueController:addDansPanier" type="service_closure" id=".service_locator.wV15JaV"/>
+        <argument key="App\Controller\UservueController:detailsProduit" type="service_closure" id=".service_locator.haFivEw"/>
         <argument key="App\Controller\UservueController:getUserPanier" type="service_closure" id=".service_locator.n2aaCnD"/>
-        <argument key="App\Controller\UservueController:index" type="service_closure" id=".service_locator.3ZSxAxz"/>
+        <argument key="App\Controller\UservueController:index" type="service_closure" id=".service_locator.EAxvjXD"/>
         <argument key="App\Controller\UservueController:indexcontact" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="App\Controller\UservueController:mentionsLegalsPage" type="service_closure" id=".service_locator.n2aaCnD"/>
-        <argument key="App\Controller\UservueController:modifierProfilUser" type="service_closure" id=".service_locator.EU0TCmr"/>
-        <argument key="App\Controller\UservueController:pageCategoriesUser" type="service_closure" id=".service_locator.2qiSyMX"/>
-        <argument key="App\Controller\UservueController:promo" type="service_closure" id=".service_locator.aEXkTBP"/>
-        <argument key="App\Controller\UservueController:removeFromCartProduit" type="service_closure" id=".service_locator.CsMkqUa"/>
-        <argument key="App\Controller\UservueController:search" type="service_closure" id=".service_locator.dQqFLKh"/>
-        <argument key="App\Controller\UservueController:showUserLoyaltyCardPage" type="service_closure" id=".service_locator.84xubWY"/>
-        <argument key="App\Controller\UservueController:submitContact" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\UservueController:modifierProfilUser" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\UservueController:pageCategoriesUser" type="service_closure" id=".service_locator.EAxvjXD"/>
+        <argument key="App\Controller\UservueController:promo" type="service_closure" id=".service_locator.oVtQ36_"/>
+        <argument key="App\Controller\UservueController:removeFromCartProduit" type="service_closure" id=".service_locator.cdXheJO"/>
+        <argument key="App\Controller\UservueController:search" type="service_closure" id=".service_locator.DxyeUEA"/>
+        <argument key="App\Controller\UservueController:showUserLoyaltyCardPage" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="App\Controller\UservueController:suppressionCompte" type="service_closure" id=".service_locator.CsMkqUa"/>
-        <argument key="App\Controller\UservueController:updateQuantityProduit" type="service_closure" id=".service_locator.CsMkqUa"/>
+        <argument key="App\Controller\UservueController:updateQuantityProduit" type="service_closure" id=".service_locator.cdXheJO"/>
         <argument key="App\Controller\UservueController:userProfile" type="service_closure" id=".service_locator.n2aaCnD"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
     </service>
-    <service id=".service_locator.UXbUH6B" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.RI9wyLm" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator" type="service_closure" id="karser_recaptcha3.validator"/>
@@ -9530,6 +9581,7 @@
         <argument key="Symfony\Component\Validator\Constraints\NoSuspiciousCharactersValidator" type="service_closure" id="validator.no_suspicious_characters"/>
         <argument key="Symfony\Component\Validator\Constraints\NotCompromisedPasswordValidator" type="service_closure" id="validator.not_compromised_password"/>
         <argument key="Symfony\Component\Validator\Constraints\WhenValidator" type="service_closure" id="validator.when"/>
+        <argument key="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" type="service_closure" id="victor_prdh_recaptcha_bundle.recaptcha_validator"/>
         <argument key="doctrine.orm.validator.unique" type="service_closure" id="doctrine.orm.validator.unique"/>
         <argument key="karser_recaptcha3_validator" type="service_closure" id="karser_recaptcha3.validator"/>
         <argument key="security.validator.user_password" type="service_closure" id="security.validator.user_password"/>
@@ -9602,7 +9654,7 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.yhILtYu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.nqgTVJj" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\AjoutPromo" type="service_closure" id="App\Form\AjoutPromo"/>
@@ -9622,6 +9674,7 @@
         <argument key="Symfony\Component\Form\Extension\Core\Type\ColorType" type="service_closure" id="form.type.color"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FileType" type="service_closure" id="form.type.file"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service_closure" id="form.type.form"/>
+        <argument key="VictorPrdh\RecaptchaBundle\Form\ReCaptchaType" type="service_closure" id="victor_prdh_recaptcha_bundle.recaptcha_type"/>
       </argument>
     </service>
     <service id=".service_locator.VHsrTPK" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -10016,12 +10069,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
-    <service id=".service_locator.O2p6Lk7.App\Controller\LoginController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\LoginController"/>
-      <argument>App\Controller\LoginController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
-    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\LoyaltyCardController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\LoyaltyCardController"/>
       <argument>App\Controller\LoyaltyCardController</argument>
@@ -10190,15 +10237,17 @@
         <argument key="main" type="service_closure" id="security.authenticator.remember_me_handler.main"/>
       </argument>
     </service>
-    <service id=".service_locator._7faqSO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.zCMhoWZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="ApiPlatform\Doctrine\Orm\State\CollectionProvider" type="service_closure" id="api_platform.doctrine.orm.state.collection_provider"/>
         <argument key="ApiPlatform\Doctrine\Orm\State\ItemProvider" type="service_closure" id="api_platform.doctrine.orm.state.item_provider"/>
+        <argument key="ApiPlatform\OpenApi\State\OpenApiProvider" type="service_closure" id="api_platform.openapi.provider"/>
         <argument key="ApiPlatform\State\CreateProvider" type="service_closure" id="api_platform.state_provider.create"/>
         <argument key="ApiPlatform\State\ObjectProvider" type="service_closure" id="api_platform.state_provider.object"/>
         <argument key="api_platform.doctrine.orm.state.collection_provider" type="service_closure" id="api_platform.doctrine.orm.state.collection_provider"/>
         <argument key="api_platform.doctrine.orm.state.item_provider" type="service_closure" id="api_platform.doctrine.orm.state.item_provider"/>
+        <argument key="api_platform.openapi.provider" type="service_closure" id="api_platform.openapi.provider"/>
         <argument key="api_platform.state.error_provider" type="service_closure" id="api_platform.state.error_provider"/>
         <argument key="api_platform.state_provider.create" type="service_closure" id="api_platform.state_provider.create"/>
         <argument key="api_platform.state_provider.object" type="service_closure" id="api_platform.state_provider.object"/>
@@ -10234,7 +10283,7 @@
     </service>
     <service id="api_platform.state_provider.parameter.inner" class="ApiPlatform\State\Provider\ReadProvider">
       <argument type="service" id="api_platform.state_provider.locator"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="debug.validator.inner" class="Symfony\Component\Validator\Validator\ValidatorInterface">
       <factory service="validator.builder" method="getValidator"/>
@@ -10261,7 +10310,6 @@
           <argument>App\Controller\AdminproductsController</argument>
           <argument>App\Controller\CouponController</argument>
           <argument>App\Controller\GestionUserController</argument>
-          <argument>App\Controller\LoginController</argument>
           <argument>App\Controller\LoyaltyCardController</argument>
           <argument>App\Controller\PromoAdminController</argument>
           <argument>App\Controller\RegistrationController</argument>
@@ -10320,7 +10368,7 @@
     </service>
     <service id="api_platform.swagger_ui.documentation.provider.inner" class="ApiPlatform\State\Provider\ReadProvider">
       <argument type="service" id="api_platform.state_provider.locator"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
     </service>
     <service id="api_platform.hydra.json_schema.schema_factory.inner" class="ApiPlatform\JsonSchema\SchemaFactory">
       <argument type="service" id="api_platform.json_schema.type_factory" on-invalid="ignore"/>
@@ -10345,7 +10393,7 @@
     <service id="api_platform.state_provider.access_checker.post_deserialize.inner" class="ApiPlatform\State\Provider\DeserializeProvider">
       <argument>null</argument>
       <argument type="service" id="serializer"/>
-      <argument type="service" id="api_platform.serializer.context_builder.filter"/>
+      <argument type="service" id="api_platform.openapi.serializer_context_builder"/>
       <argument type="service" id="translator.data_collector" on-invalid="null"/>
     </service>
     <service id="lexik_jwt_authentication.api_platform.openapi.factory.inner" class="ApiPlatform\OpenApi\Factory\OpenApiFactory">
@@ -10791,7 +10839,7 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.xs1kDyo"/>
+      <argument type="service" id=".service_locator.k4s5DJT"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -10836,14 +10884,17 @@
         <argument key="doctrine:cache:clear-query">doctrine.cache_clear_query_cache_command</argument>
         <argument key="doctrine:cache:clear-result">doctrine.cache_clear_result_command</argument>
         <argument key="doctrine:cache:clear-collection-region">doctrine.cache_collection_region_command</argument>
+        <argument key="doctrine:mapping:convert">doctrine.mapping_convert_command</argument>
         <argument key="doctrine:schema:create">doctrine.schema_create_command</argument>
         <argument key="doctrine:schema:drop">doctrine.schema_drop_command</argument>
+        <argument key="doctrine:ensure-production-settings">doctrine.ensure_production_settings_command</argument>
         <argument key="doctrine:cache:clear-entity-region">doctrine.clear_entity_region_command</argument>
         <argument key="doctrine:mapping:info">doctrine.mapping_info_command</argument>
         <argument key="doctrine:cache:clear-query-region">doctrine.clear_query_region_command</argument>
         <argument key="doctrine:query:dql">doctrine.query_dql_command</argument>
         <argument key="doctrine:schema:update">doctrine.schema_update_command</argument>
         <argument key="doctrine:schema:validate">doctrine.schema_validate_command</argument>
+        <argument key="doctrine:mapping:import">doctrine.mapping_import_command</argument>
         <argument key="doctrine:migrations:diff">doctrine_migrations.diff_command</argument>
         <argument key="doctrine:migrations:sync-metadata-storage">doctrine_migrations.sync_metadata_command</argument>
         <argument key="doctrine:migrations:list">doctrine_migrations.versions_command</argument>
@@ -10870,7 +10921,7 @@
         <argument key="lexik:jwt:generate-keypair">lexik_jwt_authentication.generate_keypair_command</argument>
       </argument>
     </service>
-    <service id=".service_locator.xs1kDyo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.k4s5DJT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
@@ -10916,14 +10967,17 @@
         <argument key="doctrine.cache_clear_query_cache_command" type="service_closure" id="doctrine.cache_clear_query_cache_command"/>
         <argument key="doctrine.cache_clear_result_command" type="service_closure" id="doctrine.cache_clear_result_command"/>
         <argument key="doctrine.cache_collection_region_command" type="service_closure" id="doctrine.cache_collection_region_command"/>
+        <argument key="doctrine.mapping_convert_command" type="service_closure" id="doctrine.mapping_convert_command"/>
         <argument key="doctrine.schema_create_command" type="service_closure" id="doctrine.schema_create_command"/>
         <argument key="doctrine.schema_drop_command" type="service_closure" id="doctrine.schema_drop_command"/>
+        <argument key="doctrine.ensure_production_settings_command" type="service_closure" id="doctrine.ensure_production_settings_command"/>
         <argument key="doctrine.clear_entity_region_command" type="service_closure" id="doctrine.clear_entity_region_command"/>
         <argument key="doctrine.mapping_info_command" type="service_closure" id="doctrine.mapping_info_command"/>
         <argument key="doctrine.clear_query_region_command" type="service_closure" id="doctrine.clear_query_region_command"/>
         <argument key="doctrine.query_dql_command" type="service_closure" id="doctrine.query_dql_command"/>
         <argument key="doctrine.schema_update_command" type="service_closure" id="doctrine.schema_update_command"/>
         <argument key="doctrine.schema_validate_command" type="service_closure" id="doctrine.schema_validate_command"/>
+        <argument key="doctrine.mapping_import_command" type="service_closure" id="doctrine.mapping_import_command"/>
         <argument key="doctrine_migrations.diff_command" type="service_closure" id=".doctrine_migrations.diff_command.lazy"/>
         <argument key="doctrine_migrations.sync_metadata_command" type="service_closure" id=".doctrine_migrations.sync_metadata_command.lazy"/>
         <argument key="doctrine_migrations.versions_command" type="service_closure" id=".doctrine_migrations.versions_command.lazy"/>
@@ -11242,7 +11296,7 @@
     <service id="ApiPlatform\Metadata\ResourceClassResolverInterface" alias="api_platform.resource_class_resolver"/>
     <service id="ApiPlatform\Api\UrlGeneratorInterface" alias="api_platform.router"/>
     <service id="ApiPlatform\Metadata\UrlGeneratorInterface" alias="api_platform.router"/>
-    <service id="ApiPlatform\Serializer\SerializerContextBuilderInterface" alias="api_platform.serializer.context_builder.filter"/>
+    <service id="ApiPlatform\Serializer\SerializerContextBuilderInterface" alias="api_platform.openapi.serializer_context_builder"/>
     <service id="ApiPlatform\Serializer\Filter\PropertyFilter" alias="api_platform.serializer.property_filter"/>
     <service id="ApiPlatform\Serializer\Filter\GroupFilter" alias="api_platform.serializer.group_filter"/>
     <service id="api_platform.identifiers_extractor" alias="api_platform.api.identifiers_extractor"/>
@@ -11303,7 +11357,7 @@
     <service id="lexik_jwt_authentication.key_loader" alias="lexik_jwt_authentication.key_loader.raw" public="true"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.UfdADMz"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.yh7FGo1"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
@@ -11312,25 +11366,23 @@
     <service id=".service_locator.bnaLdkn" alias="api_platform.serializer_locator"/>
     <service id=".service_locator.vblS2iM" alias="api_platform.filter_locator"/>
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
-    <service id=".service_locator.SsPgIct" alias=".service_locator.KYY0qKo"/>
     <service id=".service_locator.uSVyOez" alias=".service_locator.OTAdKRU"/>
-    <service id=".service_locator.C8cIOOc" alias=".service_locator.xfrE5I6"/>
     <service id=".service_locator..0ITSiX" alias=".service_locator.oG50dAC"/>
+    <service id=".service_locator.SsPgIct" alias=".service_locator.KYY0qKo"/>
     <service id=".service_locator.z4j2gRz" alias=".service_locator.Gv8Stob"/>
     <service id=".service_locator.R0Sb2kd" alias=".service_locator.rvMNZGh"/>
     <service id=".service_locator.URyQvYy" alias=".service_locator.DxJ_gkE"/>
     <service id=".service_locator.QSs.W3t" alias=".service_locator.DtsKEqY"/>
     <service id=".service_locator.HT4rftb" alias=".service_locator.ywU5Sl_"/>
-    <service id=".service_locator.SV2LEnF" alias=".service_locator.ncyOCPw"/>
-    <service id=".service_locator.eL6lHl5" alias=".service_locator.pXnaH3B"/>
-    <service id=".service_locator.Fbo.2Zn" alias=".service_locator.dQqFLKh"/>
-    <service id=".service_locator.o9i7EFx" alias=".service_locator.84xubWY"/>
-    <service id=".service_locator.EsSTjMC" alias=".service_locator.dAO6ypm"/>
-    <service id=".service_locator.sH.bvlR" alias=".service_locator.2qiSyMX"/>
+    <service id=".service_locator.KSBvoSv" alias=".service_locator.haFivEw"/>
+    <service id=".service_locator.kCnRFbn" alias=".service_locator.oVtQ36_"/>
+    <service id=".service_locator.SV2LEnF" alias=".service_locator.DxyeUEA"/>
+    <service id=".service_locator.KyewkQO" alias=".service_locator.GlqAerr"/>
+    <service id=".service_locator.EU0TCmr" alias=".service_locator.cdXheJO"/>
     <service id=".service_locator.SE3MauL" alias=".service_locator.n2aaCnD"/>
-    <service id=".service_locator.NUPxWwO" alias=".service_locator.UfdADMz"/>
-    <service id=".service_locator.sO2baFT" alias=".service_locator.UXbUH6B"/>
-    <service id=".service_locator.chy.Yq_" alias=".service_locator.yhILtYu"/>
+    <service id=".service_locator.Cdptsmc" alias=".service_locator.yh7FGo1"/>
+    <service id=".service_locator.izYZ3jJ" alias=".service_locator.RI9wyLm"/>
+    <service id=".service_locator.wwtcNAh" alias=".service_locator.nqgTVJj"/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
@@ -11375,13 +11427,14 @@
     <service id="security.firewall.authenticator.login" alias="debug.security.firewall.authenticator.login"/>
     <service id="security.firewall.authenticator.api" alias="debug.security.firewall.authenticator.api"/>
     <service id="security.firewall.authenticator.main" alias="debug.security.firewall.authenticator.main"/>
-    <service id="api_platform.serializer.context_builder" alias="api_platform.serializer.context_builder.filter"/>
+    <service id="api_platform.serializer.context_builder" alias="api_platform.openapi.serializer_context_builder"/>
     <service id="api_platform.state_processor.add_link_header.inner" alias="api_platform.hydra.processor.link"/>
     <service id="api_platform.metadata.resource.name_collection_factory.attributes.inner" alias="api_platform.metadata.resource.name_collection_factory.xml"/>
     <service id="api_platform.metadata.resource.name_collection_factory.class_name.inner" alias="api_platform.metadata.resource.name_collection_factory.attributes"/>
     <service id="api_platform.metadata.property.name_collection_factory.xml.inner" alias="api_platform.metadata.property.name_collection_factory.property_info"/>
     <service id="api_platform.metadata.resource.name_collection_factory.yaml.inner" alias="api_platform.metadata.resource.name_collection_factory.class_name"/>
     <service id="api_platform.metadata.property.name_collection_factory.yaml.inner" alias="api_platform.metadata.property.name_collection_factory.xml"/>
+    <service id="api_platform.openapi.serializer_context_builder.inner" alias="api_platform.serializer.context_builder.filter"/>
     <service id="api_platform.state_provider.documentation.read" alias="api_platform.swagger_ui.documentation.provider"/>
     <service id="api_platform.swagger_ui.provider.inner" alias="api_platform.symfony.parameter_validator"/>
     <service id="api_platform.json_schema.schema_factory" alias="api_platform.json_schema.backward_compatible_schema_factory"/>
@@ -11405,15 +11458,14 @@
     <service id="api_platform.metadata.property.metadata_factory.cached.inner" alias="api_platform.json_schema.metadata.property.metadata_factory.schema"/>
     <service id="api_platform.metadata.resource.metadata_collection_factory.cached.inner" alias="api_platform.doctrine.orm.metadata.resource.metadata_collection_factory"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
+    <service id=".service_locator.u4AVkgT" alias=".service_locator.czOFGB2"/>
     <service id=".service_locator.UtLq5wG" alias=".service_locator.1j13wVw"/>
-    <service id=".service_locator.s_zhieD" alias=".service_locator.497Dqc6"/>
-    <service id=".service_locator.UAzjlVh" alias=".service_locator.KYY0qKo"/>
     <service id=".service_locator.NQ48hbN" alias=".service_locator.OTAdKRU"/>
-    <service id=".service_locator.or6hf7N" alias=".service_locator.xfrE5I6"/>
     <service id=".service_locator.fHO51KC" alias=".service_locator.oG50dAC"/>
-    <service id=".service_locator.fzeHAyO" alias=".service_locator.EU0TCmr"/>
-    <service id=".service_locator.vBfPDkp" alias=".service_locator.KuADytJ"/>
+    <service id=".service_locator.UAzjlVh" alias=".service_locator.KYY0qKo"/>
     <service id=".service_locator.9e2t_lq" alias=".service_locator.CsMkqUa"/>
+    <service id=".service_locator.or6hf7N" alias=".service_locator.C8cIOOc"/>
+    <service id=".service_locator.vBfPDkp" alias=".service_locator.KuADytJ"/>
     <service id=".service_locator.udod_Yt" alias=".service_locator.m2Z5Caj"/>
     <service id=".service_locator.gxNxuyE" alias=".service_locator.FH0U8W3"/>
     <service id=".service_locator.iQJrFxV" alias=".service_locator.Gv8Stob"/>
@@ -11426,18 +11478,18 @@
     <service id=".service_locator.zfznZ0o" alias=".service_locator.DtsKEqY"/>
     <service id=".service_locator.NJIEzt2" alias=".service_locator.ywU5Sl_"/>
     <service id=".service_locator.7NIAq8D" alias=".service_locator.rSTd.nA"/>
-    <service id=".service_locator.MG1CPb3" alias=".service_locator.ncyOCPw"/>
-    <service id=".service_locator.MhNSvul" alias=".service_locator.pXnaH3B"/>
-    <service id=".service_locator.un8JN07" alias=".service_locator.dQqFLKh"/>
-    <service id=".service_locator.F_ZVviv" alias=".service_locator.84xubWY"/>
-    <service id=".service_locator.AAKjXqG" alias=".service_locator.dAO6ypm"/>
-    <service id=".service_locator.5mW9J9q" alias=".service_locator.2qiSyMX"/>
+    <service id=".service_locator.UmMCvPx" alias=".service_locator.haFivEw"/>
+    <service id=".service_locator.u.1edZL" alias=".service_locator.oVtQ36_"/>
+    <service id=".service_locator.KV3VxR." alias=".service_locator.wV15JaV"/>
+    <service id=".service_locator.MG1CPb3" alias=".service_locator.DxyeUEA"/>
+    <service id=".service_locator.Z5ZMt_j" alias=".service_locator.GlqAerr"/>
+    <service id=".service_locator.fzeHAyO" alias=".service_locator.cdXheJO"/>
     <service id=".service_locator.Hg4prJc" alias=".service_locator.n2aaCnD"/>
     <service id=".service_locator.Q1z.f9O" alias=".service_locator.O2p6Lk7"/>
     <service id=".service_locator.B_yLtTQ" alias=".service_locator.Lo8jEUu"/>
     <service id=".service_locator.ro9MXaF" alias=".service_locator.Oannbdp"/>
     <service id=".service_locator.BlxN3Cw" alias=".service_locator.LrCXAmX"/>
-    <service id=".service_locator.OavZKAY" alias=".service_locator._7faqSO"/>
+    <service id=".service_locator..2cOjlF" alias=".service_locator.zCMhoWZ"/>
     <service id=".service_locator.j1woMnS" alias=".service_locator.czt1CzU"/>
   </services>
 </container>
