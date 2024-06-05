@@ -12,20 +12,28 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Form\CouponAllType;
 use App\Form\ProductSearchType;
+use App\Service\ProductCategorie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-#[Route('/coupon')]
+#[Route('/coupon', methods: ['POST'])]
 class CouponController extends AbstractController
 {
+    private $productCategorie;
+
+    public function __construct(ProductCategorie $productCategorie)
+    {
+
+        $this->productCategorie = $productCategorie;
+    }
+
     #[Route('/', name: 'app_coupon_index', methods: ['GET'])]
     public function index(CouponRepository $couponRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $formRechercheCategory->handleRequest($request);
+        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($formRechercheCategory->isSubmitted() && $formRechercheCategory->isValid()) {
-            $category = $formRechercheCategory->getData()['category'];
-            return new RedirectResponse($this->generateUrl('admin_category_products', ['category' => $category]));
+        if ($redirectUrl) {
+            return $this->redirect($redirectUrl);
         }
 
         $motrecherche = $request->query->get('motrecherche');

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ProductAdminType extends AbstractType
 {
@@ -39,7 +40,7 @@ class ProductAdminType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('quantity', null, [
+            ->add('quantity', IntegerType::class, [
                 'label' => 'Quantité',
                 'required' => true,
             ])
@@ -52,7 +53,7 @@ class ProductAdminType extends AbstractType
                 'required' => false,
                 'mapped' => false,
             ])
-            ->add('price', null, [
+            ->add('price', MoneyType::class, [
                 'label' => 'Prix',
                 'required' => true,
             ]);

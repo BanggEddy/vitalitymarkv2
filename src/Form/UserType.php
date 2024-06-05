@@ -4,18 +4,19 @@ namespace App\Form;
 
 use App\Entity\LoyaltyCard;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', TextType::class)
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Admin' => 'ROLE_ADMIN',
@@ -24,15 +25,15 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('date_create', null, [
+            ->add('date_create', DateType::class, [
                 'widget' => 'single_text',
                 'label' => 'Date de création',
             ])
-            ->add('deletedAt', null, [
+            ->add('deletedAt', DateType::class, [
                 'widget' => 'single_text',
                 'label' => 'Date de suppression',
             ])
-            ->add('expiredAt', null, [
+            ->add('expiredAt', DateType::class, [
                 'widget' => 'single_text',
                 'label' => 'Date d expération',
             ]);

@@ -3,33 +3,47 @@
 namespace App\Form;
 
 use App\Entity\Promo;
+use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class AjoutPromo extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('quantity')
-            ->add('description')
-            ->add('price')
-            ->add('reduction', null, [
+            ->add('name', TextType::class, [
+                'label' => 'Nom',
+            ])
+            ->add('quantity', IntegerType::class, [
+                'label' => 'Quantité',
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+            ])
+            ->add('price', MoneyType::class, [
+                'label' => 'Prix',
+            ])
+            ->add('reduction', MoneyType::class, [
+                'label' => 'Réduction (%)',
+                'currency' => null,
                 'constraints' => [
                     new Range([
                         'min' => 1,
                         'max' => 100,
-                        'notInRangeMessage' => 'La réduction doit être entre {{ min }}% et {{ max }}%',
                     ]),
                 ],
             ])
             ->add('category', ChoiceType::class, [
-                'label' => false,
+                'label' => 'Catégorie',
                 'choices' => [
                     'Sélectionner une catégorie' => '',
                     'Produits frais' => 'Produits frais',
@@ -45,16 +59,19 @@ class AjoutPromo extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('date_fin', null, [
+            ->add('date_fin', DateType::class, [
+                'label' => 'Date de fin',
                 'widget' => 'single_text',
             ])
-            ->add('date_debut', null, [
+            ->add('date_debut', DateType::class, [
+                'label' => 'Date de début',
                 'widget' => 'single_text',
             ])
             ->add('image', FileType::class, [
                 'label' => 'Images (JPEG, PNG)',
                 'mapped' => false,
                 'required' => true,
+                'multiple' => false,
             ]);
     }
 

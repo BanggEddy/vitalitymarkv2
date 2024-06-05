@@ -14,7 +14,7 @@ use App\Form\ProductSearchType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
-#[Route('/loyalty/card')]
+#[Route('/loyalty/card', methods: ['POST'])]
 class LoyaltyCardController extends AbstractController
 {
     #[Route('/', name: 'app_loyalty_card_index', methods: ['GET'])]

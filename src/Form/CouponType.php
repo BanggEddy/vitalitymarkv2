@@ -4,12 +4,14 @@ namespace App\Form;
 
 use App\Entity\Coupon;
 use App\Entity\LoyaltyCard;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class CouponType extends AbstractType
 {
@@ -18,28 +20,31 @@ class CouponType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    'Réduction en pourcentage' => 'percentage',
-                    'Réduction en valeur fixe' => 'fixed_value',
-                    'Livraison gratuite' => 'free_shipping',
-                    'Achat un, obtenez-en un gratuit (BOGO)' => 'bogo',
+                    'Réduction sur un produit' => 'réduction produit',
+                    'Livraison gratuite' => 'livraison gratuit',
+                    'Achat un, obtenez-en un gratuit (BOGO)' => 'un acheté, un offert',
                 ],
                 'label' => 'Type de coupon',
                 'required' => true,
             ])
             ->add('description')
-            ->add('start_date', null, [
+            ->add('start_date', DateType::class, [
                 'widget' => 'single_text',
                 'label' => 'Date de début',
+                'required' => true,
             ])
-            ->add('end_date', null, [
+            ->add('end_date', DateType::class, [
                 'widget' => 'single_text',
                 'label' => 'Date de fin',
+                'required' => true,
             ])
-            ->add('reduction', null, [
-                'label' => 'Réduction',
+            ->add('reduction', NumberType::class, [
+                'label' => 'Réduction (%)',
+                'required' => false,
             ])
-            ->add('qty', null, [
+            ->add('qty', IntegerType::class, [
                 'label' => 'Quantité',
+                'required' => true,
             ])
             ->add('idloyaltycard', EntityType::class, [
                 'class' => LoyaltyCard::class,

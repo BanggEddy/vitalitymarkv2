@@ -181,7 +181,7 @@ class __TwigTemplate_11bae142063a227bb47b4e122732727f extends Template
             <form method=\"post\" action=\"";
         // line 79
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_promo_admin_delete", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["promo"]) || array_key_exists("promo", $context) ? $context["promo"] : (function () { throw new RuntimeError('Variable "promo" does not exist.', 79, $this->source); })()), "id", [], "any", false, false, false, 79)]), "html", null, true);
-        yield "\" onsubmit=\"return confirm('Es-tu sur de vouloir supprimer ce produit en réduction?');\" style=\"display: inline;\">
+        yield "\" onsubmit=\"return confirm('Êtes vous sûr de vouloir enlever la réduction?');\" style=\"display: inline;\">
                 <input type=\"hidden\" name=\"_token\" value=\"";
         // line 80
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["promo"]) || array_key_exists("promo", $context) ? $context["promo"] : (function () { throw new RuntimeError('Variable "promo" does not exist.', 80, $this->source); })()), "id", [], "any", false, false, false, 80))), "html", null, true);
@@ -306,7 +306,7 @@ class __TwigTemplate_11bae142063a227bb47b4e122732727f extends Template
             <a href=\"{{ path('app_promo_admin_edit', {'id': promo.id}) }}\" class=\"btn btn-details\">Modifier</a>
         </li>
         <li>
-            <form method=\"post\" action=\"{{ path('app_promo_admin_delete', {'id': promo.id}) }}\" onsubmit=\"return confirm('Es-tu sur de vouloir supprimer ce produit en réduction?');\" style=\"display: inline;\">
+            <form method=\"post\" action=\"{{ path('app_promo_admin_delete', {'id': promo.id}) }}\" onsubmit=\"return confirm('Êtes vous sûr de vouloir enlever la réduction?');\" style=\"display: inline;\">
                 <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ promo.id) }}\">
                 <button class=\"btn btn-details\">Supprimer</button>
             </form>

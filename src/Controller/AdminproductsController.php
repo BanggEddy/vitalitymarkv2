@@ -49,7 +49,6 @@ class AdminproductsController extends AbstractController
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         return $this->render('admin/adminproducts/index.html.twig', [
-            'controller_name' => 'AdminproductsController',
             'products' => $products,
             'barreRechercheCategory' => $formRechercheCategory->createView(),
             'promotions' => $promotions,

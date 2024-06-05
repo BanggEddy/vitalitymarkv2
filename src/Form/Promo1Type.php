@@ -8,27 +8,33 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 
+use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class Promo1Type extends AbstractType
 {
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('reduction')
-            ->add('date_fin', null, [
+            ->add('reduction', NumberType::class, [
+                'label' => 'Réduction (%)',
+                'constraints' => [
+                    new Range([
+                        'min' => 1,
+                        'max' => 100,
+                    ]),
+                ],
+            ])
+            ->add('date_debut', DateType::class, [
+                'label' => 'Date de début',
                 'widget' => 'single_text',
             ])
-            ->add('date_debut', null, [
+            ->add('date_fin', DateType::class, [
+                'label' => 'Date de fin',
                 'widget' => 'single_text',
             ])
             ->add('description')

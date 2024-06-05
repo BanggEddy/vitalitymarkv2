@@ -559,6 +559,7 @@
     <service id="App\Controller\CouponController" class="App\Controller\CouponController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Service\ProductCategorie"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\CouponController"/>
       </call>
@@ -637,7 +638,6 @@
     </service>
     <service id="App\Form\Promo1Type" class="App\Form\Promo1Type" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
-      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="App\Form\PromoEditType" class="App\Form\PromoEditType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>

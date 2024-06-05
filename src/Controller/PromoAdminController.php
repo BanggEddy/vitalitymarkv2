@@ -14,7 +14,7 @@ use App\Form\ProductSearchType;
 use App\Form\PromoEditType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-#[Route('/promo/admin')]
+#[Route('/promo/admin', methods: ['POST'])]
 class PromoAdminController extends AbstractController
 {
     #[Route('/', name: 'app_promo_admin_index', methods: ['GET'])]
