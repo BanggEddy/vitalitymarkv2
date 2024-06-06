@@ -125,7 +125,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
         $context['_seq'] = CoreExtension::ensureTraversable((isset($context["panierDetails"]) || array_key_exists("panierDetails", $context) ? $context["panierDetails"] : (function () { throw new RuntimeError('Variable "panierDetails" does not exist.', 17, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["panierDetail"]) {
             // line 18
-            yield "                <div class=\"row mb-4  row-with-margin-bottom\">
+            yield "                <div class=\"row mb-4  bgdupanieritem\">
                     <div class=\"col-md-3\">
                         ";
             // line 20
@@ -191,10 +191,10 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
             // line 43
             yield "                        </div>
 
-                        <div class=\"right-align\">
+                        <div>
                             <form method=\"POST\" action=\"";
             // line 46
-            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("remove_from_cart");
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("enleverproduit_fromcart");
             yield "\" class=\"delete-form\">
                                 <input type=\"hidden\" name=\"panierId\" value=\"";
             // line 47
@@ -305,7 +305,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
             <h1 class=\"mt-4 mb-4\">Votre Panier</h1>
             <br>
             {% for panierDetail in panierDetails %}
-                <div class=\"row mb-4  row-with-margin-bottom\">
+                <div class=\"row mb-4  bgdupanieritem\">
                     <div class=\"col-md-3\">
                         {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
                             <img src=\"{{ asset('images/' ~ panierDetail['images']) }}\" alt=\"image\" class=\"img-fluid card-img\">
@@ -332,8 +332,8 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
                             {% endif %}
                         </div>
 
-                        <div class=\"right-align\">
-                            <form method=\"POST\" action=\"{{ path('remove_from_cart') }}\" class=\"delete-form\">
+                        <div>
+                            <form method=\"POST\" action=\"{{ path('enleverproduit_fromcart') }}\" class=\"delete-form\">
                                 <input type=\"hidden\" name=\"panierId\" value=\"{{ panierDetail['id'] }}\">
                                 <a href=\"#\" class=\"delete-link\" onclick=\"this.parentNode.submit(); return false;\">Supprimer</a>
                             </form>

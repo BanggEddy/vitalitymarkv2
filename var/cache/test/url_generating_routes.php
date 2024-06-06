@@ -107,7 +107,7 @@ return [
     'app_contact_user' => [[], ['_controller' => 'App\\Controller\\UservueController::indexcontact'], [], [['text', '/contact/user']], [], [], []],
     'app_contact_user_submit' => [[], ['_controller' => 'App\\Controller\\UservueController::submitContact'], [], [['text', '/contact/user/submit']], [], [], []],
     'update_quantity' => [[], ['_controller' => 'App\\Controller\\UservueController::updateQuantityProduit'], [], [['text', '/update-quantity']], [], [], []],
-    'remove_from_cart' => [[], ['_controller' => 'App\\Controller\\UservueController::removeFromCartProduit'], [], [['text', '/remove_from_cart']], [], [], []],
+    'enleverproduit_fromcart' => [[], ['_controller' => 'App\\Controller\\UservueController::removeFromCartProduit'], [], [['text', '/enleverproduit_fromcart']], [], [], []],
     'app_legals_user' => [[], ['_controller' => 'App\\Controller\\UservueController::mentionsLegalsPage'], [], [['text', '/legals/user']], [], [], []],
     'uservue' => [[], ['_controller' => 'App\\Controller\\UservueController::index'], [], [['text', '/uservue']], [], [], []],
     'adminproducts' => [[], ['_controller' => 'App\\Controller\\AdminproductsController::index'], [], [['text', '/adminproducts']], [], [], []],
@@ -192,7 +192,7 @@ return [
     'App\Controller\UservueController::submitContact' => [[], ['_controller' => 'App\\Controller\\UservueController::submitContact'], [], [['text', '/contact/user/submit']], [], [], []],
     'App\Controller\UservueController::detailsProduit' => [['id'], ['_controller' => 'App\\Controller\\UservueController::detailsProduit'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/details-produit-user']], [], [], []],
     'App\Controller\UservueController::updateQuantityProduit' => [[], ['_controller' => 'App\\Controller\\UservueController::updateQuantityProduit'], [], [['text', '/update-quantity']], [], [], []],
-    'App\Controller\UservueController::removeFromCartProduit' => [[], ['_controller' => 'App\\Controller\\UservueController::removeFromCartProduit'], [], [['text', '/remove_from_cart']], [], [], []],
+    'App\Controller\UservueController::removeFromCartProduit' => [[], ['_controller' => 'App\\Controller\\UservueController::removeFromCartProduit'], [], [['text', '/enleverproduit_fromcart']], [], [], []],
     'App\Controller\UservueController::suppressionCompte' => [[], ['_controller' => 'App\\Controller\\UservueController::suppressionCompte'], [], [['text', '/delete_account']], [], [], []],
     'App\Controller\UservueController::mentionsLegalsPage' => [[], ['_controller' => 'App\\Controller\\UservueController::mentionsLegalsPage'], [], [['text', '/legals/user']], [], [], []],
 ];

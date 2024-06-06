@@ -299,7 +299,7 @@ body{
         text-align: right;
     }
 
-    .row-with-margin-bottom {
+    .bgdupanieritem {
         margin-bottom: 2% !important; 
         background-color: #f3f5f6;
         border-style: solid;

@@ -14,10 +14,10 @@ use App\Form\ProductSearchType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
-#[Route('/loyalty/card', methods: ['POST'])]
+#[Route('/loyalty/card')]
 class LoyaltyCardController extends AbstractController
 {
-    #[Route('/', name: 'app_loyalty_card_index', methods: ['GET'])]
+    #[Route('/', name: 'app_loyalty_card_index')]
     public function index(LoyaltyCardRepository $loyaltyCardRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -43,7 +43,7 @@ class LoyaltyCardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_loyalty_card_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_loyalty_card_show')]
     public function show(LoyaltyCard $loyaltyCard, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -60,7 +60,7 @@ class LoyaltyCardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_loyalty_card_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_loyalty_card_edit')]
     public function edit(Request $request, LoyaltyCard $loyaltyCard, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -87,7 +87,7 @@ class LoyaltyCardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_loyalty_card_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_loyalty_card_delete')]
     public function delete(Request $request, LoyaltyCard $loyaltyCard, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $loyaltyCard->getId(), $request->request->get('_token'))) {

@@ -515,13 +515,13 @@ class UservueController extends AbstractController
 
         $product = $productsRepository->find($id);
         $category = $product->getCategory();
-        $products = $productsRepository->findBy(['category' => $category]);
+        $productsrecommande = $productsRepository->findBy(['category' => $category]);
 
-        $promotions = $this->promotionService->getPromotionsPourProducts($products);
+        $promotions = $this->promotionService->getPromotionsPourProducts($productsrecommande);
 
         return $this->render('user/uservue/details.html.twig', [
             'promotions' => $promotions,
-            'products' => $products,
+            'productsrecommande' => $productsrecommande,
             'product' => $product,
             'user_id' => $userId,
             'barreRechercheCategory' => $formRechercheCategory->createView(),
@@ -563,15 +563,15 @@ class UservueController extends AbstractController
                 $panier->getIduser()->removePanier($panier, $entityManager);
             }
         } else {
-            return new RedirectResponse('/user/panier', 302, ['danger' => 'Action non valide.']);
+            return new RedirectResponse('/user/panier', 302);
         }
 
         $entityManager->flush();
 
-        return new RedirectResponse('/user/panier', 302, ['success' => 'La quantité du panier a été mise à jour avec succès.']);
+        return new RedirectResponse('/user/panier', 302);
     }
 
-    #[Route('/remove_from_cart', name: 'remove_from_cart', methods: ['POST'])]
+    #[Route('/enleverproduit_fromcart', name: 'enleverproduit_fromcart', methods: ['POST'])]
     public function removeFromCartProduit(PanierRepository $panierRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $panierId = $request->request->get('panierId');

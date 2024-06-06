@@ -15,7 +15,7 @@ use App\Form\ProductSearchType;
 use App\Service\ProductCategorie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-#[Route('/coupon', methods: ['POST'])]
+#[Route('/coupon')]
 class CouponController extends AbstractController
 {
     private $productCategorie;
@@ -26,7 +26,7 @@ class CouponController extends AbstractController
         $this->productCategorie = $productCategorie;
     }
 
-    #[Route('/', name: 'app_coupon_index', methods: ['GET'])]
+    #[Route('/', name: 'app_coupon_index')]
     public function index(CouponRepository $couponRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -51,7 +51,7 @@ class CouponController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_coupon_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_coupon_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $coupon = new Coupon();
@@ -80,7 +80,7 @@ class CouponController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_coupon_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_coupon_show')]
     public function show(Coupon $coupon, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -97,7 +97,7 @@ class CouponController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_coupon_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_coupon_edit')]
     public function edit(Request $request, Coupon $coupon, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CouponType::class, $coupon);
@@ -124,7 +124,7 @@ class CouponController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_coupon_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_coupon_delete')]
     public function delete(Request $request, Coupon $coupon, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $coupon->getId(), $request->request->get('_token'))) {

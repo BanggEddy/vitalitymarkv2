@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 #[Route('/promo/admin', methods: ['POST'])]
 class PromoAdminController extends AbstractController
 {
-    #[Route('/', name: 'app_promo_admin_index', methods: ['GET'])]
+    #[Route('/', name: 'app_promo_admin_index')]
     public function index(PromoRepository $promoRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -42,7 +42,7 @@ class PromoAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_promo_admin_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_promo_admin_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -87,7 +87,7 @@ class PromoAdminController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_promo_admin_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_promo_admin_show')]
     public function show(Promo $promo, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -112,7 +112,7 @@ class PromoAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_promo_admin_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_promo_admin_edit')]
     public function edit(Request $request, Promo $promo, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -155,7 +155,7 @@ class PromoAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_promo_admin_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_promo_admin_delete')]
     public function delete(Request $request, Promo $promo, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $promo->getId(), $request->getPayload()->get('_token'))) {

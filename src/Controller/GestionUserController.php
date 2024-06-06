@@ -15,11 +15,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/gestion/user', methods: ['POST'])]
+#[Route('/gestion/user')]
 class GestionUserController extends AbstractController
 {
-    #[Route('/', name: 'app_gestion_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository, ProductsRepository $productsRepository, PromoRepository $promoRepository, Request $request): Response
+    #[Route('/', name: 'app_gestion_user_index')]
+    public function index(UserRepository $userRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $formRechercheCategory->handleRequest($request);
@@ -44,7 +44,7 @@ class GestionUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_gestion_user_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_gestion_user_show')]
     public function show(User $user, Request $request,): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -62,7 +62,7 @@ class GestionUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_gestion_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_gestion_user_edit')]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -90,7 +90,7 @@ class GestionUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_gestion_user_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_gestion_user_delete')]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->get('_token'))) {

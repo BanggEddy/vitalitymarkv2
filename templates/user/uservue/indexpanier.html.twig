@@ -15,7 +15,7 @@
             <h1 class="mt-4 mb-4">Votre Panier</h1>
             <br>
             {% for panierDetail in panierDetails %}
-                <div class="row mb-4  row-with-margin-bottom">
+                <div class="row mb-4  bgdupanieritem">
                     <div class="col-md-3">
                         {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
                             <img src="{{ asset('images/' ~ panierDetail['images']) }}" alt="image" class="img-fluid card-img">
@@ -42,8 +42,8 @@
                             {% endif %}
                         </div>
 
-                        <div class="right-align">
-                            <form method="POST" action="{{ path('remove_from_cart') }}" class="delete-form">
+                        <div>
+                            <form method="POST" action="{{ path('enleverproduit_fromcart') }}" class="delete-form">
                                 <input type="hidden" name="panierId" value="{{ panierDetail['id'] }}">
                                 <a href="#" class="delete-link" onclick="this.parentNode.submit(); return false;">Supprimer</a>
                             </form>
