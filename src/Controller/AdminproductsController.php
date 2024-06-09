@@ -39,10 +39,10 @@ class AdminproductsController extends AbstractController
     public function index(ProductsRepository $productsRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $products = $productsRepository->findAll();
@@ -59,10 +59,10 @@ class AdminproductsController extends AbstractController
     public function ajoutProductPage(Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $productForm = $this->createForm(ProductAdminType::class);
@@ -78,10 +78,10 @@ class AdminproductsController extends AbstractController
     public function createProduit(Request $request, LoggerInterface $logger, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $productForm = $this->createForm(ProductAdminType::class);
@@ -123,10 +123,10 @@ class AdminproductsController extends AbstractController
     public function deleteProducts(ProductsRepository $productsRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $products = $productsRepository->findAll();
@@ -163,10 +163,10 @@ class AdminproductsController extends AbstractController
     public function updateProducts(PromoRepository $promoRepository, ProductsRepository $productsRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $products = $productsRepository->findAll();
@@ -200,10 +200,10 @@ class AdminproductsController extends AbstractController
     public function editProductFormFront(Products $product, Request $request, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $productForm = $this->createForm(ProductAdminType::class, $product);
@@ -243,10 +243,10 @@ class AdminproductsController extends AbstractController
     public function adminCompte(Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $user = $this->getUser();
@@ -294,10 +294,6 @@ class AdminproductsController extends AbstractController
 
         $product = $productsRepository->find($productId);
 
-        if (!$product) {
-            throw $this->createNotFoundException('Le produit avec l\'ID ' . $productId . ' n\'existe pas.');
-        }
-
         $quantityToAdd = $request->request->get('quantity');
 
         $newQuantity = $product->getQuantity() + $quantityToAdd;
@@ -312,10 +308,6 @@ class AdminproductsController extends AbstractController
     public function enleverQuantiteProduitAdmin(ProductsRepository $productsRepository,  Request $request, $productId): Response
     {
         $product = $productsRepository->find($productId);
-
-        if (!$product) {
-            throw $this->createNotFoundException('Le produit avec l\'ID ' . $productId . ' n\'existe pas.');
-        }
 
         $quantityToRemove = $request->request->get('quantity');
 
@@ -334,10 +326,10 @@ class AdminproductsController extends AbstractController
     {
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         return $this->render('admin/adminproducts/compteadmin.html.twig', [
@@ -346,16 +338,16 @@ class AdminproductsController extends AbstractController
     }
 
     #[Route('/search/admin', name: 'search_admin')]
-    public function rechercherUnProduitAdmin(Request $request, ProductsRepository $productsRepository, PromoRepository $promoRepository)
+    public function rechercherUnProduitAdmin(Request $request, ProductsRepository $productsRepository)
     {
         $products = $productsRepository->findAll();
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $motrecherche = $request->request->get('motrecherche');
@@ -384,10 +376,10 @@ class AdminproductsController extends AbstractController
         $userId = $user instanceof User ? $user->getId() : null;
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $products = $productsRepository->findBy(['category' => $category]);

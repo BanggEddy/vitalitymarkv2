@@ -52,10 +52,10 @@ class UservueController extends AbstractController
 
     ): Response {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $user = $this->getUser();
@@ -95,10 +95,10 @@ class UservueController extends AbstractController
         $panierDetails = $panierUserService->creerDetailsPanier($paniers);
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
 
@@ -174,10 +174,10 @@ class UservueController extends AbstractController
     public function getUserPanier(PanierRepository $panierRepository, Request $request, PanierUser $panierUserService): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
 
@@ -227,10 +227,10 @@ class UservueController extends AbstractController
         $panierDetails = $panierUserService->creerDetailsPanier($paniers);
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $motrecherche = $request->request->get('motrecherche');
@@ -260,19 +260,19 @@ class UservueController extends AbstractController
     #[Route('/user/loyalty-card/{id}', name: 'user_loyalty_card')]
     public function redirectToUserLoyaltyCard($id): RedirectResponse
     {
-        $redirectUrl = $this->generateUrl('user_loyalty_card_page', ['id' => $id]);
+        $utiliserServiceRedirection = $this->generateUrl('user_loyalty_card_page', ['id' => $id]);
 
-        return new RedirectResponse($redirectUrl);
+        return new RedirectResponse($utiliserServiceRedirection);
     }
 
     #[Route('/user/uservue/card/{id}', name: 'user_loyalty_card_page')]
     public function showUserLoyaltyCardPage($id, PanierRepository $panierRepository, PanierUser $panierUserService, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         /** @var UserInterface|null $user */
@@ -352,10 +352,10 @@ class UservueController extends AbstractController
         $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $userId = null;
@@ -436,10 +436,10 @@ class UservueController extends AbstractController
         PanierUser $panierUserService,
     ): Response {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $user = $this->getUser();
@@ -493,10 +493,10 @@ class UservueController extends AbstractController
     public function detailsProduit($id, Request $request, PanierUser $panierUserService, PanierRepository $panierRepository, ProductsRepository $productsRepository,): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $user = $this->getUser();
@@ -628,10 +628,10 @@ class UservueController extends AbstractController
         }
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);

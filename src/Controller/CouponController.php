@@ -30,10 +30,10 @@ class CouponController extends AbstractController
     public function index(CouponRepository $couponRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $motrecherche = $request->query->get('motrecherche');

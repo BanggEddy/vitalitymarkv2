@@ -41,10 +41,10 @@ class AccueilController extends AbstractController
         Request $request
     ): Response {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $products = $productsRepository->findAll();
@@ -62,10 +62,10 @@ class AccueilController extends AbstractController
         Request $request,
     ): Response {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         return $this->render('accueil/legals.html.twig', [
@@ -77,10 +77,10 @@ class AccueilController extends AbstractController
     public function afficherLesPromos(PromoRepository $promoRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $promotions = $promoRepository->findAll();
@@ -109,10 +109,10 @@ class AccueilController extends AbstractController
         ProductsRepository $productsRepository,
     ): Response {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $product = $productsRepository->find($id);
@@ -134,16 +134,16 @@ class AccueilController extends AbstractController
     public function rechercherUnProduitVisiteur(ProductsRepository $productsRepository, Request $request,)
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $motrecherche = $request->request->get('motrecherche');
 
         $products = $productsRepository->createQueryBuilder('p')
-            ->where('p.id LIKE :motrecherche')
+            ->where('p.name LIKE :motrecherche')
             ->setParameter('motrecherche', '%' . $motrecherche . '%')
             ->getQuery()
             ->getResult();
@@ -162,10 +162,10 @@ class AccueilController extends AbstractController
     public function indexcontact(Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         return $this->render('accueil/contact.html.twig', [
@@ -180,7 +180,6 @@ class AccueilController extends AbstractController
         $token = $request->request->get('_csrf_token');
 
         if (!$this->isCsrfTokenValid('contact', $token)) {
-            $this->addFlash('error', 'Token CSRF invalide.');
             return $this->redirectToRoute('app_contact');
         }
 
@@ -208,10 +207,10 @@ class AccueilController extends AbstractController
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
-        $redirectUrl = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
-        if ($redirectUrl) {
-            return $this->redirect($redirectUrl);
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
         }
 
         $products = $productsRepository->findBy(['category' => $category]);
