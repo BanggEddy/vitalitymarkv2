@@ -12,6 +12,7 @@ use App\Entity\User;
 use App\Entity\Promo;
 use App\Entity\Contact;
 use App\Entity\LoyaltyCard;
+use App\Entity\PanierItems;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -47,9 +48,7 @@ class UservueController extends AbstractController
     public function index(
         Request $request,
         ProductsRepository $productsRepository,
-        PanierUser $panierUserService,
-        PanierRepository $panierRepository,
-
+        PanierRepository $panierRepository
     ): Response {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
@@ -59,15 +58,24 @@ class UservueController extends AbstractController
         }
 
         $user = $this->getUser();
-        $userId = $user instanceof User ? $user->getId() : null;
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour voir votre panier.');
+        }
 
+        $userId = $user->getId();
         $paniers = $panierRepository->findBy(['iduser' => $user]);
+
         $products = $productsRepository->findAll();
-
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
+        $panierDetails = [];
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $details = $this->panierUserService->creerDetailsPanier($panier);
+            $panierDetails[] = $details;
+            $prixTotalPanier += $this->panierUserService->PriceTotalPanier($panier);
+        }
 
         return $this->render('user/uservue/index.html.twig', [
             'panierDetails' => $panierDetails,
@@ -78,7 +86,6 @@ class UservueController extends AbstractController
             'promotions' => $promotions,
         ]);
     }
-
 
     #[Route('/user/promo', name: 'app_user_promo')]
     public function promo(PanierRepository $panierRepository, PromoRepository $promoRepository, Request $request, PanierUser $panierUserService): Response
@@ -127,48 +134,73 @@ class UservueController extends AbstractController
     }
 
     #[Route('/add-dans-panier/{id}', name: 'add_dans_panier')]
-    public function addDansPanier(PanierRepository $panierRepository, Request $request, ProductsRepository $productsRepository, $id, UrlGeneratorInterface $urlGenerator): Response
-    {
+    public function addDansPanier(
+        PanierRepository $panierRepository,
+        Request $request,
+        ProductsRepository $productsRepository,
+        EntityManagerInterface $entityManager,
+        $id,
+        UrlGeneratorInterface $urlGenerator
+    ): Response {
         $quantity = $request->request->get('quantity');
 
+        if ($quantity <= 0) {
+            throw new \InvalidArgumentException('La quantité doit être supérieure à zéro.');
+        }
+
         $user = $this->getUser();
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour ajouter un produit au panier.');
+        }
 
         try {
-            $this->entityManager->beginTransaction();
+            $entityManager->beginTransaction();
 
             $product = $productsRepository->find($id);
-
-
-            if ($product) {
-                $product->setQuantity($product->getQuantity() - $quantity);
+            if (!$product) {
+                throw $this->createNotFoundException('Produit non trouvé.');
             }
 
-            $panierItem = $panierRepository->findOneBy(['idproducts' => $product, 'iduser' => $user]);
+            if ($product->getQuantity() < $quantity) {
+                throw new \Exception('Quantité insuffisante en stock.');
+            }
 
-            if ($panierItem) {
-                $panierItem->setQuantity($panierItem->getQuantity() + $quantity);
-            } else {
-                $panierItem = new Panier();
-                $panierItem->setQuantity($quantity);
-                $panierItem->setIduser($user);
+            $panier = $panierRepository->findOneBy(['iduser' => $user]);
+            if (!$panier) {
+                $panier = new Panier();
+                $panier->setIduser($user);
+                $entityManager->persist($panier);
+            }
 
-                if ($product) {
-                    $panierItem->setIdproducts($product);
+            $panierItems = $panier->getPanierItems();
+            $produitdiff = false;
+            foreach ($panierItems as $panierItem) {
+                if ($panierItem->getIdproduct() === $product) {
+                    $panierItem->setQuantity($panierItem->getQuantity() + $quantity);
+                    $produitdiff = true;
+                    break;
                 }
-
-                $this->entityManager->persist($panierItem);
             }
 
-            $this->entityManager->flush();
-            $this->entityManager->commit();
+            if (!$produitdiff) {
+                $panierItem = new PanierItems();
+                $panierItem->setIdproduct($product);
+                $panierItem->setQuantity($quantity);
+
+                $panier->addPanierItem($panierItem);
+                $entityManager->persist($panierItem);
+            }
+
+            $entityManager->flush();
+            $entityManager->commit();
 
             $url = $urlGenerator->generate('uservue');
             return new RedirectResponse($url);
         } catch (\Exception $e) {
-            $this->entityManager->rollback();
+            $entityManager->rollback();
+            throw $e;
         }
     }
-
 
     #[Route('/user/panier', name: 'user_panier')]
     public function getUserPanier(PanierRepository $panierRepository, Request $request, PanierUser $panierUserService): Response
@@ -183,7 +215,6 @@ class UservueController extends AbstractController
 
         $user = $this->getUser();
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
 
 
 
@@ -195,8 +226,14 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
 
         $panierDetails = [];
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
+
+
 
         return $this->render('user/uservue/indexpanier.html.twig', [
             'panierDetails' => $panierDetails,
@@ -224,7 +261,14 @@ class UservueController extends AbstractController
         }
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $panierDetails = [];
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
+
+
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
@@ -279,8 +323,15 @@ class UservueController extends AbstractController
         $user = $this->getUser();
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
+        $panierDetails = [];
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
+
+
 
         $loyaltyCard = $user->getIdloyaltycard();
 
@@ -348,8 +399,14 @@ class UservueController extends AbstractController
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
         $panierDetails = [];
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
+
+
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
@@ -411,12 +468,17 @@ class UservueController extends AbstractController
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
-
         $products = $productsRepository->findBy(['category' => $category]);
-
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+
+        $panierDetails = [];
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
+
 
         return $this->render('user/uservue/categorie.html.twig', [
             'category' => $category,
@@ -448,8 +510,15 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
 
         $panierDetails = [];
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
+        $panierDetails = [];
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
+
+
 
         return $this->render('user/uservue/contact.html.twig', [
             'controller_name' => 'AccueilController',
@@ -502,8 +571,7 @@ class UservueController extends AbstractController
         $user = $this->getUser();
         $userId = $user instanceof User ? $user->getId() : null;
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $panierDetails = [];
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
+
         $userId = null;
 
         if ($user instanceof User) {
@@ -511,11 +579,17 @@ class UservueController extends AbstractController
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
-
         $product = $productsRepository->find($id);
         $category = $product->getCategory();
         $productsrecommande = $productsRepository->findBy(['category' => $category]);
+
+        $panierDetails = [];
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
 
         $promotions = $this->promotionService->getPromotionsPourProducts($productsrecommande);
 
@@ -531,7 +605,6 @@ class UservueController extends AbstractController
         ]);
     }
 
-    #Soustraire/Ajout quantité d'un "produits" depuis le panier
     #[Route('/update-quantity', name: 'update_quantity', methods: ['POST'])]
     public function updateQuantityProduit(Request $request, EntityManagerInterface $entityManager, PanierRepository $panierRepository): Response
     {
@@ -540,27 +613,33 @@ class UservueController extends AbstractController
 
         $panier = $panierRepository->find($panierId);
 
+        if (!$panier) {
+            throw $this->createNotFoundException('Panier non trouvé.');
+        }
+
+        $panierItems = $panier->getPanierItems()->first();
+
+        if (!$panierItems) {
+            throw new \Exception('PanierItems non trouvé.');
+        }
+
+        $product = $panierItems->getIdproduct();
+
+        if (!$product) {
+            throw new \Exception('Produit non trouvé.');
+        }
+
         if ($action === 'add') {
-            $panier->setQuantity($panier->getQuantity() + 1);
+            $panierItems->setQuantity($panierItems->getQuantity() + 1);
 
-            if ($panier->getIdproducts()) {
-                $product = $panier->getIdproducts();
-                $product->setQuantity($product->getQuantity() - 1);
-            }
+            $product->setQuantity($product->getQuantity() - 1);
         } elseif ($action === 'subtract') {
+            $panierItems->setQuantity($panierItems->getQuantity() - 1);
 
-            $panier->setQuantity($panier->getQuantity() - 1);
+            $product->setQuantity($product->getQuantity() + 1);
 
-            if ($panier->getIdproducts()) {
-                $product = $panier->getIdproducts();
-                $product->setQuantity($product->getQuantity() + 1);
-                if ($product->getQuantity() === 0) {
-                    $panier->getIduser()->removePanier($panier, $entityManager);
-                }
-            }
-
-            if ($panier->getQuantity() === 0) {
-                $panier->getIduser()->removePanier($panier, $entityManager);
+            if ($panierItems->getQuantity() === 0) {
+                $entityManager->remove($panierItems);
             }
         } else {
             return new RedirectResponse('/user/panier', 302);
@@ -575,22 +654,22 @@ class UservueController extends AbstractController
     public function removeFromCartProduit(PanierRepository $panierRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $panierId = $request->request->get('panierId');
-        $panier = $panierRepository->find($panierId);
-        $product = $panier->getIdproducts();
+        $panierItems = $panierRepository->find($panierId);
+
+        if (!$panierItems) {
+            throw $this->createNotFoundException('PanierItems non trouvé.');
+        }
+
+        $product = $panierItems->getIdproduct();
 
         if ($product instanceof Products) {
-            $product->setQuantity($product->getQuantity() + $panier->getQuantity());
+            $product->setQuantity($product->getQuantity() + $panierItems->getQuantity());
         }
 
-        $user = $panier->getIduser();
-        if ($user) {
-            $user->removePanier($panier, $entityManager);
-        }
-
-        $entityManager->remove($panier);
+        $entityManager->remove($panierItems);
         $entityManager->flush();
 
-        return new RedirectResponse('/user/panier');
+        return new JsonResponse(['message' => 'Item removed from cart'], Response::HTTP_OK);
     }
 
     #[Route('/delete_account', name: 'delete_user_account', methods: ['POST'])]
@@ -613,6 +692,7 @@ class UservueController extends AbstractController
 
         return $this->render('confirmation_delete_account.html.twig');
     }
+
     #[Route('/legals/user', name: 'app_legals_user')]
     public function mentionsLegalsPage(
         Request $request,
@@ -635,8 +715,13 @@ class UservueController extends AbstractController
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
+        $panierDetails = [];
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
 
         return $this->render('user/uservue/legals.html.twig', [
             'barreRechercheCategory' => $formRechercheCategory->createView(),

@@ -10,9 +10,8 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
             'properties' => [
                 [
                     'id',
-                    'quantity',
                     'iduser',
-                    'idproducts',
+                    'panierItems',
                 ],
             ],
         ],

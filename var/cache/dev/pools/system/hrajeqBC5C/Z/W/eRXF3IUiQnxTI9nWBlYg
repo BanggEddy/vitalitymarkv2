@@ -12,6 +12,7 @@ return [PHP_INT_MAX, static fn () => \Symfony\Component\VarExporter\Internal\Hyd
                     'id',
                     'email',
                     'roles',
+                    'idpanier',
                     'password',
                     'name',
                     'adresse',

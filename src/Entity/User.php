@@ -39,6 +39,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\OneToOne(mappedBy: 'iduser', cascade: ['persist', 'remove'])]
+    private ?Panier $idpanier = null;
     /**
      * @var string
      */
@@ -202,29 +204,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->paniers;
     }
 
-    public function addPanier(Panier $panier): static
-    {
-        if (!$this->paniers->contains($panier)) {
-            $this->paniers->add($panier);
-            $panier->setIduser($this);
-        }
-
-        return $this;
-    }
-
-    public function removePanier(Panier $panier, EntityManagerInterface $entityManager): static
-    {
-        if ($this->paniers->removeElement($panier)) {
-            if ($panier->getIduser() === $this) {
-                $panier->setIduser(null);
-            }
-
-            $entityManager->remove($panier);
-            $entityManager->flush();
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Contact>
@@ -299,6 +278,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setExpiredAt(?\DateTimeImmutable $expiredAt): static
     {
         $this->expiredAt = $expiredAt;
+
+        return $this;
+    }
+
+    public function getIdpanier(): ?Panier
+    {
+        return $this->idpanier;
+    }
+
+    public function setIdpanier(?Panier $idpanier): static
+    {
+        $this->idpanier = $idpanier;
 
         return $this;
     }

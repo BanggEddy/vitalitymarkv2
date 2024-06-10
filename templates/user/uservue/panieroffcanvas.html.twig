@@ -120,54 +120,36 @@
           </h2>
           <div id="collapsePanier" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              {% for panierDetail in panierDetails %}
+              {% for panier in panierDetails %}
               <div class="row mb-4 border-bottom">
+              {% for item in panier %}
                 <div class="col-md-3">
                   <div class="img-container">
-                    {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
-                    <img src="{{ asset('images/' ~ panierDetail['images']) }}" alt="image" class="img-fluid img-small">
-                    {% else %}
-                    <p>image pas trouvé</p>
-                    {% endif %}
+                    <img src="{{ asset('images/' ~ item['images']) }}" alt="image" class="img-fluid img-small">
                   </div>
                 </div>
                 <div class="col-md-9">
                   <div class="text-container">
                     <div class="row">
                       <div class="col-md-8">
-                        {% if panierDetail['name'] is defined and panierDetail['name'] is not null %}
-                        <h5>{{ panierDetail['name'] }}</h5>
-                        {% else %}
-                        <p>Trouve pas de name</p>
-                        {% endif %}
-                        {% if panierDetail['quantity'] is defined and panierDetail['quantity'] is not null %}
-                        <p class="btn-quantity">Quantité: {{ panierDetail['quantity'] }}</p>
-                        {% else %}
-                        <p>No quantity available</p>
-                        {% endif %}
+                        <h5>{{ item['name'] }}</h5>
+
+                        <p class="btn-quantity">Quantité: {{ item['quantity'] }}</p>
                       </div>
                       <div class="col-md-4 text-right">
-                        {% if panierDetail['price'] is defined and panierDetail['price'] is not null %}
-                        <p>Prix: {{ panierDetail['price'] }}/unité </p>
-                        {% else %}
-                        <p>No price available</p>
-                        {% endif %}
-                        {% if panierDetail['reduction'] is not null and panierDetail['reduction'] is not empty and panierDetail['reduction'] != 'N/A' %}
-                            <p><span style="color: red;">{{ panierDetail['reduction'] }} % de réduction</span></p>
-                        {% endif %}
+                        <p>Prix: {{ item['price'] }}/unité </p>
+                            <p><span style="color: red;">{{ item['reduction'] }} % de réduction</span></p>
+
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-12">
-                        {% if panierDetail['subtotal'] is defined and panierDetail['subtotal'] is not null %}
-                        <p>sous-total: {{ panierDetail['subtotal'] }}</p>
-                        {% else %}
-                        <p>No subtotal available</p>
-                        {% endif %}
+                        <p>sous-total: {{ item['subtotal'] }}</p>
                       </div>
                     </div>
                   </div>
                 </div>
+                {% endfor %}
               </div>
               {% endfor %}
               <div class="row justify-content-end mb-4">

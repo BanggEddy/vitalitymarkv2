@@ -42,10 +42,17 @@ class Products
     #[ORM\Column(nullable: true)]
     private ?float $price = null;
 
+    /**
+     * @var Collection<int, PanierItems>
+     */
+    #[ORM\OneToMany(mappedBy: 'idproduct', targetEntity: PanierItems::class)]
+    private Collection $panierItems;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
         $this->promos = new ArrayCollection();
+        $this->panierItems = new ArrayCollection();
     }
     public function getPromoMaintenant(): ?Promo
     {
@@ -141,28 +148,6 @@ class Products
         return $this->paniers;
     }
 
-    public function addPanier(Panier $panier): static
-    {
-        if (!$this->paniers->contains($panier)) {
-            $this->paniers->add($panier);
-            $panier->setIdproducts($this);
-        }
-
-        return $this;
-    }
-
-    public function removePanier(Panier $panier): static
-    {
-        if ($this->paniers->removeElement($panier)) {
-            // set the owning side to null (unless already changed)
-            if ($panier->getIdproducts() === $this) {
-                $panier->setIdproducts(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Promo>
      */
@@ -201,6 +186,36 @@ class Products
     public function setPrice(?float $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PanierItems>
+     */
+    public function getPanierItems(): Collection
+    {
+        return $this->panierItems;
+    }
+
+    public function addPanierItem(PanierItems $panierItem): static
+    {
+        if (!$this->panierItems->contains($panierItem)) {
+            $this->panierItems->add($panierItem);
+            $panierItem->setIdproduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanierItem(PanierItems $panierItem): static
+    {
+        if ($this->panierItems->removeElement($panierItem)) {
+            // set the owning side to null (unless already changed)
+            if ($panierItem->getIdproduct() === $this) {
+                $panierItem->setIdproduct(null);
+            }
+        }
 
         return $this;
     }

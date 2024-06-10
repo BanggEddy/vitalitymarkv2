@@ -2,14 +2,17 @@
 
 namespace App\Service;
 
+use App\Entity\Panier;
+
 class PanierUser
 {
-    public function creerDetailsPanier($paniers)
+    public function creerDetailsPanier(Panier $panier)
     {
         $panierDetails = [];
+        $panierItems = $panier->getPanierItems();
 
-        foreach ($paniers as $panier) {
-            $product = $panier->getIdproducts();
+        foreach ($panierItems as $item) {
+            $product = $item->getIdproduct();
             $promo = $product ? $product->getPromoMaintenant() : null;
 
             if ($product) {
@@ -17,63 +20,54 @@ class PanierUser
                 $reduction = $promo ? $promo->getReduction() : null;
                 $category = $product->getCategory();
 
-                $panierDetails[] = $this->createPanierItemDetails($panier, $product, $productPrice, $reduction, $promo, $category); // Pass promo to createPanierItemDetails
+                $panierDetails[] = $this->createPanierItemDetails($item, $product, $productPrice, $reduction, $promo, $category);
             }
         }
-
 
         return $panierDetails;
     }
 
-    public function createPanierItemDetails($panier, $product, $productPrice, $reduction, $promo = null, $category = null)
+    public function createPanierItemDetails($panierItem, $product, $productPrice, $reduction, $promo = null, $category = null)
     {
         if ($product !== null) {
             return [
-                'id' => $panier->getId(),
+                'id' => $panierItem->getId(),
                 'images' => $product->getImages(),
                 'name' => $product->getName(),
                 'price' => $productPrice,
                 'category' => $category,
-                'quantity' => $panier->getQuantity(),
+                'quantity' => $panierItem->getQuantity(),
                 'description' => $product->getDescription(),
-                'subtotal' => $productPrice * $panier->getQuantity(),
+                'subtotal' => $productPrice * $panierItem->getQuantity(),
                 'reduction' => $reduction,
                 'promo' => $promo
             ];
         } else {
             return [
-                'id' => $panier->getId(),
+                'id' => $panierItem->getId(),
                 'name' => 'pas Product or Promotion',
                 'price' => $productPrice,
-                'quantity' => $panier->getQuantity(),
+                'quantity' => $panierItem->getQuantity(),
                 'description' => 'pas Description',
-                'subtotal' => $productPrice * $panier->getQuantity(),
+                'subtotal' => $productPrice * $panierItem->getQuantity(),
                 'reduction' => $reduction,
                 'promo' => $promo
             ];
         }
     }
 
-
-
-    public function PriceTotalPanier($paniers): float
+    public function PriceTotalPanier(Panier $panier): float
     {
-        $prixTotalPanier = 0;
+        $total = 0;
+        $panierItems = $panier->getPanierItems();
 
-        foreach ($paniers as $panier) {
-            $product = $panier->getIdproducts();
-
-            if ($product) {
-                $promo = $product->getPromoMaintenant();
-                if ($promo) {
-                    $productPrice = $promo->getPriceafterpromo();
-                } else {
-                    $productPrice = $product->getPrice();
-                }
-                $prixTotalPanier += $productPrice * $panier->getQuantity();
-            }
+        foreach ($panierItems as $item) {
+            $product = $item->getIdproduct();
+            $promo = $product ? $product->getPromoMaintenant() : null;
+            $productPrice = $promo ? $promo->getPriceafterpromo() : $product->getPrice();
+            $total += $productPrice * $item->getQuantity();
         }
 
-        return $prixTotalPanier;
+        return $total;
     }
 }
