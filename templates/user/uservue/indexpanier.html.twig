@@ -14,52 +14,54 @@
         <div class="col-lg-10">
             <h1 class="mt-4 mb-4">Votre Panier</h1>
             <br>
-            {% for panierDetail in panierDetails %}
+        {% for panier in panierDetails %}
+            {% for item in panier %}
                 <div class="row mb-4  bgdupanieritem">
                     <div class="col-md-3">
-                        {% if panierDetail['images'] is defined and panierDetail['images'] is not null %}
-                            <img src="{{ asset('images/' ~ panierDetail['images']) }}" alt="image" class="img-fluid card-img">
+                        {% if item['images'] is defined and item['images'] is not null %}
+                            <img src="{{ asset('images/' ~ item['images']) }}" alt="image" class="img-fluid card-img">
                         {% else %}
                             <p>image pas trouvé</p>
                         {% endif %}
                     </div>
                     <div class="col-md-9 card-details">
                         <div>
-                            {% if panierDetail['promo'] is not null %}
-                                <p> {{ panierDetail['name'] }} </p>
-                                <h5>{{ panierDetail['promo'].getDescription() ?? 'Trouve pas de description' }}</h5>
+                            {% if item['promo'] is not null %}
+                                <p> {{ item['name'] }} </p>
+                                <h5>{{ item['promo'].getDescription() ?? 'Trouve pas de description' }}</h5>
                                 <p>Promotion</p>
                             {% else %}
-                                <h5>{{ panierDetail['name'] ?? 'Trouve pas de name' }}</h5>
-                                <p>{{ panierDetail['description'] ?? 'Trouve pas de description' }}</p>
-                                <p>{{ panierDetail['category'] ?? 'Trouve pas de category' }}</p>
+                                <h5>{{ item['name'] ?? 'Trouve pas de name' }}</h5>
+                                <p>{{ item['description'] ?? 'Trouve pas de description' }}</p>
+                                <p>{{ item['category'] ?? 'Trouve pas de category' }}</p>
                             {% endif %}
                         </div>
                         <div class="card-price">
-                            {% if panierDetail['promo'] is not null %}
-                                <p style="color: red">Prix après réduction: {{ panierDetail['price'] }} €/u</p>
-                                <p  style="color: red">-{{ panierDetail['reduction'] }} %</p>
+                            {% if item['promo'] is not null %}
+                                <p style="color: red">Prix après réduction: {{ item['price'] }} €/u</p>
+                                <p  style="color: red">-{{ item['reduction'] }} %</p>
                             {% endif %}
                         </div>
 
                         <div>
                             <form method="POST" action="{{ path('enleverproduit_fromcart') }}" class="delete-form">
-                                <input type="hidden" name="panierId" value="{{ panierDetail['id'] }}">
+                                <input type="hidden" name="panierId" value="{{ item['id'] }}">
                                 <a href="#" class="delete-link" onclick="this.parentNode.submit(); return false;">Supprimer</a>
                             </form>
                             <form method="POST" action="{{ path('update_quantity') }}" class="quantity-form">
-                                <input type="hidden" name="panierId" value="{{ panierDetail['id'] }}">
+                                <input type="hidden" name="panierId" value="{{ item['id'] }}">
                                     <div class="card-actions">
                                         <button type="submit" name="action" value="add" class="btn btn-primary btn-sm quantity-btn add">+</button>
-                                        <p class="quantity-text">Quantité: {{ panierDetail['quantity'] ?? 'No quantity available' }}</p>
+                                        <p class="quantity-text">Quantité: {{ item['quantity'] ?? 'No quantity available' }}</p>
                                         <button type="submit" name="action" value="subtract" class="btn btn-primary btn-sm quantity-btn subtract">-</button>
                                     </div>
                             </form>
-                            <p>Sous-total: {{ panierDetail['subtotal'] ?? 'No subtotal available' }}</p>
+                            <p>Sous-total: {{ item['subtotal'] ?? 'No subtotal available' }}</p>
                         </div>
                     </div>
                 </div>
             {% endfor %}
+        {% endfor %}
             <div class="justify-content-end mb-4" style="text-align: end;">
                 <div class="col">
                     <p>Nombre d'articles: {{ panierDetails|length }}</p>

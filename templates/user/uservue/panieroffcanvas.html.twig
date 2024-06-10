@@ -1,164 +1,178 @@
-<style>
-  .offcanvas-header {
-    background-color: #fff;
-    border-bottom: 1px solid #dee2e6;
-  }
+{% extends 'base.html.twig' %}
 
-  .offcanvas-title {
-    color: #000 !important;
-    margin-bottom: 0;
-  }
+{% block body %}
+    <h1>Panier de l'utilisateur</h1>
 
-  .offcanvas-body {
-    padding: 20px;
-    background-color: rgb(235, 235, 235);
-  }
+    <style>
+      .offcanvas-header {
+        background-color: #fff;
+        border-bottom: 1px solid #dee2e6;
+      }
 
-  .accordion-item {
-    background-color: #dee2e6;
-    border: none;
-    margin-bottom: 10px;
-  }
+      .offcanvas-title {
+        color: #000 !important;
+        margin-bottom: 0;
+      }
 
-  .accordion-button {
-    background-color: #0000;
-    color: #212529;
-    border: none;
-    border-radius: 0;
-    padding: 10px 20px;
-    text-align: left;
-    width: 100%;
-  }
+      .offcanvas-body {
+        padding: 20px;
+        background-color: rgb(235, 235, 235);
+      }
 
-  .accordion-button:hover {
-    background-color: #000;
-    color: #fff;
-  }
+      .accordion-item {
+        background-color: #dee2e6;
+        border: none;
+        margin-bottom: 10px;
+      }
 
-  .accordion-button.collapsed {
-    background-color: #fff;
-    color: #000;
-  }
+      .accordion-button {
+        background-color: #0000;
+        color: #212529;
+        border: none;
+        border-radius: 0;
+        padding: 10px 20px;
+        text-align: left;
+        width: 100%;
+      }
 
-  .accordion-body {
-    background-color: #fff;
-    border-top: 1px solid #7cdf7c;
-    padding: 20px;
-  }
+      .accordion-button:hover {
+        background-color: #000;
+        color: #fff;
+      }
 
-  .accordion-body .img-container {
-    margin-bottom: 10px;
-  }
+      .accordion-button.collapsed {
+        background-color: #fff;
+        color: #000;
+      }
 
-  .accordion-body .img-container img {
-    max-width: 100px;
-    max-height: 100px;
-  }
+      .accordion-body {
+        background-color: #fff;
+        border-top: 1px solid #7cdf7c;
+        padding: 20px;
+      }
 
-  .accordion-body .text-container {
-    margin-bottom: 10px;
-  }
+      .accordion-body .img-container {
+        margin-bottom: 10px;
+      }
 
-  .accordion-body h5 {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
+      .accordion-body .img-container img {
+        max-width: 100px;
+        max-height: 100px;
+      }
 
-  .accordion-body p {
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
+      .accordion-body .text-container {
+        margin-bottom: 10px;
+      }
 
-  .accordion-body .text-right {
-    text-align: right;
-  }
+      .accordion-body h5 {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
 
-  .btn-details {
-    margin-top: 10px;
-  }
+      .accordion-body p {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
 
-  .total-info {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
+      .accordion-body .text-right {
+        text-align: right;
+      }
 
-  .total-price {
-    font-size: 18px;
-    margin-top: 10px;
-  }
+      .btn-details {
+        margin-top: 10px;
+      }
 
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #fff;
-  }
+      .total-info {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
 
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-  }
-  .img-small {
-    width: 50px; 
-    height: auto;
-  }
+      .total-price {
+        font-size: 18px;
+        margin-top: 10px;
+      }
 
-</style>
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+      }
 
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Votre panier:</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div class="container">
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePanier" aria-expanded="true" aria-controls="collapsePanier">
-              Votre panier
-            </button>
-          </h2>
-          <div id="collapsePanier" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              {% for panier in panierDetails %}
-              <div class="row mb-4 border-bottom">
-              {% for item in panier %}
-                <div class="col-md-3">
-                  <div class="img-container">
-                    <img src="{{ asset('images/' ~ item['images']) }}" alt="image" class="img-fluid img-small">
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div class="text-container">
-                    <div class="row">
-                      <div class="col-md-8">
-                        <h5>{{ item['name'] }}</h5>
+      .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+      }
 
-                        <p class="btn-quantity">Quantité: {{ item['quantity'] }}</p>
-                      </div>
-                      <div class="col-md-4 text-right">
-                        <p>Prix: {{ item['price'] }}/unité </p>
-                            <p><span style="color: red;">{{ item['reduction'] }} % de réduction</span></p>
+      .img-small {
+        width: 50px; 
+        height: auto;
+      }
 
-                      </div>
+      .border-bottom {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 15px;
+      }
+    </style>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Votre panier:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="container">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePanier" aria-expanded="true" aria-controls="collapsePanier">
+                  Votre panier
+                </button>
+              </h2>
+              <div id="collapsePanier" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  {% for panier in panierDetails %}
+                    <div class="panier">
+                      {% for item in panier %}
+                        <div class="row mb-4 border-bottom">
+                          <div class="col-md-3">
+                            <div class="img-container">
+                              <img src="{{ asset('images/' ~ item.images) }}" alt="image" class="img-fluid img-small">
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="text-container">
+                              <div class="row">
+                                <div class="col-md-8">
+                                  <h5>{{ item.name }}</h5>
+                                  <p class="btn-quantity">Quantité: {{ item.quantity }}</p>
+                                </div>
+                                <div class="col-md-4 text-right">
+                                  <p>Prix: {{ item.price }}€/unité</p>
+                                  {% if item.reduction %}
+                                    <p><span style="color: red;">{{ item.reduction }}% de réduction</span></p>
+                                  {% endif %}
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <p>Sous-total: {{ item.subtotal }}€</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endfor %}
                     </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <p>sous-total: {{ item['subtotal'] }}</p>
-                      </div>
+                  {% endfor %}
+                  <div class="row justify-content-end mb-4">
+                    <div class="col-md-6">
+                      <p class="total-info">Nombre d'articles: {{ panierDetails|length }}</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                      <h3 class="total-price">Prix total: {{ prixTotalPanier }} €</h3>
+                      <a class="btn btn-details" href="/user/panier">Mon Panier</a>
                     </div>
                   </div>
-                </div>
-                {% endfor %}
-              </div>
-              {% endfor %}
-              <div class="row justify-content-end mb-4">
-                <div class="col-md-6">
-                  <p class="total-info">Nombre d'articles: {{ panierDetails|length }}</p>
-                </div>
-                <div class="col-md-6 text-right">
-                  <h3 class="total-price">Prix total: {{ prixTotalPanier }} €</h3>
-                  <a class="btn btn-details" href="/user/panier">Mon Panier</a>
                 </div>
               </div>
             </div>
@@ -166,5 +180,6 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <h2>Total: {{ prixTotalPanier }}€</h2>
+{% endblock %}

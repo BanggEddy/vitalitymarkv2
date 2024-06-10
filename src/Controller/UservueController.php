@@ -48,7 +48,8 @@ class UservueController extends AbstractController
     public function index(
         Request $request,
         ProductsRepository $productsRepository,
-        PanierRepository $panierRepository
+        PanierRepository $panierRepository,
+        PanierUser $panierUserService,
     ): Response {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
@@ -72,9 +73,9 @@ class UservueController extends AbstractController
         $prixTotalPanier = 0;
 
         foreach ($paniers as $panier) {
-            $details = $this->panierUserService->creerDetailsPanier($panier);
+            $details = $panierUserService->creerDetailsPanier($panier);
             $panierDetails[] = $details;
-            $prixTotalPanier += $this->panierUserService->PriceTotalPanier($panier);
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
         }
 
         return $this->render('user/uservue/index.html.twig', [
@@ -97,10 +98,6 @@ class UservueController extends AbstractController
             $paniers = $panierRepository->findBy(['iduser' => $userId]);
         }
 
-
-        $panierDetails = [];
-        $panierDetails = $panierUserService->creerDetailsPanier($paniers);
-
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
@@ -121,7 +118,15 @@ class UservueController extends AbstractController
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $prixTotalPanier = $panierUserService->PriceTotalPanier($paniers);
+
+        $panierDetails = [];
+        $prixTotalPanier = 0;
+
+        foreach ($paniers as $panier) {
+            $details = $panierUserService->creerDetailsPanier($panier);
+            $panierDetails[] = $details;
+            $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
+        }
 
         return $this->render('user/uservue/promo.html.twig', [
             'panierDetails' => $panierDetails,
@@ -229,7 +234,8 @@ class UservueController extends AbstractController
         $prixTotalPanier = 0;
 
         foreach ($paniers as $panier) {
-            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $details = $panierUserService->creerDetailsPanier($panier);
+            $panierDetails[] = $details;
             $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
         }
 
@@ -248,7 +254,6 @@ class UservueController extends AbstractController
     public function search(
         Request $request,
         PanierRepository $panierRepository,
-        PromoRepository $promoRepository,
         PanierUser $panierUserService,
         ProductsRepository $productsRepository,
     ) {
@@ -264,7 +269,8 @@ class UservueController extends AbstractController
         $prixTotalPanier = 0;
 
         foreach ($paniers as $panier) {
-            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $details = $panierUserService->creerDetailsPanier($panier);
+            $panierDetails[] = $details;
             $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
         }
 
@@ -310,7 +316,7 @@ class UservueController extends AbstractController
     }
 
     #[Route('/user/uservue/card/{id}', name: 'user_loyalty_card_page')]
-    public function showUserLoyaltyCardPage($id, PanierRepository $panierRepository, PanierUser $panierUserService, Request $request): Response
+    public function showUserLoyaltyCardPage(PanierRepository $panierRepository, PanierUser $panierUserService, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
@@ -510,11 +516,11 @@ class UservueController extends AbstractController
         $paniers = $panierRepository->findBy(['iduser' => $user]);
 
         $panierDetails = [];
-        $panierDetails = [];
         $prixTotalPanier = 0;
 
         foreach ($paniers as $panier) {
-            $panierDetails[] = $panierUserService->creerDetailsPanier($panier);
+            $details = $panierUserService->creerDetailsPanier($panier);
+            $panierDetails[] = $details;
             $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
         }
 
