@@ -47,6 +47,12 @@ class RegistrationFormType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Prénom et Nom',
                 'attr' => ['placeholder' => 'Prénom et Nom'],
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z]+\s[a-zA-Z]+$/',
+                        'message' => 'Le nom doit contenir uniquement des lettres et au moins un espace.',
+                    ]),
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

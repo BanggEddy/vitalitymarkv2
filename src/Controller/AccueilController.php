@@ -222,4 +222,21 @@ class AccueilController extends AbstractController
             'promotions' => $promotions,
         ]);
     }
+
+    #[Route('/accepterterms', name: 'app_accepterterms')]
+    public function accepterTerms(
+        Request $request
+    ): Response {
+        $formRechercheCategory = $this->createForm(ProductSearchType::class);
+        $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
+
+        if ($utiliserServiceRedirection) {
+            return $this->redirect($utiliserServiceRedirection);
+        }
+
+
+        return $this->render('accueil/agreeterms.html.twig', [
+            'barreRechercheCategory' => $formRechercheCategory,
+        ]);
+    }
 }

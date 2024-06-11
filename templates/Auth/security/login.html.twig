@@ -68,8 +68,11 @@
     }
 </style>
 
+<body>
+<div class="cookie-notification" id="cookieNotification">
+    En naviguant sur ce site, vous acceptez l'utilisation de cookies.
+</div>
 
-    <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 p-0">
@@ -116,6 +119,14 @@
             </div>
         </div>
     </div>
+
+<script>
+    window.onload = function() {
+        console.log("enter")
+        document.getElementById('cookieNotification').style.display = 'block';
+    };
+</script>
+
     </body>
 
 {% endblock %}
