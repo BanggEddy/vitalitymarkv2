@@ -45,16 +45,16 @@
 
                         <div>
                             <form method="POST" action="{{ path('enleverproduit_fromcart') }}" class="delete-form">
-                                <input type="hidden" name="panierId" value="{{ item['id'] }}">
+                                <input type="hidden" name="panierItemId" value="{{ item['id'] }}">
                                 <a href="#" class="delete-link" onclick="this.parentNode.submit(); return false;">Supprimer</a>
                             </form>
                             <form method="POST" action="{{ path('update_quantity') }}" class="quantity-form">
-                                <input type="hidden" name="panierId" value="{{ item['id'] }}">
-                                    <div class="card-actions">
-                                        <button type="submit" name="action" value="add" class="btn btn-primary btn-sm quantity-btn add">+</button>
-                                        <p class="quantity-text">Quantité: {{ item['quantity'] ?? 'No quantity available' }}</p>
-                                        <button type="submit" name="action" value="subtract" class="btn btn-primary btn-sm quantity-btn subtract">-</button>
-                                    </div>
+                                <input type="hidden" name="panierItemId" value="{{ item['id'] }}">
+                                <div class="card-actions">
+                                    <button type="submit" name="action" value="add" class="btn btn-primary btn-sm quantity-btn add">+</button>
+                                    <p class="quantity-text">Quantité: {{ item['quantity'] ?? 'No quantity available' }}</p>
+                                    <button type="submit" name="action" value="subtract" class="btn btn-primary btn-sm quantity-btn subtract">-</button>
+                                </div>
                             </form>
                             <p>Sous-total: {{ item['subtotal'] ?? 'No subtotal available' }}</p>
                         </div>

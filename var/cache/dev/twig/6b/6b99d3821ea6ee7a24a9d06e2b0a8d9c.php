@@ -294,10 +294,6 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
       </div>
     </div>
 
-    <h2>Total: ";
-        // line 184
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["prixTotalPanier"]) || array_key_exists("prixTotalPanier", $context) ? $context["prixTotalPanier"] : (function () { throw new RuntimeError('Variable "prixTotalPanier" does not exist.', 184, $this->source); })()), "html", null, true);
-        yield "€</h2>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -329,7 +325,7 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
      */
     public function getDebugInfo()
     {
-        return array (  299 => 184,  284 => 172,  278 => 169,  274 => 167,  267 => 165,  254 => 158,  248 => 154,  242 => 152,  240 => 151,  236 => 150,  230 => 147,  226 => 146,  216 => 139,  211 => 136,  207 => 135,  204 => 134,  200 => 133,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  284 => 172,  278 => 169,  274 => 167,  267 => 165,  254 => 158,  248 => 154,  242 => 152,  240 => 151,  236 => 150,  230 => 147,  226 => 146,  216 => 139,  211 => 136,  207 => 135,  204 => 134,  200 => 133,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -517,7 +513,6 @@ class __TwigTemplate_cd31c627b7d0837a530e889edeb71fad extends Template
       </div>
     </div>
 
-    <h2>Total: {{ prixTotalPanier }}€</h2>
 {% endblock %}
 ", "user/uservue/panieroffcanvas.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\user\\uservue\\panieroffcanvas.html.twig");
     }

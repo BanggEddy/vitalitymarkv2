@@ -201,7 +201,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
                 // line 47
                 yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("enleverproduit_fromcart");
                 yield "\" class=\"delete-form\">
-                                <input type=\"hidden\" name=\"panierId\" value=\"";
+                                <input type=\"hidden\" name=\"panierItemId\" value=\"";
                 // line 48
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "id", [], "array", false, false, false, 48), "html", null, true);
                 yield "\">
@@ -211,18 +211,18 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
                 // line 51
                 yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("update_quantity");
                 yield "\" class=\"quantity-form\">
-                                <input type=\"hidden\" name=\"panierId\" value=\"";
+                                <input type=\"hidden\" name=\"panierItemId\" value=\"";
                 // line 52
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "id", [], "array", false, false, false, 52), "html", null, true);
                 yield "\">
-                                    <div class=\"card-actions\">
-                                        <button type=\"submit\" name=\"action\" value=\"add\" class=\"btn btn-primary btn-sm quantity-btn add\">+</button>
-                                        <p class=\"quantity-text\">Quantité: ";
+                                <div class=\"card-actions\">
+                                    <button type=\"submit\" name=\"action\" value=\"add\" class=\"btn btn-primary btn-sm quantity-btn add\">+</button>
+                                    <p class=\"quantity-text\">Quantité: ";
                 // line 55
                 (((CoreExtension::getAttribute($this->env, $this->source, $context["item"], "quantity", [], "array", true, true, false, 55) &&  !(null === CoreExtension::getAttribute($this->env, $this->source, $context["item"], "quantity", [], "array", false, false, false, 55)))) ? (yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["item"], "quantity", [], "array", false, false, false, 55), "html", null, true)) : (yield "No quantity available"));
                 yield "</p>
-                                        <button type=\"submit\" name=\"action\" value=\"subtract\" class=\"btn btn-primary btn-sm quantity-btn subtract\">-</button>
-                                    </div>
+                                    <button type=\"submit\" name=\"action\" value=\"subtract\" class=\"btn btn-primary btn-sm quantity-btn subtract\">-</button>
+                                </div>
                             </form>
                             <p>Sous-total: ";
                 // line 59
@@ -346,16 +346,16 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
 
                         <div>
                             <form method=\"POST\" action=\"{{ path('enleverproduit_fromcart') }}\" class=\"delete-form\">
-                                <input type=\"hidden\" name=\"panierId\" value=\"{{ item['id'] }}\">
+                                <input type=\"hidden\" name=\"panierItemId\" value=\"{{ item['id'] }}\">
                                 <a href=\"#\" class=\"delete-link\" onclick=\"this.parentNode.submit(); return false;\">Supprimer</a>
                             </form>
                             <form method=\"POST\" action=\"{{ path('update_quantity') }}\" class=\"quantity-form\">
-                                <input type=\"hidden\" name=\"panierId\" value=\"{{ item['id'] }}\">
-                                    <div class=\"card-actions\">
-                                        <button type=\"submit\" name=\"action\" value=\"add\" class=\"btn btn-primary btn-sm quantity-btn add\">+</button>
-                                        <p class=\"quantity-text\">Quantité: {{ item['quantity'] ?? 'No quantity available' }}</p>
-                                        <button type=\"submit\" name=\"action\" value=\"subtract\" class=\"btn btn-primary btn-sm quantity-btn subtract\">-</button>
-                                    </div>
+                                <input type=\"hidden\" name=\"panierItemId\" value=\"{{ item['id'] }}\">
+                                <div class=\"card-actions\">
+                                    <button type=\"submit\" name=\"action\" value=\"add\" class=\"btn btn-primary btn-sm quantity-btn add\">+</button>
+                                    <p class=\"quantity-text\">Quantité: {{ item['quantity'] ?? 'No quantity available' }}</p>
+                                    <button type=\"submit\" name=\"action\" value=\"subtract\" class=\"btn btn-primary btn-sm quantity-btn subtract\">-</button>
+                                </div>
                             </form>
                             <p>Sous-total: {{ item['subtotal'] ?? 'No subtotal available' }}</p>
                         </div>

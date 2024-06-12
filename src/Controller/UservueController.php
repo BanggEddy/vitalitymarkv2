@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Repository\PanierRepository;
 use App\Repository\PromoRepository;
 use App\Form\ProductSearchType;
+use App\Repository\PanierItemsRepository;
 use App\Service\PanierUser;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
@@ -612,40 +613,24 @@ class UservueController extends AbstractController
     }
 
     #[Route('/update-quantity', name: 'update_quantity', methods: ['POST'])]
-    public function updateQuantityProduit(Request $request, EntityManagerInterface $entityManager, PanierRepository $panierRepository): Response
+    public function updateQuantityProduit(Request $request, EntityManagerInterface $entityManager, PanierItemsRepository $panierItemsRepository): Response
     {
-        $panierId = $request->request->get('panierId');
+        $panierItemIdrecup = $request->request->get('panierItemId');
         $action = $request->request->get('action');
 
-        $panier = $panierRepository->find($panierId);
+        $panierItem = $panierItemsRepository->find($panierItemIdrecup);
 
-        if (!$panier) {
-            throw $this->createNotFoundException('Panier non trouvé.');
-        }
-
-        $panierItems = $panier->getPanierItems()->first();
-
-        if (!$panierItems) {
-            throw new \Exception('PanierItems non trouvé.');
-        }
-
-        $product = $panierItems->getIdproduct();
-
-        if (!$product) {
-            throw new \Exception('Produit non trouvé.');
-        }
+        $product = $panierItem->getIdproduct();
 
         if ($action === 'add') {
-            $panierItems->setQuantity($panierItems->getQuantity() + 1);
-
+            $panierItem->setQuantity($panierItem->getQuantity() + 1);
             $product->setQuantity($product->getQuantity() - 1);
         } elseif ($action === 'subtract') {
-            $panierItems->setQuantity($panierItems->getQuantity() - 1);
-
+            $panierItem->setQuantity($panierItem->getQuantity() - 1);
             $product->setQuantity($product->getQuantity() + 1);
 
-            if ($panierItems->getQuantity() === 0) {
-                $entityManager->remove($panierItems);
+            if ($panierItem->getQuantity() === 0) {
+                $entityManager->remove($panierItem);
             }
         } else {
             return new RedirectResponse('/user/panier', 302);
@@ -656,27 +641,25 @@ class UservueController extends AbstractController
         return new RedirectResponse('/user/panier', 302);
     }
 
+
     #[Route('/enleverproduit_fromcart', name: 'enleverproduit_fromcart', methods: ['POST'])]
-    public function removeFromCartProduit(PanierRepository $panierRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function removeFromCartProduit(PanierItemsRepository $panierItemsRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $panierId = $request->request->get('panierId');
-        $panierItems = $panierRepository->find($panierId);
+        $panierItemIdrecup = $request->request->get('panierItemId');
+        $panierItem = $panierItemsRepository->find($panierItemIdrecup);
 
-        if (!$panierItems) {
-            throw $this->createNotFoundException('PanierItems non trouvé.');
+        $product = $panierItem->getIdproduct();
+
+        if ($product) {
+            $product->setQuantity($product->getQuantity() + $panierItem->getQuantity());
         }
 
-        $product = $panierItems->getIdproduct();
-
-        if ($product instanceof Products) {
-            $product->setQuantity($product->getQuantity() + $panierItems->getQuantity());
-        }
-
-        $entityManager->remove($panierItems);
+        $entityManager->remove($panierItem);
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Item removed from cart'], Response::HTTP_OK);
+        return new RedirectResponse('/user/panier', 302);
     }
+
 
     #[Route('/delete_account', name: 'delete_user_account', methods: ['POST'])]
     public function suppressionCompte(Request $request, EntityManagerInterface $entityManager): Response
