@@ -148,16 +148,13 @@ class UservueController extends AbstractController
         $id,
         UrlGeneratorInterface $urlGenerator
     ): Response {
-        $quantity = $request->request->get('quantity');
+        $quantityrecup = $request->request->get('quantity');
 
-        if ($quantity <= 0) {
+        if ($quantityrecup <= 0) {
             throw new \InvalidArgumentException('La quantité doit être supérieure à zéro.');
         }
 
         $user = $this->getUser();
-        if (!$user) {
-            throw $this->createAccessDeniedException('Vous devez être connecté pour ajouter un produit au panier.');
-        }
 
         try {
             $entityManager->beginTransaction();
@@ -167,7 +164,7 @@ class UservueController extends AbstractController
                 throw $this->createNotFoundException('Produit non trouvé.');
             }
 
-            if ($product->getQuantity() < $quantity) {
+            if ($product->getQuantity() < $quantityrecup) {
                 throw new \Exception('Quantité insuffisante en stock.');
             }
 
@@ -182,7 +179,8 @@ class UservueController extends AbstractController
             $produitdiff = false;
             foreach ($panierItems as $panierItem) {
                 if ($panierItem->getIdproduct() === $product) {
-                    $panierItem->setQuantity($panierItem->getQuantity() + $quantity);
+                    $panierItem->setQuantity($panierItem->getQuantity() + $quantityrecup);
+                    $product->setQuantity($product->getQuantity() - $quantityrecup);
                     $produitdiff = true;
                     break;
                 }
@@ -191,7 +189,7 @@ class UservueController extends AbstractController
             if (!$produitdiff) {
                 $panierItem = new PanierItems();
                 $panierItem->setIdproduct($product);
-                $panierItem->setQuantity($quantity);
+                $panierItem->setQuantity($quantityrecup);
 
                 $panier->addPanierItem($panierItem);
                 $entityManager->persist($panierItem);
