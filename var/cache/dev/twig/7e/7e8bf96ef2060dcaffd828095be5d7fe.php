@@ -52,7 +52,10 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
         // line 5
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
         yield "</title>
-    <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
+    <link rel=\"icon\" href=\"";
+        // line 6
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/favicon.ico"), "html", null, true);
+        yield "\" type=\"image/x-icon\">
     <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH\" crossorigin=\"anonymous\">
     <link rel=\"stylesheet\" href=\"";
         // line 8
@@ -497,7 +500,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  461 => 220,  442 => 9,  422 => 5,  355 => 222,  353 => 220,  350 => 219,  336 => 210,  323 => 202,  310 => 194,  296 => 185,  289 => 180,  279 => 173,  266 => 165,  260 => 161,  258 => 160,  247 => 154,  230 => 139,  228 => 138,  217 => 130,  205 => 121,  200 => 119,  190 => 111,  188 => 110,  177 => 102,  136 => 64,  121 => 52,  107 => 41,  95 => 32,  84 => 24,  73 => 16,  65 => 10,  63 => 9,  59 => 8,  53 => 5,  47 => 1,);
+        return array (  464 => 220,  445 => 9,  425 => 5,  358 => 222,  356 => 220,  353 => 219,  339 => 210,  326 => 202,  313 => 194,  299 => 185,  292 => 180,  282 => 173,  269 => 165,  263 => 161,  261 => 160,  250 => 154,  233 => 139,  231 => 138,  220 => 130,  208 => 121,  203 => 119,  193 => 111,  191 => 110,  180 => 102,  139 => 64,  124 => 52,  110 => 41,  98 => 32,  87 => 24,  76 => 16,  68 => 10,  66 => 9,  62 => 8,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -507,7 +510,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
 <head>
     <meta charset=\"UTF-8\">
     <title>{% block title %}VitalityMarket{% endblock %}</title>
-    <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
+    <link rel=\"icon\" href=\"{{ asset('images/favicon.ico') }}\" type=\"image/x-icon\">
     <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH\" crossorigin=\"anonymous\">
     <link rel=\"stylesheet\" href=\"{{ asset('css/style.css') }}\">
     {% block stylesheets %}{% endblock %}

@@ -8,17 +8,6 @@ parameters:
 
 services:
   # default configuration for services in *this* file
-  App\Entity\LoyaltyCard:
-    autowire: true
-  App\Service\PromotionService:
-    arguments:
-      $promoRepository: '@App\Repository\PromoRepository'
-  App\Service\ProductCategorie:
-    arguments:
-      $urlGenerator: "@router"
-      $security: "@security.helper"
-  App\Service\PanierUser:
-    autowire: true
   _defaults:
     autowire: true # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.

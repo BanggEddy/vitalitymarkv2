@@ -52,7 +52,10 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
         // line 5
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
         yield "</title>
-    <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
+    <link rel=\"icon\" href=\"";
+        // line 6
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/favicon.ico"), "html", null, true);
+        yield "\" type=\"image/x-icon\">
     <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">
     <link rel=\"stylesheet\" href=\"";
         // line 8
@@ -313,7 +316,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  277 => 106,  258 => 9,  238 => 5,  183 => 108,  181 => 106,  171 => 99,  159 => 90,  154 => 88,  115 => 52,  95 => 35,  72 => 15,  65 => 10,  63 => 9,  59 => 8,  53 => 5,  47 => 1,);
+        return array (  280 => 106,  261 => 9,  241 => 5,  186 => 108,  184 => 106,  174 => 99,  162 => 90,  157 => 88,  118 => 52,  98 => 35,  75 => 15,  68 => 10,  66 => 9,  62 => 8,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -323,7 +326,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
 <head>
     <meta charset=\"UTF-8\">
     <title>{% block title %}VitalityMarket{% endblock %}</title>
-    <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
+    <link rel=\"icon\" href=\"{{ asset('images/favicon.ico') }}\" type=\"image/x-icon\">
     <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">
     <link rel=\"stylesheet\" href=\"{{ asset('css/style.css') }}\">
     {% block stylesheets %}{% endblock %}
