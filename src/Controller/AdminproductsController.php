@@ -19,6 +19,7 @@ use App\Repository\PromoRepository;
 use Psr\Log\LoggerInterface;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
+use App\Service\UpdatePriceApresPromo;
 
 class AdminproductsController extends AbstractController
 {
@@ -26,13 +27,15 @@ class AdminproductsController extends AbstractController
     private $filesystem;
     private $productCategorie;
     private $promotionService;
+    private $updatePriceApresPromo;
 
-    public function __construct(PromotionService $promotionService, ProductCategorie $productCategorie, EntityManagerInterface $entityManager, Filesystem $filesystem)
+    public function __construct(UpdatePriceApresPromo $updatePriceApresPromo, PromotionService $promotionService, ProductCategorie $productCategorie, EntityManagerInterface $entityManager, Filesystem $filesystem)
     {
         $this->entityManager = $entityManager;
         $this->filesystem = $filesystem;
         $this->productCategorie = $productCategorie;
         $this->promotionService = $promotionService;
+        $this->updatePriceApresPromo = $updatePriceApresPromo;
     }
 
     #[Route('/adminproducts', name: 'app_adminproducts')]
@@ -167,6 +170,7 @@ class AdminproductsController extends AbstractController
         return $this->redirectToRoute('app_admin_delete_products');
     }
 
+    #utilisation d'un service "updatepricearpespromo" pour update le prix avec la réduction
     #[Route('/adminupdateproducts', name: 'app_admin_update_products')]
     public function updateProducts(PromoRepository $promoRepository, ProductsRepository $productsRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -181,17 +185,12 @@ class AdminproductsController extends AbstractController
         $promotions = [];
 
         foreach ($products as $product) {
+            $this->updatePriceApresPromo->updatePriceAfterPromo($product);
+
             $promo = $promoRepository->findOneBy(['idproduct' => $product->getId()]);
             if ($promo) {
-                $reduction = floatval($promo->getReduction());
-                $originalPrice = floatval($product->getPrice());
-                $priceAfterPromo = $originalPrice * (1 - $reduction / 100);
-
-                $promo->setPriceafterpromo($priceAfterPromo);
-
-                $entityManager->persist($promo);
-
                 $promotions[] = $promo;
+                $entityManager->persist($promo);
             }
         }
 

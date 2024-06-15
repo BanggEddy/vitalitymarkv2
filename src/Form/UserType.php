@@ -32,6 +32,7 @@ class UserType extends AbstractType
             ->add('deletedAt', DateType::class, [
                 'widget' => 'single_text',
                 'label' => 'Date de suppression',
+                'required' => false,
             ])
             ->add('expiredAt', DateType::class, [
                 'widget' => 'single_text',

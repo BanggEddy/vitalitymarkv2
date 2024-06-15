@@ -54,26 +54,6 @@ class Products
         $this->promos = new ArrayCollection();
         $this->panierItems = new ArrayCollection();
     }
-    public function getPromoMaintenant(): ?Promo
-    {
-        foreach ($this->promos as $promo) {
-            if ($promo->isCurrent()) {
-                return $promo;
-            }
-        }
-        return null;
-    }
-
-    public function updatePriceAfterPromo(): void
-    {
-        $promo = $this->getPromoMaintenant();
-        if ($promo && $this->price !== null) {
-            $reduction = (float) $promo->getReduction();
-            $priceAfterPromo = $this->price - ($this->price * ($reduction / 100));
-            $promo->setPriceafterpromo((string) $priceAfterPromo);
-        }
-    }
-
 
     public function getId(): ?int
     {

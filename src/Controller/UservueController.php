@@ -666,8 +666,7 @@ class UservueController extends AbstractController
         $user = $this->getUser();
 
         if ($request->isMethod('POST') && $user instanceof User) {
-            // Remove panier items and paniers first
-            $paniers = $user->getPanier();
+            $paniers = $user->getPaniers();
             foreach ($paniers as $panier) {
                 $panierItems = $panier->getPanierItems();
                 foreach ($panierItems as $panierItem) {
@@ -676,18 +675,15 @@ class UservueController extends AbstractController
                 $entityManager->remove($panier);
             }
 
-            // Remove contacts
             foreach ($user->getContacts() as $contact) {
                 $entityManager->remove($contact);
             }
 
-            // Remove loyalty card if exists
             $loyaltyCard = $user->getIdloyaltycard();
             if ($loyaltyCard) {
                 $entityManager->remove($loyaltyCard);
             }
 
-            // Mark the user as deleted
             $user->setDeletedAt(new \DateTimeImmutable());
             $entityManager->flush();
 

@@ -2,10 +2,21 @@
 
 namespace App\Service;
 
+use App\Service\UpdatePriceApresPromo;
+use App\Service\PromoRecupDate;
 use App\Entity\Panier;
 
 class PanierUser
 {
+    private PromoRecupDate $promoRecupDate;
+    private UpdatePriceApresPromo $updatePriceAfterPromo;
+
+    public function __construct(PromoRecupDate $promoRecupDate, UpdatePriceApresPromo $updatePriceAfterPromo)
+    {
+        $this->promoRecupDate = $promoRecupDate;
+        $this->updatePriceAfterPromo = $updatePriceAfterPromo;
+    }
+
     public function creerDetailsPanier(Panier $panier)
     {
         $panierDetails = [];
@@ -13,7 +24,7 @@ class PanierUser
 
         foreach ($panierItems as $item) {
             $product = $item->getIdproduct();
-            $promo = $product ? $product->getPromoMaintenant() : null;
+            $promo = $product ? $this->promoRecupDate->getPromoMaintenant($product) : null;
 
             if ($product) {
                 $productPrice = $promo ? $promo->getPriceafterpromo() : $product->getPrice();
@@ -63,7 +74,7 @@ class PanierUser
 
         foreach ($panierItems as $item) {
             $product = $item->getIdproduct();
-            $promo = $product ? $product->getPromoMaintenant() : null;
+            $promo = $product ? $this->promoRecupDate->getPromoMaintenant($product) : null;
             $productPrice = $promo ? $promo->getPriceafterpromo() : $product->getPrice();
             $total += $productPrice * $item->getQuantity();
         }
