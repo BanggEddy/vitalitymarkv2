@@ -119,6 +119,7 @@ class AdminproductsController extends AbstractController
         ]);
     }
 
+    #supp page produit
     #[Route('/admindeleteproducts', name: 'app_admin_delete_products')]
     public function deleteProducts(ProductsRepository $productsRepository, Request $request): Response
     {
@@ -140,6 +141,8 @@ class AdminproductsController extends AbstractController
             'promotions' => $promotions,
         ]);
     }
+
+    #supp request produit
     #[Route('/deleteproduct/{id}', name: 'app_delete_product')]
     public function deleteProduct(Products $product, EntityManagerInterface $entityManager): RedirectResponse
     {
@@ -151,6 +154,11 @@ class AdminproductsController extends AbstractController
         $promos = $product->getPromos();
         foreach ($promos as $promo) {
             $entityManager->remove($promo);
+        }
+
+        $panierItems = $product->getPanierItems();
+        foreach ($panierItems as $panierItem) {
+            $entityManager->remove($panierItem);
         }
 
         $entityManager->remove($product);

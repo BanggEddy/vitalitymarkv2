@@ -665,13 +665,30 @@ class UservueController extends AbstractController
         /** @var User|null $user */
         $user = $this->getUser();
 
-        if ($request->isMethod('POST')) {
-            foreach ($user->getPaniers() as $panier) {
+        if ($request->isMethod('POST') && $user instanceof User) {
+            // Remove panier items and paniers first
+            $paniers = $user->getPanier();
+            foreach ($paniers as $panier) {
+                $panierItems = $panier->getPanierItems();
+                foreach ($panierItems as $panierItem) {
+                    $entityManager->remove($panierItem);
+                }
                 $entityManager->remove($panier);
             }
 
-            $user->setDeletedAt(new \DateTimeImmutable());
+            // Remove contacts
+            foreach ($user->getContacts() as $contact) {
+                $entityManager->remove($contact);
+            }
 
+            // Remove loyalty card if exists
+            $loyaltyCard = $user->getIdloyaltycard();
+            if ($loyaltyCard) {
+                $entityManager->remove($loyaltyCard);
+            }
+
+            // Mark the user as deleted
+            $user->setDeletedAt(new \DateTimeImmutable());
             $entityManager->flush();
 
             return $this->redirectToRoute('app_logout');

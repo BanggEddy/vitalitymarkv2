@@ -170,7 +170,7 @@ class __TwigTemplate_59024be47f42b49f2c84e4040b19da27 extends Template
                                     ";
                 // line 43
                 $context['_parent'] = $context;
-                $context['_seq'] = CoreExtension::ensureTraversable(range(0, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 43)));
+                $context['_seq'] = CoreExtension::ensureTraversable(range(1, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 43)));
                 foreach ($context['_seq'] as $context["_key"] => $context["qty"]) {
                     // line 44
                     yield "                                        <option value=\"";
@@ -303,7 +303,7 @@ class __TwigTemplate_59024be47f42b49f2c84e4040b19da27 extends Template
                             <div class=\"form-group\">
                                 <label for=\"quantity\">Quantité :</label>
                                 <select name=\"quantity\" id=\"quantity\" class=\"form-control custom-select\">
-                                    {% for qty in 0..product.quantity %}
+                                    {% for qty in 1..product.quantity %}
                                         <option value=\"{{ qty }}\">{{ qty }}</option>
                                     {% endfor %}
                                 </select>

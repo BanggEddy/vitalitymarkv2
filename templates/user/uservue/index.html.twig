@@ -41,7 +41,7 @@
                         <label for="quantity">Quantité :</label>
                         <select name="quantity" id="quantity" class="form-control custom-select">
                             {% for qty in 1..product.quantity %}
-                                <option value="{{ qty }}">{{ qty }}</option>
+                                <option value="{{ qty + 1}}">{{ qty + 1 }}</option>
                             {% endfor %}
                         </select>
                     </div>

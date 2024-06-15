@@ -177,9 +177,9 @@ class __TwigTemplate_7331e3f29bf078cddb29ce0ee2629514 extends Template
                 foreach ($context['_seq'] as $context["_key"] => $context["qty"]) {
                     // line 44
                     yield "                                <option value=\"";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["qty"], "html", null, true);
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["qty"] + 1), "html", null, true);
                     yield "\">";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["qty"], "html", null, true);
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["qty"] + 1), "html", null, true);
                     yield "</option>
                             ";
                 }
@@ -303,7 +303,7 @@ class __TwigTemplate_7331e3f29bf078cddb29ce0ee2629514 extends Template
                         <label for=\"quantity\">Quantité :</label>
                         <select name=\"quantity\" id=\"quantity\" class=\"form-control custom-select\">
                             {% for qty in 1..product.quantity %}
-                                <option value=\"{{ qty }}\">{{ qty }}</option>
+                                <option value=\"{{ qty + 1}}\">{{ qty + 1 }}</option>
                             {% endfor %}
                         </select>
                     </div>
