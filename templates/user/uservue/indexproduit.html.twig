@@ -6,7 +6,7 @@
         <div class="row">
             {% if product is defined %}
                 <div class="col-md-6">
-                    <div class="border p-3 nature-card">
+                    <div class="border nature-card">
                         <img src="{{ asset('images/' ~ product.images) }}" class="img-fluid product-image image-transition" alt="Image du produit">
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                 </div>
             {% elseif promo is defined %}
                 <div class="col-md-6">
-                    <div class="border p-3 nature-card">
+                    <div class="border nature-card">
                         <img src="{{ asset('images/' ~ promo.images) }}" class="img-fluid promo-image image-transition" alt="Image de la promotion">
                     </div>
                 </div>

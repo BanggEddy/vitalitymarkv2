@@ -121,14 +121,22 @@ class __TwigTemplate_fe2f27a4160b7526cca7d9de1cbd257c extends Template
         yield ">Autre</option>
               </select>
             </div>
-            <button type=\"submit\" class=\"btn btn-details\">Enregistrer les modifications</button>        
+            <div class=\"row\">
+              <div class=\"col\">
+            <button type=\"submit\" class=\"btn btn-details\" style=\"font-size:15px\">Enregistrer les modifications</button>        
+
+              </div>
+            
           </form>
+                        <div class=\"col\">
           <form action=\"";
-        // line 34
+        // line 40
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_user_account");
         yield "\" method=\"post\">
-            <button type=\"submit\" class=\"btn btn-danger\" onclick=\"return confirm('Voulez-vous vraiment supprimer votre compte ?')\">Supprimer mon compte</button>        
+            <button type=\"submit\" class=\"btn btn-details\" style=\"background-color:red\" onclick=\"return confirm('Voulez-vous vraiment supprimer votre compte ?')\">Supprimer mon compte</button>        
           </form>
+              </div>
+              </div>
         </div>
       </div>
     </div>
@@ -166,7 +174,7 @@ class __TwigTemplate_fe2f27a4160b7526cca7d9de1cbd257c extends Template
      */
     public function getDebugInfo()
     {
-        return array (  128 => 34,  118 => 29,  112 => 28,  106 => 27,  98 => 22,  91 => 18,  84 => 14,  78 => 11,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  134 => 40,  118 => 29,  112 => 28,  106 => 27,  98 => 22,  91 => 18,  84 => 14,  78 => 11,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -202,11 +210,19 @@ class __TwigTemplate_fe2f27a4160b7526cca7d9de1cbd257c extends Template
                 <option value=\"Autre\" {% if user.civilite == 'Autre' %} selected {% endif %}>Autre</option>
               </select>
             </div>
-            <button type=\"submit\" class=\"btn btn-details\">Enregistrer les modifications</button>        
+            <div class=\"row\">
+              <div class=\"col\">
+            <button type=\"submit\" class=\"btn btn-details\" style=\"font-size:15px\">Enregistrer les modifications</button>        
+
+              </div>
+            
           </form>
+                        <div class=\"col\">
           <form action=\"{{ path('delete_user_account') }}\" method=\"post\">
-            <button type=\"submit\" class=\"btn btn-danger\" onclick=\"return confirm('Voulez-vous vraiment supprimer votre compte ?')\">Supprimer mon compte</button>        
+            <button type=\"submit\" class=\"btn btn-details\" style=\"background-color:red\" onclick=\"return confirm('Voulez-vous vraiment supprimer votre compte ?')\">Supprimer mon compte</button>        
           </form>
+              </div>
+              </div>
         </div>
       </div>
     </div>

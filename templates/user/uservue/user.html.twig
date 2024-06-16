@@ -29,11 +29,19 @@
                 <option value="Autre" {% if user.civilite == 'Autre' %} selected {% endif %}>Autre</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-details">Enregistrer les modifications</button>        
+            <div class="row">
+              <div class="col">
+            <button type="submit" class="btn btn-details" style="font-size:15px">Enregistrer les modifications</button>        
+
+              </div>
+            
           </form>
+                        <div class="col">
           <form action="{{ path('delete_user_account') }}" method="post">
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer votre compte ?')">Supprimer mon compte</button>        
+            <button type="submit" class="btn btn-details" style="background-color:red" onclick="return confirm('Voulez-vous vraiment supprimer votre compte ?')">Supprimer mon compte</button>        
           </form>
+              </div>
+              </div>
         </div>
       </div>
     </div>

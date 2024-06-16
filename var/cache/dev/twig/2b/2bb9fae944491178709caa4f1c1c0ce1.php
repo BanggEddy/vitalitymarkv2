@@ -75,8 +75,6 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/logo.png"), "html", null, true);
         yield "\" alt=\"Logo\" style=\"width: 150px; height: auto; border-radius: 50%; border: 4px solid #4CAF50; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;\">
             </a>
-
-
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                 <span class=\"navbar-toggler-icon\"></span>
             </button>
@@ -94,7 +92,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                 </ul>
                 <ul class=\"navbar-nav ml-auto\">
                     <form action=\"";
-        // line 35
+        // line 33
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("search");
         yield "\" method=\"post\" class=\"form-inline my-2 my-lg-0 mr-auto\">
                         <input class=\"form-control\" type=\"text\" name=\"motrecherche\" placeholder=\"Rechercher un produit\" aria-label=\"Search\">
@@ -114,7 +112,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                     </li>
                     <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"";
-        // line 52
+        // line 50
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_legals");
         yield "\">
                             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text\" viewBox=\"0 0 16 16\">
@@ -147,19 +145,18 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
         <section class=\"section\">
             <div class=\"container\">
                 <div class=\"row justify-content-center\"> 
-                    <div class=\"col-lg-8 col-md-10 col-sm-12\">
                         <div class=\"form-container\">
                             <h1>Bienvenue :)</h1>
                             <p>Drive, Piéton, Cliquez Collectez, Livraison... C'est à vous de décider !</p>
                                 <form class=\"form-inline\" method=\"POST\">
                                     ";
-        // line 88
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 88, $this->source); })()), 'form_start', ["attr" => ["class" => "form-inline"]]);
+        // line 85
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 85, $this->source); })()), 'form_start', ["attr" => ["class" => "form-inline"]]);
         yield "
                                     <div class=\"input-group\">
                                         ";
-        // line 90
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 90, $this->source); })()), "category", [], "any", false, false, false, 90), 'row', ["attr" => ["class" => "form-control", "placeholder" => "Rechercher", "aria-label" => "Search"]]);
+        // line 87
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 87, $this->source); })()), "category", [], "any", false, false, false, 87), 'row', ["attr" => ["class" => "form-control", "placeholder" => "Rechercher", "aria-label" => "Search"]]);
         yield "
                                         <div class=\"input-group-append\">
                                             <button type=\"submit\" class=\"btn btn-success\">
@@ -170,25 +167,24 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                                         </div>
                                     </div>
                                 ";
-        // line 99
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 99, $this->source); })()), 'form_end');
+        // line 96
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 96, $this->source); })()), 'form_end');
         yield "
                             </form>
                         </div>
-                    </div>
                 </div>
             </div>
         </section> 
     ";
-        // line 106
+        // line 102
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 108
+        // line 104
         yield "
 <br>
 <br>
 
 <section2 class=\"justify-content-around\">
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Obtenir de l'aide</h2>
@@ -196,7 +192,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Trouver un magasin</h2>
@@ -204,7 +200,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Télécharger l'application</h2>
@@ -212,7 +208,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>FAQ & Questions?</h2>
@@ -276,7 +272,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
         return; yield '';
     }
 
-    // line 106
+    // line 102
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -316,7 +312,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  280 => 106,  261 => 9,  241 => 5,  186 => 108,  184 => 106,  174 => 99,  162 => 90,  157 => 88,  118 => 52,  98 => 35,  75 => 15,  68 => 10,  66 => 9,  62 => 8,  57 => 6,  53 => 5,  47 => 1,);
+        return array (  276 => 102,  257 => 9,  237 => 5,  182 => 104,  180 => 102,  171 => 96,  159 => 87,  154 => 85,  116 => 50,  96 => 33,  75 => 15,  68 => 10,  66 => 9,  62 => 8,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -337,8 +333,6 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
             <a href=\"/\" style=\"text-decoration: none;\">
                 <img src=\"{{ asset('images/logo.png') }}\" alt=\"Logo\" style=\"width: 150px; height: auto; border-radius: 50%; border: 4px solid #4CAF50; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;\">
             </a>
-
-
             <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
                 <span class=\"navbar-toggler-icon\"></span>
             </button>
@@ -403,7 +397,6 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
         <section class=\"section\">
             <div class=\"container\">
                 <div class=\"row justify-content-center\"> 
-                    <div class=\"col-lg-8 col-md-10 col-sm-12\">
                         <div class=\"form-container\">
                             <h1>Bienvenue :)</h1>
                             <p>Drive, Piéton, Cliquez Collectez, Livraison... C'est à vous de décider !</p>
@@ -422,7 +415,6 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
                                 {{ form_end(barreRechercheCategory) }}
                             </form>
                         </div>
-                    </div>
                 </div>
             </div>
         </section> 
@@ -433,7 +425,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
 <br>
 
 <section2 class=\"justify-content-around\">
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Obtenir de l'aide</h2>
@@ -441,7 +433,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Trouver un magasin</h2>
@@ -449,7 +441,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Télécharger l'application</h2>
@@ -457,7 +449,7 @@ class __TwigTemplate_ac3a9f8563b4702f190ae3270d368538 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>FAQ & Questions?</h2>

@@ -117,7 +117,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
 <div class=\"container nature-theme\">
     <div class=\"row justify-content-center\">
         <div class=\"col-lg-10\">
-            <h1 class=\"mt-4 mb-4\">Votre Panier</h1>
+            <h1>Votre Panier</h1>
             <br>
         ";
         // line 17
@@ -130,7 +130,7 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
             $context['_seq'] = CoreExtension::ensureTraversable($context["panier"]);
             foreach ($context['_seq'] as $context["_key"] => $context["item"]) {
                 // line 19
-                yield "                <div class=\"row mb-4  bgdupanieritem\">
+                yield "                <div class=\"row bgdupanieritem\">
                     <div class=\"col-md-3\">
                         ";
                 // line 21
@@ -313,11 +313,11 @@ class __TwigTemplate_3da395361a2bddd56b721cd30a85af51 extends Template
 <div class=\"container nature-theme\">
     <div class=\"row justify-content-center\">
         <div class=\"col-lg-10\">
-            <h1 class=\"mt-4 mb-4\">Votre Panier</h1>
+            <h1>Votre Panier</h1>
             <br>
         {% for panier in panierDetails %}
             {% for item in panier %}
-                <div class=\"row mb-4  bgdupanieritem\">
+                <div class=\"row bgdupanieritem\">
                     <div class=\"col-md-3\">
                         {% if item['images'] is defined and item['images'] is not null %}
                             <img src=\"{{ asset('images/' ~ item['images']) }}\" alt=\"image\" class=\"img-fluid card-img\">

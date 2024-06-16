@@ -195,7 +195,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
 <br>
 
 <section2 class=\"justify-content-around\">
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Obtenir de l'aide</h2>
@@ -203,7 +203,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Trouver un magasin</h2>
@@ -211,7 +211,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Télécharger l'application</h2>
@@ -219,7 +219,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>FAQ & Questions?</h2>
@@ -454,7 +454,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
 <br>
 
 <section2 class=\"justify-content-around\">
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Obtenir de l'aide</h2>
@@ -462,7 +462,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Trouver un magasin</h2>
@@ -470,7 +470,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>Télécharger l'application</h2>
@@ -478,7 +478,7 @@ class __TwigTemplate_4316d16999ff8ede76ba31fed31ccd77 extends Template
             </div>
         </div>
     </div>
-    <div class=\"col-md-3\">
+    <div class=\"col\">
         <div class=\"card\">
             <div class=\"card-body\">
                 <h2>FAQ & Questions?</h2>

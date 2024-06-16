@@ -523,6 +523,10 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="App\Service\ProductCategorie" class="App\Service\ProductCategorie" autowire="true" autoconfigure="true">
+      <argument type="service" id="router.default"/>
+      <argument type="service" id="security.token_storage"/>
+    </service>
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
@@ -688,10 +692,6 @@
     <service id="App\Service\PanierUser" class="App\Service\PanierUser" autowire="true" autoconfigure="true">
       <argument type="service" id="App\Service\PromoRecupDate"/>
       <argument type="service" id="App\Service\UpdatePriceApresPromo"/>
-    </service>
-    <service id="App\Service\ProductCategorie" class="App\Service\ProductCategorie" autowire="true" autoconfigure="true">
-      <argument type="service" id="router.default"/>
-      <argument type="service" id="security.token_storage"/>
     </service>
     <service id="App\Service\PromoFilter" class="App\Service\PromoFilter" autowire="true" autoconfigure="true"/>
     <service id="App\Service\PromoRecupDate" class="App\Service\PromoRecupDate" autowire="true" autoconfigure="true"/>

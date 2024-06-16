@@ -189,7 +189,7 @@ class __TwigTemplate_bc07ecded1e92deaf1d25943286d7d71 extends Template
         $context['_seq'] = CoreExtension::ensureTraversable((isset($context["products"]) || array_key_exists("products", $context) ? $context["products"] : (function () { throw new RuntimeError('Variable "products" does not exist.', 91, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
             // line 92
-            yield "    <div class=\"col-md-6 col-lg-3 mb-4\">
+            yield "    <div class=\"col-md-6 col-lg-3\">
         <div class=\"card h-100 product-card\">
                 <img src=\"";
             // line 94
@@ -420,7 +420,7 @@ class __TwigTemplate_bc07ecded1e92deaf1d25943286d7d71 extends Template
     <div class=\"row justify-content-center\">
     
         {% for product in products %}
-    <div class=\"col-md-6 col-lg-3 mb-4\">
+    <div class=\"col-md-6 col-lg-3\">
         <div class=\"card h-100 product-card\">
                 <img src=\"{{ asset('images/' ~ product.images) }}\" alt=\"images\" class=\"product-image\">
                 <div class=\"card-body product-details\">

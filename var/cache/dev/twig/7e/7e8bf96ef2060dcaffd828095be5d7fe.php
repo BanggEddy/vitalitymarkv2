@@ -68,7 +68,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
         yield "</head>
 <body>
     <header>
-        <nav class=\"navbar navbar-expand-lg navbar-success bg-custom\"> 
+        <nav class=\"navbar navbar-expand-lg navbar-light navbar-custom\">
             <div class=\"container-fluid\">
                 <a class=\"navbar-brand\" href=\"/uservue\">
                     <img src=\"";
@@ -193,7 +193,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
         yield "        <section class=\"section\">
             <div class=\"container\">
                 <div class=\"row justify-content-center\"> 
-                    <div class=\"col-lg-8 col-md-10 col-sm-12\">
+                    <div class=\"col-lg-8 col-md-10\">
                         <div class=\"form-container\">
                             <h1>Bienvenue :)</h1>
                             <p>Drive, Piéton, Cliquez Collectez, Livraison... C'est à vous de décider !</p>
@@ -517,7 +517,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
 </head>
 <body>
     <header>
-        <nav class=\"navbar navbar-expand-lg navbar-success bg-custom\"> 
+        <nav class=\"navbar navbar-expand-lg navbar-light navbar-custom\">
             <div class=\"container-fluid\">
                 <a class=\"navbar-brand\" href=\"/uservue\">
                     <img src=\"{{ asset('images/logo.png') }}\" alt=\"Logo\" style=\"width: 150px; height: auto; border-radius: 50%; border: 4px solid #4CAF50; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;\">
@@ -618,7 +618,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
         <section class=\"section\">
             <div class=\"container\">
                 <div class=\"row justify-content-center\"> 
-                    <div class=\"col-lg-8 col-md-10 col-sm-12\">
+                    <div class=\"col-lg-8 col-md-10\">
                         <div class=\"form-container\">
                             <h1>Bienvenue :)</h1>
                             <p>Drive, Piéton, Cliquez Collectez, Livraison... C'est à vous de décider !</p>

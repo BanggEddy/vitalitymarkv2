@@ -74,7 +74,7 @@ class __TwigTemplate_65927ef89a1e0558a2c8ba9da89a0886 extends Template
         if (array_key_exists("product", $context)) {
             // line 8
             yield "                <div class=\"col-md-6\">
-                    <div class=\"border p-3 nature-card\">
+                    <div class=\"border nature-card\">
                         <img src=\"";
             // line 10
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 10, $this->source); })()), "images", [], "any", false, false, false, 10))), "html", null, true);
@@ -107,7 +107,7 @@ class __TwigTemplate_65927ef89a1e0558a2c8ba9da89a0886 extends Template
 array_key_exists("promo", $context)) {
             // line 23
             yield "                <div class=\"col-md-6\">
-                    <div class=\"border p-3 nature-card\">
+                    <div class=\"border nature-card\">
                         <img src=\"";
             // line 25
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["promo"]) || array_key_exists("promo", $context) ? $context["promo"] : (function () { throw new RuntimeError('Variable "promo" does not exist.', 25, $this->source); })()), "images", [], "any", false, false, false, 25))), "html", null, true);
@@ -199,7 +199,7 @@ array_key_exists("promo", $context)) {
         <div class=\"row\">
             {% if product is defined %}
                 <div class=\"col-md-6\">
-                    <div class=\"border p-3 nature-card\">
+                    <div class=\"border nature-card\">
                         <img src=\"{{ asset('images/' ~ product.images) }}\" class=\"img-fluid product-image image-transition\" alt=\"Image du produit\">
                     </div>
                 </div>
@@ -214,7 +214,7 @@ array_key_exists("promo", $context)) {
                 </div>
             {% elseif promo is defined %}
                 <div class=\"col-md-6\">
-                    <div class=\"border p-3 nature-card\">
+                    <div class=\"border nature-card\">
                         <img src=\"{{ asset('images/' ~ promo.images) }}\" class=\"img-fluid promo-image image-transition\" alt=\"Image de la promotion\">
                     </div>
                 </div>
