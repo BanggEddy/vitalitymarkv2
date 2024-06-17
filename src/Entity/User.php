@@ -66,9 +66,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'iduser')]
     private Collection $contacts;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?LoyaltyCard $idloyaltycard = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_create = null;
 
@@ -77,6 +74,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $expiredAt = null;
+
+    #[ORM\OneToOne(mappedBy: 'iduser', cascade: ['persist', 'remove'])]
+    private ?LoyaltyCard $loyaltyCard = null;
 
     public function __construct()
     {
@@ -234,18 +234,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getIdloyaltycard(): ?LoyaltyCard
-    {
-        return $this->idloyaltycard;
-    }
-
-    public function setIdloyaltycard(?LoyaltyCard $idloyaltycard): static
-    {
-        $this->idloyaltycard = $idloyaltycard;
-
-        return $this;
-    }
-
     public function getDateCreate(): ?\DateTimeInterface
     {
         return $this->date_create;
@@ -290,6 +278,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdpanier(?Panier $idpanier): static
     {
         $this->idpanier = $idpanier;
+
+        return $this;
+    }
+
+    public function getLoyaltyCard(): ?LoyaltyCard
+    {
+        return $this->loyaltyCard;
+    }
+
+    public function setLoyaltyCard(?LoyaltyCard $loyaltyCard): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($loyaltyCard === null && $this->loyaltyCard !== null) {
+            $this->loyaltyCard->setIduser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($loyaltyCard !== null && $loyaltyCard->getIduser() !== $this) {
+            $loyaltyCard->setIduser($this);
+        }
+
+        $this->loyaltyCard = $loyaltyCard;
 
         return $this;
     }

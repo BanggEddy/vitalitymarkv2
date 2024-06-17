@@ -29,11 +29,12 @@ class LoyaltyCard
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $personalized_offer = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $iduser = null;
 
     #[ORM\ManyToMany(targetEntity: Coupon::class, mappedBy: 'idloyaltycard')]
     private Collection $coupons;
+
+    #[ORM\OneToOne(inversedBy: 'loyaltyCard', cascade: ['persist', 'remove'])]
+    private ?User $iduser = null;
 
     public function __construct()
     {
@@ -93,17 +94,6 @@ class LoyaltyCard
         return $this;
     }
 
-    public function getIduser(): ?User
-    {
-        return $this->iduser;
-    }
-
-    public function setIduser(?User $iduser): static
-    {
-        $this->iduser = $iduser;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Coupon>
@@ -128,6 +118,18 @@ class LoyaltyCard
         if ($this->coupons->removeElement($coupon)) {
             $coupon->removeIdloyaltycard($this);
         }
+
+        return $this;
+    }
+
+    public function getIduser(): ?User
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(?User $iduser): static
+    {
+        $this->iduser = $iduser;
 
         return $this;
     }

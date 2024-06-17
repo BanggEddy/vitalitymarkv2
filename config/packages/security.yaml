@@ -57,7 +57,7 @@ security:
     #USER
     - { path: ^/uservue, roles: ROLE_USER }
     - { path: ^/user/promo, roles: ROLE_USER }
-    - { path: ^/add-dans-panier/, roles: ROLE_USER }
+    - { path: ^/add/dans/panier/, roles: ROLE_USER }
     - { path: ^/user/panier, roles: ROLE_USER }
     - { path: ^/search/user, roles: ROLE_USER }
     - { path: ^/user/loyalty-card/, roles: ROLE_USER }

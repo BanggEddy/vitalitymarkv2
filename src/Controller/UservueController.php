@@ -58,11 +58,8 @@ class UservueController extends AbstractController
         if ($utiliserServiceRedirection) {
             return $this->redirect($utiliserServiceRedirection);
         }
-
+        /** @var UserInterface|null $user */
         $user = $this->getUser();
-        if (!$user instanceof User) {
-            throw $this->createAccessDeniedException('Vous devez être connecté pour voir votre panier.');
-        }
 
         $userId = $user->getId();
         $paniers = $panierRepository->findBy(['iduser' => $user]);
@@ -338,7 +335,7 @@ class UservueController extends AbstractController
 
 
 
-        $loyaltyCard = $user->getIdloyaltycard();
+        $loyaltyCard = $user->getLoyaltyCard();
 
         if (!$loyaltyCard) {
             $this->addFlash('warning', 'Vous n\'avez pas de carte de fidélité. Souhaitez-vous en obtenir une ?');
@@ -368,7 +365,8 @@ class UservueController extends AbstractController
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
 
-        $loyaltyCardUser = $user->getIdloyaltycard();
+        $loyaltyCardUser = $user->getLoyaltyCard();
+
 
         if ($loyaltyCardUser) {
             $this->addFlash('warning', 'Vous avez déjà une carte de fidélité.');
@@ -380,7 +378,7 @@ class UservueController extends AbstractController
         $loyaltyCard->setCardType('normal');
         $loyaltyCard->setPoints(10);
         $loyaltyCard->setIduser($user);
-        $user->setIdloyaltycard($loyaltyCard);
+        $user->setloyaltycard($loyaltyCard);
 
         $entityManager->persist($loyaltyCard);
         $entityManager->flush();
@@ -679,8 +677,7 @@ class UservueController extends AbstractController
                 $entityManager->remove($contact);
             }
 
-            $loyaltyCard = $user->getIdloyaltycard();
-            if ($loyaltyCard) {
+            foreach ($user->getLoyaltycard() as $loyaltyCard) {
                 $entityManager->remove($loyaltyCard);
             }
 

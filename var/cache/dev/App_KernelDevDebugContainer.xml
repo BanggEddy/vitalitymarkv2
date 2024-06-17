@@ -5563,7 +5563,7 @@
         <argument>null</argument>
       </call>
       <call method="add">
-        <argument type="service" id=".security.request_matcher.e_9ijl."/>
+        <argument type="service" id=".security.request_matcher.Lfde2vU"/>
         <argument type="collection">
           <argument>ROLE_USER</argument>
         </argument>
@@ -6534,12 +6534,12 @@
         <argument type="service" id=".security.request_matcher.omKvKxg"/>
       </argument>
     </service>
-    <service id=".security.request_matcher.LtYR14H" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
-      <argument>^/add-dans-panier/</argument>
+    <service id=".security.request_matcher.7Ts8VFy" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/add/dans/panier/</argument>
     </service>
-    <service id=".security.request_matcher.e_9ijl." class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+    <service id=".security.request_matcher.Lfde2vU" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
       <argument type="collection">
-        <argument type="service" id=".security.request_matcher.LtYR14H"/>
+        <argument type="service" id=".security.request_matcher.7Ts8VFy"/>
       </argument>
     </service>
     <service id=".security.request_matcher.9hIrkVb" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">

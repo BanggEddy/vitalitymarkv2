@@ -7585,7 +7585,7 @@
       </argument>
     </service>
     <service id=".security.request_matcher.LtYR14H" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
-      <argument>^/add-dans-panier/</argument>
+      <argument>^/add/dans/panier/</argument>
     </service>
     <service id=".security.request_matcher.e_9ijl." class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
       <argument type="collection">
