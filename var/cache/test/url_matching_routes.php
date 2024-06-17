@@ -13,6 +13,7 @@ return [
         '/promo' => [[['_route' => 'app_promo', '_controller' => 'App\\Controller\\AccueilController::afficherLesPromos'], null, null, null, false, false, null]],
         '/search' => [[['_route' => 'search', '_controller' => 'App\\Controller\\AccueilController::rechercherUnProduitVisiteur'], null, null, null, false, false, null]],
         '/contact/submit' => [[['_route' => 'app_contact_submit', '_controller' => 'App\\Controller\\AccueilController::submitContact'], null, ['POST' => 0], null, false, false, null]],
+        '/accepterterms' => [[['_route' => 'app_accepterterms', '_controller' => 'App\\Controller\\AccueilController::accepterTerms'], null, null, null, false, false, null]],
         '/adminproducts' => [
             [['_route' => 'app_adminproducts', '_controller' => 'App\\Controller\\AdminproductsController::index'], null, null, null, false, false, null],
             [['_route' => 'adminproducts', '_controller' => 'App\\Controller\\AdminproductsController::index'], null, null, null, false, false, null],
@@ -27,13 +28,13 @@ return [
         ],
         '/edit/admin/profile' => [[['_route' => 'edit_admin_profile', '_controller' => 'App\\Controller\\AdminproductsController::modifierProfilAdminFlush'], null, null, null, false, false, null]],
         '/search/admin' => [[['_route' => 'search_admin', '_controller' => 'App\\Controller\\AdminproductsController::rechercherUnProduitAdmin'], null, null, null, false, false, null]],
-        '/coupon' => [[['_route' => 'app_coupon_index', '_controller' => 'App\\Controller\\CouponController::index'], null, ['GET' => 0], null, true, false, null]],
-        '/coupon/new' => [[['_route' => 'app_coupon_new', '_controller' => 'App\\Controller\\CouponController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/coupon' => [[['_route' => 'app_coupon_index', '_controller' => 'App\\Controller\\CouponController::index'], null, null, null, true, false, null]],
+        '/coupon/new' => [[['_route' => 'app_coupon_new', '_controller' => 'App\\Controller\\CouponController::new'], null, null, null, false, false, null]],
         '/coupon/admin/loyalty_card/new' => [[['_route' => 'loyalty_card_new', '_controller' => 'App\\Controller\\CouponController::newCoupon'], null, null, null, false, false, null]],
-        '/gestion/user' => [[['_route' => 'app_gestion_user_index', '_controller' => 'App\\Controller\\GestionUserController::index'], null, ['GET' => 0], null, true, false, null]],
-        '/loyalty/card' => [[['_route' => 'app_loyalty_card_index', '_controller' => 'App\\Controller\\LoyaltyCardController::index'], null, ['GET' => 0], null, true, false, null]],
-        '/promo/admin' => [[['_route' => 'app_promo_admin_index', '_controller' => 'App\\Controller\\PromoAdminController::index'], null, ['GET' => 0], null, true, false, null]],
-        '/promo/admin/new' => [[['_route' => 'app_promo_admin_new', '_controller' => 'App\\Controller\\PromoAdminController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/gestion/user' => [[['_route' => 'app_gestion_user_index', '_controller' => 'App\\Controller\\GestionUserController::index'], null, null, null, true, false, null]],
+        '/loyalty/card' => [[['_route' => 'app_loyalty_card_index', '_controller' => 'App\\Controller\\LoyaltyCardController::index'], null, null, null, true, false, null]],
+        '/promo/admin' => [[['_route' => 'app_promo_admin_index', '_controller' => 'App\\Controller\\PromoAdminController::index'], null, null, null, true, false, null]],
+        '/promo/admin/new' => [[['_route' => 'app_promo_admin_new', '_controller' => 'App\\Controller\\PromoAdminController::new'], null, null, null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
@@ -71,154 +72,154 @@ return [
     ],
     [ // $regexpList
         0 => '{^(?'
-            . '|/a(?'
-            . '|pi(?'
-            . '|/(?'
-            . '|\\.well\\-known/genid/([^/]++)(*:49)'
-            . '|errors(?:/(\\d+))?(*:73)'
-            . '|validation_errors/([^/]++)(*:106)'
-            . ')'
-            . '|(?:/(index)(?:\\.([^/]++))?)?(*:143)'
-            . '|/(?'
-            . '|docs(?:\\.([^/]++))?(*:174)'
-            . '|co(?'
-            . '|nt(?'
-            . '|exts/([^.]+)(?:\\.(jsonld))?(*:219)'
-            . '|acts(?'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(*:260)'
-            . '|(?:\\.([^/]++))?(?'
-            . '|(*:286)'
-            . ')'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(?'
-            . '|(*:324)'
-            . ')'
-            . ')'
-            . ')'
-            . '|upons(?'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(*:369)'
-            . '|(?:\\.([^/]++))?(?'
-            . '|(*:395)'
-            . ')'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(?'
-            . '|(*:433)'
-            . ')'
-            . ')'
-            . ')'
-            . '|validation_errors/([^/]++)(?'
-            . '|(*:473)'
-            . ')'
-            . '|loyalty_cards(?'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(*:524)'
-            . '|(?:\\.([^/]++))?(?'
-            . '|(*:550)'
-            . ')'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(?'
-            . '|(*:588)'
-            . ')'
-            . ')'
-            . '|p(?'
-            . '|aniers(?'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(*:637)'
-            . '|(?:\\.([^/]++))?(?'
-            . '|(*:663)'
-            . ')'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(?'
-            . '|(*:701)'
-            . ')'
-            . ')'
-            . '|ro(?'
-            . '|ductss(?'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(*:751)'
-            . '|(?:\\.([^/]++))?(?'
-            . '|(*:777)'
-            . ')'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(?'
-            . '|(*:815)'
-            . ')'
-            . ')'
-            . '|mos(?'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(*:857)'
-            . '|(?:\\.([^/]++))?(?'
-            . '|(*:883)'
-            . ')'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(?'
-            . '|(*:921)'
-            . ')'
-            . ')'
-            . ')'
-            . ')'
-            . '|users(?'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(*:967)'
-            . '|(?:\\.([^/]++))?(?'
-            . '|(*:993)'
-            . ')'
-            . '|/([^/\\.]++)(?:\\.([^/]++))?(?'
-            . '|(*:1031)'
-            . ')'
-            . ')'
-            . ')'
-            . ')'
-            . '|d(?'
-            . '|min(?'
-            . '|formedit/([^/]++)(*:1071)'
-            . '|/(?'
-            . '|ad(?'
-            . '|d_quantity/([^/]++)(*:1108)'
-            . '|minproducts/categorie/([^/]++)(*:1147)'
-            . ')'
-            . '|remove_quantity/([^/]++)(*:1181)'
-            . '|products/([^/]++)/(?'
-            . '|add_quantity(*:1223)'
-            . '|remove_quantity(*:1247)'
-            . ')'
-            . ')'
-            . ')'
-            . '|d\\-dans\\-panier/([^/]++)(*:1283)'
-            . ')'
-            . '|ccueil/categorie/([^/]++)(*:1318)'
-            . ')'
-            . '|/de(?'
-            . '|leteproduct/([^/]++)(*:1354)'
-            . '|tails\\-pro(?'
-            . '|duit(?'
-            . '|/([^/]++)(*:1392)'
-            . '|\\-user/([^/]++)(*:1416)'
-            . ')'
-            . '|motion(?'
-            . '|/([^/]++)(*:1444)'
-            . '|\\-user/([^/]++)(*:1468)'
-            . ')'
-            . ')'
-            . ')'
-            . '|/coupon/([^/]++)(?'
-            . '|(*:1499)'
-            . '|/edit(*:1513)'
-            . '|(*:1522)'
-            . ')'
-            . '|/gestion/user/([^/]++)(?'
-            . '|(*:1557)'
-            . '|/edit(*:1571)'
-            . '|(*:1580)'
-            . ')'
-            . '|/loyalty/card/([^/]++)(?'
-            . '|(*:1615)'
-            . '|/edit(*:1629)'
-            . '|(*:1638)'
-            . ')'
-            . '|/promo/admin/([^/]++)(?'
-            . '|(*:1672)'
-            . '|/edit(*:1686)'
-            . '|(*:1695)'
-            . ')'
-            . '|/user/(?'
-            . '|loyalty\\-card/([^/]++)(*:1736)'
-            . '|uservue/ca(?'
-            . '|rd/([^/]++)(*:1769)'
-            . '|tegorie/([^/]++)(*:1794)'
-            . ')'
-            . ')'
-            . '|/editproduct/([^/]++)(*:1826)'
-            . ')/?$}sDu',
+                .'|/a(?'
+                    .'|pi(?'
+                        .'|/(?'
+                            .'|\\.well\\-known/genid/([^/]++)(*:49)'
+                            .'|errors(?:/(\\d+))?(*:73)'
+                            .'|validation_errors/([^/]++)(*:106)'
+                        .')'
+                        .'|(?:/(index)(?:\\.([^/]++))?)?(*:143)'
+                        .'|/(?'
+                            .'|docs(?:\\.([^/]++))?(*:174)'
+                            .'|co(?'
+                                .'|nt(?'
+                                    .'|exts/([^.]+)(?:\\.(jsonld))?(*:219)'
+                                    .'|acts(?'
+                                        .'|/([^/\\.]++)(?:\\.([^/]++))?(*:260)'
+                                        .'|(?:\\.([^/]++))?(?'
+                                            .'|(*:286)'
+                                        .')'
+                                        .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
+                                            .'|(*:324)'
+                                        .')'
+                                    .')'
+                                .')'
+                                .'|upons(?'
+                                    .'|/([^/\\.]++)(?:\\.([^/]++))?(*:369)'
+                                    .'|(?:\\.([^/]++))?(?'
+                                        .'|(*:395)'
+                                    .')'
+                                    .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
+                                        .'|(*:433)'
+                                    .')'
+                                .')'
+                            .')'
+                            .'|validation_errors/([^/]++)(?'
+                                .'|(*:473)'
+                            .')'
+                            .'|loyalty_cards(?'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:524)'
+                                .'|(?:\\.([^/]++))?(?'
+                                    .'|(*:550)'
+                                .')'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
+                                    .'|(*:588)'
+                                .')'
+                            .')'
+                            .'|p(?'
+                                .'|aniers(?'
+                                    .'|/([^/\\.]++)(?:\\.([^/]++))?(*:637)'
+                                    .'|(?:\\.([^/]++))?(?'
+                                        .'|(*:663)'
+                                    .')'
+                                    .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
+                                        .'|(*:701)'
+                                    .')'
+                                .')'
+                                .'|ro(?'
+                                    .'|ducts(?'
+                                        .'|/([^/\\.]++)(?:\\.([^/]++))?(*:750)'
+                                        .'|(?:\\.([^/]++))?(?'
+                                            .'|(*:776)'
+                                        .')'
+                                        .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
+                                            .'|(*:814)'
+                                        .')'
+                                    .')'
+                                    .'|mos(?'
+                                        .'|/([^/\\.]++)(?:\\.([^/]++))?(*:856)'
+                                        .'|(?:\\.([^/]++))?(?'
+                                            .'|(*:882)'
+                                        .')'
+                                        .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
+                                            .'|(*:920)'
+                                        .')'
+                                    .')'
+                                .')'
+                            .')'
+                            .'|users(?'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(*:966)'
+                                .'|(?:\\.([^/]++))?(?'
+                                    .'|(*:992)'
+                                .')'
+                                .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
+                                    .'|(*:1030)'
+                                .')'
+                            .')'
+                        .')'
+                    .')'
+                    .'|d(?'
+                        .'|min(?'
+                            .'|formedit/([^/]++)(*:1070)'
+                            .'|/(?'
+                                .'|ad(?'
+                                    .'|d_quantity/([^/]++)(*:1107)'
+                                    .'|minproducts/categorie/([^/]++)(*:1146)'
+                                .')'
+                                .'|remove_quantity/([^/]++)(*:1180)'
+                                .'|products/([^/]++)/(?'
+                                    .'|add_quantity(*:1222)'
+                                    .'|remove_quantity(*:1246)'
+                                .')'
+                            .')'
+                        .')'
+                        .'|d\\-dans\\-panier/([^/]++)(*:1282)'
+                    .')'
+                    .'|ccueil/categorie/([^/]++)(*:1317)'
+                .')'
+                .'|/de(?'
+                    .'|leteproduct/([^/]++)(*:1353)'
+                    .'|tails\\-pro(?'
+                        .'|duit(?'
+                            .'|/([^/]++)(*:1391)'
+                            .'|\\-user/([^/]++)(*:1415)'
+                        .')'
+                        .'|motion(?'
+                            .'|/([^/]++)(*:1443)'
+                            .'|\\-user/([^/]++)(*:1467)'
+                        .')'
+                    .')'
+                .')'
+                .'|/coupon/([^/]++)(?'
+                    .'|(*:1498)'
+                    .'|/edit(*:1512)'
+                    .'|(*:1521)'
+                .')'
+                .'|/gestion/user/([^/]++)(?'
+                    .'|(*:1556)'
+                    .'|/edit(*:1570)'
+                    .'|(*:1579)'
+                .')'
+                .'|/loyalty/card/([^/]++)(?'
+                    .'|(*:1614)'
+                    .'|/edit(*:1628)'
+                    .'|(*:1637)'
+                .')'
+                .'|/promo/admin/([^/]++)(?'
+                    .'|(*:1671)'
+                    .'|/edit(*:1685)'
+                    .'|(*:1694)'
+                .')'
+                .'|/user/(?'
+                    .'|loyalty\\-card/([^/]++)(*:1735)'
+                    .'|uservue/ca(?'
+                        .'|rd/([^/]++)(*:1768)'
+                        .'|tegorie/([^/]++)(*:1793)'
+                    .')'
+                .')'
+                .'|/editproduct/([^/]++)(*:1825)'
+            .')/?$}sDu',
     ],
     [ // $dynamicRoutes
         49 => [[['_route' => 'api_genid', '_controller' => 'api_platform.action.not_exposed', '_api_respond' => 'true'], ['id'], null, null, false, true, null]],
@@ -272,65 +273,65 @@ return [
             [['_route' => '_api_/paniers/{id}{._format}_patch', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Panier', '_api_operation_name' => '_api_/paniers/{id}{._format}_patch'], ['id', '_format'], ['PATCH' => 0], null, false, true, null],
             [['_route' => '_api_/paniers/{id}{._format}_delete', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Panier', '_api_operation_name' => '_api_/paniers/{id}{._format}_delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
         ],
-        751 => [[['_route' => '_api_/productss/{id}{._format}_get', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/productss/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
-        777 => [
-            [['_route' => '_api_/productss{._format}_get_collection', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/productss{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null],
-            [['_route' => '_api_/productss{._format}_post', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/productss{._format}_post'], ['_format'], ['POST' => 0], null, false, true, null],
+        750 => [[['_route' => '_api_/products/{id}{._format}_get', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/products/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
+        776 => [
+            [['_route' => '_api_/products{._format}_get_collection', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/products{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null],
+            [['_route' => '_api_/products{._format}_post', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/products{._format}_post'], ['_format'], ['POST' => 0], null, false, true, null],
         ],
-        815 => [
-            [['_route' => '_api_/productss/{id}{._format}_put', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/productss/{id}{._format}_put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],
-            [['_route' => '_api_/productss/{id}{._format}_patch', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/productss/{id}{._format}_patch'], ['id', '_format'], ['PATCH' => 0], null, false, true, null],
-            [['_route' => '_api_/productss/{id}{._format}_delete', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/productss/{id}{._format}_delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
+        814 => [
+            [['_route' => '_api_/products/{id}{._format}_put', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/products/{id}{._format}_put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],
+            [['_route' => '_api_/products/{id}{._format}_patch', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/products/{id}{._format}_patch'], ['id', '_format'], ['PATCH' => 0], null, false, true, null],
+            [['_route' => '_api_/products/{id}{._format}_delete', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Products', '_api_operation_name' => '_api_/products/{id}{._format}_delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
         ],
-        857 => [[['_route' => '_api_/promos/{id}{._format}_get', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Promo', '_api_operation_name' => '_api_/promos/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
-        883 => [
+        856 => [[['_route' => '_api_/promos/{id}{._format}_get', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Promo', '_api_operation_name' => '_api_/promos/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
+        882 => [
             [['_route' => '_api_/promos{._format}_get_collection', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Promo', '_api_operation_name' => '_api_/promos{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null],
             [['_route' => '_api_/promos{._format}_post', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Promo', '_api_operation_name' => '_api_/promos{._format}_post'], ['_format'], ['POST' => 0], null, false, true, null],
         ],
-        921 => [
+        920 => [
             [['_route' => '_api_/promos/{id}{._format}_put', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Promo', '_api_operation_name' => '_api_/promos/{id}{._format}_put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],
             [['_route' => '_api_/promos/{id}{._format}_patch', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Promo', '_api_operation_name' => '_api_/promos/{id}{._format}_patch'], ['id', '_format'], ['PATCH' => 0], null, false, true, null],
             [['_route' => '_api_/promos/{id}{._format}_delete', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\Promo', '_api_operation_name' => '_api_/promos/{id}{._format}_delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
         ],
-        967 => [[['_route' => '_api_/users/{id}{._format}_get', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
-        993 => [
+        966 => [[['_route' => '_api_/users/{id}{._format}_get', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_get'], ['id', '_format'], ['GET' => 0], null, false, true, null]],
+        992 => [
             [['_route' => '_api_/users{._format}_get_collection', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users{._format}_get_collection'], ['_format'], ['GET' => 0], null, false, true, null],
             [['_route' => '_api_/users{._format}_post', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users{._format}_post'], ['_format'], ['POST' => 0], null, false, true, null],
         ],
-        1031 => [
+        1030 => [
             [['_route' => '_api_/users/{id}{._format}_put', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],
             [['_route' => '_api_/users/{id}{._format}_patch', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_patch'], ['id', '_format'], ['PATCH' => 0], null, false, true, null],
             [['_route' => '_api_/users/{id}{._format}_delete', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
         ],
-        1071 => [[['_route' => 'app_admin_form_edit', '_controller' => 'App\\Controller\\AdminproductsController::editProductFormFront'], ['id'], null, null, false, true, null]],
-        1108 => [[['_route' => 'admin_add_quantity', '_controller' => 'App\\Controller\\AdminproductsController::ajoutQuantiteProduitAdmin'], ['productId'], null, null, false, true, null]],
-        1147 => [[['_route' => 'admin_category_products', '_controller' => 'App\\Controller\\AdminproductsController::showCategoryProductsAdmin'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        1181 => [[['_route' => 'admin_remove_quantity', '_controller' => 'App\\Controller\\AdminproductsController::enleverQuantiteProduitAdmin'], ['productId'], null, null, false, true, null]],
-        1223 => [[['_route' => 'add_quantity', '_controller' => 'App\\Controller\\AdminproductsController::ajoutQuantiteProduitAdmin'], ['productId'], ['POST' => 0], null, false, false, null]],
-        1247 => [[['_route' => 'remove_quantity', '_controller' => 'App\\Controller\\AdminproductsController::enleverQuantiteProduitAdmin'], ['productId'], ['POST' => 0], null, false, false, null]],
-        1283 => [[['_route' => 'add_dans_panier', '_controller' => 'App\\Controller\\UservueController::addDansPanier'], ['id'], null, null, false, true, null]],
-        1318 => [[['_route' => 'accueil_category_products', '_controller' => 'App\\Controller\\AccueilController::categorieAccueil'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        1354 => [[['_route' => 'app_delete_product', '_controller' => 'App\\Controller\\AdminproductsController::deleteProduct'], ['id'], null, null, false, true, null]],
-        1392 => [[['_route' => 'details_produit', '_controller' => 'App\\Controller\\AccueilController::detailsDunProduit'], ['id'], null, null, false, true, null]],
-        1416 => [[['_route' => 'details_produit_user', '_controller' => 'App\\Controller\\UservueController::detailsProduit'], ['id'], null, null, false, true, null]],
-        1444 => [[['_route' => 'details_promotion', '_controller' => 'App\\Controller\\AccueilController::detailsPromotion'], ['id'], null, null, false, true, null]],
-        1468 => [[['_route' => 'details_promotion_user', '_controller' => 'App\\Controller\\UservueController::detailsPromotion'], ['id'], null, null, false, true, null]],
-        1499 => [[['_route' => 'app_coupon_show', '_controller' => 'App\\Controller\\CouponController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        1513 => [[['_route' => 'app_coupon_edit', '_controller' => 'App\\Controller\\CouponController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        1522 => [[['_route' => 'app_coupon_delete', '_controller' => 'App\\Controller\\CouponController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        1557 => [[['_route' => 'app_gestion_user_show', '_controller' => 'App\\Controller\\GestionUserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        1571 => [[['_route' => 'app_gestion_user_edit', '_controller' => 'App\\Controller\\GestionUserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        1580 => [[['_route' => 'app_gestion_user_delete', '_controller' => 'App\\Controller\\GestionUserController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        1615 => [[['_route' => 'app_loyalty_card_show', '_controller' => 'App\\Controller\\LoyaltyCardController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        1629 => [[['_route' => 'app_loyalty_card_edit', '_controller' => 'App\\Controller\\LoyaltyCardController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        1638 => [[['_route' => 'app_loyalty_card_delete', '_controller' => 'App\\Controller\\LoyaltyCardController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        1672 => [[['_route' => 'app_promo_admin_show', '_controller' => 'App\\Controller\\PromoAdminController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        1686 => [[['_route' => 'app_promo_admin_edit', '_controller' => 'App\\Controller\\PromoAdminController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        1695 => [[['_route' => 'app_promo_admin_delete', '_controller' => 'App\\Controller\\PromoAdminController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        1736 => [[['_route' => 'user_loyalty_card', '_controller' => 'App\\Controller\\UservueController::redirectToUserLoyaltyCard'], ['id'], null, null, false, true, null]],
-        1769 => [[['_route' => 'user_loyalty_card_page', '_controller' => 'App\\Controller\\UservueController::showUserLoyaltyCardPage'], ['id'], null, null, false, true, null]],
-        1794 => [[['_route' => 'user_category_products', '_controller' => 'App\\Controller\\UservueController::pageCategoriesUser'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        1826 => [
+        1070 => [[['_route' => 'app_admin_form_edit', '_controller' => 'App\\Controller\\AdminproductsController::editProductFormFront'], ['id'], null, null, false, true, null]],
+        1107 => [[['_route' => 'admin_add_quantity', '_controller' => 'App\\Controller\\AdminproductsController::ajoutQuantiteProduitAdmin'], ['productId'], null, null, false, true, null]],
+        1146 => [[['_route' => 'admin_category_products', '_controller' => 'App\\Controller\\AdminproductsController::showCategoryProductsAdmin'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        1180 => [[['_route' => 'admin_remove_quantity', '_controller' => 'App\\Controller\\AdminproductsController::enleverQuantiteProduitAdmin'], ['productId'], null, null, false, true, null]],
+        1222 => [[['_route' => 'add_quantity', '_controller' => 'App\\Controller\\AdminproductsController::ajoutQuantiteProduitAdmin'], ['productId'], ['POST' => 0], null, false, false, null]],
+        1246 => [[['_route' => 'remove_quantity', '_controller' => 'App\\Controller\\AdminproductsController::enleverQuantiteProduitAdmin'], ['productId'], ['POST' => 0], null, false, false, null]],
+        1282 => [[['_route' => 'add_dans_panier', '_controller' => 'App\\Controller\\UservueController::addDansPanier'], ['id'], null, null, false, true, null]],
+        1317 => [[['_route' => 'accueil_category_products', '_controller' => 'App\\Controller\\AccueilController::categorieAccueil'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        1353 => [[['_route' => 'app_delete_product', '_controller' => 'App\\Controller\\AdminproductsController::deleteProduct'], ['id'], null, null, false, true, null]],
+        1391 => [[['_route' => 'details_produit', '_controller' => 'App\\Controller\\AccueilController::detailsDunProduit'], ['id'], null, null, false, true, null]],
+        1415 => [[['_route' => 'details_produit_user', '_controller' => 'App\\Controller\\UservueController::detailsProduit'], ['id'], null, null, false, true, null]],
+        1443 => [[['_route' => 'details_promotion', '_controller' => 'App\\Controller\\AccueilController::detailsPromotion'], ['id'], null, null, false, true, null]],
+        1467 => [[['_route' => 'details_promotion_user', '_controller' => 'App\\Controller\\UservueController::detailsPromotion'], ['id'], null, null, false, true, null]],
+        1498 => [[['_route' => 'app_coupon_show', '_controller' => 'App\\Controller\\CouponController::show'], ['id'], null, null, false, true, null]],
+        1512 => [[['_route' => 'app_coupon_edit', '_controller' => 'App\\Controller\\CouponController::edit'], ['id'], null, null, false, false, null]],
+        1521 => [[['_route' => 'app_coupon_delete', '_controller' => 'App\\Controller\\CouponController::delete'], ['id'], null, null, false, true, null]],
+        1556 => [[['_route' => 'app_gestion_user_show', '_controller' => 'App\\Controller\\GestionUserController::show'], ['id'], null, null, false, true, null]],
+        1570 => [[['_route' => 'app_gestion_user_edit', '_controller' => 'App\\Controller\\GestionUserController::edit'], ['id'], null, null, false, false, null]],
+        1579 => [[['_route' => 'app_gestion_user_delete', '_controller' => 'App\\Controller\\GestionUserController::delete'], ['id'], null, null, false, true, null]],
+        1614 => [[['_route' => 'app_loyalty_card_show', '_controller' => 'App\\Controller\\LoyaltyCardController::show'], ['id'], null, null, false, true, null]],
+        1628 => [[['_route' => 'app_loyalty_card_edit', '_controller' => 'App\\Controller\\LoyaltyCardController::edit'], ['id'], null, null, false, false, null]],
+        1637 => [[['_route' => 'app_loyalty_card_delete', '_controller' => 'App\\Controller\\LoyaltyCardController::delete'], ['id'], null, null, false, true, null]],
+        1671 => [[['_route' => 'app_promo_admin_show', '_controller' => 'App\\Controller\\PromoAdminController::show'], ['id'], null, null, false, true, null]],
+        1685 => [[['_route' => 'app_promo_admin_edit', '_controller' => 'App\\Controller\\PromoAdminController::edit'], ['id'], null, null, false, false, null]],
+        1694 => [[['_route' => 'app_promo_admin_delete', '_controller' => 'App\\Controller\\PromoAdminController::delete'], ['id'], null, null, false, true, null]],
+        1735 => [[['_route' => 'user_loyalty_card', '_controller' => 'App\\Controller\\UservueController::redirectToUserLoyaltyCard'], ['id'], null, null, false, true, null]],
+        1768 => [[['_route' => 'user_loyalty_card_page', '_controller' => 'App\\Controller\\UservueController::showUserLoyaltyCardPage'], ['id'], null, null, false, true, null]],
+        1793 => [[['_route' => 'user_category_products', '_controller' => 'App\\Controller\\UservueController::pageCategoriesUser'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        1825 => [
             [['_route' => 'app_edit_product', '_controller' => 'App\\Controller\\AdminproductsController::editProductFormFront'], ['id'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

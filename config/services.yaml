@@ -7,12 +7,20 @@ parameters:
   images_directory: "%kernel.project_dir%/public/images"
 
 services:
-  App\Service\ProductCategorie:
-    lazy: true
+  App\Entity\LoyaltyCard:
+    autowire: true
   # default configuration for services in *this* file
   _defaults:
-    autowire: true # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    autowire: true
+    autoconfigure: true
+  App\Service\PromotionService:
+    arguments:
+      $promoRepository: '@App\Repository\PromoRepository'
+  App\Service\ProductCategorie:
+    lazy: true
+    arguments:
+      $urlGenerator: "@router"
+      $security: "@security.helper"
 
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name

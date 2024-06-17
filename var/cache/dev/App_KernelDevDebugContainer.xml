@@ -523,6 +523,10 @@
       <tag name="controller.service_arguments"/>
       <tag name="routing.route_loader"/>
     </service>
+    <service id="App\Entity\LoyaltyCard" class="App\Entity\LoyaltyCard" autowire="true" autoconfigure="true"/>
+    <service id="App\Service\PromotionService" class="App\Service\PromotionService" autowire="true" autoconfigure="true">
+      <argument type="service" id="App\Repository\PromoRepository"/>
+    </service>
     <service id="App\Service\ProductCategorie" class="App\Service\ProductCategorie" autowire="true" autoconfigure="true">
       <argument type="service" id="router.default"/>
       <argument type="service" id="security.token_storage"/>
@@ -695,9 +699,6 @@
     </service>
     <service id="App\Service\PromoFilter" class="App\Service\PromoFilter" autowire="true" autoconfigure="true"/>
     <service id="App\Service\PromoRecupDate" class="App\Service\PromoRecupDate" autowire="true" autoconfigure="true"/>
-    <service id="App\Service\PromotionService" class="App\Service\PromotionService" autowire="true" autoconfigure="true">
-      <argument type="service" id="App\Repository\PromoRepository"/>
-    </service>
     <service id="App\Service\UpdatePriceApresPromo" class="App\Service\UpdatePriceApresPromo" autowire="true" autoconfigure="true">
       <argument type="service" id="App\Service\PromoRecupDate"/>
     </service>
@@ -8905,14 +8906,14 @@
     <service id=".service_locator.oFpVnn4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="loyaltyCard" type="service_closure" id=".errored..service_locator.oFpVnn4.App\Entity\LoyaltyCard"/>
+        <argument key="loyaltyCard" type="service_closure" id="App\Entity\LoyaltyCard"/>
       </argument>
     </service>
     <service id=".service_locator.DxJ_gkE" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="loyaltyCard" type="service_closure" id=".errored..service_locator.DxJ_gkE.App\Entity\LoyaltyCard"/>
+        <argument key="loyaltyCard" type="service_closure" id="App\Entity\LoyaltyCard"/>
       </argument>
     </service>
     <service id=".service_locator.mcb6ZOo" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8971,7 +8972,7 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="loyaltyCard" type="service_closure" id=".errored..service_locator.GlqAerr.App\Entity\LoyaltyCard"/>
+        <argument key="loyaltyCard" type="service_closure" id="App\Entity\LoyaltyCard"/>
         <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
       </argument>
     </service>
@@ -10397,20 +10398,11 @@
     <service id=".errored..service_locator.rvMNZGh.App\Entity\User" class="App\Entity\User">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.rvMNZGh&quot;: it needs an instance of &quot;App\Entity\User&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
-    <service id=".errored..service_locator.oFpVnn4.App\Entity\LoyaltyCard" class="App\Entity\LoyaltyCard">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.oFpVnn4&quot;: it needs an instance of &quot;App\Entity\LoyaltyCard&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
-    </service>
-    <service id=".errored..service_locator.DxJ_gkE.App\Entity\LoyaltyCard" class="App\Entity\LoyaltyCard">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.DxJ_gkE&quot;: it needs an instance of &quot;App\Entity\LoyaltyCard&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
-    </service>
     <service id=".errored..service_locator.mcb6ZOo.App\Entity\Promo" class="App\Entity\Promo">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.mcb6ZOo&quot;: it needs an instance of &quot;App\Entity\Promo&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.DtsKEqY.App\Entity\Promo" class="App\Entity\Promo">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.DtsKEqY&quot;: it needs an instance of &quot;App\Entity\Promo&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
-    </service>
-    <service id=".errored..service_locator.GlqAerr.App\Entity\LoyaltyCard" class="App\Entity\LoyaltyCard">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.GlqAerr&quot;: it needs an instance of &quot;App\Entity\LoyaltyCard&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
@@ -11699,8 +11691,8 @@
     <service id=".service_locator.EmZ4cZI" alias=".service_locator.Hz5btge"/>
     <service id=".service_locator.ICTRhpx" alias=".service_locator.rvMNZGh"/>
     <service id=".service_locator.3Rl9_Fp" alias=".service_locator.7i3BCB3"/>
-    <service id=".service_locator.mYgamyJ" alias=".service_locator.oFpVnn4"/>
-    <service id=".service_locator.KP6tpCw" alias=".service_locator.DxJ_gkE"/>
+    <service id=".service_locator.IwX9ds6" alias=".service_locator.oFpVnn4"/>
+    <service id=".service_locator.LfO_Raf" alias=".service_locator.DxJ_gkE"/>
     <service id=".service_locator.JVV0XZr" alias=".service_locator.mcb6ZOo"/>
     <service id=".service_locator.zfznZ0o" alias=".service_locator.DtsKEqY"/>
     <service id=".service_locator.NJIEzt2" alias=".service_locator.ywU5Sl_"/>
@@ -11708,7 +11700,7 @@
     <service id=".service_locator.UmMCvPx" alias=".service_locator.haFivEw"/>
     <service id=".service_locator.u.1edZL" alias=".service_locator.oVtQ36_"/>
     <service id=".service_locator.mZbqrxf" alias=".service_locator.XkbD_kH"/>
-    <service id=".service_locator.x72hlKF" alias=".service_locator.GlqAerr"/>
+    <service id=".service_locator.Z5ZMt_j" alias=".service_locator.GlqAerr"/>
     <service id=".service_locator.6j8_2CG" alias=".service_locator.qdDxjpw"/>
     <service id=".service_locator.Hg4prJc" alias=".service_locator.n2aaCnD"/>
     <service id=".service_locator.Q1z.f9O" alias=".service_locator.O2p6Lk7"/>

@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '7160e81fe023340294f4a2a96cd86ad21fa112d6',
+        'reference' => '1c9e98bf8a60425117140e83317c6a794ad2d8be',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7160e81fe023340294f4a2a96cd86ad21fa112d6',
+            'reference' => '1c9e98bf8a60425117140e83317c6a794ad2d8be',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -27,6 +27,15 @@
             'install_path' => __DIR__ . '/../api-platform/core',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'dbrekelmans/bdi' => array(
+            'pretty_version' => '1.3.0',
+            'version' => '1.3.0.0',
+            'reference' => '46e5f8ec09bac842ab569c02e64476408aa46ef8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../dbrekelmans/bdi',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'doctrine/cache' => array(
             'pretty_version' => '2.2.0',
@@ -181,6 +190,12 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'facebook/webdriver' => array(
+            'dev_requirement' => true,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
         'google/recaptcha' => array(
             'pretty_version' => '1.3.0',
             'version' => '1.3.0.0',
@@ -307,6 +322,27 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'php-http/async-client-implementation' => array(
+            'dev_requirement' => true,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+        'php-http/client-implementation' => array(
+            'dev_requirement' => true,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+        'php-webdriver/webdriver' => array(
+            'pretty_version' => '1.15.1',
+            'version' => '1.15.1.0',
+            'reference' => 'cd52d9342c5aa738c2e75a67e47a1b6df97154e8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php-webdriver/webdriver',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'phpunit/php-code-coverage' => array(
             'pretty_version' => '11.0.3',
             'version' => '11.0.3.0',
@@ -417,6 +453,12 @@
         ),
         'psr/event-dispatcher-implementation' => array(
             'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
+        'psr/http-client-implementation' => array(
+            'dev_requirement' => true,
             'provided' => array(
                 0 => '1.0',
             ),
@@ -802,6 +844,30 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'symfony/http-client' => array(
+            'pretty_version' => 'v6.4.8',
+            'version' => '6.4.8.0',
+            'reference' => '61faba993e620fc22d4f0ab3b6bcf8fbb0d44b05',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/http-client',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'symfony/http-client-contracts' => array(
+            'pretty_version' => 'v3.5.0',
+            'version' => '3.5.0.0',
+            'reference' => '20414d96f391677bf80078aa55baece78b82647d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/http-client-contracts',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'symfony/http-client-implementation' => array(
+            'dev_requirement' => true,
+            'provided' => array(
+                0 => '3.0',
+            ),
+        ),
         'symfony/http-foundation' => array(
             'pretty_version' => 'v6.4.8',
             'version' => '6.4.8.0',
@@ -821,9 +887,9 @@
             'dev_requirement' => false,
         ),
         'symfony/maker-bundle' => array(
-            'pretty_version' => 'v1.59.1',
-            'version' => '1.59.1.0',
-            'reference' => 'b87b1b25c607a8a50832395bc751c784946a0350',
+            'pretty_version' => 'v1.60.0',
+            'version' => '1.60.0.0',
+            'reference' => 'c305a02a22974670f359d4274c9431e1a191f559',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../symfony/maker-bundle',
             'aliases' => array(),
@@ -847,6 +913,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'symfony/panther' => array(
+            'pretty_version' => 'v2.1.1',
+            'version' => '2.1.1.0',
+            'reference' => 'ef9a6f2393ac9679af03a93d3f508e4aa65c15b5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/panther',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'symfony/password-hasher' => array(
             'pretty_version' => 'v6.4.8',
             'version' => '6.4.8.0',
@@ -857,9 +932,9 @@
             'dev_requirement' => false,
         ),
         'symfony/phpunit-bridge' => array(
-            'pretty_version' => 'v7.1.0',
-            'version' => '7.1.0.0',
-            'reference' => '1168ef27edb094fe4ba755ec937cf62a6dff84eb',
+            'pretty_version' => 'v7.1.1',
+            'version' => '7.1.1.0',
+            'reference' => '3e1cb8c4dee341cfe96ae9fe29b1acda52a6bb16',
             'type' => 'symfony-bridge',
             'install_path' => __DIR__ . '/../symfony/phpunit-bridge',
             'aliases' => array(),

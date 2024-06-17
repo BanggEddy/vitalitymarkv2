@@ -49,7 +49,7 @@ class UserTest extends KernelTestCase
         }
     }
 
-    public function testUserIfPasswordIsMissing(): void
+    public function testUserIfPasswordExistePas(): void
     {
         self::bootKernel();
         $container = static::getContainer();

@@ -86,7 +86,6 @@ class ProductsCRUDControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        #Il demande de se connecter, parce qu'il faut la session admin
         $crawler = $client->request('GET', '/login');
         $this->assertSelectorTextContains('h3', 'Connectez vous');
         $form = $crawler->selectButton('Se connecter')->form([
