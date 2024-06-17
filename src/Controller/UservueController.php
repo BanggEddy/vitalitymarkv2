@@ -136,7 +136,7 @@ class UservueController extends AbstractController
         ]);
     }
 
-    #[Route('/add-dans-panier/{id}', name: 'add_dans_panier')]
+    #[Route('/add/dans/panier/{id}', name: 'add_dans_panier')]
     public function addDansPanier(
         PanierRepository $panierRepository,
         Request $request,
@@ -187,7 +187,7 @@ class UservueController extends AbstractController
                 $panierItem = new PanierItems();
                 $panierItem->setIdproduct($product);
                 $panierItem->setQuantity($quantityrecup);
-
+                $product->setQuantity($product->getQuantity() - $quantityrecup);
                 $panier->addPanierItem($panierItem);
                 $entityManager->persist($panierItem);
             }
@@ -677,9 +677,11 @@ class UservueController extends AbstractController
                 $entityManager->remove($contact);
             }
 
-            foreach ($user->getLoyaltycard() as $loyaltyCard) {
+            $loyaltyCard = $user->getLoyaltyCard();
+            if ($loyaltyCard) {
                 $entityManager->remove($loyaltyCard);
             }
+            $this->container->get('security.token_storage')->setToken(null);
 
             $user->setDeletedAt(new \DateTimeImmutable());
             $entityManager->flush();
