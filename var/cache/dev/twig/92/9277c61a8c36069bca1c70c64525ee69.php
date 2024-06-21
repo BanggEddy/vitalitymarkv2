@@ -405,6 +405,6 @@ class __TwigTemplate_655b9bb063772c1abaf9d06cf8a48fd1 extends Template
 </div>
 </div>
 {% endblock %}
-", "user/uservue/card.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\user\\uservue\\card.html.twig");
+", "user/uservue/card.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\user\\uservue\\card.html.twig");
     }
 }

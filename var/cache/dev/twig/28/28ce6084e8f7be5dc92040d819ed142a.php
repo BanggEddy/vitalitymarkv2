@@ -462,6 +462,6 @@ class __TwigTemplate_7e9d9707cca1bb4e7e5bcc1d7b8ad237 extends Template
     </div>
 </div>
 {% endblock %}
-", "accueil/categorie.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\accueil\\categorie.html.twig");
+", "accueil/categorie.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\accueil\\categorie.html.twig");
     }
 }

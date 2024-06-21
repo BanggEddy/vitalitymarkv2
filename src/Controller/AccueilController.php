@@ -18,6 +18,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use App\Service\BarreRechercheCategory;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
+use App\Service\VerifIfTokenExiste;
 
 class AccueilController extends AbstractController
 {
@@ -25,13 +26,15 @@ class AccueilController extends AbstractController
     private $csrfTokenManager;
     private $promotionService;
     private $productCategorie;
+    private $verifTokenAuthExisteService;
 
-    public function __construct(ProductCategorie $productCategorie, PromotionService $promotionService, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager)
+    public function __construct(VerifIfTokenExiste $verifTokenAuthExisteService, ProductCategorie $productCategorie, PromotionService $promotionService, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->promotionService = $promotionService;
         $this->productCategorie = $productCategorie;
+        $this->verifTokenAuthExisteService = $verifTokenAuthExisteService;
     }
 
 
@@ -40,6 +43,12 @@ class AccueilController extends AbstractController
         ProductsRepository $productsRepository,
         Request $request
     ): Response {
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
+
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
@@ -64,6 +73,12 @@ class AccueilController extends AbstractController
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
+
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
         if ($utiliserServiceRedirection) {
             return $this->redirect($utiliserServiceRedirection);
         }
@@ -76,6 +91,12 @@ class AccueilController extends AbstractController
     #[Route('/promo', name: 'app_promo')]
     public function afficherLesPromos(PromoRepository $promoRepository, Request $request): Response
     {
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
+
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
@@ -108,6 +129,12 @@ class AccueilController extends AbstractController
         Request $request,
         ProductsRepository $productsRepository,
     ): Response {
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
+
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
@@ -133,6 +160,12 @@ class AccueilController extends AbstractController
     #[Route('/search', name: 'search')]
     public function rechercherUnProduitVisiteur(ProductsRepository $productsRepository, Request $request,)
     {
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
+
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
@@ -161,6 +194,12 @@ class AccueilController extends AbstractController
     #[Route('/', name: 'app_contact')]
     public function indexcontact(Request $request): Response
     {
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
+
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 
@@ -177,6 +216,12 @@ class AccueilController extends AbstractController
     #[Route('/contact/submit', name: 'app_contact_submit', methods: ['POST'])]
     public function submitContact(Request $request): Response
     {
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
+
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
         $token = $request->request->get('_csrf_token');
 
         if (!$this->isCsrfTokenValid('contact', $token)) {
@@ -202,8 +247,13 @@ class AccueilController extends AbstractController
     #[Route('/accueil/categorie/{category}', name: 'accueil_category_products')]
     public function categorieAccueil(Request $request, string $category, ProductsRepository $productsRepository,): Response
     {
-        $products = $productsRepository->findAll();
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
 
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
+        $products = $productsRepository->findAll();
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -227,6 +277,12 @@ class AccueilController extends AbstractController
     public function accepterTerms(
         Request $request
     ): Response {
+        $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
+
+        if ($redirectPath) {
+            return $this->redirect($redirectPath);
+        }
+
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
 

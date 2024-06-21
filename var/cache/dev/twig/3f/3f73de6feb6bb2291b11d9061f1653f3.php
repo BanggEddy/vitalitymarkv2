@@ -306,6 +306,6 @@ class __TwigTemplate_21523c866832c0bac901f8d5d3b26453 extends Template
     <a href=\"{{ path('loyalty_card_new') }}\" class=\"btn btn-details\">Ajouter un coupon pour le même type</a>
 </div>
 {% endblock %}
-", "admin/coupon/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\coupon\\index.html.twig");
+", "admin/coupon/index.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\admin\\coupon\\index.html.twig");
     }
 }

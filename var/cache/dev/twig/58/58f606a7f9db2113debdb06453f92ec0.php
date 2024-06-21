@@ -131,6 +131,6 @@ class __TwigTemplate_93d883db64b96cc7e824d667671c7a21 extends Template
 {% block body %}
 
 {% endblock %}
-", "admin/adminproducts/profil.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\adminproducts\\profil.html.twig");
+", "admin/adminproducts/profil.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\admin\\adminproducts\\profil.html.twig");
     }
 }

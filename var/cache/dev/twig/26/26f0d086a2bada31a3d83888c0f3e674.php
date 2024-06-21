@@ -577,6 +577,6 @@ class __TwigTemplate_29067ea62a84e193a6984e29e785a716 extends Template
         });
     </script>
 {% endblock %}
-", "user/uservue/details.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\user\\uservue\\details.html.twig");
+", "user/uservue/details.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\user\\uservue\\details.html.twig");
     }
 }

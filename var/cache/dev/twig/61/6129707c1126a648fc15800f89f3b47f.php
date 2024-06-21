@@ -174,6 +174,6 @@ class __TwigTemplate_e6071e9c6e8a639ef3009714564ea42b extends Template
     </div>
 </body>
 {% endblock %}
-", "accueil/agreeterms.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\accueil\\agreeterms.html.twig");
+", "accueil/agreeterms.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\accueil\\agreeterms.html.twig");
     }
 }
