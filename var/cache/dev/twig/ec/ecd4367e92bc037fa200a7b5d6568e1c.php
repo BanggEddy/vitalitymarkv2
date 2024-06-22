@@ -194,6 +194,6 @@ class __TwigTemplate_000c05ab3a730f2859b1aeb207462bae extends Template
     <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>
 </body>
 </html>
-", "base.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\base.html.twig");
+", "base.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\base.html.twig");
     }
 }

@@ -143,6 +143,6 @@ class __TwigTemplate_a7928a6ea28601e7bd43282b9e65e8e3 extends Template
     </span>
     {{ title }}
 </a>
-", "@KnpPaginator/Pagination/bootstrap_v5_md_sortable_link.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\bootstrap_v5_md_sortable_link.html.twig");
+", "@KnpPaginator/Pagination/bootstrap_v5_md_sortable_link.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\bootstrap_v5_md_sortable_link.html.twig");
     }
 }

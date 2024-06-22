@@ -45,7 +45,7 @@ class UservueController extends AbstractController
         $this->promotionService = $promotionService;
     }
 
-    #[Route('/uservue', name: 'app_uservue')]
+    #[Route('/uservue', name: 'uservue')]
     public function index(
         Request $request,
         ProductsRepository $productsRepository,

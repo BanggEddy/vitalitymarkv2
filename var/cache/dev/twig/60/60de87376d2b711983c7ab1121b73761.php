@@ -234,6 +234,6 @@ class __TwigTemplate_b6a0f256ec141e5160990eb5f0f6a9f6 extends Template
 
     {% endapply %}
 {% endblock %}
-", "@Recaptcha/form/recaptcha.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\vendor\\victor-prdh\\recaptcha-bundle\\src\\Resources\\views\\form\\recaptcha.html.twig");
+", "@Recaptcha/form/recaptcha.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\vendor\\victor-prdh\\recaptcha-bundle\\src\\Resources\\views\\form\\recaptcha.html.twig");
     }
 }

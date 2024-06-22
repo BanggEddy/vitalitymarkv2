@@ -240,6 +240,6 @@ class __TwigTemplate_c23b1a1f4b754d77654ec076b65ce3d7 extends Template
 </div>
 
 {% endblock %}
-", "admin/coupon/newtype.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\coupon\\newtype.html.twig");
+", "admin/coupon/newtype.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\admin\\coupon\\newtype.html.twig");
     }
 }

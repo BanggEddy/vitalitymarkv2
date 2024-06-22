@@ -20,10 +20,7 @@ return [
         '/search' => [[['_route' => 'search', '_controller' => 'App\\Controller\\AccueilController::rechercherUnProduitVisiteur'], null, null, null, false, false, null]],
         '/contact/submit' => [[['_route' => 'app_contact_submit', '_controller' => 'App\\Controller\\AccueilController::submitContact'], null, ['POST' => 0], null, false, false, null]],
         '/accepterterms' => [[['_route' => 'app_accepterterms', '_controller' => 'App\\Controller\\AccueilController::accepterTerms'], null, null, null, false, false, null]],
-        '/adminproducts' => [
-            [['_route' => 'app_adminproducts', '_controller' => 'App\\Controller\\AdminproductsController::index'], null, null, null, false, false, null],
-            [['_route' => 'adminproducts', '_controller' => 'App\\Controller\\AdminproductsController::index'], null, null, null, false, false, null],
-        ],
+        '/adminproducts' => [[['_route' => 'adminproducts', '_controller' => 'App\\Controller\\AdminproductsController::index'], null, null, null, false, false, null]],
         '/adminajouterproducts' => [[['_route' => 'app_admin_add_products', '_controller' => 'App\\Controller\\AdminproductsController::ajoutProductPage'], null, null, null, false, false, null]],
         '/product/create' => [[['_route' => 'app_create_product', '_controller' => 'App\\Controller\\AdminproductsController::createProduit'], null, null, null, false, false, null]],
         '/admindeleteproducts' => [[['_route' => 'app_admin_delete_products', '_controller' => 'App\\Controller\\AdminproductsController::deleteProducts'], null, null, null, false, false, null]],
@@ -44,10 +41,7 @@ return [
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
-        '/uservue' => [
-            [['_route' => 'app_uservue', '_controller' => 'App\\Controller\\UservueController::index'], null, null, null, false, false, null],
-            [['_route' => 'uservue', '_controller' => 'App\\Controller\\UservueController::index'], null, null, null, false, false, null],
-        ],
+        '/uservue' => [[['_route' => 'uservue', '_controller' => 'App\\Controller\\UservueController::index'], null, null, null, false, false, null]],
         '/user/promo' => [[['_route' => 'app_user_promo', '_controller' => 'App\\Controller\\UservueController::promo'], null, null, null, false, false, null]],
         '/user/panier' => [
             [['_route' => 'user_panier', '_controller' => 'App\\Controller\\UservueController::getUserPanier'], null, null, null, false, false, null],
@@ -64,16 +58,13 @@ return [
         '/contact/user/submit' => [[['_route' => 'app_contact_user_submit', '_controller' => 'App\\Controller\\UservueController::submitContact'], null, null, null, false, false, null]],
         '/update-quantity' => [[['_route' => 'update_quantity', '_controller' => 'App\\Controller\\UservueController::updateQuantityProduit'], null, ['POST' => 0], null, false, false, null]],
         '/enleverproduit_fromcart' => [[['_route' => 'enleverproduit_fromcart', '_controller' => 'App\\Controller\\UservueController::removeFromCartProduit'], null, ['POST' => 0], null, false, false, null]],
+        '/delete_account' => [[['_route' => 'delete_user_account', '_controller' => 'App\\Controller\\UservueController::suppressionCompte'], null, ['POST' => 0], null, false, false, null]],
         '/legals/user' => [[['_route' => 'app_legals_user', '_controller' => 'App\\Controller\\UservueController::mentionsLegalsPage'], null, null, null, false, false, null]],
-        '/product/new' => [[['_route' => 'adminajouterproducts', '_controller' => 'App\\Controller\\AdminproductsController::new'], null, null, null, false, false, null]],
-        '/product/delete' => [[['_route' => 'admindeleteproducts', '_controller' => 'App\\Controller\\AdminproductsController::delete'], null, null, null, false, false, null]],
-        '/product/update' => [[['_route' => 'adminupdateproducts', '_controller' => 'App\\Controller\\AdminupdateController::update'], null, null, null, false, false, null]],
         '/compteadmin' => [[['_route' => 'compteadmin', '_controller' => 'App\\Controller\\AdminproductsController::adminPage'], null, null, null, false, false, null]],
         '/api/user/panier' => [[['_route' => 'api_user_panier', '_controller' => 'App\\Controller\\UserController::getUserPanier'], null, null, null, false, false, null]],
         '/admin/products/list' => [[['_route' => 'admin_products_list', '_controller' => 'App\\Controller\\AdminproductsController::index'], null, null, null, false, false, null]],
         '/contact' => [[['_route' => 'app_contact', '_controller' => 'App\\Controller\\AccueilController::indexcontact'], null, null, null, false, false, null]],
         '/api/loyalty-card' => [[['_route' => 'api_loyalty_card', '_controller' => 'App\\Controller\\UservueController::getLoyaltyCard'], null, ['GET' => 0], null, false, false, null]],
-        '/delete_account' => [[['_route' => 'delete_user_account', '_controller' => 'App\\Controller\\UservueController::suppressionCompte'], null, ['POST' => 0], null, false, false, null]],
         '/api/login_check' => [[['_route' => 'api_login', '_controller' => 'App\\Security\\AuthAuthenticator::onAuthenticationSuccess'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
@@ -165,84 +156,73 @@ return [
                             .')'
                         .')'
                     .')'
+                    .'|ccueil/categorie/([^/]++)(*:1069)'
                     .'|d(?'
                         .'|min(?'
-                            .'|formedit/([^/]++)(*:1071)'
+                            .'|formedit/([^/]++)(*:1105)'
                             .'|/(?'
                                 .'|ad(?'
-                                    .'|d_quantity/([^/]++)(*:1108)'
-                                    .'|minproducts/categorie/([^/]++)(*:1147)'
+                                    .'|d_quantity/([^/]++)(*:1142)'
+                                    .'|minproducts/categorie/([^/]++)(*:1181)'
                                 .')'
-                                .'|remove_quantity/([^/]++)(*:1181)'
-                                .'|products/([^/]++)/(?'
-                                    .'|add_quantity(*:1223)'
-                                    .'|remove_quantity(*:1247)'
-                                .')'
+                                .'|remove_quantity/([^/]++)(*:1215)'
                             .')'
                         .')'
-                        .'|d/dans/panier/([^/]++)(*:1281)'
+                        .'|d/dans/panier/([^/]++)(*:1248)'
                     .')'
-                    .'|ccueil/categorie/([^/]++)(*:1316)'
                 .')'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:1357)'
-                    .'|wdt/([^/]++)(*:1378)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:1290)'
+                    .'|wdt/([^/]++)(*:1311)'
                     .'|profiler/(?'
-                        .'|font/([^/\\.]++)\\.woff2(*:1421)'
+                        .'|font/([^/\\.]++)\\.woff2(*:1354)'
                         .'|([^/]++)(?'
                             .'|/(?'
-                                .'|search/results(*:1459)'
-                                .'|router(*:1474)'
+                                .'|search/results(*:1392)'
+                                .'|router(*:1407)'
                                 .'|exception(?'
-                                    .'|(*:1495)'
-                                    .'|\\.css(*:1509)'
+                                    .'|(*:1428)'
+                                    .'|\\.css(*:1442)'
                                 .')'
                             .')'
-                            .'|(*:1520)'
+                            .'|(*:1453)'
                         .')'
                     .')'
                 .')'
                 .'|/de(?'
-                    .'|leteproduct/([^/]++)(*:1558)'
-                    .'|tails\\-pro(?'
-                        .'|duit(?'
-                            .'|/([^/]++)(*:1596)'
-                            .'|\\-user/([^/]++)(*:1620)'
-                        .')'
-                        .'|motion(?'
-                            .'|/([^/]++)(*:1648)'
-                            .'|\\-user/([^/]++)(*:1672)'
-                        .')'
+                    .'|tails(?'
+                        .'|\\-produit/([^/]++)(*:1497)'
+                        .'|/produit/user/([^/]++)(*:1528)'
                     .')'
+                    .'|leteproduct/([^/]++)(*:1558)'
                 .')'
                 .'|/coupon/([^/]++)(?'
+                    .'|(*:1587)'
+                    .'|/edit(*:1601)'
+                    .'|(*:1610)'
+                .')'
+                .'|/gestion/user/([^/]++)(?'
+                    .'|(*:1645)'
+                    .'|/edit(*:1659)'
+                    .'|(*:1668)'
+                .')'
+                .'|/loyalty/card/([^/]++)(?'
                     .'|(*:1703)'
                     .'|/edit(*:1717)'
                     .'|(*:1726)'
                 .')'
-                .'|/gestion/user/([^/]++)(?'
-                    .'|(*:1761)'
-                    .'|/edit(*:1775)'
-                    .'|(*:1784)'
-                .')'
-                .'|/loyalty/card/([^/]++)(?'
-                    .'|(*:1819)'
-                    .'|/edit(*:1833)'
-                    .'|(*:1842)'
-                .')'
                 .'|/promo/admin/([^/]++)(?'
-                    .'|(*:1876)'
-                    .'|/edit(*:1890)'
-                    .'|(*:1899)'
+                    .'|(*:1760)'
+                    .'|/edit(*:1774)'
+                    .'|(*:1783)'
                 .')'
                 .'|/user/(?'
-                    .'|loyalty\\-card/([^/]++)(*:1940)'
+                    .'|loyalty\\-card/([^/]++)(*:1824)'
                     .'|uservue/ca(?'
-                        .'|rd/([^/]++)(*:1973)'
-                        .'|tegorie/([^/]++)(*:1998)'
+                        .'|rd/([^/]++)(*:1857)'
+                        .'|tegorie/([^/]++)(*:1882)'
                     .')'
                 .')'
-                .'|/editproduct/([^/]++)(*:2030)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -327,44 +307,39 @@ return [
             [['_route' => '_api_/users/{id}{._format}_patch', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_patch'], ['id', '_format'], ['PATCH' => 0], null, false, true, null],
             [['_route' => '_api_/users/{id}{._format}_delete', '_controller' => 'api_platform.action.placeholder', '_format' => null, '_stateless' => false, '_api_resource_class' => 'App\\Entity\\User', '_api_operation_name' => '_api_/users/{id}{._format}_delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
         ],
-        1071 => [[['_route' => 'app_admin_form_edit', '_controller' => 'App\\Controller\\AdminproductsController::editProductFormFront'], ['id'], null, null, false, true, null]],
-        1108 => [[['_route' => 'admin_add_quantity', '_controller' => 'App\\Controller\\AdminproductsController::ajoutQuantiteProduitAdmin'], ['productId'], null, null, false, true, null]],
-        1147 => [[['_route' => 'admin_category_products', '_controller' => 'App\\Controller\\AdminproductsController::showCategoryProductsAdmin'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        1181 => [[['_route' => 'admin_remove_quantity', '_controller' => 'App\\Controller\\AdminproductsController::enleverQuantiteProduitAdmin'], ['productId'], null, null, false, true, null]],
-        1223 => [[['_route' => 'add_quantity', '_controller' => 'App\\Controller\\AdminproductsController::ajoutQuantiteProduitAdmin'], ['productId'], ['POST' => 0], null, false, false, null]],
-        1247 => [[['_route' => 'remove_quantity', '_controller' => 'App\\Controller\\AdminproductsController::enleverQuantiteProduitAdmin'], ['productId'], ['POST' => 0], null, false, false, null]],
-        1281 => [[['_route' => 'add_dans_panier', '_controller' => 'App\\Controller\\UservueController::addDansPanier'], ['id'], null, null, false, true, null]],
-        1316 => [[['_route' => 'accueil_category_products', '_controller' => 'App\\Controller\\AccueilController::categorieAccueil'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        1357 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        1378 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        1421 => [[['_route' => '_profiler_font', '_controller' => 'web_profiler.controller.profiler::fontAction'], ['fontName'], null, null, false, false, null]],
-        1459 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        1474 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        1495 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        1509 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        1520 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
+        1069 => [[['_route' => 'accueil_category_products', '_controller' => 'App\\Controller\\AccueilController::categorieAccueil'], ['category'], null, null, false, true, null]],
+        1105 => [[['_route' => 'app_admin_form_edit', '_controller' => 'App\\Controller\\AdminproductsController::editProductFormFront'], ['id'], null, null, false, true, null]],
+        1142 => [[['_route' => 'add_quantity', '_controller' => 'App\\Controller\\AdminproductsController::ajoutQuantiteProduitAdmin'], ['productId'], null, null, false, true, null]],
+        1181 => [[['_route' => 'admin_category_products', '_controller' => 'App\\Controller\\AdminproductsController::showCategoryProductsAdmin'], ['category'], null, null, false, true, null]],
+        1215 => [[['_route' => 'remove_quantity', '_controller' => 'App\\Controller\\AdminproductsController::enleverQuantiteProduitAdmin'], ['productId'], null, null, false, true, null]],
+        1248 => [[['_route' => 'add_dans_panier', '_controller' => 'App\\Controller\\UservueController::addDansPanier'], ['id'], null, null, false, true, null]],
+        1290 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        1311 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        1354 => [[['_route' => '_profiler_font', '_controller' => 'web_profiler.controller.profiler::fontAction'], ['fontName'], null, null, false, false, null]],
+        1392 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        1407 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        1428 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        1442 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        1453 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
+        1497 => [[['_route' => 'details_produit', '_controller' => 'App\\Controller\\AccueilController::detailsDunProduit'], ['id'], null, null, false, true, null]],
+        1528 => [[['_route' => 'details_produit_user', '_controller' => 'App\\Controller\\UservueController::detailsProduit'], ['id'], null, null, false, true, null]],
         1558 => [[['_route' => 'app_delete_product', '_controller' => 'App\\Controller\\AdminproductsController::deleteProduct'], ['id'], null, null, false, true, null]],
-        1596 => [[['_route' => 'details_produit', '_controller' => 'App\\Controller\\AccueilController::detailsDunProduit'], ['id'], null, null, false, true, null]],
-        1620 => [[['_route' => 'details_produit_user', '_controller' => 'App\\Controller\\UservueController::detailsProduit'], ['id'], null, null, false, true, null]],
-        1648 => [[['_route' => 'details_promotion', '_controller' => 'App\\Controller\\AccueilController::detailsPromotion'], ['id'], null, null, false, true, null]],
-        1672 => [[['_route' => 'details_promotion_user', '_controller' => 'App\\Controller\\UservueController::detailsPromotion'], ['id'], null, null, false, true, null]],
-        1703 => [[['_route' => 'app_coupon_show', '_controller' => 'App\\Controller\\CouponController::show'], ['id'], null, null, false, true, null]],
-        1717 => [[['_route' => 'app_coupon_edit', '_controller' => 'App\\Controller\\CouponController::edit'], ['id'], null, null, false, false, null]],
-        1726 => [[['_route' => 'app_coupon_delete', '_controller' => 'App\\Controller\\CouponController::delete'], ['id'], null, null, false, true, null]],
-        1761 => [[['_route' => 'app_gestion_user_show', '_controller' => 'App\\Controller\\GestionUserController::show'], ['id'], null, null, false, true, null]],
-        1775 => [[['_route' => 'app_gestion_user_edit', '_controller' => 'App\\Controller\\GestionUserController::edit'], ['id'], null, null, false, false, null]],
-        1784 => [[['_route' => 'app_gestion_user_delete', '_controller' => 'App\\Controller\\GestionUserController::delete'], ['id'], null, null, false, true, null]],
-        1819 => [[['_route' => 'app_loyalty_card_show', '_controller' => 'App\\Controller\\LoyaltyCardController::show'], ['id'], null, null, false, true, null]],
-        1833 => [[['_route' => 'app_loyalty_card_edit', '_controller' => 'App\\Controller\\LoyaltyCardController::edit'], ['id'], null, null, false, false, null]],
-        1842 => [[['_route' => 'app_loyalty_card_delete', '_controller' => 'App\\Controller\\LoyaltyCardController::delete'], ['id'], null, null, false, true, null]],
-        1876 => [[['_route' => 'app_promo_admin_show', '_controller' => 'App\\Controller\\PromoAdminController::show'], ['id'], null, null, false, true, null]],
-        1890 => [[['_route' => 'app_promo_admin_edit', '_controller' => 'App\\Controller\\PromoAdminController::edit'], ['id'], null, null, false, false, null]],
-        1899 => [[['_route' => 'app_promo_admin_delete', '_controller' => 'App\\Controller\\PromoAdminController::delete'], ['id'], null, null, false, true, null]],
-        1940 => [[['_route' => 'user_loyalty_card', '_controller' => 'App\\Controller\\UservueController::redirectToUserLoyaltyCard'], ['id'], null, null, false, true, null]],
-        1973 => [[['_route' => 'user_loyalty_card_page', '_controller' => 'App\\Controller\\UservueController::showUserLoyaltyCardPage'], ['id'], null, null, false, true, null]],
-        1998 => [[['_route' => 'user_category_products', '_controller' => 'App\\Controller\\UservueController::pageCategoriesUser'], ['category'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        2030 => [
-            [['_route' => 'app_edit_product', '_controller' => 'App\\Controller\\AdminproductsController::editProductFormFront'], ['id'], ['POST' => 0], null, false, true, null],
+        1587 => [[['_route' => 'app_coupon_show', '_controller' => 'App\\Controller\\CouponController::show'], ['id'], null, null, false, true, null]],
+        1601 => [[['_route' => 'app_coupon_edit', '_controller' => 'App\\Controller\\CouponController::edit'], ['id'], null, null, false, false, null]],
+        1610 => [[['_route' => 'app_coupon_delete', '_controller' => 'App\\Controller\\CouponController::delete'], ['id'], null, null, false, true, null]],
+        1645 => [[['_route' => 'app_gestion_user_show', '_controller' => 'App\\Controller\\GestionUserController::show'], ['id'], null, null, false, true, null]],
+        1659 => [[['_route' => 'app_gestion_user_edit', '_controller' => 'App\\Controller\\GestionUserController::edit'], ['id'], null, null, false, false, null]],
+        1668 => [[['_route' => 'app_gestion_user_delete', '_controller' => 'App\\Controller\\GestionUserController::delete'], ['id'], null, null, false, true, null]],
+        1703 => [[['_route' => 'app_loyalty_card_show', '_controller' => 'App\\Controller\\LoyaltyCardController::show'], ['id'], null, null, false, true, null]],
+        1717 => [[['_route' => 'app_loyalty_card_edit', '_controller' => 'App\\Controller\\LoyaltyCardController::edit'], ['id'], null, null, false, false, null]],
+        1726 => [[['_route' => 'app_loyalty_card_delete', '_controller' => 'App\\Controller\\LoyaltyCardController::delete'], ['id'], null, null, false, true, null]],
+        1760 => [[['_route' => 'app_promo_admin_show', '_controller' => 'App\\Controller\\PromoAdminController::show'], ['id'], null, null, false, true, null]],
+        1774 => [[['_route' => 'app_promo_admin_edit', '_controller' => 'App\\Controller\\PromoAdminController::edit'], ['id'], null, null, false, false, null]],
+        1783 => [[['_route' => 'app_promo_admin_delete', '_controller' => 'App\\Controller\\PromoAdminController::delete'], ['id'], null, null, false, true, null]],
+        1824 => [[['_route' => 'user_loyalty_card', '_controller' => 'App\\Controller\\UservueController::redirectToUserLoyaltyCard'], ['id'], null, null, false, true, null]],
+        1857 => [[['_route' => 'user_loyalty_card_page', '_controller' => 'App\\Controller\\UservueController::showUserLoyaltyCardPage'], ['id'], null, null, false, true, null]],
+        1882 => [
+            [['_route' => 'user_category_products', '_controller' => 'App\\Controller\\UservueController::pageCategoriesUser'], ['category'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

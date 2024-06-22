@@ -107,6 +107,6 @@ class __TwigTemplate_49a0b729187c8e8cd85ee7d9e1493d5d extends Template
         <link rel=\"next\" href=\"{{ path(route, query|merge({(pageParameterName): next})) }}\" />
     {% endif %}
 {% endif %}
-", "@KnpPaginator/Pagination/rel_links.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\rel_links.html.twig");
+", "@KnpPaginator/Pagination/rel_links.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\rel_links.html.twig");
     }
 }

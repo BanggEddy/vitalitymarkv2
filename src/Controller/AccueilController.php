@@ -14,7 +14,6 @@ use App\Entity\Contact;
 use App\Form\ProductSearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use App\Service\BarreRechercheCategory;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
@@ -23,15 +22,13 @@ use App\Service\VerifIfTokenExiste;
 class AccueilController extends AbstractController
 {
     private $entityManager;
-    private $csrfTokenManager;
     private $promotionService;
     private $productCategorie;
     private $verifTokenAuthExisteService;
 
-    public function __construct(VerifIfTokenExiste $verifTokenAuthExisteService, ProductCategorie $productCategorie, PromotionService $promotionService, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager)
+    public function __construct(VerifIfTokenExiste $verifTokenAuthExisteService, ProductCategorie $productCategorie, PromotionService $promotionService, EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->csrfTokenManager = $csrfTokenManager;
         $this->promotionService = $promotionService;
         $this->productCategorie = $productCategorie;
         $this->verifTokenAuthExisteService = $verifTokenAuthExisteService;

@@ -326,6 +326,6 @@ class __TwigTemplate_c0862a968f942e7f55e3e3948f4c90e4 extends Template
         </div>
     </div>
 {% endblock %}
-", "admin/loyalty_card/edit.html.twig", "C:\\Users\\David\\Desktop\\vitalitymarkv2\\templates\\admin\\loyalty_card\\edit.html.twig");
+", "admin/loyalty_card/edit.html.twig", "C:\\Users\\David\\Desktop\\vitalitysecond\\vitalitymarkv2\\templates\\admin\\loyalty_card\\edit.html.twig");
     }
 }

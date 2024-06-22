@@ -38,7 +38,7 @@ class AdminproductsController extends AbstractController
         $this->updatePriceApresPromo = $updatePriceApresPromo;
     }
 
-    #[Route('/adminproducts', name: 'app_adminproducts')]
+    #[Route('/adminproducts', name: 'adminproducts')]
     public function index(ProductsRepository $productsRepository, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -245,7 +245,6 @@ class AdminproductsController extends AbstractController
         ]);
     }
 
-
     #[Route('/compte/admin', name: 'app_admin_compte')]
     public function adminCompte(Request $request): Response
     {
@@ -295,7 +294,7 @@ class AdminproductsController extends AbstractController
         return new RedirectResponse($this->generateUrl('compte_admin'));
     }
 
-    #[Route('/admin/add_quantity/{productId}', name: 'admin_add_quantity')]
+    #[Route('/admin/add_quantity/{productId}', name: 'add_quantity')]
     public function ajoutQuantiteProduitAdmin(ProductsRepository $productsRepository, Request $request, $productId): Response
     {
 
@@ -311,7 +310,7 @@ class AdminproductsController extends AbstractController
         return $this->redirectToRoute('admin_products_list');
     }
 
-    #[Route('/admin/remove_quantity/{productId}', name: 'admin_remove_quantity')]
+    #[Route('/admin/remove_quantity/{productId}', name: 'remove_quantity')]
     public function enleverQuantiteProduitAdmin(ProductsRepository $productsRepository,  Request $request, $productId): Response
     {
         $product = $productsRepository->find($productId);
