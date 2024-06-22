@@ -25,8 +25,9 @@ use App\Repository\PanierItemsRepository;
 use App\Service\PanierUser;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-
+use Symfony\Component\Mime\Email;
 
 class UservueController extends AbstractController
 {
@@ -533,10 +534,10 @@ class UservueController extends AbstractController
     }
 
     #[Route('/contact/user/submit', name: 'app_contact_user_submit')]
-    public function submitContact(Request $request): Response
+    public function submitContact(Request $request, MailerInterface $mailer): Response
     {
         $token = $request->request->get('_csrf_token');
-
+        /** @var UserInterface|null $user */
         $user = $this->getUser();
 
         $subject = $request->request->get('subject');
@@ -546,18 +547,25 @@ class UservueController extends AbstractController
         $contact->setSubject($subject);
         $contact->setObject($message);
 
-        if ($user instanceof User) {
-            $contact->setIduser($user);
-        }
+        $contact->setIduser($user);
 
         if (!$this->isCsrfTokenValid('contact', $token)) {
-            $this->addFlash('error', 'le Token CSRF est invalide.');
+            $this->addFlash('error', 'Le Token CSRF est invalide.');
             return $this->redirectToRoute('app_contact_user');
         }
 
         $this->entityManager->persist($contact);
         $this->entityManager->flush();
 
+        $email = (new Email())
+            ->from($user->getEmail())
+            ->to('vitalitymarket-contact@vttmt.com')
+            ->subject($contact->getSubject())
+            ->html($contact->getObject());
+
+        $mailer->send($email);
+
+        $this->addFlash('success', 'Votre message a été envoyé avec succès.');
         return $this->redirectToRoute('app_contact_user');
     }
 

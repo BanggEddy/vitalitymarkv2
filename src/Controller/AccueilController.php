@@ -18,6 +18,8 @@ use App\Service\BarreRechercheCategory;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
 use App\Service\VerifIfTokenExiste;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class AccueilController extends AbstractController
 {
@@ -211,7 +213,7 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/contact/submit', name: 'app_contact_submit', methods: ['POST'])]
-    public function submitContact(Request $request): Response
+    public function submitContact(Request $request, MailerInterface $mailer): Response
     {
         $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
 
@@ -236,6 +238,14 @@ class AccueilController extends AbstractController
         $this->entityManager->flush();
 
         $this->addFlash('success', 'Votre message a été envoyé avec succès.');
+
+        $email = (new Email())
+            ->from('vitalitymarket-accueil@vttmt.com')
+            ->to('vitalitymarket-contact@vttmt.com')
+            ->subject($contact->getSubject($message))
+            ->html($contact->getObject($message));
+
+        $mailer->send($email);
 
         return $this->redirectToRoute('app_contact');
     }
