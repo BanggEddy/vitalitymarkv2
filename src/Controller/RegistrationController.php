@@ -12,10 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Entity\LoyaltyCard;
-use App\Form\LoyaltyCardType;
-use Symfony\Component\Security\Core\User\UserInterface;
-use DateTime;
 use DateInterval;
 use DateTimeImmutable;
 

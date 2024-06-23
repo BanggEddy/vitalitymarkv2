@@ -25,6 +25,7 @@ use App\Repository\PanierItemsRepository;
 use App\Service\PanierUser;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Mime\Email;
@@ -59,7 +60,7 @@ class UservueController extends AbstractController
         if ($utiliserServiceRedirection) {
             return $this->redirect($utiliserServiceRedirection);
         }
-        /** @var UserInterface|null $user */
+        /** @var User|null $user */
         $user = $this->getUser();
 
         $userId = $user->getId();
@@ -220,7 +221,7 @@ class UservueController extends AbstractController
 
 
 
-        /** @var UserInterface|null $user */
+        /** @var User|null $user */
         $user = $this->getUser();
 
         $userId = $user->getId();
@@ -254,7 +255,7 @@ class UservueController extends AbstractController
         PanierUser $panierUserService,
         ProductsRepository $productsRepository,
     ) {
-        /** @var UserInterface|null $user */
+        /** @var User|null $user */
         $user = $this->getUser();
 
         $userId = null;
@@ -322,7 +323,7 @@ class UservueController extends AbstractController
             return $this->redirect($utiliserServiceRedirection);
         }
 
-        /** @var UserInterface|null $user */
+        /** @var User|null $user */
         $user = $this->getUser();
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
@@ -396,7 +397,7 @@ class UservueController extends AbstractController
     public function userProfile(PanierRepository $panierRepository, PanierUser $panierUserService, Request $request, $category = null): Response
     {
 
-        /** @var UserInterface|null $user */
+        /** @var User|null $user */
         $user = $this->getUser();
 
         $userId = $user->getId();
@@ -537,7 +538,8 @@ class UservueController extends AbstractController
     public function submitContact(Request $request, MailerInterface $mailer): Response
     {
         $token = $request->request->get('_csrf_token');
-        /** @var UserInterface|null $user */
+
+        /** @var User|null $user */
         $user = $this->getUser();
 
         $subject = $request->request->get('subject');
@@ -557,12 +559,17 @@ class UservueController extends AbstractController
         $this->entityManager->persist($contact);
         $this->entityManager->flush();
 
-        $email = (new Email())
+        $email = (new TemplatedEmail())
             ->from($user->getEmail())
             ->to('vitalitymarket-contact@vttmt.com')
             ->subject($contact->getSubject())
-            ->html($contact->getObject());
+            ->html($contact->getObject())
+            ->htmlTemplate('emails/contactuser.html.twig')
 
+            ->context([
+                'contact' => $contact,
+                'user' => $user,
+            ]);
         $mailer->send($email);
 
         $this->addFlash('success', 'Votre message a été envoyé avec succès.');

@@ -18,6 +18,7 @@ use App\Service\BarreRechercheCategory;
 use App\Service\ProductCategorie;
 use App\Service\PromotionService;
 use App\Service\VerifIfTokenExiste;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -239,12 +240,16 @@ class AccueilController extends AbstractController
 
         $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
-        $email = (new Email())
+        $email = (new TemplatedEmail())
             ->from('vitalitymarket-accueil@vttmt.com')
             ->to('vitalitymarket-contact@vttmt.com')
             ->subject($contact->getSubject($message))
-            ->html($contact->getObject($message));
+            ->html($contact->getObject($message))
+            ->htmlTemplate('emails/contact.html.twig')
 
+            ->context([
+                'contact' => $contact,
+            ]);
         $mailer->send($email);
 
         return $this->redirectToRoute('app_contact');
