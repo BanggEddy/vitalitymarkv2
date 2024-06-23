@@ -58,7 +58,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Veuillez cocher la case',
                     ]),
                 ],
             ])
@@ -71,7 +71,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 12,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins 12 caractères.',
                         'max' => 4096,
                     ]),
                     new Regex([
