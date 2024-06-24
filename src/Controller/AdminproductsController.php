@@ -112,7 +112,7 @@ class AdminproductsController extends AbstractController
                 $entityManager->persist($product);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_adminproducts');
+                return $this->redirectToRoute('adminproducts');
             }
         }
 
@@ -203,7 +203,7 @@ class AdminproductsController extends AbstractController
         ]);
     }
 
-    #[Route('/adminformedit/{id}', name: 'app_admin_form_edit')]
+    #[Route('/adminformedit/{id}', name: 'admin_form_edit')]
     public function editProductFormFront(Products $product, Request $request, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);

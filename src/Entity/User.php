@@ -39,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\OneToOne(mappedBy: 'iduser', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'iduser')]
     private ?Panier $idpanier = null;
     /**
      * @var string

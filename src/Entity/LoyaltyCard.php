@@ -33,7 +33,7 @@ class LoyaltyCard
     #[ORM\ManyToMany(targetEntity: Coupon::class, mappedBy: 'idloyaltycard')]
     private Collection $coupons;
 
-    #[ORM\OneToOne(inversedBy: 'loyaltyCard', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'loyaltyCard')]
     private ?User $iduser = null;
 
     public function __construct()

@@ -7,7 +7,7 @@
 <div class="container nature-card">
     <br>
     <h3> Editer un produit </h3>
-    <form action="{{ path('app_edit_product', {'id': product.id}) }}" method="post" enctype="multipart/form-data" class="mb-4">
+    <form action="{{ path('admin_form_edit', {'id': product.id}) }}" method="post" enctype="multipart/form-data" class="mb-4">
         {{ form_start(productForm, {'attr': {'class': 'row g-3'}}) }}
             {{ form_row(productForm.name, {'attr': {'class': 'spaced-input'}}) }}
             {{ form_row(productForm.category, {'attr': {'class': 'spaced-input'}}) }}

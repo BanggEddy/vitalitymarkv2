@@ -75,7 +75,7 @@ class __TwigTemplate_f2d08927c6cadb7b4ad9644bc961af9d extends Template
                     <h3 class=\"card-title\">Nous Contacter</h3>
                     <form action=\"";
         // line 12
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_contact_user_submit");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("contact_user_submit");
         yield "\" method=\"POST\">
                         <div class=\"form-group\">
                             <label for=\"subject\">Sujet :</label>
@@ -154,7 +154,7 @@ class __TwigTemplate_f2d08927c6cadb7b4ad9644bc961af9d extends Template
             <div class=\"card nature-card\">
                 <div class=\"card-body\">
                     <h3 class=\"card-title\">Nous Contacter</h3>
-                    <form action=\"{{ path('app_contact_user_submit') }}\" method=\"POST\">
+                    <form action=\"{{ path('contact_user_submit') }}\" method=\"POST\">
                         <div class=\"form-group\">
                             <label for=\"subject\">Sujet :</label>
                             <select class=\"form-select\" id=\"subject\" name=\"subject\" required>

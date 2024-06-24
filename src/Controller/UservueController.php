@@ -237,8 +237,6 @@ class UservueController extends AbstractController
             $prixTotalPanier += $panierUserService->PriceTotalPanier($panier);
         }
 
-
-
         return $this->render('user/uservue/indexpanier.html.twig', [
             'panierDetails' => $panierDetails,
             'prixTotalPanier' => $prixTotalPanier,
@@ -246,7 +244,6 @@ class UservueController extends AbstractController
             'barreRechercheCategory' => $formRechercheCategory->createView(),
         ]);
     }
-
 
     #[Route('/search/user', name: 'search_user')]
     public function search(
@@ -496,7 +493,7 @@ class UservueController extends AbstractController
         ]);
     }
 
-    #[Route('/contact/user', name: 'app_contact_user')]
+    #[Route('/contact/user', name: 'contact_user')]
     public function indexcontact(
         Request $request,
         PanierRepository $panierRepository,
@@ -534,7 +531,7 @@ class UservueController extends AbstractController
         ]);
     }
 
-    #[Route('/contact/user/submit', name: 'app_contact_user_submit')]
+    #[Route('/contact/user/submit', name: 'contact_user_submit')]
     public function submitContact(Request $request, MailerInterface $mailer): Response
     {
         $token = $request->request->get('_csrf_token');
@@ -553,7 +550,7 @@ class UservueController extends AbstractController
 
         if (!$this->isCsrfTokenValid('contact', $token)) {
             $this->addFlash('error', 'Le Token CSRF est invalide.');
-            return $this->redirectToRoute('app_contact_user');
+            return $this->redirectToRoute('contact_user');
         }
 
         $this->entityManager->persist($contact);
@@ -573,11 +570,11 @@ class UservueController extends AbstractController
         $mailer->send($email);
 
         $this->addFlash('success', 'Votre message a été envoyé avec succès.');
-        return $this->redirectToRoute('app_contact_user');
+        return $this->redirectToRoute('contact_user');
     }
 
     #[Route('/details/produit/user/{id}', name: 'details_produit_user')]
-    public function detailsProduit($id, Request $request, PanierUser $panierUserService, PanierRepository $panierRepository, ProductsRepository $productsRepository,): Response
+    public function detailsProduit(Products $product, Request $request, PanierUser $panierUserService, PanierRepository $panierRepository, ProductsRepository $productsRepository,): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
         $utiliserServiceRedirection = $this->productCategorie->barreCategoryChercher($formRechercheCategory, $request);
@@ -597,7 +594,6 @@ class UservueController extends AbstractController
         }
 
         $paniers = $panierRepository->findBy(['iduser' => $user]);
-        $product = $productsRepository->find($id);
         $category = $product->getCategory();
         $productsrecommande = $productsRepository->findBy(['category' => $category]);
 
@@ -707,7 +703,7 @@ class UservueController extends AbstractController
         return $this->render('confirmation_delete_account.html.twig');
     }
 
-    #[Route('/legals/user', name: 'app_legals_user')]
+    #[Route('/legals/user', name: 'legals_user')]
     public function mentionsLegalsPage(
         Request $request,
         PanierUser $panierUserService,

@@ -14,6 +14,7 @@ use Twig\Source;
 use Twig\Template;
 
 /* headeruser.html.twig */
+
 class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
 {
     private $source;
@@ -104,7 +105,9 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
                         <li class=\"nav-item\">
                             <a class=\"nav-link\" href=\"";
         // line 41
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_loyalty_card", ["id" => (isset($context["user_id"]) || array_key_exists("user_id", $context) ? $context["user_id"] : (function () { throw new RuntimeError('Variable "user_id" does not exist.', 41, $this->source); })())]), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_loyalty_card", ["id" => (isset($context["user_id"]) || array_key_exists("user_id", $context) ? $context["user_id"] : (function () {
+            throw new RuntimeError('Variable "user_id" does not exist.', 41, $this->source);
+        })())]), "html", null, true);
         yield "\">
                                 <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-card-heading\" viewBox=\"0 0 16 16\">
                                     <path d=\"M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z\"/>
@@ -133,7 +136,7 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
                                         <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"";
         // line 64
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_legals_user");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("legals_user");
         yield "\">
                             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text\" viewBox=\"0 0 16 16\">
                             <path d=\"M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5\"/>
@@ -174,7 +177,9 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
                                 </svg>
                                 <span class=\"text-danger\">";
         // line 102
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["prixTotalPanier"]) || array_key_exists("prixTotalPanier", $context) ? $context["prixTotalPanier"] : (function () { throw new RuntimeError('Variable "prixTotalPanier" does not exist.', 102, $this->source); })()), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["prixTotalPanier"]) || array_key_exists("prixTotalPanier", $context) ? $context["prixTotalPanier"] : (function () {
+            throw new RuntimeError('Variable "prixTotalPanier" does not exist.', 102, $this->source);
+        })()), "html", null, true);
         yield "€</span>
                             </a>
                         </li>
@@ -197,12 +202,16 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
                                 <form class=\"form-inline\" method=\"POST\">
                                     ";
         // line 119
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 119, $this->source); })()), 'form_start', ["attr" => ["class" => "form-inline"]]);
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () {
+            throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 119, $this->source);
+        })()), 'form_start', ["attr" => ["class" => "form-inline"]]);
         yield "
                                     <div class=\"input-group\">
                                         ";
         // line 121
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 121, $this->source); })()), "category", [], "any", false, false, false, 121), 'row', ["attr" => ["class" => "form-control", "placeholder" => "Rechercher", "aria-label" => "Search"]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () {
+            throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 121, $this->source);
+        })()), "category", [], "any", false, false, false, 121), 'row', ["attr" => ["class" => "form-control", "placeholder" => "Rechercher", "aria-label" => "Search"]]);
         yield "
                                         <div class=\"input-group-append\">
                                             <button type=\"submit\" class=\"btn btn-success\">
@@ -214,7 +223,9 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
                                     </div>
                                 ";
         // line 130
-        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () { throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 130, $this->source); })()), 'form_end');
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["barreRechercheCategory"]) || array_key_exists("barreRechercheCategory", $context) ? $context["barreRechercheCategory"] : (function () {
+            throw new RuntimeError('Variable "barreRechercheCategory" does not exist.', 130, $this->source);
+        })()), 'form_end');
         yield "
                             </form>
                         </div>
@@ -225,7 +236,9 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
 
 ";
         // line 138
-        if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 138, $this->source); })()), "request", [], "any", false, false, false, 138), "attributes", [], "any", false, false, false, 138), "get", ["_route"], "method", false, false, false, 138), ["user_panier", "user_profile", "app_contact_user", "app_legals_user"])) {
+        if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () {
+            throw new RuntimeError('Variable "app" does not exist.', 138, $this->source);
+        })()), "request", [], "any", false, false, false, 138), "attributes", [], "any", false, false, false, 138), "get", ["_route"], "method", false, false, false, 138), ["user_panier", "user_profile", "contact_user", "legals_user"])) {
             // line 139
             yield "<div class=\"container\" style=\"margin-bottom: 40px; margin-top: 40px\">
     <div class=\"row justify-content-center align-items-center\">
@@ -255,7 +268,9 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
 
 ";
             // line 160
-            if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 160, $this->source); })()), "request", [], "any", false, false, false, 160), "attributes", [], "any", false, false, false, 160), "get", ["_route"], "method", false, false, false, 160), ["user_loyalty_card_page"])) {
+            if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () {
+                throw new RuntimeError('Variable "app" does not exist.', 160, $this->source);
+            })()), "request", [], "any", false, false, false, 160), "attributes", [], "any", false, false, false, 160), "get", ["_route"], "method", false, false, false, 160), ["user_loyalty_card_page"])) {
                 // line 161
                 yield "<section style=\"background-color:#DBFFCA; margin-bottom:40px;\">
     <div class=\"container\">
@@ -276,7 +291,9 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
                     <br>
                     <a class=\"nav-link btn btn-details\" style=\"width:100%;\" href=\"";
                 // line 173
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_loyalty_card", ["id" => (isset($context["user_id"]) || array_key_exists("user_id", $context) ? $context["user_id"] : (function () { throw new RuntimeError('Variable "user_id" does not exist.', 173, $this->source); })())]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user_loyalty_card", ["id" => (isset($context["user_id"]) || array_key_exists("user_id", $context) ? $context["user_id"] : (function () {
+                    throw new RuntimeError('Variable "user_id" does not exist.', 173, $this->source);
+                })())]), "html", null, true);
                 yield "\">Ma carte de fidélité</a>
                 </div>
             </div>
@@ -409,10 +426,11 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
 </body>
 </html>
 ";
-        
+
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
-        return; yield '';
+        return;
+        yield '';
     }
 
     // line 5
@@ -423,10 +441,11 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
         yield "VitalityMarket";
-        
+
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
-        return; yield '';
+        return;
+        yield '';
     }
 
     // line 9
@@ -436,10 +455,11 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        
+
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
-        return; yield '';
+        return;
+        yield '';
     }
 
     // line 220
@@ -449,10 +469,11 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        
+
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
-        return; yield '';
+        return;
+        yield '';
     }
 
     /**
@@ -476,7 +497,7 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  446 => 220,  433 => 9,  419 => 5,  355 => 222,  353 => 220,  350 => 219,  336 => 210,  323 => 202,  310 => 194,  296 => 185,  289 => 180,  279 => 173,  266 => 165,  260 => 161,  258 => 160,  247 => 154,  230 => 139,  228 => 138,  217 => 130,  205 => 121,  200 => 119,  190 => 111,  188 => 110,  177 => 102,  136 => 64,  121 => 52,  107 => 41,  95 => 32,  84 => 24,  73 => 16,  65 => 10,  63 => 9,  59 => 8,  54 => 6,  50 => 5,  44 => 1,);
+        return array(446 => 220,  433 => 9,  419 => 5,  355 => 222,  353 => 220,  350 => 219,  336 => 210,  323 => 202,  310 => 194,  296 => 185,  289 => 180,  279 => 173,  266 => 165,  260 => 161,  258 => 160,  247 => 154,  230 => 139,  228 => 138,  217 => 130,  205 => 121,  200 => 119,  190 => 111,  188 => 110,  177 => 102,  136 => 64,  121 => 52,  107 => 41,  95 => 32,  84 => 24,  73 => 16,  65 => 10,  63 => 9,  59 => 8,  54 => 6,  50 => 5,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -544,7 +565,7 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
                         </form>
                         </li>
                                         <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"{{ path('app_legals_user') }}\">
+                        <a class=\"nav-link\" href=\"{{ path('legals_user') }}\">
                             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text\" viewBox=\"0 0 16 16\">
                             <path d=\"M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5\"/>
                             <path d=\"M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/>
@@ -618,7 +639,7 @@ class __TwigTemplate_cfaacea3e46240e5703d8bbe8e57ab08 extends Template
             </div>
         </section>
 
-{% if app.request.attributes.get('_route') not in ['user_panier', 'user_profile', 'app_contact_user', 'app_legals_user'] %}
+{% if app.request.attributes.get('_route') not in ['user_panier', 'user_profile', 'contact_user', 'legals_user'] %}
 <div class=\"container\" style=\"margin-bottom: 40px; margin-top: 40px\">
     <div class=\"row justify-content-center align-items-center\">
         <div class=\"col-md-6\" style=\"text-align: right; margin-bottom: 20px;\">

@@ -4,14 +4,15 @@ namespace App\Form;
 
 use App\Entity\Coupon;
 use App\Entity\LoyaltyCard;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CouponType extends AbstractType
 {
@@ -48,8 +49,8 @@ class CouponType extends AbstractType
             ])
             ->add('idloyaltycard', EntityType::class, [
                 'class' => LoyaltyCard::class,
-                'choice_label' => function ($loyaltyCard) {
-                    return $loyaltyCard->getIduser()->getName();
+                'choice_label' => function (LoyaltyCard $loyaltyCard) {
+                    return $loyaltyCard->getIduser() ? $loyaltyCard->getIduser()->getName() : '';
                 },
                 'label' => "Nom de l'utilisateur :",
                 'multiple' => true,

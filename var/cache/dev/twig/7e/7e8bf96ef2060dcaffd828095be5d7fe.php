@@ -136,7 +136,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
                                         <li class=\"nav-item\">
                         <a class=\"nav-link\" href=\"";
         // line 64
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_legals_user");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("legals_user");
         yield "\">
                             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text\" viewBox=\"0 0 16 16\">
                             <path d=\"M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5\"/>
@@ -228,7 +228,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
 
 ";
         // line 138
-        if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 138, $this->source); })()), "request", [], "any", false, false, false, 138), "attributes", [], "any", false, false, false, 138), "get", ["_route"], "method", false, false, false, 138), ["user_panier", "user_profile", "app_contact_user", "app_legals_user"])) {
+        if (!CoreExtension::inFilter(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 138, $this->source); })()), "request", [], "any", false, false, false, 138), "attributes", [], "any", false, false, false, 138), "get", ["_route"], "method", false, false, false, 138), ["user_panier", "user_profile", "contact_user", "legals_user"])) {
             // line 139
             yield "<div class=\"container\" style=\"margin-bottom: 40px; margin-top: 40px\">
     <div class=\"row justify-content-center align-items-center\">
@@ -568,7 +568,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
                         </form>
                         </li>
                                         <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"{{ path('app_legals_user') }}\">
+                        <a class=\"nav-link\" href=\"{{ path('legals_user') }}\">
                             <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-file-earmark-text\" viewBox=\"0 0 16 16\">
                             <path d=\"M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5\"/>
                             <path d=\"M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/>
@@ -642,7 +642,7 @@ class __TwigTemplate_2ed6cf42ff00a0edffaeff409e4ae892 extends Template
             </div>
         </section>
 
-{% if app.request.attributes.get('_route') not in ['user_panier', 'user_profile', 'app_contact_user', 'app_legals_user'] %}
+{% if app.request.attributes.get('_route') not in ['user_panier', 'user_profile', 'contact_user', 'legals_user'] %}
 <div class=\"container\" style=\"margin-bottom: 40px; margin-top: 40px\">
     <div class=\"row justify-content-center align-items-center\">
         <div class=\"col-md-6\" style=\"text-align: right; margin-bottom: 20px;\">

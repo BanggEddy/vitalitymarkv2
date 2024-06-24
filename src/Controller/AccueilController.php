@@ -125,9 +125,9 @@ class AccueilController extends AbstractController
 
     #[Route('/details-produit/{id}', name: 'details_produit')]
     public function detailsDunProduit(
-        $id,
+        Products $product,
         Request $request,
-        ProductsRepository $productsRepository,
+        ProductsRepository $productsRepository
     ): Response {
         $redirectPath = $this->verifTokenAuthExisteService->RedirectToAdminOuUser();
 
@@ -142,20 +142,18 @@ class AccueilController extends AbstractController
             return $this->redirect($utiliserServiceRedirection);
         }
 
-        $product = $productsRepository->find($id);
         $category = $product->getCategory();
 
         $products = $productsRepository->findBy(['category' => $category]);
         $promotions = $this->promotionService->getPromotionsPourProducts($products);
 
         return $this->render('accueil/indexproduit.html.twig', [
-            'barreRechercheCategory' => $formRechercheCategory,
+            'barreRechercheCategory' => $formRechercheCategory->createView(),
             'promotions' => $promotions,
             'products' => $products,
             'product' => $product,
         ]);
     }
-
 
     #[Route('/search', name: 'search')]
     public function rechercherUnProduitVisiteur(ProductsRepository $productsRepository, Request $request,)

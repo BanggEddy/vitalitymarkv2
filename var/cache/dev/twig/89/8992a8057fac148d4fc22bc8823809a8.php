@@ -93,7 +93,7 @@ class __TwigTemplate_88a81360af4f4f7dda81a9ebafe13cc9 extends Template
     <h3> Editer un produit </h3>
     <form action=\"";
         // line 10
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_edit_product", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 10, $this->source); })()), "id", [], "any", false, false, false, 10)]), "html", null, true);
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_form_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 10, $this->source); })()), "id", [], "any", false, false, false, 10)]), "html", null, true);
         yield "\" method=\"post\" enctype=\"multipart/form-data\" class=\"mb-4\">
         ";
         // line 11
@@ -199,7 +199,7 @@ class __TwigTemplate_88a81360af4f4f7dda81a9ebafe13cc9 extends Template
 <div class=\"container nature-card\">
     <br>
     <h3> Editer un produit </h3>
-    <form action=\"{{ path('app_edit_product', {'id': product.id}) }}\" method=\"post\" enctype=\"multipart/form-data\" class=\"mb-4\">
+    <form action=\"{{ path('admin_form_edit', {'id': product.id}) }}\" method=\"post\" enctype=\"multipart/form-data\" class=\"mb-4\">
         {{ form_start(productForm, {'attr': {'class': 'row g-3'}}) }}
             {{ form_row(productForm.name, {'attr': {'class': 'spaced-input'}}) }}
             {{ form_row(productForm.category, {'attr': {'class': 'spaced-input'}}) }}
