@@ -87,7 +87,7 @@ class PromoAdminController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_promo_admin_show')]
+    #[Route('/{id}', name: 'app_promo_admin_show', methods: ['GET'])]
     public function show(Promo $promo, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -112,7 +112,7 @@ class PromoAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_promo_admin_edit')]
+    #[Route('/{id}/edit', name: 'app_promo_admin_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Promo $promo, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -155,7 +155,7 @@ class PromoAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_promo_admin_delete')]
+    #[Route('/{id}', name: 'app_promo_admin_delete', methods: ['POST'])]
     public function delete(Request $request, Promo $promo, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $promo->getId(), $request->getPayload()->get('_token'))) {

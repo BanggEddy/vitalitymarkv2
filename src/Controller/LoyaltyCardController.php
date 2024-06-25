@@ -43,7 +43,7 @@ class LoyaltyCardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_loyalty_card_show')]
+    #[Route('/{id}', name: 'app_loyalty_card_show', methods: ['GET'])]
     public function show(LoyaltyCard $loyaltyCard, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -60,7 +60,7 @@ class LoyaltyCardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_loyalty_card_edit')]
+    #[Route('/{id}/edit', name: 'app_loyalty_card_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, LoyaltyCard $loyaltyCard, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -87,7 +87,7 @@ class LoyaltyCardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_loyalty_card_delete')]
+    #[Route('/{id}', name: 'app_loyalty_card_delete', methods: ['POST'])]
     public function delete(Request $request, LoyaltyCard $loyaltyCard, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $loyaltyCard->getId(), $request->request->get('_token'))) {

@@ -16,7 +16,7 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerWaivRzI\App_KernelDevDebugContainer([
     'container.build_hash' => 'WaivRzI',
-    'container.build_id' => '4cd63f0e',
-    'container.build_time' => 1719244426,
+    'container.build_id' => '1854f988',
+    'container.build_time' => 1719357002,
     'container.runtime_mode' => \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? 'web=0' : 'web=1',
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerWaivRzI');

@@ -44,7 +44,7 @@ class GestionUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_gestion_user_show')]
+    #[Route('/{id}', name: 'app_gestion_user_show', methods: ['GET'])]
     public function show(User $user, Request $request,): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -62,7 +62,7 @@ class GestionUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_gestion_user_edit')]
+    #[Route('/{id}/edit', name: 'app_gestion_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -90,7 +90,7 @@ class GestionUserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_gestion_user_delete')]
+    #[Route('/{id}', name: 'app_gestion_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->get('_token'))) {

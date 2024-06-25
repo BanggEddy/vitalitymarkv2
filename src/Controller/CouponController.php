@@ -80,7 +80,7 @@ class CouponController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_coupon_show')]
+    #[Route('/{id}', name: 'app_coupon_show', methods: ['GET'])]
     public function show(Coupon $coupon, Request $request): Response
     {
         $formRechercheCategory = $this->createForm(ProductSearchType::class);
@@ -97,7 +97,7 @@ class CouponController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_coupon_edit')]
+    #[Route('/{id}/edit', name: 'app_coupon_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Coupon $coupon, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CouponType::class, $coupon);
@@ -124,7 +124,7 @@ class CouponController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_coupon_delete')]
+    #[Route('/{id}', name: 'app_coupon_delete', methods: ['POST'])]
     public function delete(Request $request, Coupon $coupon, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $coupon->getId(), $request->request->get('_token'))) {
